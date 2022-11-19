@@ -116,7 +116,15 @@ export const lists: Lists = {
       dueDate: calendarDay(),
       amount: integer(),
       status: text(),
+      items: relationship({ ref: 'BillItem.bill', many: true})
+    }
+  }),
+
+  BillItem: list({
+    access: allowAll,
+    fields:{
+      name: text(),
+      bill: relationship({ ref: 'Bill.items', many: false})
     }
   })
-
 };

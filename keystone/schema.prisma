@@ -69,14 +69,24 @@ model Enrolment {
 }
 
 model Bill {
-  id        String   @id @default(cuid())
-  name      String   @default("")
-  account   Account? @relation("Bill_account", fields: [accountId], references: [id])
-  accountId String?  @map("account")
+  id        String     @id @default(cuid())
+  name      String     @default("")
+  account   Account?   @relation("Bill_account", fields: [accountId], references: [id])
+  accountId String?    @map("account")
   date      String?
   dueDate   String?
   amount    Int?
-  status    String   @default("")
+  status    String     @default("")
+  items     BillItem[] @relation("BillItem_bill")
 
   @@index([accountId])
+}
+
+model BillItem {
+  id     String  @id @default(cuid())
+  name   String  @default("")
+  bill   Bill?   @relation("BillItem_bill", fields: [billId], references: [id])
+  billId String? @map("bill")
+
+  @@index([billId])
 }

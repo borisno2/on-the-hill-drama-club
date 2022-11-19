@@ -443,6 +443,8 @@ type Bill {
   dueDate: CalendarDay
   amount: Int
   status: String
+  items(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0): [BillItem!]
+  itemsCount(where: BillItemWhereInput! = {}): Int
 }
 
 input BillWhereUniqueInput {
@@ -460,6 +462,13 @@ input BillWhereInput {
   dueDate: CalendarDayNullableFilter
   amount: IntNullableFilter
   status: StringFilter
+  items: BillItemManyRelationFilter
+}
+
+input BillItemManyRelationFilter {
+  every: BillItemWhereInput
+  some: BillItemWhereInput
+  none: BillItemWhereInput
 }
 
 input BillOrderByInput {
@@ -478,6 +487,14 @@ input BillUpdateInput {
   dueDate: CalendarDay
   amount: Int
   status: String
+  items: BillItemRelateToManyForUpdateInput
+}
+
+input BillItemRelateToManyForUpdateInput {
+  disconnect: [BillItemWhereUniqueInput!]
+  set: [BillItemWhereUniqueInput!]
+  create: [BillItemCreateInput!]
+  connect: [BillItemWhereUniqueInput!]
 }
 
 input BillUpdateArgs {
@@ -492,6 +509,62 @@ input BillCreateInput {
   dueDate: CalendarDay
   amount: Int
   status: String
+  items: BillItemRelateToManyForCreateInput
+}
+
+input BillItemRelateToManyForCreateInput {
+  create: [BillItemCreateInput!]
+  connect: [BillItemWhereUniqueInput!]
+}
+
+type BillItem {
+  id: ID!
+  name: String
+  bill: Bill
+}
+
+input BillItemWhereUniqueInput {
+  id: ID
+}
+
+input BillItemWhereInput {
+  AND: [BillItemWhereInput!]
+  OR: [BillItemWhereInput!]
+  NOT: [BillItemWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  bill: BillWhereInput
+}
+
+input BillItemOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+}
+
+input BillItemUpdateInput {
+  name: String
+  bill: BillRelateToOneForUpdateInput
+}
+
+input BillRelateToOneForUpdateInput {
+  create: BillCreateInput
+  connect: BillWhereUniqueInput
+  disconnect: Boolean
+}
+
+input BillItemUpdateArgs {
+  where: BillItemWhereUniqueInput!
+  data: BillItemUpdateInput!
+}
+
+input BillItemCreateInput {
+  name: String
+  bill: BillRelateToOneForCreateInput
+}
+
+input BillRelateToOneForCreateInput {
+  create: BillCreateInput
+  connect: BillWhereUniqueInput
 }
 
 """
@@ -536,6 +609,12 @@ type Mutation {
   updateBills(data: [BillUpdateArgs!]!): [Bill]
   deleteBill(where: BillWhereUniqueInput!): Bill
   deleteBills(where: [BillWhereUniqueInput!]!): [Bill]
+  createBillItem(data: BillItemCreateInput!): BillItem
+  createBillItems(data: [BillItemCreateInput!]!): [BillItem]
+  updateBillItem(where: BillItemWhereUniqueInput!, data: BillItemUpdateInput!): BillItem
+  updateBillItems(data: [BillItemUpdateArgs!]!): [BillItem]
+  deleteBillItem(where: BillItemWhereUniqueInput!): BillItem
+  deleteBillItems(where: [BillItemWhereUniqueInput!]!): [BillItem]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -577,6 +656,9 @@ type Query {
   bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0): [Bill!]
   bill(where: BillWhereUniqueInput!): Bill
   billsCount(where: BillWhereInput! = {}): Int
+  billItems(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0): [BillItem!]
+  billItem(where: BillItemWhereUniqueInput!): BillItem
+  billItemsCount(where: BillItemWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
