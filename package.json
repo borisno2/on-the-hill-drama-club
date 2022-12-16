@@ -5,11 +5,13 @@
     "build": "keystone build && next build",
     "build:keystone": "keystone build",
     "build:next": "next build",
+    "deploy": "pnpm build && pnpm migrate",
     "dev": "concurrently \"pnpm dev:keystone\" \"pnpm dev:next\"",
     "dev:keystone": "keystone dev",
     "dev:next": "next dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone postinstall",
+    "migrate": "keystone prisma migrate deploy",
     "start:keystone": "next start .keystone/admin",
     "start:next": "next start"
   },
@@ -48,8 +50,8 @@
     "concurrently": "^7.3.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
-    "prettier": "^2.5.1",    
-	"prettier-plugin-tailwindcss": "^0.1.11",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwindcss": "^0.1.11",
     "typescript": "^4.8.0"
   },
   "packageManager": "pnpm@7.15.0"
