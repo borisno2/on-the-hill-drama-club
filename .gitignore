@@ -4,6 +4,7 @@ node_modules
 # dependencies
 .pnp
 .pnp.js
+__generated__
 
 # testing
 coverage
