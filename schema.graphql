@@ -5,13 +5,10 @@ type User {
   id: ID!
   name: String
   email: String
-  password: PasswordState
+  subjectId: String
   createdAt: DateTime
   account: Account
-}
-
-type PasswordState {
-  isSet: Boolean!
+  role: String
 }
 
 scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
@@ -19,6 +16,7 @@ scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339
 input UserWhereUniqueInput {
   id: ID
   email: String
+  subjectId: String
 }
 
 input UserWhereInput {
@@ -28,8 +26,10 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
+  subjectId: StringFilter
   createdAt: DateTimeNullableFilter
   account: AccountWhereInput
+  role: StringFilter
 }
 
 input IDFilter {
@@ -86,7 +86,9 @@ input UserOrderByInput {
   id: OrderDirection
   name: OrderDirection
   email: OrderDirection
+  subjectId: OrderDirection
   createdAt: OrderDirection
+  role: OrderDirection
 }
 
 enum OrderDirection {
@@ -97,9 +99,10 @@ enum OrderDirection {
 input UserUpdateInput {
   name: String
   email: String
-  password: String
+  subjectId: String
   createdAt: DateTime
   account: AccountRelateToOneForUpdateInput
+  role: String
 }
 
 input AccountRelateToOneForUpdateInput {
@@ -116,9 +119,10 @@ input UserUpdateArgs {
 input UserCreateInput {
   name: String
   email: String
-  password: String
+  subjectId: String
   createdAt: DateTime
   account: AccountRelateToOneForCreateInput
+  role: String
 }
 
 input AccountRelateToOneForCreateInput {
@@ -616,25 +620,6 @@ type Mutation {
   deleteBillItem(where: BillItemWhereUniqueInput!): BillItem
   deleteBillItems(where: [BillItemWhereUniqueInput!]!): [BillItem]
   endSession: Boolean!
-  authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
-  createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
-}
-
-union UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordSuccess | UserAuthenticationWithPasswordFailure
-
-type UserAuthenticationWithPasswordSuccess {
-  sessionToken: String!
-  item: User!
-}
-
-type UserAuthenticationWithPasswordFailure {
-  message: String!
-}
-
-input CreateInitialUserInput {
-  name: String
-  email: String
-  password: String
 }
 
 type Query {
@@ -660,10 +645,7 @@ type Query {
   billItem(where: BillItemWhereUniqueInput!): BillItem
   billItemsCount(where: BillItemWhereInput! = {}): Int
   keystone: KeystoneMeta!
-  authenticatedItem: AuthenticatedItem
 }
-
-union AuthenticatedItem = User
 
 type KeystoneMeta {
   adminMeta: KeystoneAdminMeta!
