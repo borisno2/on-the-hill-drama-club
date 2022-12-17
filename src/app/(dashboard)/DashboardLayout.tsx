@@ -1,6 +1,8 @@
 "use client"
 
 import React, { Fragment, useState } from 'react'
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import { Dialog, Transition } from '@headlessui/react'
 
 import {
@@ -12,12 +14,13 @@ import {
     InboxIcon,
     UsersIcon,
     XMarkIcon,
+    IdentificationIcon,
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
 type NavigationProps = {
     children: React.ReactNode;
-    PageName: 'Dashboard' | 'Students' | 'Classes' | 'Calendar' | 'Notifications' | 'Reports';
+    PageName: 'Dashboard' | 'Students' | 'Classes' | 'Calendar' | 'Notifications' | 'Profile';
 }
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
@@ -32,7 +35,15 @@ function classNames(...classes: string[]) {
 }
 
 export default function DashboardLayout({ children, PageName }: NavigationProps) {
+    const { data: session } = useSession()
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    if (!session) {
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <p className="text-xl font-medium">Loading...</p>
+            </div>
+        )
+    }
     return (
         <>
             <div>
@@ -93,7 +104,7 @@ export default function DashboardLayout({ children, PageName }: NavigationProps)
                                         </div>
                                         <nav className="mt-5 space-y-1 px-2">
                                             {navigation.map((item) => (
-                                                <a
+                                                <Link
                                                     key={item.name}
                                                     href={item.href}
                                                     className={classNames(
@@ -111,28 +122,25 @@ export default function DashboardLayout({ children, PageName }: NavigationProps)
                                                         aria-hidden="true"
                                                     />
                                                     {item.name}
-                                                </a>
+                                                </Link>
                                             ))}
                                         </nav>
                                     </div>
                                     <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                                        <a href="#" className="group block flex-shrink-0">
+                                        <Link href="/dashboard/profile" className="group block flex-shrink-0">
                                             <div className="flex items-center">
                                                 <div>
-                                                    <Image
-                                                        width={40}
-                                                        height={40}
-                                                        className="inline-block h-10 w-10 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                        alt=""
-                                                    />
+                                                    <IdentificationIcon className={classNames('text-gray-400 group-hover:text-gray-500',
+                                                        'mr-4 flex-shrink-0 h-6 w-6'
+                                                    )}
+                                                        aria-hidden="true" />
                                                 </div>
                                                 <div className="ml-3">
-                                                    <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
+                                                    <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">{session.user?.name}</p>
                                                     <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
@@ -157,7 +165,7 @@ export default function DashboardLayout({ children, PageName }: NavigationProps)
                             </div>
                             <nav className="mt-5 flex-1 space-y-1 bg-white px-2">
                                 {navigation.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
                                         href={item.href}
                                         className={classNames(
@@ -173,28 +181,22 @@ export default function DashboardLayout({ children, PageName }: NavigationProps)
                                             aria-hidden="true"
                                         />
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
                             </nav>
                         </div>
                         <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                            <a href="#" className="group block w-full flex-shrink-0">
+                            <Link href="/dashboard/profile" className="group block w-full flex-shrink-0">
                                 <div className="flex items-center">
                                     <div>
-                                        <Image
-                                            width={40}
-                                            height={40}
-                                            className="inline-block h-9 w-9 rounded-full"
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            alt=""
-                                        />
+                                        <IdentificationIcon className="inline-block h-9 w-9 rounded-full" />
                                     </div>
                                     <div className="ml-3">
-                                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">Tom Cook</p>
+                                        <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{session.user?.name}</p>
                                         <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">View profile</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
