@@ -1,4 +1,4 @@
-import AuthContext from 'app/AuthContext';
+import AuthContext from 'app/AuthContext'
 
 import 'styles/tailwind.css'
 import 'focus-visible'
@@ -8,9 +8,8 @@ type AppProps = {
 }
 
 
-export default function RootLayout({
-    children
-}: AppProps) {
+export default function RootLayout({ children }: AppProps) {
+
     return (
         <html className="h-full antialiased" lang="en">
             <body className="h-full">

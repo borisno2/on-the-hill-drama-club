@@ -1,19 +1,12 @@
 export default function Head() {
   return (
     <>
-      <title>
-        On the Hill
-      </title>
-      <link
-        rel="alternate"
-        type="application/rss+xml"
-        href={`${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.xml`}
+      <title>On The Hill Performing Arts - Teaching Theatre and Music in the Bendigo Region</title>
+      <meta
+        name="description"
+        content="On The Hill Performing Arts - Teaching Theatre and Music in the Bendigo Region"
       />
-      <link
-        rel="alternate"
-        type="application/feed+json"
-        href={`${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.json`}
-      />
+      <link rel="icon" href="/favicon.ico" />
     </>
   )
 }

@@ -8,20 +8,17 @@ const { withTsGql } = require('@ts-gql/next')
 module.exports = withTsGql(
   withPreconstruct({
     webpack(config) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        //react: Path.dirname(require.resolve('react/package.json')),
-        //'react-dom': Path.dirname(require.resolve('react-dom/package.json')),
-        '@keystone-6/core': Path.dirname(
-          require.resolve('@keystone-6/core/package.json')
-        ),
-      }
       config.externals = [...config.externals, '.prisma/client']
       return config
     },
     experimental: {
       scrollRestoration: true,
       appDir: true,
+      serverComponentsExternalPackages: [
+        'graphql',
+        '.prisma/client',
+        '@keystone/core',
+      ],
     },
     images: {
       dangerouslyAllowSVG: true,
