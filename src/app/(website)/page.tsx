@@ -3,16 +3,11 @@ import React from 'react'
 import type {
     NextPage,
 } from 'next'
-import Head from 'next/head'
 import { Container } from 'components/Container'
 
 const Home: NextPage = () => {
     return (
         <div>
-            <Head>
-            </Head>
-
-
             <Container className="mt-9">
                 <section>
                     <h1>On the Hill Performing Arts</h1>
