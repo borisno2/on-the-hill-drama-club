@@ -28,6 +28,11 @@ module.exports = withTsGql(
       remotePatterns: [
         {
           protocol: 'https',
+          hostname: 'images.unsplash.com',
+          pathname: '/*',
+        },
+        {
+          protocol: 'https',
           hostname: 'tailwindui.com',
           pathname: '/img/**/*',
         },

@@ -12,6 +12,7 @@ import {
     UsersIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 const navigation = [
     { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -79,10 +80,12 @@ export default function Portal() {
                                     </Transition.Child>
                                     <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
                                         <div className="flex flex-shrink-0 items-center px-4">
-                                            <img
+                                            <Image
                                                 className="h-8 w-auto"
                                                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                                                 alt="Your Company"
+                                                width={40}
+                                                height={40}
                                             />
                                         </div>
                                         <nav className="mt-5 space-y-1 px-2">
@@ -113,7 +116,9 @@ export default function Portal() {
                                         <a href="#" className="group block flex-shrink-0">
                                             <div className="flex items-center">
                                                 <div>
-                                                    <img
+                                                    <Image
+                                                        width={40}
+                                                        height={40}
                                                         className="inline-block h-10 w-10 rounded-full"
                                                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                                         alt=""
@@ -139,7 +144,9 @@ export default function Portal() {
                     <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
                         <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
                             <div className="flex flex-shrink-0 items-center px-4">
-                                <img
+                                <Image
+                                    width={40}
+                                    height={40}
                                     className="h-8 w-auto"
                                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                                     alt="Your Company"
@@ -171,7 +178,9 @@ export default function Portal() {
                             <a href="#" className="group block w-full flex-shrink-0">
                                 <div className="flex items-center">
                                     <div>
-                                        <img
+                                        <Image
+                                            width={40}
+                                            height={40}
                                             className="inline-block h-9 w-9 rounded-full"
                                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                             alt=""
