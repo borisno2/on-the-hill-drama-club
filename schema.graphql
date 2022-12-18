@@ -133,12 +133,16 @@ input AccountRelateToOneForCreateInput {
 type Account {
   id: ID!
   user: User
-  name: String
+  firstName: String
+  surname: String
   phone: String
   students(where: StudentWhereInput! = {}, orderBy: [StudentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Student!]
   studentsCount(where: StudentWhereInput! = {}): Int
   bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0): [Bill!]
   billsCount(where: BillWhereInput! = {}): Int
+  streetAddress: String
+  suburb: String
+  postcode: String
 }
 
 input AccountWhereUniqueInput {
@@ -151,10 +155,14 @@ input AccountWhereInput {
   NOT: [AccountWhereInput!]
   id: IDFilter
   user: UserWhereInput
-  name: StringFilter
+  firstName: StringFilter
+  surname: StringFilter
   phone: StringFilter
   students: StudentManyRelationFilter
   bills: BillManyRelationFilter
+  streetAddress: StringFilter
+  suburb: StringFilter
+  postcode: StringFilter
 }
 
 input StudentManyRelationFilter {
@@ -171,16 +179,24 @@ input BillManyRelationFilter {
 
 input AccountOrderByInput {
   id: OrderDirection
-  name: OrderDirection
+  firstName: OrderDirection
+  surname: OrderDirection
   phone: OrderDirection
+  streetAddress: OrderDirection
+  suburb: OrderDirection
+  postcode: OrderDirection
 }
 
 input AccountUpdateInput {
   user: UserRelateToOneForUpdateInput
-  name: String
+  firstName: String
+  surname: String
   phone: String
   students: StudentRelateToManyForUpdateInput
   bills: BillRelateToManyForUpdateInput
+  streetAddress: String
+  suburb: String
+  postcode: String
 }
 
 input UserRelateToOneForUpdateInput {
@@ -210,10 +226,14 @@ input AccountUpdateArgs {
 
 input AccountCreateInput {
   user: UserRelateToOneForCreateInput
-  name: String
+  firstName: String
+  surname: String
   phone: String
   students: StudentRelateToManyForCreateInput
   bills: BillRelateToManyForCreateInput
+  streetAddress: String
+  suburb: String
+  postcode: String
 }
 
 input UserRelateToOneForCreateInput {

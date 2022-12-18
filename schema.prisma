@@ -25,13 +25,17 @@ model User {
 }
 
 model Account {
-  id       String    @id @default(cuid())
-  user     User?     @relation("Account_user", fields: [userId], references: [id])
-  userId   String?   @unique @map("user")
-  name     String    @default("")
-  phone    String    @default("")
-  students Student[] @relation("Student_account")
-  bills    Bill[]    @relation("Bill_account")
+  id            String    @id @default(cuid())
+  user          User?     @relation("Account_user", fields: [userId], references: [id])
+  userId        String?   @unique @map("user")
+  firstName     String    @default("")
+  surname       String    @default("")
+  phone         String    @default("")
+  students      Student[] @relation("Student_account")
+  bills         Bill[]    @relation("Bill_account")
+  streetAddress String    @default("")
+  suburb        String    @default("")
+  postcode      String    @default("")
 }
 
 model Student {
