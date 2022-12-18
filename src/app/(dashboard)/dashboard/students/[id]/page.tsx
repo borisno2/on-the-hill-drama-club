@@ -20,8 +20,6 @@ export default async function Students({ params }: { params: { id?: string } }) 
             <div className="py-4">
                 <StudentForm student={student} />
             </div>
-
-
         </DashboardLayout>
     )
 }

@@ -1,11 +1,6 @@
-"use client"
-import React from 'react'
-import type {
-    NextPage,
-} from 'next'
 import { Container } from 'components/Container'
 
-const Home: NextPage = () => {
+export default function Home() {
     return (
         <div>
             <Container className="mt-9">
@@ -23,6 +18,3 @@ const Home: NextPage = () => {
         </div>
     )
 }
-
-
-export default Home
