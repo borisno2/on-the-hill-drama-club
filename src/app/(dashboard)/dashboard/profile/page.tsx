@@ -1,12 +1,17 @@
+import { getSessionContext } from "app/KeystoneContext";
+import ProfileForm from "components/ProfileForm"
 import DashboardLayout from "../../DashboardLayout"
 
 
-export default function Students() {
+export default async function Profile() {
+    const context = await getSessionContext();
+    const user = context.session.data
 
     return (
-        <DashboardLayout PageName="Profile"><div className="py-4">
-            <div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
-        </div>
+        <DashboardLayout PageName="Profile">
+            <div className="py-4">
+                <ProfileForm user={user} />
+            </div>
         </DashboardLayout>
     )
 }

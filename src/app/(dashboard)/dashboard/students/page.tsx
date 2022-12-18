@@ -3,10 +3,9 @@ import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
 import { getSessionContext } from "app/KeystoneContext";
 import Link from "next/link";
 
-export default async function Students({ searchParams }: { searchParams: URLSearchParams }) {
+export default async function Students() {
     const context = await getSessionContext();
     const students = await context.query.Student.findMany({ query: 'name id' })
-    console.log('props', searchParams);
 
     return (
         <DashboardLayout PageName="Students">
@@ -48,6 +47,13 @@ export default async function Students({ searchParams }: { searchParams: URLSear
                     ))}
                 </ul>
             </div>
+            <Link
+                type="button"
+                href="/dashboard/students/add"
+                className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+                Add New
+            </Link>
 
         </DashboardLayout>
     )

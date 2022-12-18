@@ -14,11 +14,7 @@ module.exports = withTsGql(
     experimental: {
       scrollRestoration: true,
       appDir: true,
-      serverComponentsExternalPackages: [
-        'graphql',
-        '.prisma/client',
-        '@keystone/core',
-      ],
+      serverComponentsExternalPackages: ['graphql'],
     },
     images: {
       dangerouslyAllowSVG: true,

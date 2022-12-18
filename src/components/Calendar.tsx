@@ -162,7 +162,7 @@ export default function Example() {
                                             : undefined
                                     }
                                 >
-                                    {day.date.split('-').pop().replace(/^0/, '')}
+                                    {day.date?.split('-')?.pop()?.replace(/^0/, '')}
                                 </time>
                                 {day.events.length > 0 && (
                                     <ol className="mt-2">
@@ -211,7 +211,7 @@ export default function Example() {
                                         'ml-auto'
                                     )}
                                 >
-                                    {day.date.split('-').pop().replace(/^0/, '')}
+                                    {day?.date?.split('-')?.pop()?.replace(/^0/, '')}
                                 </time>
                                 <span className="sr-only">{day.events.length} events</span>
                                 {day.events.length > 0 && (
@@ -226,10 +226,10 @@ export default function Example() {
                     </div>
                 </div>
             </div>
-            {selectedDay?.events.length > 0 && (
+            {selectedDay?.events.length && selectedDay?.events.length > 0 && (
                 <div className="py-10 px-4 sm:px-6 lg:hidden">
                     <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5">
-                        {selectedDay.events.map((event) => (
+                        {selectedDay?.events.map((event) => (
                             <li key={event.id} className="group flex p-4 pr-6 focus-within:bg-gray-50 hover:bg-gray-50">
                                 <div className="flex-auto">
                                     <p className="font-semibold text-gray-900">{event.name}</p>
