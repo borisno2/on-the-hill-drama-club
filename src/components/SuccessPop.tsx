@@ -5,7 +5,6 @@ import { Fragment } from 'react'
 
 export default function SuccessPop({ success, setSuccess }: { success: boolean, setSuccess: (success: boolean) => void }) {
     return (
-
         <Transition.Root show={success} as={Fragment}>
             <Transition.Child
                 as={Fragment}

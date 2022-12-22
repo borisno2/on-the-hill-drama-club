@@ -1,9 +1,10 @@
+"use client"
 import { XCircleIcon } from '@heroicons/react/20/solid'
 import { Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
 
-export default function Example({ error, setError }: { error: boolean, setError: (error: boolean) => void }) {
+export default function ErrorPop({ error, setError }: { error: boolean, setError: (error: boolean) => void }) {
     return (
         <Transition.Root show={error} as={Fragment}>
             <Transition.Child

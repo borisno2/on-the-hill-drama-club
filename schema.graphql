@@ -253,7 +253,8 @@ input BillRelateToManyForCreateInput {
 
 type Student {
   id: ID!
-  name: String
+  firstName: String
+  surname: String
   dateOfBirth: CalendarDay
   account: Account
 }
@@ -269,7 +270,8 @@ input StudentWhereInput {
   OR: [StudentWhereInput!]
   NOT: [StudentWhereInput!]
   id: IDFilter
-  name: StringFilter
+  firstName: StringFilter
+  surname: StringFilter
   dateOfBirth: CalendarDayNullableFilter
   account: AccountWhereInput
 }
@@ -287,12 +289,14 @@ input CalendarDayNullableFilter {
 
 input StudentOrderByInput {
   id: OrderDirection
-  name: OrderDirection
+  firstName: OrderDirection
+  surname: OrderDirection
   dateOfBirth: OrderDirection
 }
 
 input StudentUpdateInput {
-  name: String
+  firstName: String
+  surname: String
   dateOfBirth: CalendarDay
   account: AccountRelateToOneForUpdateInput
 }
@@ -303,7 +307,8 @@ input StudentUpdateArgs {
 }
 
 input StudentCreateInput {
-  name: String
+  firstName: String
+  surname: String
   dateOfBirth: CalendarDay
   account: AccountRelateToOneForCreateInput
 }

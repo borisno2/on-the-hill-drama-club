@@ -40,7 +40,8 @@ model Account {
 
 model Student {
   id                     String      @id @default(cuid())
-  name                   String      @default("")
+  firstName              String      @default("")
+  surname                String      @default("")
   dateOfBirth            DateTime?   @mysql.Date
   account                Account?    @relation("Student_account", fields: [accountId], references: [id])
   accountId              String?     @map("account")

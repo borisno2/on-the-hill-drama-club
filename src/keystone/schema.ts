@@ -54,7 +54,8 @@ export const lists: Lists = {
   Student: list({
     access: allowAll,
     fields: {
-      name: text(),
+      firstName: text(),
+      surname: text(),
       dateOfBirth: calendarDay(),
       account: relationship({ ref: 'Account.students', many: false }),
     },

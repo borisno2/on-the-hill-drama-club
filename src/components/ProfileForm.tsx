@@ -117,7 +117,7 @@ export default function ProfileForm({ user }: { user: User }) {
 
                         <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                             <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                Last name
+                                Surname
                             </label>
                             <div className="mt-1 sm:col-span-2 sm:mt-0">
                                 <input
