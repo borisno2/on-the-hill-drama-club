@@ -6,17 +6,6 @@ import { Fragment } from 'react'
 export default function SuccessPop({ success, setSuccess }: { success: boolean, setSuccess: (success: boolean) => void }) {
     return (
         <Transition.Root show={success} as={Fragment}>
-            <Transition.Child
-                as={Fragment}
-                enter="transition-opacity ease-linear duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity ease-linear duration-300"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-            >
-                <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
-            </Transition.Child>
             <div className="rounded-md bg-green-50 p-4">
                 <div className="flex">
                     <div className="flex-shrink-0">
