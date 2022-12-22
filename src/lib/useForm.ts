@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 export function useForm(initial = {}) {
   // create a state object for our inputs
-  const [inputs, setInputs] = useState(initial);
-  const initialValues = Object.values(initial).join('');
+  const [inputs, setInputs] = useState(initial)
+  const initialValues = Object.values(initial).join('')
 
   useEffect(() => {
     // This function runs when the things we are watching change
-    setInputs(initial);
-  }, [initialValues]);
+    setInputs(initial)
+  }, [initialValues])
 
   function handleStageButton(e: any) {
-    const { innerText } = e.target;
-    const value = innerText.toLowerCase();
+    const { innerText } = e.target
+    const value = innerText.toLowerCase()
     setInputs({
       ...inputs,
       stage: value,
-    });
+    })
   }
 
   function handleChange(e: any) {
@@ -25,44 +25,44 @@ export function useForm(initial = {}) {
       name,
       type,
     }: { value: string | boolean | number; name: string; type: string } =
-      e.target;
+      e.target
 
     if (type === 'number') {
-      value = parseInt(value as string);
+      value = parseInt(value as string)
     }
     if (type === 'checkbox') {
       // @ts-ignore
-      value = !inputs[name];
+      value = !inputs[name]
     }
     if (type === 'radio') {
       if (value === 'yes') {
-        value = true;
+        value = true
       } else if (value === 'no') {
-        value = false;
+        value = false
       } else if (name === 'feeAmount') {
-        value = parseInt(value as string);
+        value = parseInt(value as string)
       }
     }
     if (type === 'file') {
-      [value] = e.target.files;
+      ;[value] = e.target.files
     }
 
     setInputs({
       // copy the existing state
       ...inputs,
       [name]: value,
-    });
+    })
   }
 
   function resetForm() {
-    setInputs(initial);
+    setInputs(initial)
   }
 
   function clearForm() {
     const blankState = Object.fromEntries(
       Object.entries(inputs).map(([key, value]) => [key, ''])
-    );
-    setInputs(blankState);
+    )
+    setInputs(blankState)
   }
 
   // return the things we want to surface from this custom hook
@@ -72,5 +72,5 @@ export function useForm(initial = {}) {
     handleStageButton,
     resetForm,
     clearForm,
-  };
+  }
 }

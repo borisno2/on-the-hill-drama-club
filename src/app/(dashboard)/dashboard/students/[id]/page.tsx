@@ -1,6 +1,7 @@
 import DashboardLayout from "../../../DashboardLayout"
 import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
 import { getSessionContext } from "app/KeystoneContext";
+import { Suspense } from "react";
 import StudentForm from "components/StudentForm"
 
 import { redirect } from 'next/navigation';
@@ -30,9 +31,11 @@ export default async function Students({ params }: { params: { id?: string } }) 
     }
 
     return (
-        <DashboardLayout PageName="Profile">
+        <DashboardLayout PageName="Students">
             <div className="py-4">
-                <StudentForm student={{ ...student }} />
+                <Suspense fallback={<p>Loading feed...</p>}>
+                    <StudentForm student={{ ...student }} />
+                </Suspense>
             </div>
         </DashboardLayout>
     )
