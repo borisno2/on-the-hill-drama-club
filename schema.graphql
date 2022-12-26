@@ -143,6 +143,7 @@ type Account {
   streetAddress: String
   suburb: String
   postcode: String
+  createdAt: DateTime
 }
 
 input AccountWhereUniqueInput {
@@ -163,6 +164,7 @@ input AccountWhereInput {
   streetAddress: StringFilter
   suburb: StringFilter
   postcode: StringFilter
+  createdAt: DateTimeNullableFilter
 }
 
 input StudentManyRelationFilter {
@@ -185,6 +187,7 @@ input AccountOrderByInput {
   streetAddress: OrderDirection
   suburb: OrderDirection
   postcode: OrderDirection
+  createdAt: OrderDirection
 }
 
 input AccountUpdateInput {
@@ -197,6 +200,7 @@ input AccountUpdateInput {
   streetAddress: String
   suburb: String
   postcode: String
+  createdAt: DateTime
 }
 
 input UserRelateToOneForUpdateInput {
@@ -234,6 +238,7 @@ input AccountCreateInput {
   streetAddress: String
   suburb: String
   postcode: String
+  createdAt: DateTime
 }
 
 input UserRelateToOneForCreateInput {
@@ -257,6 +262,7 @@ type Student {
   surname: String
   dateOfBirth: CalendarDay
   account: Account
+  createdAt: DateTime
 }
 
 scalar CalendarDay @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
@@ -274,6 +280,7 @@ input StudentWhereInput {
   surname: StringFilter
   dateOfBirth: CalendarDayNullableFilter
   account: AccountWhereInput
+  createdAt: DateTimeNullableFilter
 }
 
 input CalendarDayNullableFilter {
@@ -292,6 +299,7 @@ input StudentOrderByInput {
   firstName: OrderDirection
   surname: OrderDirection
   dateOfBirth: OrderDirection
+  createdAt: OrderDirection
 }
 
 input StudentUpdateInput {
@@ -299,6 +307,7 @@ input StudentUpdateInput {
   surname: String
   dateOfBirth: CalendarDay
   account: AccountRelateToOneForUpdateInput
+  createdAt: DateTime
 }
 
 input StudentUpdateArgs {
@@ -311,20 +320,24 @@ input StudentCreateInput {
   surname: String
   dateOfBirth: CalendarDay
   account: AccountRelateToOneForCreateInput
+  createdAt: DateTime
 }
 
 type Class {
   id: ID!
   name: String
   time: String
+  day: String
   minimumAge: Int
   maximumAge: Int
   cost: Int
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  frequency: String
+  type: String
   location: String
+  status: String
+  createdAt: DateTime
 }
 
 input ClassWhereUniqueInput {
@@ -338,14 +351,45 @@ input ClassWhereInput {
   id: IDFilter
   name: StringFilter
   time: StringFilter
+  day: StringNullableFilter
   minimumAge: IntNullableFilter
   maximumAge: IntNullableFilter
   cost: IntNullableFilter
   quantity: IntNullableFilter
   startDate: CalendarDayNullableFilter
   endDate: CalendarDayNullableFilter
-  frequency: StringFilter
+  type: StringNullableFilter
   location: StringFilter
+  status: StringNullableFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
 }
 
 input IntNullableFilter {
@@ -363,27 +407,33 @@ input ClassOrderByInput {
   id: OrderDirection
   name: OrderDirection
   time: OrderDirection
+  day: OrderDirection
   minimumAge: OrderDirection
   maximumAge: OrderDirection
   cost: OrderDirection
   quantity: OrderDirection
   startDate: OrderDirection
   endDate: OrderDirection
-  frequency: OrderDirection
+  type: OrderDirection
   location: OrderDirection
+  status: OrderDirection
+  createdAt: OrderDirection
 }
 
 input ClassUpdateInput {
   name: String
   time: String
+  day: String
   minimumAge: Int
   maximumAge: Int
   cost: Int
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  frequency: String
+  type: String
   location: String
+  status: String
+  createdAt: DateTime
 }
 
 input ClassUpdateArgs {
@@ -394,20 +444,25 @@ input ClassUpdateArgs {
 input ClassCreateInput {
   name: String
   time: String
+  day: String
   minimumAge: Int
   maximumAge: Int
   cost: Int
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  frequency: String
+  type: String
   location: String
+  status: String
+  createdAt: DateTime
 }
 
 type Enrolment {
   id: ID!
   class: Class
   student: Student
+  status: String
+  createdAt: DateTime
 }
 
 input EnrolmentWhereUniqueInput {
@@ -421,15 +476,21 @@ input EnrolmentWhereInput {
   id: IDFilter
   class: ClassWhereInput
   student: StudentWhereInput
+  status: StringNullableFilter
+  createdAt: DateTimeNullableFilter
 }
 
 input EnrolmentOrderByInput {
   id: OrderDirection
+  status: OrderDirection
+  createdAt: OrderDirection
 }
 
 input EnrolmentUpdateInput {
   class: ClassRelateToOneForUpdateInput
   student: StudentRelateToOneForUpdateInput
+  status: String
+  createdAt: DateTime
 }
 
 input ClassRelateToOneForUpdateInput {
@@ -452,6 +513,8 @@ input EnrolmentUpdateArgs {
 input EnrolmentCreateInput {
   class: ClassRelateToOneForCreateInput
   student: StudentRelateToOneForCreateInput
+  status: String
+  createdAt: DateTime
 }
 
 input ClassRelateToOneForCreateInput {
@@ -470,10 +533,11 @@ type Bill {
   account: Account
   date: CalendarDay
   dueDate: CalendarDay
-  amount: Int
+  total: Int
   status: String
   items(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0): [BillItem!]
   itemsCount(where: BillItemWhereInput! = {}): Int
+  createdAt: DateTime
 }
 
 input BillWhereUniqueInput {
@@ -489,9 +553,9 @@ input BillWhereInput {
   account: AccountWhereInput
   date: CalendarDayNullableFilter
   dueDate: CalendarDayNullableFilter
-  amount: IntNullableFilter
-  status: StringFilter
+  status: StringNullableFilter
   items: BillItemManyRelationFilter
+  createdAt: DateTimeNullableFilter
 }
 
 input BillItemManyRelationFilter {
@@ -505,8 +569,8 @@ input BillOrderByInput {
   name: OrderDirection
   date: OrderDirection
   dueDate: OrderDirection
-  amount: OrderDirection
   status: OrderDirection
+  createdAt: OrderDirection
 }
 
 input BillUpdateInput {
@@ -514,9 +578,9 @@ input BillUpdateInput {
   account: AccountRelateToOneForUpdateInput
   date: CalendarDay
   dueDate: CalendarDay
-  amount: Int
   status: String
   items: BillItemRelateToManyForUpdateInput
+  createdAt: DateTime
 }
 
 input BillItemRelateToManyForUpdateInput {
@@ -536,9 +600,9 @@ input BillCreateInput {
   account: AccountRelateToOneForCreateInput
   date: CalendarDay
   dueDate: CalendarDay
-  amount: Int
   status: String
   items: BillItemRelateToManyForCreateInput
+  createdAt: DateTime
 }
 
 input BillItemRelateToManyForCreateInput {
@@ -550,6 +614,9 @@ type BillItem {
   id: ID!
   name: String
   bill: Bill
+  quantity: Int
+  amount: Int
+  createdAt: DateTime
 }
 
 input BillItemWhereUniqueInput {
@@ -563,16 +630,25 @@ input BillItemWhereInput {
   id: IDFilter
   name: StringFilter
   bill: BillWhereInput
+  quantity: IntNullableFilter
+  amount: IntNullableFilter
+  createdAt: DateTimeNullableFilter
 }
 
 input BillItemOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  quantity: OrderDirection
+  amount: OrderDirection
+  createdAt: OrderDirection
 }
 
 input BillItemUpdateInput {
   name: String
   bill: BillRelateToOneForUpdateInput
+  quantity: Int
+  amount: Int
+  createdAt: DateTime
 }
 
 input BillRelateToOneForUpdateInput {
@@ -589,6 +665,9 @@ input BillItemUpdateArgs {
 input BillItemCreateInput {
   name: String
   bill: BillRelateToOneForCreateInput
+  quantity: Int
+  amount: Int
+  createdAt: DateTime
 }
 
 input BillRelateToOneForCreateInput {

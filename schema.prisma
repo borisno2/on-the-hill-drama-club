@@ -36,6 +36,7 @@ model Account {
   streetAddress String    @default("")
   suburb        String    @default("")
   postcode      String    @default("")
+  createdAt     DateTime? @default(now())
 }
 
 model Student {
@@ -45,6 +46,7 @@ model Student {
   dateOfBirth            DateTime?   @mysql.Date
   account                Account?    @relation("Student_account", fields: [accountId], references: [id])
   accountId              String?     @map("account")
+  createdAt              DateTime?   @default(now())
   from_Enrolment_student Enrolment[] @relation("Enrolment_student")
 
   @@index([accountId])
@@ -54,23 +56,28 @@ model Class {
   id                   String      @id @default(cuid())
   name                 String      @default("")
   time                 String      @default("")
+  day                  String?
   minimumAge           Int?
   maximumAge           Int?
   cost                 Int?
   quantity             Int?
   startDate            DateTime?   @mysql.Date
   endDate              DateTime?   @mysql.Date
-  frequency            String      @default("")
+  type                 String?
   location             String      @default("")
+  status               String?
+  createdAt            DateTime?   @default(now())
   from_Enrolment_class Enrolment[] @relation("Enrolment_class")
 }
 
 model Enrolment {
-  id        String   @id @default(cuid())
-  class     Class?   @relation("Enrolment_class", fields: [classId], references: [id])
-  classId   String?  @map("class")
-  student   Student? @relation("Enrolment_student", fields: [studentId], references: [id])
-  studentId String?  @map("student")
+  id        String    @id @default(cuid())
+  class     Class?    @relation("Enrolment_class", fields: [classId], references: [id])
+  classId   String?   @map("class")
+  student   Student?  @relation("Enrolment_student", fields: [studentId], references: [id])
+  studentId String?   @map("student")
+  status    String?
+  createdAt DateTime? @default(now())
 
   @@index([classId])
   @@index([studentId])
@@ -83,18 +90,21 @@ model Bill {
   accountId String?    @map("account")
   date      DateTime?  @mysql.Date
   dueDate   DateTime?  @mysql.Date
-  amount    Int?
-  status    String     @default("")
+  status    String?
   items     BillItem[] @relation("BillItem_bill")
+  createdAt DateTime?  @default(now())
 
   @@index([accountId])
 }
 
 model BillItem {
-  id     String  @id @default(cuid())
-  name   String  @default("")
-  bill   Bill?   @relation("BillItem_bill", fields: [billId], references: [id])
-  billId String? @map("bill")
+  id        String    @id @default(cuid())
+  name      String    @default("")
+  bill      Bill?     @relation("BillItem_bill", fields: [billId], references: [id])
+  billId    String?   @map("bill")
+  quantity  Int?
+  amount    Int?
+  createdAt DateTime? @default(now())
 
   @@index([billId])
 }
