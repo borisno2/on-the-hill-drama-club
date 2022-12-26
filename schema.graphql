@@ -262,6 +262,8 @@ type Student {
   surname: String
   dateOfBirth: CalendarDay
   account: Account
+  enrollments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
+  enrollmentsCount(where: EnrolmentWhereInput! = {}): Int
   createdAt: DateTime
 }
 
@@ -280,6 +282,7 @@ input StudentWhereInput {
   surname: StringFilter
   dateOfBirth: CalendarDayNullableFilter
   account: AccountWhereInput
+  enrollments: EnrolmentManyRelationFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -292,6 +295,12 @@ input CalendarDayNullableFilter {
   gt: CalendarDay
   gte: CalendarDay
   not: CalendarDayNullableFilter
+}
+
+input EnrolmentManyRelationFilter {
+  every: EnrolmentWhereInput
+  some: EnrolmentWhereInput
+  none: EnrolmentWhereInput
 }
 
 input StudentOrderByInput {
@@ -307,7 +316,15 @@ input StudentUpdateInput {
   surname: String
   dateOfBirth: CalendarDay
   account: AccountRelateToOneForUpdateInput
+  enrollments: EnrolmentRelateToManyForUpdateInput
   createdAt: DateTime
+}
+
+input EnrolmentRelateToManyForUpdateInput {
+  disconnect: [EnrolmentWhereUniqueInput!]
+  set: [EnrolmentWhereUniqueInput!]
+  create: [EnrolmentCreateInput!]
+  connect: [EnrolmentWhereUniqueInput!]
 }
 
 input StudentUpdateArgs {
@@ -320,7 +337,13 @@ input StudentCreateInput {
   surname: String
   dateOfBirth: CalendarDay
   account: AccountRelateToOneForCreateInput
+  enrollments: EnrolmentRelateToManyForCreateInput
   createdAt: DateTime
+}
+
+input EnrolmentRelateToManyForCreateInput {
+  create: [EnrolmentCreateInput!]
+  connect: [EnrolmentWhereUniqueInput!]
 }
 
 type Class {
@@ -330,7 +353,7 @@ type Class {
   day: String
   minimumAge: Int
   maximumAge: Int
-  cost: Int
+  cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
@@ -339,6 +362,8 @@ type Class {
   status: String
   createdAt: DateTime
 }
+
+scalar Decimal
 
 input ClassWhereUniqueInput {
   id: ID
@@ -354,7 +379,7 @@ input ClassWhereInput {
   day: StringNullableFilter
   minimumAge: IntNullableFilter
   maximumAge: IntNullableFilter
-  cost: IntNullableFilter
+  cost: DecimalNullableFilter
   quantity: IntNullableFilter
   startDate: CalendarDayNullableFilter
   endDate: CalendarDayNullableFilter
@@ -403,6 +428,17 @@ input IntNullableFilter {
   not: IntNullableFilter
 }
 
+input DecimalNullableFilter {
+  equals: Decimal
+  in: [Decimal!]
+  notIn: [Decimal!]
+  lt: Decimal
+  lte: Decimal
+  gt: Decimal
+  gte: Decimal
+  not: DecimalNullableFilter
+}
+
 input ClassOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -426,7 +462,7 @@ input ClassUpdateInput {
   day: String
   minimumAge: Int
   maximumAge: Int
-  cost: Int
+  cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
@@ -447,7 +483,7 @@ input ClassCreateInput {
   day: String
   minimumAge: Int
   maximumAge: Int
-  cost: Int
+  cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
@@ -533,7 +569,7 @@ type Bill {
   account: Account
   date: CalendarDay
   dueDate: CalendarDay
-  total: Int
+  total: Decimal
   status: String
   items(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0): [BillItem!]
   itemsCount(where: BillItemWhereInput! = {}): Int
@@ -615,7 +651,8 @@ type BillItem {
   name: String
   bill: Bill
   quantity: Int
-  amount: Int
+  amount: Decimal
+  total: Decimal
   createdAt: DateTime
 }
 
@@ -631,7 +668,7 @@ input BillItemWhereInput {
   name: StringFilter
   bill: BillWhereInput
   quantity: IntNullableFilter
-  amount: IntNullableFilter
+  amount: DecimalNullableFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -647,7 +684,7 @@ input BillItemUpdateInput {
   name: String
   bill: BillRelateToOneForUpdateInput
   quantity: Int
-  amount: Int
+  amount: Decimal
   createdAt: DateTime
 }
 
@@ -666,7 +703,7 @@ input BillItemCreateInput {
   name: String
   bill: BillRelateToOneForCreateInput
   quantity: Int
-  amount: Int
+  amount: Decimal
   createdAt: DateTime
 }
 

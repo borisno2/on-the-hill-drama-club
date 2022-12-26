@@ -40,14 +40,14 @@ model Account {
 }
 
 model Student {
-  id                     String      @id @default(cuid())
-  firstName              String      @default("")
-  surname                String      @default("")
-  dateOfBirth            DateTime?   @mysql.Date
-  account                Account?    @relation("Student_account", fields: [accountId], references: [id])
-  accountId              String?     @map("account")
-  createdAt              DateTime?   @default(now())
-  from_Enrolment_student Enrolment[] @relation("Enrolment_student")
+  id          String      @id @default(cuid())
+  firstName   String      @default("")
+  surname     String      @default("")
+  dateOfBirth DateTime?   @mysql.Date
+  account     Account?    @relation("Student_account", fields: [accountId], references: [id])
+  accountId   String?     @map("account")
+  enrollments Enrolment[] @relation("Enrolment_student")
+  createdAt   DateTime?   @default(now())
 
   @@index([accountId])
 }
@@ -59,7 +59,7 @@ model Class {
   day                  String?
   minimumAge           Int?
   maximumAge           Int?
-  cost                 Int?
+  cost                 Decimal?    @mysql.Decimal(18, 2)
   quantity             Int?
   startDate            DateTime?   @mysql.Date
   endDate              DateTime?   @mysql.Date
@@ -103,7 +103,7 @@ model BillItem {
   bill      Bill?     @relation("BillItem_bill", fields: [billId], references: [id])
   billId    String?   @map("bill")
   quantity  Int?
-  amount    Int?
+  amount    Decimal?  @mysql.Decimal(18, 2)
   createdAt DateTime? @default(now())
 
   @@index([billId])

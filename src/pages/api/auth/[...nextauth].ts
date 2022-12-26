@@ -1,10 +1,27 @@
-import NextAuth from 'next-auth'
+import { gql } from '@ts-gql/tag/no-transform'
+import NextAuth, { AuthOptions } from 'next-auth'
 import Auth0 from 'next-auth/providers/auth0'
 import { keystoneContext } from '../../../keystone/context'
 
-export const authOptions = {
+const GET_AUTH_SESSION = gql`
+  query GET_AUTH_SESSION($subjectId: String!) {
+    user(where: { subjectId: $subjectId }) {
+      id
+      email
+      role
+      account {
+        id
+        firstName
+        surname
+      }
+    }
+  }
+` as import('../../../../__generated__/ts-gql/GET_AUTH_SESSION').type
+
+export const authOptions: AuthOptions = {
   callbacks: {
-    async signIn({ user }: any) {
+    async signIn(signInProps) {
+      const { user } = signInProps
       const keyUser = await keystoneContext.sudo().db.User.findOne({
         where: { subjectId: user.id },
       })
@@ -16,32 +33,40 @@ export const authOptions = {
             subjectId: user.id,
             email: user.email,
             name: user.name,
+            account: {
+              create: {
+                firstName: user.name,
+              },
+            },
           },
         })
       }
       return true
     },
-    async session({ session, token }: any) {
-      const { id, account, email, role } = token
+    async session({ session, token }) {
+      const { id, email, role, account } = token
       return {
         ...session,
         user: {
           ...session.user,
-          name: account.firstName + ' ' + account.surname,
+          name: account?.firstName + ' ' + account?.surname,
         },
         data: {
           id,
-          firstName: account.firstName,
-          surname: account.surname,
+          firstName: account?.firstName,
+          surname: account?.surname,
           email,
           role,
         },
       }
     },
-    async jwt({ token, user }: any) {
-      const userInDb = await keystoneContext.sudo().query.User.findOne({
-        where: { subjectId: token.sub },
-        query: 'id email role account { id firstName surname }',
+    async jwt({ token, user }) {
+      if (!token?.sub) {
+        return token
+      }
+      const { user: userInDb } = await keystoneContext.sudo().graphql.run({
+        variables: { subjectId: token.sub },
+        query: GET_AUTH_SESSION,
       })
       if (userInDb) {
         token = { ...token, ...userInDb }

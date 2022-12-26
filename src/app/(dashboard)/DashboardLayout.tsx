@@ -15,17 +15,19 @@ import {
     UsersIcon,
     XMarkIcon,
     IdentificationIcon,
+    ScaleIcon,
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
 type NavigationProps = {
     children: React.ReactNode;
-    PageName: 'Dashboard' | 'Students' | 'Classes' | 'Calendar' | 'Notifications' | 'Profile';
+    PageName: 'Account' | 'Dashboard' | 'Students' | 'Classes' | 'Calendar' | 'Notifications' | 'Profile';
 }
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
     { name: 'Students', href: '/dashboard/students', icon: UsersIcon },
     { name: 'Classes', href: '/dashboard/classes', icon: FolderIcon },
+    { name: 'Account', href: '/dashboard/account', icon: ScaleIcon },
     { name: 'Calendar', href: '/dashboard/calendar', icon: CalendarIcon },
     { name: 'Notifications', href: '/dashboard/notifications', icon: InboxIcon },
 ]

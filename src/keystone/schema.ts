@@ -9,10 +9,23 @@ import {
   calendarDay,
   integer,
   virtual,
+  decimal,
 } from '@keystone-6/core/fields'
 import { document } from '@keystone-6/fields-document'
 import type { Lists, Context } from '.keystone/types'
+import { gql } from '@ts-gql/tag/no-transform'
+import { Decimal } from 'decimal.js'
 
+const GET_BILL_ITEMS_TOTAL = gql`
+  query GET_BILL_ITEMS_TOTAL($id: ID!) {
+    billItems(where: { bill: { id: { equals: $id } } }) {
+      id
+      amount
+    }
+  }
+` as import('../../__generated__/ts-gql/GET_BILL_ITEMS_TOTAL').type
+
+const decimalScale = 2
 export const lists: Lists = {
   User: list({
     access: allowAll,
@@ -59,6 +72,7 @@ export const lists: Lists = {
       surname: text(),
       dateOfBirth: calendarDay(),
       account: relationship({ ref: 'Account.students', many: false }),
+      enrollments: relationship({ ref: 'Enrolment.student', many: true }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
@@ -83,7 +97,7 @@ export const lists: Lists = {
       }),
       minimumAge: integer(),
       maximumAge: integer(),
-      cost: integer(),
+      cost: decimal({ scale: decimalScale }),
       quantity: integer(),
       startDate: calendarDay(),
       endDate: calendarDay(),
@@ -115,7 +129,7 @@ export const lists: Lists = {
     access: allowAll,
     fields: {
       class: relationship({ ref: 'Class', many: false }),
-      student: relationship({ ref: 'Student', many: false }),
+      student: relationship({ ref: 'Student.enrollments', many: false }),
       status: select({
         options: [
           { label: 'Enrolled', value: 'ENROLLED' },
@@ -139,13 +153,22 @@ export const lists: Lists = {
       dueDate: calendarDay(),
       total: virtual({
         field: graphql.field({
-          type: graphql.Int,
+          type: graphql.Decimal,
           resolve: async (item, args, context) => {
-            const billItems = await context.query.BillItem.findMany({
-              where: { bill: { id: item.id } },
-              query: ' id amount',
+            const data = await context.graphql.run({
+              query: GET_BILL_ITEMS_TOTAL,
+              variables: { id: item.id },
             })
-            return billItems.reduce((acc, billItem) => acc + billItem.amount, 0)
+            const billItems = data.billItems
+            let val: Decimal & { scaleToPrint?: number } = new Decimal(0)
+            if (billItems && billItems.length) {
+              val = billItems.reduce(
+                (acc, billItem) => acc.add(billItem.amount),
+                new Decimal(0)
+              )
+            }
+            val.scaleToPrint = decimalScale
+            return val
           },
         }),
       }),
@@ -171,7 +194,19 @@ export const lists: Lists = {
       name: text(),
       bill: relationship({ ref: 'Bill.items', many: false }),
       quantity: integer(),
-      amount: integer(),
+      amount: decimal({ scale: decimalScale }),
+      total: virtual({
+        field: graphql.field({
+          type: graphql.Decimal,
+          resolve: (item) => {
+            let val: Decimal & { scaleToPrint?: number } = new Decimal(0.0)
+            if (item.amount && item.quantity)
+              val = new Decimal(item.amount).mul(item.quantity)
+            val.scaleToPrint = decimalScale
+            return val
+          },
+        }),
+      }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),

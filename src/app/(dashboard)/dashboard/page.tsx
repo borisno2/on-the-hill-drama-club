@@ -1,18 +1,36 @@
-import { BuildingOfficeIcon, CheckCircleIcon, IdentificationIcon, ScaleIcon } from "@heroicons/react/24/outline";
+import { BuildingOfficeIcon, CheckCircleIcon, IdentificationIcon, ScaleIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { getSessionContext } from "app/KeystoneContext";
 import DashboardLayout from "../DashboardLayout";
 import Image from "next/image";
 import Link from "next/link";
+import { gql } from "@ts-gql/tag/no-transform";
 
-const cards = [
+const GET_STUDENT_ENROLLMENTS = gql`
+    query GET_STUDENT_ENROLLMENTS {
+        students {
+            id
+            firstName
+            surname
+            enrollments {
+                id
+                class {
+                    id
+                    name
+                }
+            }
+        }
+    }`as import("../../../../__generated__/ts-gql/GET_STUDENT_ENROLLMENTS").type
 
 
-    { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' },
-    // More items...
-]
 export default async function Portal() {
     const context = await getSessionContext();
-
+    const { students } = await context.graphql.run({ query: GET_STUDENT_ENROLLMENTS })
+    const cards = [
+        { name: 'Account balance', href: '/dashboard/account', icon: ScaleIcon, amount: '$30,659.45' },
+        { name: 'Students', href: '/dashboard/students', icon: UsersIcon, amount: students ? students.length : 0 },
+        { name: 'Classes', href: '/dashboard/classes', icon: BuildingOfficeIcon, amount: students ? students.reduce((acc, student) => acc + (student.enrollments ? student.enrollments.length : 0), 0) : 0 },
+        // More items...
+    ]
     return (
         <DashboardLayout PageName="Dashboard">
             <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -24,16 +42,12 @@ export default async function Portal() {
                     <div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
                         <div className="min-w-0 flex-1">
                             <div className="flex items-center">
-                                <IdentificationIcon className="inline-block h-9 w-9 rounded-full" />
+                                <IdentificationIcon className="hidden h-16 w-16 rounded-full sm:block" />
 
                                 <div>
                                     <div className="flex items-center">
-                                        <Image
+                                        <IdentificationIcon
                                             className="h-16 w-16 rounded-full sm:hidden"
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                                            alt=""
-                                            width={64}
-                                            height={64}
                                         />
                                         <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:leading-9">
                                             Hello, {context.session.data.firstName}
@@ -96,7 +110,7 @@ export default async function Portal() {
                                 <div className="bg-gray-50 px-5 py-3">
                                     <div className="text-sm">
                                         <a href={card.href} className="font-medium text-cyan-700 hover:text-cyan-900">
-                                            View all
+                                            Manage
                                         </a>
                                     </div>
                                 </div>
