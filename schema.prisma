@@ -18,6 +18,7 @@ model User {
   id        String    @id @default(cuid())
   name      String    @default("")
   email     String    @unique @default("")
+  password  String?
   subjectId String    @unique @default("")
   createdAt DateTime? @default(now())
   account   Account?  @relation("Account_user")

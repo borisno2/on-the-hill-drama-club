@@ -1,11 +1,15 @@
+import { isCuid } from 'lib/isCuid'
 import { gql } from '@ts-gql/tag/no-transform'
 import NextAuth, { AuthOptions } from 'next-auth'
 import Auth0 from 'next-auth/providers/auth0'
+import Credentials from 'next-auth/providers/credentials'
 import { keystoneContext } from '../../../keystone/context'
 
+import { assertObjectType, GraphQLSchema } from 'graphql'
+
 const GET_AUTH_SESSION = gql`
-  query GET_AUTH_SESSION($subjectId: String!) {
-    user(where: { subjectId: $subjectId }) {
+  query GET_AUTH_SESSION($where: UserWhereUniqueInput!) {
+    user(where: $where) {
       id
       email
       role
@@ -17,11 +21,30 @@ const GET_AUTH_SESSION = gql`
     }
   }
 ` as import('../../../../__generated__/ts-gql/GET_AUTH_SESSION').type
+type SecretFieldImpl = {
+  generateHash: (secret: string) => Promise<string>
+  compare: (secret: string, hash: string) => Promise<string>
+}
+function getSecretFieldImpl(
+  schema: GraphQLSchema,
+  listKey: string,
+  fieldKey: string
+): SecretFieldImpl {
+  const gqlOutputType = assertObjectType(schema.getType(listKey))
+  const secretFieldImpl =
+    gqlOutputType.getFields()?.[fieldKey].extensions?.keystoneSecretField
+  return secretFieldImpl as SecretFieldImpl
+}
 
 export const authOptions: AuthOptions = {
   callbacks: {
     async signIn(signInProps) {
-      const { user } = signInProps
+      console.log('signInProps', signInProps)
+
+      const { user, account } = signInProps
+      if (account?.provider === 'credentials') {
+        return true
+      }
       const keyUser = await keystoneContext.sudo().db.User.findOne({
         where: { subjectId: user.id },
       })
@@ -64,8 +87,13 @@ export const authOptions: AuthOptions = {
       if (!token?.sub) {
         return token
       }
+      console.log('jwt', token)
+      console.log('user', user)
+      const where = isCuid(token.sub)
+        ? { id: token.sub }
+        : { subjectId: token.sub }
       const { user: userInDb } = await keystoneContext.sudo().graphql.run({
-        variables: { subjectId: token.sub },
+        variables: { where },
         query: GET_AUTH_SESSION,
       })
       if (userInDb) {
@@ -79,6 +107,44 @@ export const authOptions: AuthOptions = {
     },
   },
   providers: [
+    Credentials({
+      name: 'Credentials',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'text',
+          placeholder: 'jsmith@email.com',
+        },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials) {
+        if (!credentials) {
+          return null
+        }
+        const { email, password } = credentials
+        const secretFieldImpl = getSecretFieldImpl(
+          keystoneContext.sudo().graphql.schema,
+          'User',
+          'password'
+        )
+        const item = await keystoneContext
+          .sudo()
+          .db.User.findOne({ where: { email } })
+        console.log('item', item)
+
+        if (!item || !item.password) {
+          await secretFieldImpl.generateHash(
+            'simulated-password-to-counter-timing-attack'
+          )
+          return null
+        } else if (await secretFieldImpl.compare(password, item.password)) {
+          // Authenticated!
+          return item
+        } else {
+          return null
+        }
+      },
+    }),
     Auth0({
       clientId: process.env.AUTH0_CLIENT_ID || 'Auth0ClientID',
       clientSecret: process.env.AUTH0_CLIENT_SECRET || 'Auth0ClientSecret',

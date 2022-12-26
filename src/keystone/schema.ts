@@ -35,6 +35,7 @@ export const lists: Lists = {
         validation: { isRequired: true },
         isIndexed: 'unique',
       }),
+      password: password(),
       subjectId: text({
         validation: { isRequired: true },
         isIndexed: 'unique',
