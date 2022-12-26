@@ -38,13 +38,13 @@ function getSecretFieldImpl(
 
 export const authOptions: AuthOptions = {
   callbacks: {
-    async signIn(signInProps) {
-      console.log('signInProps', signInProps)
-
-      const { user, account } = signInProps
+    async signIn({ user, account }) {
+      // if account type is cretentials then authorise the user
       if (account?.provider === 'credentials') {
-        return true
+        if (user.id) return true
+        return false
       }
+
       const keyUser = await keystoneContext.sudo().db.User.findOne({
         where: { subjectId: user.id },
       })
@@ -55,7 +55,7 @@ export const authOptions: AuthOptions = {
           data: {
             subjectId: user.id,
             email: user.email,
-            name: user.name,
+            provider: account?.provider,
             account: {
               create: {
                 firstName: user.name,
@@ -63,6 +63,12 @@ export const authOptions: AuthOptions = {
             },
           },
         })
+      }
+      if (keyUser?.provider !== account?.provider) {
+        console.log(
+          `User provider mismatch for ${user.email} - ${account?.provider}`
+        )
+        return false
       }
       return true
     },
@@ -83,12 +89,10 @@ export const authOptions: AuthOptions = {
         },
       }
     },
-    async jwt({ token, user }) {
+    async jwt({ token }) {
       if (!token?.sub) {
         return token
       }
-      console.log('jwt', token)
-      console.log('user', user)
       const where = isCuid(token.sub)
         ? { id: token.sub }
         : { subjectId: token.sub }
@@ -99,10 +103,6 @@ export const authOptions: AuthOptions = {
       if (userInDb) {
         token = { ...token, ...userInDb }
       }
-      if (user) {
-        token = { ...token, ...user }
-      }
-
       return token
     },
   },
@@ -127,19 +127,30 @@ export const authOptions: AuthOptions = {
           'User',
           'password'
         )
-        const item = await keystoneContext
-          .sudo()
-          .db.User.findOne({ where: { email } })
-        console.log('item', item)
-
-        if (!item || !item.password) {
+        const item = await keystoneContext.sudo().db.User.findMany({
+          where: {
+            AND: [
+              { email: { equals: email } },
+              { provider: { equals: 'credentials' } },
+            ],
+          },
+        })
+        // simulate a password hash to counter timing attacks
+        // https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#implement-proper-password-strength-controls
+        // Deny if on user is found of more than one user found
+        if (
+          !item ||
+          item.length > 1 ||
+          item.length === 0 ||
+          !item[0].password
+        ) {
           await secretFieldImpl.generateHash(
             'simulated-password-to-counter-timing-attack'
           )
           return null
-        } else if (await secretFieldImpl.compare(password, item.password)) {
+        } else if (await secretFieldImpl.compare(password, item[0].password)) {
           // Authenticated!
-          return item
+          return { id: item[0].id, email: item[0].email, role: item[0].role }
         } else {
           return null
         }

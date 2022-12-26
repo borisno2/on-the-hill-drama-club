@@ -30,10 +30,27 @@ export const lists: Lists = {
   User: list({
     access: allowAll,
     fields: {
-      name: text({ validation: { isRequired: true } }),
+      name: virtual({
+        field: graphql.field({
+          type: graphql.String,
+          resolve: async (item, args, context: Context) => {
+            const user = await context.query.User.findOne({
+              where: { id: item.id },
+              query: 'id account { firstName surname } provider',
+            })
+            return `${user.account?.firstName} ${user.account?.surname} - ${item.provider}`
+          },
+        }),
+      }),
       email: text({
         validation: { isRequired: true },
-        isIndexed: 'unique',
+      }),
+      provider: select({
+        options: [
+          { label: 'Credentials', value: 'credentials' },
+          { label: 'Auth0', value: 'auth0' },
+        ],
+        validation: { isRequired: true },
       }),
       password: password(),
       subjectId: text({
