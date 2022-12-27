@@ -37,6 +37,9 @@ function getSecretFieldImpl(
 }
 
 export const authOptions: AuthOptions = {
+  pages: {
+    signIn: '/auth/signin',
+  },
   callbacks: {
     async signIn({ user, account }) {
       // if account type is cretentials then authorise the user
@@ -108,7 +111,7 @@ export const authOptions: AuthOptions = {
   },
   providers: [
     Credentials({
-      name: 'Credentials',
+      name: 'credentials',
       credentials: {
         email: {
           label: 'Email',
@@ -137,7 +140,7 @@ export const authOptions: AuthOptions = {
         })
         // simulate a password hash to counter timing attacks
         // https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#implement-proper-password-strength-controls
-        // Deny if on user is found of more than one user found
+        // Deny if there is more than one user found (this should not happen)
         if (
           !item ||
           item.length > 1 ||
