@@ -1,7 +1,10 @@
 import { isCuid } from 'lib/isCuid'
 import { gql } from '@ts-gql/tag/no-transform'
 import NextAuth, { AuthOptions } from 'next-auth'
-import Auth0 from 'next-auth/providers/auth0'
+import Google from 'next-auth/providers/google'
+import Facebook from 'next-auth/providers/facebook'
+import Apple from 'next-auth/providers/apple'
+
 import Credentials from 'next-auth/providers/credentials'
 import { keystoneContext } from '../../../keystone/context'
 
@@ -159,13 +162,18 @@ export const authOptions: AuthOptions = {
         }
       },
     }),
-    Auth0({
-      clientId: process.env.AUTH0_CLIENT_ID || 'Auth0ClientID',
-      clientSecret: process.env.AUTH0_CLIENT_SECRET || 'Auth0ClientSecret',
-      issuer:
-        process.env.AUTH0_ISSUER_BASE_URL || 'https://opensaas.au.auth0.com',
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID || 'GoogleClientID',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'GoogleClientSecret',
     }),
-    // ...add more providers here
+    Facebook({
+      clientId: process.env.FACEBOOK_CLIENT_ID || 'FacebookClientID',
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || 'Facebook',
+    }),
+    Apple({
+      clientId: process.env.APPLE_CLIENT_ID || 'AppleClientID',
+      clientSecret: process.env.APPLE_CLIENT_SECRET || 'AppleClientSecret',
+    }),
   ],
 }
 

@@ -22,7 +22,6 @@ export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: st
         } catch {
             setError("Failed to log in");
         }
-        setLoading(false);
     }
 
     return (
