@@ -12,6 +12,7 @@ export default async function RegisterPage({
     const callbackUrl = typeof searchParams?.callbackUrl === 'string' ? searchParams?.callbackUrl : "/dashboard"
 
     return (
+
         <div className="flex items-center justify-center h-screen">
             <div className="flex flex-col items-center justify-center w-full px-4 py-8 space-y-4 bg-white border-2 border-gray-200 rounded-lg shadow-xl">
                 <h1 className="text-2xl font-bold">Register</h1>

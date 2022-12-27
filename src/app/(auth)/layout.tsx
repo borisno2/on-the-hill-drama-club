@@ -4,6 +4,7 @@ import 'styles/tailwind.css'
 import 'focus-visible'
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
+import Script from 'next/script'
 
 type AppProps = {
   children: React.ReactNode;
@@ -19,6 +20,9 @@ export default function RootLayout({
         <AuthContext>
           <div className="relative">
             <main>
+              <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async={true}
+                defer={true}></Script>
+
               {children}
             </main>
             <Footer />

@@ -24,6 +24,7 @@ specifiers:
   aws-crt: ^1.15.5
   clsx: ^1.2.1
   concurrently: ^7.6.0
+  cuid: ^2.1.8
   decimal.js: ^10.4.3
   eslint: 8.29.0
   eslint-config-next: 13.0.6
@@ -43,6 +44,7 @@ specifiers:
   remark-gfm: ^3.0.1
   tailwindcss: ^3.2.4
   typescript: ^4.9.4
+  zod: ^3.20.2
 
 dependencies:
   '@apollo/server': 4.3.0_graphql@16.6.0
@@ -62,6 +64,7 @@ dependencies:
   autoprefixer: 10.4.13_postcss@8.4.20
   aws-crt: 1.15.5
   clsx: 1.2.1
+  cuid: 2.1.8
   decimal.js: 10.4.3
   fast-glob: 3.2.12
   feed: 4.2.2
@@ -76,6 +79,7 @@ dependencies:
   react-tailwindcss-datepicker: 1.3.2_dayjs@1.11.7+react@18.2.0
   remark-gfm: 3.0.1
   tailwindcss: 3.2.4_postcss@8.4.20
+  zod: 3.20.2
 
 devDependencies:
   '@ts-gql/eslint-plugin': 0.8.4_jz3a2h5hk7ovnjw77iknbsl6sy
@@ -11508,6 +11512,10 @@ packages:
       archiver-utils: 2.1.0
       compress-commons: 4.1.1
       readable-stream: 3.6.0
+    dev: false
+
+  /zod/3.20.2:
+    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
     dev: false
 
   /zwitch/1.0.5:

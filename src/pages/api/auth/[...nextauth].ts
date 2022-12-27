@@ -1,14 +1,17 @@
-import { isCuid } from 'lib/isCuid'
+import { isCuid } from 'cuid'
 import { gql } from '@ts-gql/tag/no-transform'
 import NextAuth, { AuthOptions } from 'next-auth'
 import Google from 'next-auth/providers/google'
 import Facebook from 'next-auth/providers/facebook'
 import Apple from 'next-auth/providers/apple'
+import { headers } from 'next/headers'
 
 import Credentials from 'next-auth/providers/credentials'
 import { keystoneContext } from '../../../keystone/context'
 
 import { assertObjectType, GraphQLSchema } from 'graphql'
+
+const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || 'Turnstile'
 
 const GET_AUTH_SESSION = gql`
   query GET_AUTH_SESSION($where: UserWhereUniqueInput!) {
@@ -47,6 +50,15 @@ export const authOptions: AuthOptions = {
     async signIn({ user, account }) {
       // if account type is cretentials then authorise the user
       if (account?.provider === 'credentials') {
+        if (user.failMessage) {
+          if (user.failMessage === 'InvalidCredentials') {
+            return '/auth/signin?error=InvalidCredentials'
+          } else if (user.failMessage === 'TurnstileFailed') {
+            return '/auth/signin?error=UserNotVerified'
+          } else {
+            return '/auth/signin?error=UnknownError'
+          }
+        }
         if (user.id) return true
         return false
       }
@@ -122,12 +134,27 @@ export const authOptions: AuthOptions = {
           placeholder: 'jsmith@email.com',
         },
         password: { label: 'Password', type: 'password' },
+        turnstileRes: { label: 'TurnstileRes', type: 'text' },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials) {
           return null
         }
-        const { email, password } = credentials
+        const { email, password, turnstileRes } = credentials
+        const form = new URLSearchParams()
+
+        form.append('secret', SECRET_KEY)
+        form.append('response', turnstileRes)
+        form.append('remoteip', req?.headers?.['x-forwarded-for'] as string)
+        const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+        const result = await fetch(url, {
+          body: form,
+          method: 'POST',
+        })
+        const outcome = await result.json()
+        if (!outcome.success) {
+          return { failMessage: 'TurnstileFailed' }
+        }
         const secretFieldImpl = getSecretFieldImpl(
           keystoneContext.sudo().graphql.schema,
           'User',
@@ -153,12 +180,12 @@ export const authOptions: AuthOptions = {
           await secretFieldImpl.generateHash(
             'simulated-password-to-counter-timing-attack'
           )
-          return null
+          return { failMessage: 'InvalidCredentials' }
         } else if (await secretFieldImpl.compare(password, item[0].password)) {
           // Authenticated!
           return { id: item[0].id, email: item[0].email, role: item[0].role }
         } else {
-          return null
+          return { failMessage: 'InvalidCredentials' }
         }
       },
     }),

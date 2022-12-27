@@ -2,7 +2,7 @@
 import { gql } from "@ts-gql/tag/no-transform";
 import { useForm } from "lib/useForm";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { client } from "util/request";
 import ErrorPop from "./ErrorPop";
 import SuccessPop from "./SuccessPop";
@@ -17,6 +17,15 @@ type User = {
     streetAddress: string | null;
 };
 
+type Inputs = {
+    firstName: string;
+    surname: string;
+    phone: string;
+    suburb: string;
+    postcode: string;
+    streetAddress: string;
+}
+
 const UPDATE_ACCOUNT = gql`
     mutation UPDATE_ACCOUNT($id: ID!, $data: AccountUpdateInput!) {
         updateAccount(where: {id: $id}, data: $data) {
@@ -29,26 +38,27 @@ const UPDATE_ACCOUNT = gql`
 export default function ProfileForm({ user }: { user: User }) {
     const router = useRouter();
     const initialValues = {
-        firstName: user.firstName,
-        surname: user.surname,
-        phone: user.phone,
-        suburb: user.suburb,
-        postcode: user.postcode,
-        streetAddress: user.streetAddress,
+        firstName: user.firstName || '',
+        surname: user.surname || '',
+        phone: user.phone || '',
+        suburb: user.suburb || '',
+        postcode: user.postcode || '',
+        streetAddress: user.streetAddress || '',
     }
     const {
         inputs,
         handleChange,
     }: {
-        inputs: any;
-        handleChange: any;
+        inputs: Inputs;
+        handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
         resetForm: any;
         handleStageButton: any;
         clearForm: any;
-    } = useForm(initialValues);
+    } = useForm<Inputs>(initialValues);
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [isPending, startTransition] = useTransition();
 
     const onsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -60,7 +70,9 @@ export default function ProfileForm({ user }: { user: User }) {
             });
             setSuccess(true);
             setLoading(false);
-            router.refresh();
+            startTransition(() => {
+                router.refresh();
+            });
         } catch (error) {
             setError(true);
             setLoading(false);
@@ -221,7 +233,7 @@ export default function ProfileForm({ user }: { user: User }) {
                             type="submit"
                             className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
-                            {loading ? 'Loading...' : 'Save'}
+                            {loading || isPending ? 'Loading...' : 'Save'}
                         </button>
                     </div>
                 </div>

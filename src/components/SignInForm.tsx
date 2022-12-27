@@ -12,13 +12,14 @@ export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: st
     async function handleSubmit(e: FormEvent) {
         e.preventDefault();
 
+        setError("");
+        setLoading(true);
+
+
         try {
-            setError("");
-            setLoading(true);
-            await signIn('credentials', { email, password, callbackUrl, csrfToken }
-            );
-            console.log("Logged in");
-            Router.redirect(callbackUrl);
+            const formData = new FormData(e.target as HTMLFormElement)
+            const turnstileRes = formData.get('cf-turnstile-response')?.toString()
+            await signIn('credentials', { email, password, callbackUrl, turnstileRes, csrfToken });
         } catch {
             setError("Failed to log in");
         }
@@ -72,6 +73,7 @@ export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: st
                     </a>
                 </div>
             </div>
+            <div className="cf-turnstile checkbox" data-theme='light' data-sitekey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}></div>
 
             <div>
                 <button

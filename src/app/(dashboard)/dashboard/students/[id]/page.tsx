@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import StudentForm from "components/StudentForm"
 
 import { redirect } from 'next/navigation';
-import { isCuid } from "lib/isCuid";
+import { isCuid } from 'cuid'
 
 import { gql } from "@ts-gql/tag/no-transform";
 

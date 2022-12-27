@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
-export function useForm(initial = {}) {
+export function useForm<Inputs extends { [k: string]: string }>(
+  initial: Inputs
+) {
   // create a state object for our inputs
   const [inputs, setInputs] = useState(initial)
   const initialValues = Object.values(initial).join('')
@@ -62,7 +64,7 @@ export function useForm(initial = {}) {
     const blankState = Object.fromEntries(
       Object.entries(inputs).map(([key, value]) => [key, ''])
     )
-    setInputs(blankState)
+    setInputs(blankState as Inputs)
   }
 
   // return the things we want to surface from this custom hook
