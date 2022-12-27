@@ -3,9 +3,13 @@ import { SocialLogins } from "components/SocialLogins"
 import { getCsrfToken } from "next-auth/react"
 import Link from "next/link"
 
-export default async function RegisterPage({ searchParams }: { searchParams: { callbackUrl?: string } }) {
+export default async function RegisterPage({
+    searchParams,
+}: {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) {
     const csrfToken = await getCsrfToken()
-    const callbackUrl = searchParams.callbackUrl || "/dashboard"
+    const callbackUrl = typeof searchParams?.callbackUrl === 'string' ? searchParams?.callbackUrl : "/dashboard"
 
     return (
         <div className="flex items-center justify-center h-screen">

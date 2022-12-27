@@ -5,9 +5,13 @@ import { SocialLogins } from 'components/SocialLogins';
 import Link from 'next/link';
 
 
-export default async function SignInPage({ searchParams }: { searchParams: { callbackUrl?: string } }) {
+export default async function SignInPage({
+    searchParams,
+}: {
+    searchParams?: { [key: string]: string | string[] | undefined };
+}) {
     const csrfToken = await getCsrfToken()
-    const callbackUrl = searchParams.callbackUrl || "/dashboard"
+    const callbackUrl = typeof searchParams?.callbackUrl === 'string' ? searchParams?.callbackUrl : "/dashboard"
     return (
         <>
             <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
