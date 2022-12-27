@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getCsrfToken } from "next-auth/react"
 import SignInForm from 'components/SignInForm';
 import { SocialLogins } from 'components/SocialLogins';
+import Link from 'next/link';
 
 
 export default async function SignInPage({ searchParams }: { searchParams: { callbackUrl?: string } }) {
@@ -21,9 +22,9 @@ export default async function SignInPage({ searchParams }: { searchParams: { cal
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Or{' '}
-                        <a href="/auth/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+                        <Link href="/auth/register" className="font-medium text-indigo-600 hover:text-indigo-500">
                             Register for a new account
-                        </a>
+                        </Link>
                     </p>
                 </div>
 
