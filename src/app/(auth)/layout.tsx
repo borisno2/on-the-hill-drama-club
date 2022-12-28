@@ -18,11 +18,10 @@ export default function RootLayout({
     <html className="h-full antialiased" lang="en">
       <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
         <AuthContext>
+          <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async={true}
+            defer={true}></Script>
           <div className="relative">
             <main>
-              <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async={true}
-                defer={true}></Script>
-
               {children}
             </main>
             <Footer />

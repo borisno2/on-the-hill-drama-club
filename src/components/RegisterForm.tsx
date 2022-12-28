@@ -1,7 +1,6 @@
 "use client"
 import { useForm } from "lib/useForm";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ErrorPop from "./ErrorPop";
 import SuccessPop from "./SuccessPop";
@@ -82,11 +81,12 @@ export default function RegisterForm({ callbackUrl, csrfToken }: { callbackUrl: 
                 body: JSON.stringify(data),
             });
             if (!result.ok) {
+                setError(true);
                 throw new Error(result.statusText);
             }
             setSuccess(true);
             setLoading(false);
-            signIn('credentials', { email: inputs.email, password: inputs.password, callbackUrl, csrfToken, turnstileRes: data.turnstileRes })
+            signIn('credentials', { callbackUrl })
 
         } catch (error) {
             setError(true);
@@ -109,7 +109,7 @@ export default function RegisterForm({ callbackUrl, csrfToken }: { callbackUrl: 
                         <div className="grid grid-cols-6 gap-6">
                             <div className="col-span-6 sm:col-span-3">
                                 <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                                    First name
+                                    Your First Name
                                 </label>
                                 <input
                                     title="Please enter your first name."
@@ -125,7 +125,7 @@ export default function RegisterForm({ callbackUrl, csrfToken }: { callbackUrl: 
 
                             <div className="col-span-6 sm:col-span-3">
                                 <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                                    Last name
+                                    Your Last Name
                                 </label>
                                 <input
                                     title="Please enter your last name."
@@ -259,7 +259,7 @@ export default function RegisterForm({ callbackUrl, csrfToken }: { callbackUrl: 
                             type="submit"
                             className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
-                            {loading ? 'Loading...' : 'Save'}
+                            {loading ? 'Loading...' : 'Next'}
                         </button>
                     </div>
                 </div>

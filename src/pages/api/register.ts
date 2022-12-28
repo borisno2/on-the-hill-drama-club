@@ -57,6 +57,7 @@ export default async function handler(
         email: data.email,
         password: data.password,
         subjectId: cuid(),
+        provider: 'credentials',
         account: {
           create: {
             firstName: data.firstName,
