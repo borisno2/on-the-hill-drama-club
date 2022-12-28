@@ -18,6 +18,7 @@ const GET_AUTH_SESSION = gql`
     user(where: $where) {
       id
       email
+      emailVerified
       role
       account {
         id

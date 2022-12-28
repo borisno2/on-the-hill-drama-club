@@ -1,7 +1,6 @@
-import { BuildingOfficeIcon, CheckCircleIcon, IdentificationIcon, ScaleIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { BuildingOfficeIcon, CheckCircleIcon, IdentificationIcon, ScaleIcon, StopCircleIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { getSessionContext } from "app/KeystoneContext";
 import DashboardLayout from "../DashboardLayout";
-import Image from "next/image";
 import Link from "next/link";
 import { gql } from "@ts-gql/tag/no-transform";
 
@@ -26,7 +25,7 @@ export default async function Portal() {
     const context = await getSessionContext();
     const { students } = await context.graphql.run({ query: GET_STUDENT_ENROLLMENTS })
     const cards = [
-        { name: 'Account balance', href: '/dashboard/account', icon: ScaleIcon, amount: '$30,659.45' },
+        //{ name: 'Account balance', href: '/dashboard/account', icon: ScaleIcon, amount: '$30,659.45' },
         { name: 'Students', href: '/dashboard/students', icon: UsersIcon, amount: students ? students.length : 0 },
         { name: 'Classes', href: '/dashboard/classes', icon: BuildingOfficeIcon, amount: students ? students.reduce((acc, student) => acc + (student.enrollments ? student.enrollments.length : 0), 0) : 0 },
         // More items...
@@ -71,11 +70,22 @@ export default async function Portal() {
 
                                         <dt className="sr-only">Account status</dt>
                                         <dd className="mt-3 flex items-center text-sm font-medium capitalize text-gray-500 sm:mr-6 sm:mt-0">
-                                            <CheckCircleIcon
-                                                className="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400"
-                                                aria-hidden="true"
-                                            />
-                                            Verified account
+                                            {context.session.data.emailVerified ? (
+                                                <>
+                                                    <CheckCircleIcon
+                                                        className="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400"
+                                                        aria-hidden="true"
+                                                    />
+                                                    <p>Verified account</p>
+                                                </>
+                                            ) : (<>
+                                                <StopCircleIcon
+                                                    className="mr-1.5 h-5 w-5 flex-shrink-0 text-red-400"
+                                                    aria-hidden="true"
+                                                />
+                                                <p>Unverified account</p>
+                                            </>
+                                            )}
                                         </dd>
                                     </dl>
                                 </div>

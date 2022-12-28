@@ -29,8 +29,8 @@ const navigation = [
     { name: 'Students', href: '/dashboard/students', icon: UsersIcon },
     { name: 'Classes', href: '/dashboard/classes', icon: FolderIcon },
     { name: 'Account', href: '/dashboard/account', icon: ScaleIcon },
-    { name: 'Calendar', href: '/dashboard/calendar', icon: CalendarIcon },
-    { name: 'Notifications', href: '/dashboard/notifications', icon: InboxIcon },
+    //{ name: 'Calendar', href: '/dashboard/calendar', icon: CalendarIcon },
+    //{ name: 'Notifications', href: '/dashboard/notifications', icon: InboxIcon },
 ]
 
 function classNames(...classes: string[]) {

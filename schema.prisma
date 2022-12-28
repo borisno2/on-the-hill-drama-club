@@ -15,14 +15,17 @@ generator client {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  email     String    @default("")
-  provider  String
-  password  String?
-  subjectId String    @unique @default("")
-  createdAt DateTime? @default(now())
-  account   Account?  @relation("Account_user")
-  role      String    @default("")
+  id                           String    @id @default(cuid())
+  email                        String    @default("")
+  emailVerified                Boolean   @default(false)
+  emailVerificationToken       String    @default("")
+  emailVerificationTokenExpiry DateTime?
+  provider                     String
+  password                     String?
+  subjectId                    String    @unique @default("")
+  createdAt                    DateTime? @default(now())
+  account                      Account?  @relation("Account_user")
+  role                         String    @default("")
 }
 
 model Account {

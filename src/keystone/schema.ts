@@ -1,5 +1,5 @@
 import { graphql, list } from '@keystone-6/core'
-import { allowAll } from '@keystone-6/core/access'
+import { allowAll, denyAll } from '@keystone-6/core/access'
 import {
   text,
   relationship,
@@ -10,6 +10,7 @@ import {
   integer,
   virtual,
   decimal,
+  checkbox,
 } from '@keystone-6/core/fields'
 import { document } from '@keystone-6/fields-document'
 import type { Lists, Context } from '.keystone/types'
@@ -45,6 +46,9 @@ export const lists: Lists = {
       email: text({
         validation: { isRequired: true },
       }),
+      emailVerified: checkbox({ defaultValue: false }),
+      emailVerificationToken: text(),
+      emailVerificationTokenExpiry: timestamp(),
       provider: select({
         options: [
           { label: 'Credentials', value: 'credentials' },

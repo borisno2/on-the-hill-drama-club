@@ -5,6 +5,9 @@ type User {
   id: ID!
   name: String
   email: String
+  emailVerified: Boolean
+  emailVerificationToken: String
+  emailVerificationTokenExpiry: DateTime
   provider: String
   password: PasswordState
   subjectId: String
@@ -13,11 +16,11 @@ type User {
   role: String
 }
 
+scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
 type PasswordState {
   isSet: Boolean!
 }
-
-scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
 
 input UserWhereUniqueInput {
   id: ID
@@ -30,6 +33,9 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
   id: IDFilter
   email: StringFilter
+  emailVerified: BooleanFilter
+  emailVerificationToken: StringFilter
+  emailVerificationTokenExpiry: DateTimeNullableFilter
   provider: StringFilter
   password: PasswordFilter
   subjectId: StringFilter
@@ -77,8 +83,9 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input PasswordFilter {
-  isSet: Boolean!
+input BooleanFilter {
+  equals: Boolean
+  not: BooleanFilter
 }
 
 input DateTimeNullableFilter {
@@ -92,9 +99,16 @@ input DateTimeNullableFilter {
   not: DateTimeNullableFilter
 }
 
+input PasswordFilter {
+  isSet: Boolean!
+}
+
 input UserOrderByInput {
   id: OrderDirection
   email: OrderDirection
+  emailVerified: OrderDirection
+  emailVerificationToken: OrderDirection
+  emailVerificationTokenExpiry: OrderDirection
   provider: OrderDirection
   subjectId: OrderDirection
   createdAt: OrderDirection
@@ -108,6 +122,9 @@ enum OrderDirection {
 
 input UserUpdateInput {
   email: String
+  emailVerified: Boolean
+  emailVerificationToken: String
+  emailVerificationTokenExpiry: DateTime
   provider: String
   password: String
   subjectId: String
@@ -129,6 +146,9 @@ input UserUpdateArgs {
 
 input UserCreateInput {
   email: String
+  emailVerified: Boolean
+  emailVerificationToken: String
+  emailVerificationTokenExpiry: DateTime
   provider: String
   password: String
   subjectId: String
