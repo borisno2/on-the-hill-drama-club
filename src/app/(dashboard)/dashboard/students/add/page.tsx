@@ -6,7 +6,7 @@ import DashboardLayout from "../../../DashboardLayout"
 export default async function NewStudent() {
 
     return (
-        <DashboardLayout PageName="Profile">
+        <DashboardLayout PageName="Students">
             <div className="py-4">
                 <StudentForm />
             </div>
