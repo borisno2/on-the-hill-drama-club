@@ -1,6 +1,5 @@
 "use client"
 import { FormEvent, useState } from "react";
-import Router from "next/navigation";
 import { signIn } from "next-auth/react";
 export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: string, csrfToken?: string }) {
     const [email, setEmail] = useState("");

@@ -5,18 +5,37 @@ import { z } from 'zod'
 
 const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || 'Turnstile'
 
-const registerSchema = z.object({
-  turnstileRes: z.string(),
-  firstName: z.string(),
-  surname: z.string(),
-  phone: z.string(),
-  suburb: z.string(),
-  postcode: z.string(),
-  streetAddress: z.string(),
-  email: z.string(),
-  password: z.string(),
-  passwordConfirmation: z.string(),
-})
+const registerSchema = z
+  .object({
+    turnstileRes: z.string(),
+    firstName: z.string(),
+    surname: z.string(),
+    phone: z
+      .string()
+      .length(10, { message: 'Please enter a valid 10 digit phone number' })
+      .regex(/^\d+$/, {
+        message: 'Please enter a valid 10 digit phone number',
+      }),
+    suburb: z.string(),
+    postcode: z
+      .number()
+      .min(1000, { message: 'Please enter a valid postcode' })
+      .max(9999, { message: 'Please enter a valid postcode' }),
+    streetAddress: z.string(),
+    email: z.string().email({ message: 'Please enter a valid email address' }),
+    password: z
+      .string()
+      .min(8, { message: 'Password must be at least 8 characters' }),
+    passwordConfirmation: z.string(),
+  })
+  .superRefine(({ passwordConfirmation, password }, ctx) => {
+    if (passwordConfirmation !== password) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'The passwords did not match',
+      })
+    }
+  })
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -41,9 +60,6 @@ export default async function handler(
 
   if (!outcome.success) {
     return res.status(403).json({ error: 'Verification failed' })
-  }
-  if (data.password !== data.passwordConfirmation) {
-    return res.status(400).json({ error: 'Passwords do not match' })
   }
   const existingUser = await keystoneContext.sudo().db.User.count({
     where: { email: { equals: data.email } },

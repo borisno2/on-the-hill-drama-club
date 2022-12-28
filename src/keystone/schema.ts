@@ -76,7 +76,7 @@ export const lists: Lists = {
       bills: relationship({ ref: 'Bill.account', many: true }),
       streetAddress: text(),
       suburb: text(),
-      postcode: text(),
+      postcode: integer(),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
