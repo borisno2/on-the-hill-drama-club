@@ -305,7 +305,7 @@ type Student {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
-  school: String
+  school: StudentSchoolType
   yearLevel: Int
   medical: String
   account: Account
@@ -315,6 +315,12 @@ type Student {
 }
 
 scalar CalendarDay @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
+
+enum StudentSchoolType {
+  SCHOOL
+  HOME
+  OTHER
+}
 
 input StudentWhereUniqueInput {
   id: ID
@@ -328,9 +334,9 @@ input StudentWhereInput {
   firstName: StringFilter
   surname: StringFilter
   dateOfBirth: CalendarDayFilter
-  school: StringFilter
+  school: StudentSchoolTypeNullableFilter
   yearLevel: IntFilter
-  medical: StringFilter
+  medical: StringNullableFilter
   account: AccountWhereInput
   enrollments: EnrolmentManyRelationFilter
   createdAt: DateTimeNullableFilter
@@ -345,6 +351,41 @@ input CalendarDayFilter {
   gt: CalendarDay
   gte: CalendarDay
   not: CalendarDayFilter
+}
+
+input StudentSchoolTypeNullableFilter {
+  equals: StudentSchoolType
+  in: [StudentSchoolType!]
+  notIn: [StudentSchoolType!]
+  not: StudentSchoolTypeNullableFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
 }
 
 input EnrolmentManyRelationFilter {
@@ -368,7 +409,7 @@ input StudentUpdateInput {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
-  school: String
+  school: StudentSchoolType
   yearLevel: Int
   medical: String
   account: AccountRelateToOneForUpdateInput
@@ -392,7 +433,7 @@ input StudentCreateInput {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
-  school: String
+  school: StudentSchoolType
   yearLevel: Int
   medical: String
   account: AccountRelateToOneForCreateInput
@@ -419,7 +460,10 @@ type Class {
   type: String
   location: String
   status: String
+  desription: String
   createdAt: DateTime
+  enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
+  enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
 }
 
 scalar Decimal
@@ -445,7 +489,9 @@ input ClassWhereInput {
   type: StringFilter
   location: StringFilter
   status: StringFilter
+  desription: StringNullableFilter
   createdAt: DateTimeNullableFilter
+  enrolments: EnrolmentManyRelationFilter
 }
 
 input DecimalNullableFilter {
@@ -495,6 +541,7 @@ input ClassOrderByInput {
   type: OrderDirection
   location: OrderDirection
   status: OrderDirection
+  desription: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -511,7 +558,9 @@ input ClassUpdateInput {
   type: String
   location: String
   status: String
+  desription: String
   createdAt: DateTime
+  enrolments: EnrolmentRelateToManyForUpdateInput
 }
 
 input ClassUpdateArgs {
@@ -532,7 +581,9 @@ input ClassCreateInput {
   type: String
   location: String
   status: String
+  desription: String
   createdAt: DateTime
+  enrolments: EnrolmentRelateToManyForCreateInput
 }
 
 type Enrolment {

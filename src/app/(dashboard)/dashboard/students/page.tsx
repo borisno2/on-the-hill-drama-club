@@ -2,17 +2,9 @@ import DashboardLayout from "../../DashboardLayout"
 import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
 import { getSessionContext } from "app/KeystoneContext";
 import Link from "next/link";
-import { gql } from "@ts-gql/tag/no-transform";
+import { GET_STUDENTS } from "./queries";
 
-const GET_STUDENTS = gql`
-    query GET_STUDENTS {
-        students {
-            id
-            firstName
-            surname
-            dateOfBirth
-            }
-            }`as import("../../../../../__generated__/ts-gql/GET_STUDENTS").type
+
 export default async function Students() {
     const context = await getSessionContext();
     const { students } = await context.graphql.run({ query: GET_STUDENTS })

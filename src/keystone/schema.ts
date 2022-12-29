@@ -103,6 +103,7 @@ export const lists: Lists = {
       dateOfBirth: calendarDay({ validation: { isRequired: true } }),
       school: select({
         validation: { isRequired: true },
+        type: 'enum',
         options: [
           { label: 'School', value: 'SCHOOL' },
           { label: 'Home Educated', value: 'HOME' },
@@ -110,7 +111,13 @@ export const lists: Lists = {
         ],
       }),
       yearLevel: integer({ validation: { isRequired: true } }),
-      medical: text({ ui: { displayMode: 'textarea' } }),
+      medical: text({
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+      }),
       account: relationship({ ref: 'Account.students', many: false }),
       enrollments: relationship({ ref: 'Enrolment.student', many: true }),
       createdAt: timestamp({
@@ -162,16 +169,24 @@ export const lists: Lists = {
           { label: 'Previous', value: 'PREVIOUS' },
         ],
       }),
+      desription: text({
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+      }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
+      enrolments: relationship({ ref: 'Enrolment.class', many: true }),
     },
   }),
 
   Enrolment: list({
     access: allowAll,
     fields: {
-      class: relationship({ ref: 'Class', many: false }),
+      class: relationship({ ref: 'Class.enrolments', many: false }),
       student: relationship({ ref: 'Student.enrollments', many: false }),
       status: select({
         validation: { isRequired: true },

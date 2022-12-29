@@ -16,7 +16,7 @@ export default function RootLayout({ children }: AppProps) {
             <body className="h-full">
                 <AuthContext>
                     {children}
-                    <div className='bottom-0 fixed md:left-40 pl-8'><Footer /></div>
+                    <div className='bottom-0 relative md:left-40 pl-8'><Footer /></div>
                 </AuthContext>
             </body>
         </html>

@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import ErrorPop from "./ErrorPop";
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { Formik, FormikHelpers } from 'formik';
-import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 interface Values {
@@ -20,8 +19,7 @@ interface Values {
     turnstileRes: string;
 };
 
-export default function RegisterForm({ callbackUrl }: { callbackUrl: string, csrfToken?: string }) {
-    const router = useRouter();
+export default function RegisterForm() {
     const ref = useRef<TurnstileInstance | undefined>(null);
     const initialValues = {
         firstName: '',

@@ -1,24 +1,24 @@
 "use client"
 import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
+import { Turnstile } from "@marsidev/react-turnstile";
+
 export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: string, csrfToken?: string }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [token, setToken] = useState("");
 
 
     async function handleSubmit(e: FormEvent) {
         e.preventDefault();
-
         setError("");
         setLoading(true);
 
 
         try {
-            const formData = new FormData(e.target as HTMLFormElement)
-            const turnstileRes = formData.get('cf-turnstile-response')?.toString()
-            await signIn('credentials', { email, password, callbackUrl, turnstileRes, csrfToken });
+            await signIn('credentials', { email, password, callbackUrl, turnstileRes: token, csrfToken });
         } catch {
             setError("Failed to log in");
         }
@@ -72,8 +72,12 @@ export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: st
                     </a>
                 </div>
             </div>
-            <div className="cf-turnstile checkbox" data-theme='light' data-sitekey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}></div>
 
+            <Turnstile
+                options={{ theme: 'light', responseFieldName: 'turnstileRes' }}
+                siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+                onSuccess={(token) => { setToken(token) }}
+            />
             <div>
                 <button
                     type="submit"

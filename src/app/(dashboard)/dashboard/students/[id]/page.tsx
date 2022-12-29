@@ -1,41 +1,60 @@
-import DashboardLayout from "../../../DashboardLayout"
-import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
-import { getSessionContext } from "app/KeystoneContext";
-import { Suspense } from "react";
-import StudentForm from "components/StudentForm"
+import DashboardLayout from '../../../DashboardLayout'
+import { getSessionContext } from 'app/KeystoneContext'
+import StudentForm from 'components/StudentForm'
 
-import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation'
 import { isCuid } from 'cuid'
 
-import { gql } from "@ts-gql/tag/no-transform";
+import ClassList from '../../classes/ClassList'
+import { GET_STUDENT_BY_ID } from '../queries'
 
-const GET_STUDENT = gql`
-    query GET_STUDENT($id: ID!) {
-        student(where: { id: $id }) {
-            id
-            firstName
-            surname
-            dateOfBirth
-        }
-    }
-`as import("../../../../../../__generated__/ts-gql/GET_STUDENT").type
 
-export default async function Students({ params }: { params: { id?: string } }) {
+export default async function Students({
+    params,
+}: {
+    params: { id?: string }
+}) {
     if (!params.id || !isCuid(params.id)) {
         redirect('/dashboard/students')
     }
-    const context = await getSessionContext();
-    const { student } = await context.graphql.run({ query: GET_STUDENT, variables: { id: params.id } })
+    const context = await getSessionContext()
+    const { student } = await context.graphql.run({
+        query: GET_STUDENT_BY_ID,
+        variables: { id: params.id },
+    })
     if (!student) {
         redirect('/dashboard/students')
+    }
+    const availableWhere = {
+        AND: {
+            maxYear: { lt: student.yearLevel },
+            minYear: { gt: student.yearLevel },
+        }
+    }
+    const enrolledWhere = {
+        enrolments: {
+            some: {
+                student: {
+                    id: { equals: student.id }
+                }
+            }
+        }
     }
 
     return (
         <DashboardLayout PageName="Students">
             <div className="py-4">
-                <Suspense fallback={<p>Loading feed...</p>}>
-                    <StudentForm student={{ ...student }} />
-                </Suspense>
+                <StudentForm student={{ ...student }} />
+                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                    <h2 className="text-2xl font-bold text-gray-900">Enrolled Classes</h2>
+                    <ClassList where={enrolledWhere} studentId={student.id} enrolled={false} />
+                </div>
+                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+
+                    <h2 className="text-2xl font-bold text-gray-900">Available Classes</h2>
+                    <ClassList where={availableWhere} studentId={student.id} enrolled={false} />
+                </div>
+
             </div>
         </DashboardLayout>
     )
