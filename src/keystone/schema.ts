@@ -73,14 +73,14 @@ export const lists: Lists = {
     access: allowAll,
     fields: {
       user: relationship({ ref: 'User.account', many: false }),
-      firstName: text(),
-      surname: text(),
-      phone: text(),
+      firstName: text({ validation: { isRequired: true } }),
+      surname: text({ validation: { isRequired: true } }),
+      phone: text({ validation: { isRequired: true } }),
       students: relationship({ ref: 'Student.account', many: true }),
       bills: relationship({ ref: 'Bill.account', many: true }),
-      streetAddress: text(),
-      suburb: text(),
-      postcode: integer(),
+      streetAddress: text({ validation: { isRequired: true } }),
+      suburb: text({ validation: { isRequired: true } }),
+      postcode: integer({ validation: { isRequired: true } }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
@@ -90,9 +90,27 @@ export const lists: Lists = {
   Student: list({
     access: allowAll,
     fields: {
-      firstName: text(),
-      surname: text(),
-      dateOfBirth: calendarDay(),
+      name: virtual({
+        field: graphql.field({
+          type: graphql.String,
+          resolve: async (item) => {
+            return `${item.firstName} ${item.surname}`
+          },
+        }),
+      }),
+      firstName: text({ validation: { isRequired: true } }),
+      surname: text({ validation: { isRequired: true } }),
+      dateOfBirth: calendarDay({ validation: { isRequired: true } }),
+      school: select({
+        validation: { isRequired: true },
+        options: [
+          { label: 'School', value: 'SCHOOL' },
+          { label: 'Home Educated', value: 'HOME' },
+          { label: 'Other', value: 'OTHER' },
+        ],
+      }),
+      yearLevel: integer({ validation: { isRequired: true } }),
+      medical: text({ ui: { displayMode: 'textarea' } }),
       account: relationship({ ref: 'Account.students', many: false }),
       enrollments: relationship({ ref: 'Enrolment.student', many: true }),
       createdAt: timestamp({
@@ -104,9 +122,10 @@ export const lists: Lists = {
   Class: list({
     access: allowAll,
     fields: {
-      name: text(),
-      time: text(),
+      name: text({ validation: { isRequired: true } }),
+      time: text({ validation: { isRequired: true } }),
       day: select({
+        validation: { isRequired: true },
         options: [
           { label: 'Monday', value: 'MONDAY' },
           { label: 'Tuesday', value: 'TUESDAY' },
@@ -117,13 +136,14 @@ export const lists: Lists = {
           { label: 'Sunday', value: 'SUNDAY' },
         ],
       }),
-      minimumAge: integer(),
-      maximumAge: integer(),
+      minYear: integer({ validation: { isRequired: true } }),
+      maxYear: integer({ validation: { isRequired: true } }),
       cost: decimal({ scale: decimalScale }),
       quantity: integer(),
       startDate: calendarDay(),
       endDate: calendarDay(),
       type: select({
+        validation: { isRequired: true },
         options: [
           { label: 'Term', value: 'TERM' },
           { label: 'Holiday', value: 'HOLIDAY' },
@@ -132,8 +152,9 @@ export const lists: Lists = {
           { label: 'Other', value: 'OTHER' },
         ],
       }),
-      location: text(),
+      location: text({ validation: { isRequired: true } }),
       status: select({
+        validation: { isRequired: true },
         options: [
           { label: 'Upcoming', value: 'UPCOMING' },
           { label: 'Current', value: 'CURRENT' },
@@ -153,6 +174,7 @@ export const lists: Lists = {
       class: relationship({ ref: 'Class', many: false }),
       student: relationship({ ref: 'Student.enrollments', many: false }),
       status: select({
+        validation: { isRequired: true },
         options: [
           { label: 'Enrolled', value: 'ENROLLED' },
           { label: 'Pending', value: 'PENDING' },
@@ -195,6 +217,7 @@ export const lists: Lists = {
         }),
       }),
       status: select({
+        validation: { isRequired: true },
         options: [
           { label: 'Pending', value: 'PENDING' },
           { label: 'Overdue', value: 'OVERDUE' },

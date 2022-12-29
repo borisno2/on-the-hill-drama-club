@@ -195,7 +195,7 @@ input AccountWhereInput {
   bills: BillManyRelationFilter
   streetAddress: StringFilter
   suburb: StringFilter
-  postcode: IntNullableFilter
+  postcode: IntFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -211,7 +211,7 @@ input BillManyRelationFilter {
   none: BillWhereInput
 }
 
-input IntNullableFilter {
+input IntFilter {
   equals: Int
   in: [Int!]
   notIn: [Int!]
@@ -219,7 +219,7 @@ input IntNullableFilter {
   lte: Int
   gt: Int
   gte: Int
-  not: IntNullableFilter
+  not: IntFilter
 }
 
 input AccountOrderByInput {
@@ -301,9 +301,13 @@ input BillRelateToManyForCreateInput {
 
 type Student {
   id: ID!
+  name: String
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
+  school: String
+  yearLevel: Int
+  medical: String
   account: Account
   enrollments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrollmentsCount(where: EnrolmentWhereInput! = {}): Int
@@ -323,13 +327,16 @@ input StudentWhereInput {
   id: IDFilter
   firstName: StringFilter
   surname: StringFilter
-  dateOfBirth: CalendarDayNullableFilter
+  dateOfBirth: CalendarDayFilter
+  school: StringFilter
+  yearLevel: IntFilter
+  medical: StringFilter
   account: AccountWhereInput
   enrollments: EnrolmentManyRelationFilter
   createdAt: DateTimeNullableFilter
 }
 
-input CalendarDayNullableFilter {
+input CalendarDayFilter {
   equals: CalendarDay
   in: [CalendarDay!]
   notIn: [CalendarDay!]
@@ -337,7 +344,7 @@ input CalendarDayNullableFilter {
   lte: CalendarDay
   gt: CalendarDay
   gte: CalendarDay
-  not: CalendarDayNullableFilter
+  not: CalendarDayFilter
 }
 
 input EnrolmentManyRelationFilter {
@@ -351,6 +358,9 @@ input StudentOrderByInput {
   firstName: OrderDirection
   surname: OrderDirection
   dateOfBirth: OrderDirection
+  school: OrderDirection
+  yearLevel: OrderDirection
+  medical: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -358,6 +368,9 @@ input StudentUpdateInput {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
+  school: String
+  yearLevel: Int
+  medical: String
   account: AccountRelateToOneForUpdateInput
   enrollments: EnrolmentRelateToManyForUpdateInput
   createdAt: DateTime
@@ -379,6 +392,9 @@ input StudentCreateInput {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
+  school: String
+  yearLevel: Int
+  medical: String
   account: AccountRelateToOneForCreateInput
   enrollments: EnrolmentRelateToManyForCreateInput
   createdAt: DateTime
@@ -394,8 +410,8 @@ type Class {
   name: String
   time: String
   day: String
-  minimumAge: Int
-  maximumAge: Int
+  minYear: Int
+  maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
@@ -419,45 +435,17 @@ input ClassWhereInput {
   id: IDFilter
   name: StringFilter
   time: StringFilter
-  day: StringNullableFilter
-  minimumAge: IntNullableFilter
-  maximumAge: IntNullableFilter
+  day: StringFilter
+  minYear: IntFilter
+  maxYear: IntFilter
   cost: DecimalNullableFilter
   quantity: IntNullableFilter
   startDate: CalendarDayNullableFilter
   endDate: CalendarDayNullableFilter
-  type: StringNullableFilter
+  type: StringFilter
   location: StringFilter
-  status: StringNullableFilter
+  status: StringFilter
   createdAt: DateTimeNullableFilter
-}
-
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
-}
-
-input NestedStringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableFilter
 }
 
 input DecimalNullableFilter {
@@ -471,13 +459,35 @@ input DecimalNullableFilter {
   not: DecimalNullableFilter
 }
 
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input CalendarDayNullableFilter {
+  equals: CalendarDay
+  in: [CalendarDay!]
+  notIn: [CalendarDay!]
+  lt: CalendarDay
+  lte: CalendarDay
+  gt: CalendarDay
+  gte: CalendarDay
+  not: CalendarDayNullableFilter
+}
+
 input ClassOrderByInput {
   id: OrderDirection
   name: OrderDirection
   time: OrderDirection
   day: OrderDirection
-  minimumAge: OrderDirection
-  maximumAge: OrderDirection
+  minYear: OrderDirection
+  maxYear: OrderDirection
   cost: OrderDirection
   quantity: OrderDirection
   startDate: OrderDirection
@@ -492,8 +502,8 @@ input ClassUpdateInput {
   name: String
   time: String
   day: String
-  minimumAge: Int
-  maximumAge: Int
+  minYear: Int
+  maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
@@ -513,8 +523,8 @@ input ClassCreateInput {
   name: String
   time: String
   day: String
-  minimumAge: Int
-  maximumAge: Int
+  minYear: Int
+  maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
@@ -544,7 +554,7 @@ input EnrolmentWhereInput {
   id: IDFilter
   class: ClassWhereInput
   student: StudentWhereInput
-  status: StringNullableFilter
+  status: StringFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -621,7 +631,7 @@ input BillWhereInput {
   account: AccountWhereInput
   date: CalendarDayNullableFilter
   dueDate: CalendarDayNullableFilter
-  status: StringNullableFilter
+  status: StringFilter
   items: BillItemManyRelationFilter
   createdAt: DateTimeNullableFilter
 }

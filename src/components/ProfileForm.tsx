@@ -11,7 +11,7 @@ import { z } from "zod";
 type User = {
     id: string;
     firstName: string | null;
-    surname?: string | null;
+    surname: string | null;
     email: string | null;
     phone: string | null;
     suburb: string | null;
