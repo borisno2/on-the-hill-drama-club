@@ -1,12 +1,14 @@
 import { Context } from '.keystone/types'
 import { SessionStrategy } from '@keystone-6/core/types'
 import { getSession as getNextAuthSession } from 'next-auth/react'
-
+import dotenv from 'dotenv-flow'
 import * as Path from 'path'
 
 import { config } from '@keystone-6/core'
 
 import { lists } from './src/keystone/schema'
+
+dotenv.config()
 
 const session: SessionStrategy<any> = {
   get: async ({ context }) => {

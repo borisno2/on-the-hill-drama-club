@@ -17,6 +17,7 @@ specifiers:
   '@ts-gql/eslint-plugin': ^0.8.4
   '@ts-gql/next': ^17.0.0
   '@ts-gql/tag': ^0.7.0
+  '@types/dotenv-flow': ^3.2.0
   '@types/lodash': ^4.14.191
   '@types/node': ^18.11.17
   '@types/react': ^18.0.26
@@ -27,6 +28,8 @@ specifiers:
   concurrently: ^7.6.0
   cuid: ^2.1.8
   decimal.js: ^10.4.3
+  dotenv: ^16.0.3
+  dotenv-flow: ^3.2.0
   eslint: 8.29.0
   eslint-config-next: 13.0.6
   fast-glob: ^3.2.12
@@ -64,11 +67,14 @@ dependencies:
   '@ts-gql/compiler': 0.16.1_graphql@16.6.0
   '@ts-gql/next': 17.0.0_cumkaoc3cvkzkvzqcfegovdiaa
   '@ts-gql/tag': 0.7.0_graphql@16.6.0
+  '@types/dotenv-flow': 3.2.0
   autoprefixer: 10.4.13_postcss@8.4.20
   aws-crt: 1.15.5
   clsx: 1.2.1
   cuid: 2.1.8
   decimal.js: 10.4.3
+  dotenv: 16.0.3
+  dotenv-flow: 3.2.0
   fast-glob: 3.2.12
   feed: 4.2.2
   focus-visible: 5.2.0
@@ -3959,6 +3965,10 @@ packages:
       '@types/ms': 0.7.31
     dev: false
 
+  /@types/dotenv-flow/3.2.0:
+    resolution: {integrity: sha512-A79hbPwocbYkcTwGcDOFbKDuqyVo5mLAz/6Iq465YZ7R7Go5bT1PIM8I2jlPQkaD9u9fbotGVLkUPhX+9XUHfw==}
+    dev: false
+
   /@types/express-serve-static-core/4.17.31:
     resolution: {integrity: sha512-DxMhY+NAsTwMMFHBTtJFNp5qiHKJ7TeqOo23zVEM9alT1Ml27Q3xcTH0xwxn7Q0BbMcVEJOs/7aQtUWupUQN3Q==}
     dependencies:
@@ -5817,9 +5827,26 @@ packages:
       is-obj: 2.0.0
     dev: false
 
+  /dotenv-flow/3.2.0:
+    resolution: {integrity: sha512-GEB6RrR4AbqDJvNSFrYHqZ33IKKbzkvLYiD5eo4+9aFXr4Y4G+QaFrB/fNp0y6McWBmvaPn3ZNjIufnj8irCtg==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      dotenv: 8.6.0
+    dev: false
+
   /dotenv/16.0.1:
     resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
     engines: {node: '>=12'}
+    dev: false
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /dotenv/8.6.0:
+    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
+    engines: {node: '>=10'}
     dev: false
 
   /dumb-passwords/0.2.1:
