@@ -8,6 +8,7 @@ export const GET_STUDENTS = gql`
       surname
       dateOfBirth
       yearLevel
+      enrolmentsCount
     }
   }
 ` as import('../../../../../__generated__/ts-gql/GET_STUDENTS').type

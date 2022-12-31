@@ -4,13 +4,13 @@ import DashboardLayout from "../DashboardLayout";
 import Link from "next/link";
 import { gql } from "@ts-gql/tag/no-transform";
 
-const GET_STUDENT_ENROLLMENTS = gql`
-    query GET_STUDENT_ENROLLMENTS {
+const GET_STUDENT_ENROLMENTS = gql`
+    query GET_STUDENT_ENROLMENTS {
         students {
             id
             firstName
             surname
-            enrollments {
+            enrolments {
                 id
                 class {
                     id
@@ -18,16 +18,16 @@ const GET_STUDENT_ENROLLMENTS = gql`
                 }
             }
         }
-    }`as import("../../../../__generated__/ts-gql/GET_STUDENT_ENROLLMENTS").type
+    }`as import("../../../../__generated__/ts-gql/GET_STUDENT_ENROLMENTS").type
 
 
 export default async function Portal() {
     const context = await getSessionContext();
-    const { students } = await context.graphql.run({ query: GET_STUDENT_ENROLLMENTS })
+    const { students } = await context.graphql.run({ query: GET_STUDENT_ENROLMENTS })
     const cards = [
         //{ name: 'Account balance', href: '/dashboard/account', icon: ScaleIcon, amount: '$30,659.45' },
         { name: 'Students', href: '/dashboard/students', icon: UsersIcon, amount: students ? students.length : 0 },
-        { name: 'Classes', href: '/dashboard/classes', icon: BuildingOfficeIcon, amount: students ? students.reduce((acc, student) => acc + (student.enrollments ? student.enrollments.length : 0), 0) : 0 },
+        { name: 'Classes', href: '/dashboard/classes', icon: BuildingOfficeIcon, amount: students ? students.reduce((acc, student) => acc + (student.enrolments ? student.enrolments.length : 0), 0) : 0 },
         // More items...
     ]
     return (

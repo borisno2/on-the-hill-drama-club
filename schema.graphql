@@ -309,8 +309,8 @@ type Student {
   yearLevel: Int
   medical: String
   account: Account
-  enrollments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
-  enrollmentsCount(where: EnrolmentWhereInput! = {}): Int
+  enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
+  enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
   createdAt: DateTime
 }
 
@@ -338,7 +338,7 @@ input StudentWhereInput {
   yearLevel: IntFilter
   medical: StringNullableFilter
   account: AccountWhereInput
-  enrollments: EnrolmentManyRelationFilter
+  enrolments: EnrolmentManyRelationFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -413,7 +413,7 @@ input StudentUpdateInput {
   yearLevel: Int
   medical: String
   account: AccountRelateToOneForUpdateInput
-  enrollments: EnrolmentRelateToManyForUpdateInput
+  enrolments: EnrolmentRelateToManyForUpdateInput
   createdAt: DateTime
 }
 
@@ -437,7 +437,7 @@ input StudentCreateInput {
   yearLevel: Int
   medical: String
   account: AccountRelateToOneForCreateInput
-  enrollments: EnrolmentRelateToManyForCreateInput
+  enrolments: EnrolmentRelateToManyForCreateInput
   createdAt: DateTime
 }
 
@@ -460,7 +460,7 @@ type Class {
   type: String
   location: String
   status: String
-  desription: String
+  description: String
   createdAt: DateTime
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
@@ -489,7 +489,7 @@ input ClassWhereInput {
   type: StringFilter
   location: StringFilter
   status: StringFilter
-  desription: StringNullableFilter
+  description: StringNullableFilter
   createdAt: DateTimeNullableFilter
   enrolments: EnrolmentManyRelationFilter
 }
@@ -541,7 +541,7 @@ input ClassOrderByInput {
   type: OrderDirection
   location: OrderDirection
   status: OrderDirection
-  desription: OrderDirection
+  description: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -558,7 +558,7 @@ input ClassUpdateInput {
   type: String
   location: String
   status: String
-  desription: String
+  description: String
   createdAt: DateTime
   enrolments: EnrolmentRelateToManyForUpdateInput
 }
@@ -581,7 +581,7 @@ input ClassCreateInput {
   type: String
   location: String
   status: String
-  desription: String
+  description: String
   createdAt: DateTime
   enrolments: EnrolmentRelateToManyForCreateInput
 }

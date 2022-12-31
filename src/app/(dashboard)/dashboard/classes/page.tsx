@@ -10,18 +10,34 @@ export default async function Classess() {
     const { students } = await context.graphql.run({ query: GET_STUDENTS })
     // get a list of students year levels
     const yearLevels = students ? students.map(student => student.yearLevel) : []
+    const studentIds = students ? students.map(student => student.id) : []
     // remove duplicates
     const uniqueYearLevels = [...new Set(yearLevels)]
     // create a class where clause to filter classes by year level
-    let where: ClassWhereInput = {}
+    let availableWhere: ClassWhereInput = {}
     if (uniqueYearLevels.length > 0) {
-        where = { OR: uniqueYearLevels.map(yearLevel => ({ AND: [{ maxYear: { lt: yearLevel } }, { minYear: { gt: yearLevel } }] })) }
+        availableWhere = { OR: uniqueYearLevels.map(yearLevel => ({ AND: [{ maxYear: { gte: yearLevel } }, { minYear: { lte: yearLevel } }] })) }
+    }
+    // create a class where clause to filter classes by student id
+    let enroledWhere: ClassWhereInput = {}
+    if (studentIds.length > 0) {
+        enroledWhere = { enrolments: { some: { student: { id: { in: studentIds } } } } }
     }
 
     return (
         <DashboardLayout PageName="Classes">
-            <div className="overflow-hidden bg-white shadow sm:rounded-md">
-                <ClassList where={where} />
+            <div className="px-4 sm:px-6 lg:px-8">
+                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                    <h2 className="text-2xl font-bold text-gray-900">Enroled Classes</h2>
+                    {/* @ts-expect-error Server Component */}
+                    <ClassList where={enroledWhere} enroled={false} />
+                </div>
+                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+
+                    <h2 className="text-2xl font-bold text-gray-900">Available Classes</h2>
+                    {/* @ts-expect-error Server Component */}
+                    <ClassList where={availableWhere} enroled={false} />
+                </div>
             </div>
         </DashboardLayout>
     )

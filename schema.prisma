@@ -53,29 +53,29 @@ model Student {
   medical     String?           @mysql.Text
   account     Account?          @relation("Student_account", fields: [accountId], references: [id])
   accountId   String?           @map("account")
-  enrollments Enrolment[]       @relation("Enrolment_student")
+  enrolments  Enrolment[]       @relation("Enrolment_student")
   createdAt   DateTime?         @default(now())
 
   @@index([accountId])
 }
 
 model Class {
-  id         String      @id @default(cuid())
-  name       String      @default("")
-  time       String      @default("")
-  day        String
-  minYear    Int
-  maxYear    Int
-  cost       Decimal?    @mysql.Decimal(18, 2)
-  quantity   Int?
-  startDate  DateTime?   @mysql.Date
-  endDate    DateTime?   @mysql.Date
-  type       String
-  location   String      @default("")
-  status     String
-  desription String?     @mysql.Text
-  createdAt  DateTime?   @default(now())
-  enrolments Enrolment[] @relation("Enrolment_class")
+  id          String      @id @default(cuid())
+  name        String      @default("")
+  time        String      @default("")
+  day         String
+  minYear     Int
+  maxYear     Int
+  cost        Decimal?    @mysql.Decimal(18, 2)
+  quantity    Int?
+  startDate   DateTime?   @mysql.Date
+  endDate     DateTime?   @mysql.Date
+  type        String
+  location    String      @default("")
+  status      String
+  description String?     @mysql.Text
+  createdAt   DateTime?   @default(now())
+  enrolments  Enrolment[] @relation("Enrolment_class")
 }
 
 model Enrolment {

@@ -4,6 +4,7 @@ import { getSessionContext } from "app/KeystoneContext";
 import { ClassWhereInput } from "../../../../../__generated__/ts-gql/@schema";
 import { GET_CLASSES } from "./queries";
 import labelHelper from "lib/labelHelper";
+import { formatDate } from "lib/formatDate";
 
 const classTypes = [
     { label: 'Term', value: 'TERM' },
@@ -17,9 +18,11 @@ const classStatus = [
     { label: 'Current', value: 'CURRENT' },
     { label: 'Enrolments Open', value: 'ENROL' },
     { label: 'Previous', value: 'PREVIOUS' },
+    { label: 'Enrolments Closed', value: 'CLOSED' },
+    { label: 'Class Full', value: 'FULL' },
 ]
 
-export default async function ClassList({ where, studentId, enrolled = false }: { where?: ClassWhereInput, studentId?: string, enrolled?: boolean }) {
+export default async function ClassList({ where, studentId, enroled = false }: { where?: ClassWhereInput, studentId?: string, enroled?: boolean }) {
     const context = await getSessionContext();
     const { classes } = await context.graphql.run({ query: GET_CLASSES, variables: { where } })
     return (
@@ -28,7 +31,7 @@ export default async function ClassList({ where, studentId, enrolled = false }: 
                 <ul role="list" className="divide-y divide-gray-200">
                     {classes.map((oneClass) => (
                         <li key={oneClass.id}>
-                            <Link href={`/dashboard/classes/${oneClass.id}`} className="block hover:bg-gray-50">
+                            <Link href={`/dashboard/classes/${oneClass.id}${studentId !== undefined ? `?studentId=${studentId}` : ''}`} className="block hover:bg-gray-50">
                                 <div className="px-4 py-4 sm:px-6">
                                     <div className="flex items-center justify-between">
                                         <p className="truncate text-sm font-medium text-indigo-600">{oneClass.name}</p>
@@ -42,7 +45,7 @@ export default async function ClassList({ where, studentId, enrolled = false }: 
                                         <div className="sm:flex">
                                             <p className="flex items-center text-sm text-gray-500">
                                                 <UsersIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                {oneClass.status ? labelHelper(classStatus, oneClass.status) : 'Upcoming'}
+                                                {oneClass.status ? labelHelper(classStatus, oneClass.status) : 'Upcoming'} {enroled && `- enroled`} {oneClass.status === 'ENROL' && '- Click to enrol in this class'}
                                             </p>
                                             <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                                 <MapPinIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
@@ -52,7 +55,7 @@ export default async function ClassList({ where, studentId, enrolled = false }: 
                                         <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                                             <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
                                             <p>
-                                                Starts on <time dateTime={new Date(oneClass.startDate).toUTCString()}>{new Date(oneClass.startDate).toUTCString()}</time>
+                                                Starts on <time dateTime={new Date(oneClass.startDate).toUTCString()}>{formatDate(oneClass.startDate)}</time>
                                             </p>
                                         </div>
                                     </div>

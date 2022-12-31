@@ -119,7 +119,7 @@ export const lists: Lists = {
         },
       }),
       account: relationship({ ref: 'Account.students', many: false }),
-      enrollments: relationship({ ref: 'Enrolment.student', many: true }),
+      enrolments: relationship({ ref: 'Enrolment.student', many: true }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
@@ -165,11 +165,13 @@ export const lists: Lists = {
         options: [
           { label: 'Upcoming', value: 'UPCOMING' },
           { label: 'Current', value: 'CURRENT' },
+          { label: 'Enrolments Closed', value: 'CLOSED' },
+          { label: 'Class Full', value: 'FULL' },
           { label: 'Enrolments Open', value: 'ENROL' },
           { label: 'Previous', value: 'PREVIOUS' },
         ],
       }),
-      desription: text({
+      description: text({
         ui: { displayMode: 'textarea' },
         db: {
           nativeType: 'Text',
@@ -187,11 +189,11 @@ export const lists: Lists = {
     access: allowAll,
     fields: {
       class: relationship({ ref: 'Class.enrolments', many: false }),
-      student: relationship({ ref: 'Student.enrollments', many: false }),
+      student: relationship({ ref: 'Student.enrolments', many: false }),
       status: select({
         validation: { isRequired: true },
         options: [
-          { label: 'Enrolled', value: 'ENROLLED' },
+          { label: 'Enroled', value: 'ENROLED' },
           { label: 'Pending', value: 'PENDING' },
           { label: 'Cancelled', value: 'CANCELLED' },
           { label: 'Paid', value: 'PAID' },

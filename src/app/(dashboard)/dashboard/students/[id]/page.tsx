@@ -27,11 +27,11 @@ export default async function Students({
     }
     const availableWhere = {
         AND: {
-            maxYear: { lt: student.yearLevel },
-            minYear: { gt: student.yearLevel },
+            maxYear: { gte: student.yearLevel },
+            minYear: { lte: student.yearLevel },
         }
     }
-    const enrolledWhere = {
+    const enroledWhere = {
         enrolments: {
             some: {
                 student: {
@@ -46,13 +46,15 @@ export default async function Students({
             <div className="py-4">
                 <StudentForm student={{ ...student }} />
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                    <h2 className="text-2xl font-bold text-gray-900">Enrolled Classes</h2>
-                    <ClassList where={enrolledWhere} studentId={student.id} enrolled={false} />
+                    <h2 className="text-2xl font-bold text-gray-900">Enroled Classes</h2>
+                    {/* @ts-expect-error Server Component */}
+                    <ClassList where={enroledWhere} studentId={student.id} enroled={false} />
                 </div>
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
 
                     <h2 className="text-2xl font-bold text-gray-900">Available Classes</h2>
-                    <ClassList where={availableWhere} studentId={student.id} enrolled={false} />
+                    {/* @ts-expect-error Server Component */}
+                    <ClassList where={availableWhere} studentId={student.id} enroled={false} />
                 </div>
 
             </div>
