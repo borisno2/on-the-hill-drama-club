@@ -14,7 +14,7 @@ export const GET_STUDENTS = gql`
 ` as import('../../../../../__generated__/ts-gql/GET_STUDENTS').type
 
 export const GET_STUDENT_BY_ID = gql`
-  query GET_STUDEN_BY_IDT($id: ID!) {
+  query GET_STUDENT_BY_ID($id: ID!) {
     student(where: { id: $id }) {
       id
       firstName
@@ -25,4 +25,4 @@ export const GET_STUDENT_BY_ID = gql`
       medical
     }
   }
-` as import('../../../../../__generated__/ts-gql/GET_STUDEN_BY_IDT').type
+` as import('../../../../../__generated__/ts-gql/GET_STUDENT_BY_ID').type

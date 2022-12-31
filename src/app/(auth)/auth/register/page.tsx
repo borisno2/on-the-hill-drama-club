@@ -23,7 +23,7 @@ export default async function RegisterPage({
                 <p className="text-sm text-gray-500">If you already have an account <Link href="/auth/signin" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</Link></p>
                 <p className="text-sm text-gray-500">To setup a new account, fill in your details below and click submit</p>
                 <SocialLogins callbackUrl={callbackUrl} csrfToken={csrfToken} />
-                <RegisterForm callbackUrl={callbackUrl} csrfToken={csrfToken} />
+                <RegisterForm />
             </div>
         </div>
     )

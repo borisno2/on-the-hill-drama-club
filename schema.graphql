@@ -446,52 +446,86 @@ input EnrolmentRelateToManyForCreateInput {
   connect: [EnrolmentWhereUniqueInput!]
 }
 
-type Class {
+type Lesson {
   id: ID!
   name: String
   time: String
-  day: String
+  day: LessonDayType
   minYear: Int
   maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  type: String
+  type: LessonTypeType
   location: String
-  status: String
+  status: LessonStatusType
   description: String
   createdAt: DateTime
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
 }
 
+enum LessonDayType {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
 scalar Decimal
 
-input ClassWhereUniqueInput {
+enum LessonTypeType {
+  TERM
+  HOLIDAY
+  TRIAL
+  ONCE
+  OTHER
+}
+
+enum LessonStatusType {
+  UPCOMING
+  CURRENT
+  CLOSED
+  FULL
+  ENROL
+  PREVIOUS
+}
+
+input LessonWhereUniqueInput {
   id: ID
 }
 
-input ClassWhereInput {
-  AND: [ClassWhereInput!]
-  OR: [ClassWhereInput!]
-  NOT: [ClassWhereInput!]
+input LessonWhereInput {
+  AND: [LessonWhereInput!]
+  OR: [LessonWhereInput!]
+  NOT: [LessonWhereInput!]
   id: IDFilter
   name: StringFilter
   time: StringFilter
-  day: StringFilter
+  day: LessonDayTypeNullableFilter
   minYear: IntFilter
   maxYear: IntFilter
   cost: DecimalNullableFilter
   quantity: IntNullableFilter
   startDate: CalendarDayNullableFilter
   endDate: CalendarDayNullableFilter
-  type: StringFilter
+  type: LessonTypeTypeNullableFilter
   location: StringFilter
-  status: StringFilter
+  status: LessonStatusTypeNullableFilter
   description: StringNullableFilter
   createdAt: DateTimeNullableFilter
   enrolments: EnrolmentManyRelationFilter
+}
+
+input LessonDayTypeNullableFilter {
+  equals: LessonDayType
+  in: [LessonDayType!]
+  notIn: [LessonDayType!]
+  not: LessonDayTypeNullableFilter
 }
 
 input DecimalNullableFilter {
@@ -527,7 +561,21 @@ input CalendarDayNullableFilter {
   not: CalendarDayNullableFilter
 }
 
-input ClassOrderByInput {
+input LessonTypeTypeNullableFilter {
+  equals: LessonTypeType
+  in: [LessonTypeType!]
+  notIn: [LessonTypeType!]
+  not: LessonTypeTypeNullableFilter
+}
+
+input LessonStatusTypeNullableFilter {
+  equals: LessonStatusType
+  in: [LessonStatusType!]
+  notIn: [LessonStatusType!]
+  not: LessonStatusTypeNullableFilter
+}
+
+input LessonOrderByInput {
   id: OrderDirection
   name: OrderDirection
   time: OrderDirection
@@ -545,42 +593,42 @@ input ClassOrderByInput {
   createdAt: OrderDirection
 }
 
-input ClassUpdateInput {
+input LessonUpdateInput {
   name: String
   time: String
-  day: String
+  day: LessonDayType
   minYear: Int
   maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  type: String
+  type: LessonTypeType
   location: String
-  status: String
+  status: LessonStatusType
   description: String
   createdAt: DateTime
   enrolments: EnrolmentRelateToManyForUpdateInput
 }
 
-input ClassUpdateArgs {
-  where: ClassWhereUniqueInput!
-  data: ClassUpdateInput!
+input LessonUpdateArgs {
+  where: LessonWhereUniqueInput!
+  data: LessonUpdateInput!
 }
 
-input ClassCreateInput {
+input LessonCreateInput {
   name: String
   time: String
-  day: String
+  day: LessonDayType
   minYear: Int
   maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  type: String
+  type: LessonTypeType
   location: String
-  status: String
+  status: LessonStatusType
   description: String
   createdAt: DateTime
   enrolments: EnrolmentRelateToManyForCreateInput
@@ -588,10 +636,17 @@ input ClassCreateInput {
 
 type Enrolment {
   id: ID!
-  class: Class
+  lesson: Lesson
   student: Student
-  status: String
+  status: EnrolmentStatusType
   createdAt: DateTime
+}
+
+enum EnrolmentStatusType {
+  ENROLED
+  PENDING
+  CANCELLED
+  PAID
 }
 
 input EnrolmentWhereUniqueInput {
@@ -603,10 +658,17 @@ input EnrolmentWhereInput {
   OR: [EnrolmentWhereInput!]
   NOT: [EnrolmentWhereInput!]
   id: IDFilter
-  class: ClassWhereInput
+  lesson: LessonWhereInput
   student: StudentWhereInput
-  status: StringFilter
+  status: EnrolmentStatusTypeNullableFilter
   createdAt: DateTimeNullableFilter
+}
+
+input EnrolmentStatusTypeNullableFilter {
+  equals: EnrolmentStatusType
+  in: [EnrolmentStatusType!]
+  notIn: [EnrolmentStatusType!]
+  not: EnrolmentStatusTypeNullableFilter
 }
 
 input EnrolmentOrderByInput {
@@ -616,15 +678,15 @@ input EnrolmentOrderByInput {
 }
 
 input EnrolmentUpdateInput {
-  class: ClassRelateToOneForUpdateInput
+  lesson: LessonRelateToOneForUpdateInput
   student: StudentRelateToOneForUpdateInput
-  status: String
+  status: EnrolmentStatusType
   createdAt: DateTime
 }
 
-input ClassRelateToOneForUpdateInput {
-  create: ClassCreateInput
-  connect: ClassWhereUniqueInput
+input LessonRelateToOneForUpdateInput {
+  create: LessonCreateInput
+  connect: LessonWhereUniqueInput
   disconnect: Boolean
 }
 
@@ -640,15 +702,15 @@ input EnrolmentUpdateArgs {
 }
 
 input EnrolmentCreateInput {
-  class: ClassRelateToOneForCreateInput
+  lesson: LessonRelateToOneForCreateInput
   student: StudentRelateToOneForCreateInput
-  status: String
+  status: EnrolmentStatusType
   createdAt: DateTime
 }
 
-input ClassRelateToOneForCreateInput {
-  create: ClassCreateInput
-  connect: ClassWhereUniqueInput
+input LessonRelateToOneForCreateInput {
+  create: LessonCreateInput
+  connect: LessonWhereUniqueInput
 }
 
 input StudentRelateToOneForCreateInput {
@@ -829,12 +891,12 @@ type Mutation {
   updateStudents(data: [StudentUpdateArgs!]!): [Student]
   deleteStudent(where: StudentWhereUniqueInput!): Student
   deleteStudents(where: [StudentWhereUniqueInput!]!): [Student]
-  createClass(data: ClassCreateInput!): Class
-  createClasses(data: [ClassCreateInput!]!): [Class]
-  updateClass(where: ClassWhereUniqueInput!, data: ClassUpdateInput!): Class
-  updateClasses(data: [ClassUpdateArgs!]!): [Class]
-  deleteClass(where: ClassWhereUniqueInput!): Class
-  deleteClasses(where: [ClassWhereUniqueInput!]!): [Class]
+  createLesson(data: LessonCreateInput!): Lesson
+  createLessons(data: [LessonCreateInput!]!): [Lesson]
+  updateLesson(where: LessonWhereUniqueInput!, data: LessonUpdateInput!): Lesson
+  updateLessons(data: [LessonUpdateArgs!]!): [Lesson]
+  deleteLesson(where: LessonWhereUniqueInput!): Lesson
+  deleteLessons(where: [LessonWhereUniqueInput!]!): [Lesson]
   createEnrolment(data: EnrolmentCreateInput!): Enrolment
   createEnrolments(data: [EnrolmentCreateInput!]!): [Enrolment]
   updateEnrolment(where: EnrolmentWhereUniqueInput!, data: EnrolmentUpdateInput!): Enrolment
@@ -866,9 +928,9 @@ type Query {
   students(where: StudentWhereInput! = {}, orderBy: [StudentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Student!]
   student(where: StudentWhereUniqueInput!): Student
   studentsCount(where: StudentWhereInput! = {}): Int
-  classes(where: ClassWhereInput! = {}, orderBy: [ClassOrderByInput!]! = [], take: Int, skip: Int! = 0): [Class!]
-  class(where: ClassWhereUniqueInput!): Class
-  classesCount(where: ClassWhereInput! = {}): Int
+  lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0): [Lesson!]
+  lesson(where: LessonWhereUniqueInput!): Lesson
+  lessonsCount(where: LessonWhereInput! = {}): Int
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrolment(where: EnrolmentWhereUniqueInput!): Enrolment
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int

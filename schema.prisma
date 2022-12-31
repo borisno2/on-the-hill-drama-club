@@ -59,35 +59,35 @@ model Student {
   @@index([accountId])
 }
 
-model Class {
-  id          String      @id @default(cuid())
-  name        String      @default("")
-  time        String      @default("")
-  day         String
+model Lesson {
+  id          String           @id @default(cuid())
+  name        String           @default("")
+  time        String           @default("")
+  day         LessonDayType
   minYear     Int
   maxYear     Int
-  cost        Decimal?    @mysql.Decimal(18, 2)
+  cost        Decimal?         @mysql.Decimal(18, 2)
   quantity    Int?
-  startDate   DateTime?   @mysql.Date
-  endDate     DateTime?   @mysql.Date
-  type        String
-  location    String      @default("")
-  status      String
-  description String?     @mysql.Text
-  createdAt   DateTime?   @default(now())
-  enrolments  Enrolment[] @relation("Enrolment_class")
+  startDate   DateTime?        @mysql.Date
+  endDate     DateTime?        @mysql.Date
+  type        LessonTypeType
+  location    String           @default("")
+  status      LessonStatusType
+  description String?          @mysql.Text
+  createdAt   DateTime?        @default(now())
+  enrolments  Enrolment[]      @relation("Enrolment_lesson")
 }
 
 model Enrolment {
-  id        String    @id @default(cuid())
-  class     Class?    @relation("Enrolment_class", fields: [classId], references: [id])
-  classId   String?   @map("class")
-  student   Student?  @relation("Enrolment_student", fields: [studentId], references: [id])
-  studentId String?   @map("student")
-  status    String
-  createdAt DateTime? @default(now())
+  id        String              @id @default(cuid())
+  lesson    Lesson?             @relation("Enrolment_lesson", fields: [lessonId], references: [id])
+  lessonId  String?             @map("lesson")
+  student   Student?            @relation("Enrolment_student", fields: [studentId], references: [id])
+  studentId String?             @map("student")
+  status    EnrolmentStatusType
+  createdAt DateTime?           @default(now())
 
-  @@index([classId])
+  @@index([lessonId])
   @@index([studentId])
 }
 
@@ -121,4 +121,38 @@ enum StudentSchoolType {
   SCHOOL
   HOME
   OTHER
+}
+
+enum LessonDayType {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum LessonTypeType {
+  TERM
+  HOLIDAY
+  TRIAL
+  ONCE
+  OTHER
+}
+
+enum LessonStatusType {
+  UPCOMING
+  CURRENT
+  CLOSED
+  FULL
+  ENROL
+  PREVIOUS
+}
+
+enum EnrolmentStatusType {
+  ENROLED
+  PENDING
+  CANCELLED
+  PAID
 }

@@ -1,10 +1,36 @@
+import { gql } from '@ts-gql/tag/no-transform';
 import { getSessionContext } from 'app/KeystoneContext';
 import Link from 'next/link';
-import { GET_STUDENTS } from "./queries";
+import { useRouter } from 'next/navigation';
+import { GET_STUDENTS } from "../../students/queries";
+import { type GET_LESSON_BY_ID } from '../queries'
 
-export default async function StudentList() {
+
+const GET_STUDENTS_ENROLMENTS = gql`
+    query GET_STUDENTS_ENROLMENTS($minYear: Int!, $maxYear: Int!) {
+        students(where: {AND: [{yearLevel: {gte: $minYear}}, {yearLevel: {lte: $maxYear}}]}) {
+            id
+            firstName
+            yearLevel
+            surname
+            enrolments {
+                id
+                lesson {
+                    id
+                    name
+                }
+            }
+        }
+    }
+    `as import("../../../../../../__generated__/ts-gql/GET_STUDENTS_ENROLMENTS").type
+
+export default async function StudentList({ studentId, lesson }: { studentId: string, lesson: NonNullable<typeof GET_LESSON_BY_ID['___type']['result']['lesson']> }) {
+    const router = useRouter();
     const context = await getSessionContext();
-    const { students } = await context.graphql.run({ query: GET_STUDENTS })
+    if (lesson.maxYear === null || !lesson.minYear === null) {
+        router.push('/dashboard/lessons')
+    }
+    const { students } = await context.graphql.run({ query: GET_STUDENTS_ENROLMENTS, variables: { minYear: lesson.minYear!, maxYear: lesson.maxYear! } })
     return (
         <div className="mt-8 flex flex-col">
             <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -22,14 +48,11 @@ export default async function StudentList() {
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         School Year Level
                                     </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Number of Lessons
+                                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                                        <span className="sr-only">Enrol</span>
                                     </th>
                                     <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                        <span className="sr-only">Edit</span>
-                                    </th>
-                                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                                        <span className="sr-only">Edit</span>
+                                        <span className="sr-only">Enrol</span>
                                     </th>
                                 </tr>
                             </thead>
@@ -41,8 +64,8 @@ export default async function StudentList() {
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.surname}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.yearLevel}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.enrolmentsCount}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+
                                             <Link href={`/dashboard/students/${student.id}`} className="text-indigo-600 hover:text-indigo-900">
                                                 Edit/Enrol in Class <span className="sr-only">, {student.firstName}</span>
                                             </Link>

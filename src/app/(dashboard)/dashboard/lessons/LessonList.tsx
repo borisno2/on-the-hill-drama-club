@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
 import { getSessionContext } from "app/KeystoneContext";
-import { ClassWhereInput } from "../../../../../__generated__/ts-gql/@schema";
-import { GET_CLASSES } from "./queries";
+import { LessonWhereInput } from "../../../../../__generated__/ts-gql/@schema";
+import { GET_LESSONS } from "./queries";
 import labelHelper from "lib/labelHelper";
 import { formatDate } from "lib/formatDate";
 
@@ -22,22 +22,22 @@ const classStatus = [
     { label: 'Class Full', value: 'FULL' },
 ]
 
-export default async function ClassList({ where, studentId, enroled = false }: { where?: ClassWhereInput, studentId?: string, enroled?: boolean }) {
+export default async function ClassList({ where, studentId, enroled = false }: { where?: LessonWhereInput, studentId?: string, enroled?: boolean }) {
     const context = await getSessionContext();
-    const { classes } = await context.graphql.run({ query: GET_CLASSES, variables: { where } })
+    const { lessons } = await context.graphql.run({ query: GET_LESSONS, variables: { where } })
     return (
         <>
-            {!classes || classes.length === 0 ? (<div className="px-4 py-5 sm:px-6"> No Classes Found</div>) : (
+            {!lessons || lessons.length === 0 ? (<div className="px-4 py-5 sm:px-6"> No lessons Found</div>) : (
                 <ul role="list" className="divide-y divide-gray-200">
-                    {classes.map((oneClass) => (
-                        <li key={oneClass.id}>
-                            <Link href={`/dashboard/classes/${oneClass.id}${studentId !== undefined ? `?studentId=${studentId}` : ''}`} className="block hover:bg-gray-50">
+                    {lessons.map((lesson) => (
+                        <li key={lesson.id}>
+                            <Link href={`/dashboard/lessons/${lesson.id}${studentId !== undefined ? `?studentId=${studentId}` : ''}`} className="block hover:bg-gray-50">
                                 <div className="px-4 py-4 sm:px-6">
                                     <div className="flex items-center justify-between">
-                                        <p className="truncate text-sm font-medium text-indigo-600">{oneClass.name}</p>
+                                        <p className="truncate text-sm font-medium text-indigo-600">{lesson.name}</p>
                                         <div className="ml-2 flex flex-shrink-0">
                                             <p className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                                {oneClass.type ? labelHelper(classTypes, oneClass.type) : 'Other'}
+                                                {lesson.type ? labelHelper(classTypes, lesson.type) : 'Other'}
                                             </p>
                                         </div>
                                     </div>
@@ -45,17 +45,17 @@ export default async function ClassList({ where, studentId, enroled = false }: {
                                         <div className="sm:flex">
                                             <p className="flex items-center text-sm text-gray-500">
                                                 <UsersIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                {oneClass.status ? labelHelper(classStatus, oneClass.status) : 'Upcoming'} {enroled && `- enroled`} {oneClass.status === 'ENROL' && '- Click to enrol in this class'}
+                                                {lesson.status ? labelHelper(classStatus, lesson.status) : 'Upcoming'} {enroled && `- enroled`} {lesson.status === 'ENROL' && '- Click to enrol in this class'}
                                             </p>
                                             <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                                 <MapPinIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                {oneClass.location ? oneClass.location : 'The Old Church on the Hill'}
+                                                {lesson.location ? lesson.location : 'The Old Church on the Hill'}
                                             </p>
                                         </div>
                                         <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                                             <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
                                             <p>
-                                                Starts on <time dateTime={new Date(oneClass.startDate).toUTCString()}>{formatDate(oneClass.startDate)}</time>
+                                                Starts on <time dateTime={new Date(lesson.startDate).toUTCString()}>{formatDate(lesson.startDate)}</time>
                                             </p>
                                         </div>
                                     </div>

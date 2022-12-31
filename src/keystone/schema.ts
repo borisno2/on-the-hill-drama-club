@@ -126,13 +126,14 @@ export const lists: Lists = {
     },
   }),
 
-  Class: list({
+  Lesson: list({
     access: allowAll,
     fields: {
       name: text({ validation: { isRequired: true } }),
       time: text({ validation: { isRequired: true } }),
       day: select({
         validation: { isRequired: true },
+        type: 'enum',
         options: [
           { label: 'Monday', value: 'MONDAY' },
           { label: 'Tuesday', value: 'TUESDAY' },
@@ -151,6 +152,7 @@ export const lists: Lists = {
       endDate: calendarDay(),
       type: select({
         validation: { isRequired: true },
+        type: 'enum',
         options: [
           { label: 'Term', value: 'TERM' },
           { label: 'Holiday', value: 'HOLIDAY' },
@@ -162,6 +164,7 @@ export const lists: Lists = {
       location: text({ validation: { isRequired: true } }),
       status: select({
         validation: { isRequired: true },
+        type: 'enum',
         options: [
           { label: 'Upcoming', value: 'UPCOMING' },
           { label: 'Current', value: 'CURRENT' },
@@ -181,17 +184,18 @@ export const lists: Lists = {
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
-      enrolments: relationship({ ref: 'Enrolment.class', many: true }),
+      enrolments: relationship({ ref: 'Enrolment.lesson', many: true }),
     },
   }),
 
   Enrolment: list({
     access: allowAll,
     fields: {
-      class: relationship({ ref: 'Class.enrolments', many: false }),
+      lesson: relationship({ ref: 'Lesson.enrolments', many: false }),
       student: relationship({ ref: 'Student.enrolments', many: false }),
       status: select({
         validation: { isRequired: true },
+        type: 'enum',
         options: [
           { label: 'Enroled', value: 'ENROLED' },
           { label: 'Pending', value: 'PENDING' },

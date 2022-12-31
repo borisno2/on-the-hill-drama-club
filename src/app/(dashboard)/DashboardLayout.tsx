@@ -22,12 +22,12 @@ import ProfileDropdown from 'components/ProfileDropdown'
 
 type NavigationProps = {
     children: React.ReactNode;
-    PageName: 'Account' | 'Dashboard' | 'Students' | 'Classes' | 'Calendar' | 'Notifications' | 'Profile';
+    PageName: 'Account' | 'Dashboard' | 'Students' | 'Lessons' | 'Calendar' | 'Notifications' | 'Profile';
 }
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
     { name: 'Students', href: '/dashboard/students', icon: UsersIcon },
-    { name: 'Classes', href: '/dashboard/classes', icon: FolderIcon },
+    { name: 'lessons', href: '/dashboard/lessons', icon: FolderIcon },
     { name: 'Account', href: '/dashboard/account', icon: ScaleIcon },
     //{ name: 'Calendar', href: '/dashboard/calendar', icon: CalendarIcon },
     //{ name: 'Notifications', href: '/dashboard/notifications', icon: InboxIcon },
