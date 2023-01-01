@@ -1,10 +1,9 @@
+import { UserCreateInput } from './../../../../__generated__/ts-gql/@schema.d'
 import { isCuid } from 'cuid'
 import { gql } from '@ts-gql/tag/no-transform'
 import NextAuth, { AuthOptions } from 'next-auth'
-import Google from 'next-auth/providers/google'
-import Facebook from 'next-auth/providers/facebook'
-import Apple from 'next-auth/providers/apple'
-import { headers } from 'next/headers'
+import Google, { GoogleProfile } from 'next-auth/providers/google'
+import Apple, { AppleProfile } from 'next-auth/providers/apple'
 
 import Credentials from 'next-auth/providers/credentials'
 import { keystoneContext } from '../../../keystone/context'
@@ -48,7 +47,7 @@ export const authOptions: AuthOptions = {
     signIn: '/auth/signin',
   },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
       // if account type is cretentials then authorise the user
       if (account?.provider === 'credentials') {
         if (user.failMessage) {
@@ -63,37 +62,80 @@ export const authOptions: AuthOptions = {
         if (user.id) return true
         return false
       }
-
+      if (!user.id || !user.email) {
+        return false
+      }
+      // if account type is not credentials then check if user exists in keystone
       const keyUser = await keystoneContext.sudo().db.User.findOne({
         where: { subjectId: user.id },
       })
+      if (keyUser) {
+        if (keyUser.provider !== account?.provider) {
+          console.log(
+            `User provider mismatch for ${user.email} - ${account?.provider}`
+          )
+          return '/auth/signin?error=UserProviderMismatch'
+        }
+        return true
+      }
 
       if (!keyUser) {
-        console.log('user not found, creating one')
-        await keystoneContext.sudo().db.User.createOne({
-          data: {
+        let newUserData: UserCreateInput
+        if (account?.provider === 'google') {
+          const googleProfile = profile as GoogleProfile
+          newUserData = {
             subjectId: user.id,
-            email: user.email,
             provider: account?.provider,
+            email: googleProfile?.email,
+            emailVerified: googleProfile?.email_verified,
             account: {
               create: {
-                firstName: user.name,
+                firstName: googleProfile?.given_name,
+                surname: googleProfile?.family_name,
+                phone: googleProfile?.phone_number || 'PLEASE_UPDATE',
+                streetAddress:
+                  googleProfile?.address?.street_address || 'PLEASE_UPDATE',
+                suburb: googleProfile?.address?.locality || 'PLEASE_UPDATE',
+                postcode: parseInt(googleProfile?.address?.postal_code) || 3550,
               },
             },
-          },
-        })
+          }
+        } else if (account?.provider === 'apple') {
+          const appleProfile = profile as AppleProfile
+          newUserData = {
+            subjectId: user.id,
+            provider: account?.provider,
+            email: user.email,
+            emailVerified: !!appleProfile?.email_verified,
+            account: {
+              create: {
+                firstName: appleProfile?.given_name,
+                surname: appleProfile?.family_name,
+                phone: appleProfile?.phone_number || 'PLEASE_UPDATE',
+                streetAddress:
+                  appleProfile?.address?.street_address || 'PLEASE_UPDATE',
+                suburb: appleProfile?.address?.locality || 'PLEASE_UPDATE',
+                postcode: parseInt(appleProfile?.address?.postal_code) || 3550,
+              },
+            },
+          }
+        } else {
+          return '/auth/signin?error=UnknownProvider'
+        }
+        try {
+          const newUser = await keystoneContext.sudo().db.User.createOne({
+            data: newUserData,
+          })
+          return newUser.id ? true : '/auth/signin?error=ErrorCreatingUser'
+        } catch (error) {
+          console.log('error :', error)
+          return '/auth/signin?error=ErrorCreatingUser'
+        }
       }
-      if (keyUser?.provider !== account?.provider) {
-        console.log(
-          `User provider mismatch for ${user.email} - ${account?.provider}`
-        )
-        return false
-      }
-      return true
+      return '/auth/signin?error=GenericError'
     },
     async session({ session, token }) {
-      const { id, email, role, account } = token
-      const allowAdminUI = role === 'ADMIN'
+      const { id, email, role, account, allowAdminUI } = token
       return {
         ...session,
         user: {
@@ -105,6 +147,7 @@ export const authOptions: AuthOptions = {
           id,
           firstName: account?.firstName,
           surname: account?.surname,
+          emailVerified: token.emailVerified,
           email,
           role,
         },
@@ -122,7 +165,11 @@ export const authOptions: AuthOptions = {
         query: GET_AUTH_SESSION,
       })
       if (userInDb) {
-        token = { ...token, ...userInDb }
+        token = {
+          ...token,
+          ...userInDb,
+          allowAdminUI: userInDb.role === 'ADMIN',
+        }
       }
       return token
     },
@@ -195,10 +242,6 @@ export const authOptions: AuthOptions = {
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID || 'GoogleClientID',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'GoogleClientSecret',
-    }),
-    Facebook({
-      clientId: process.env.FACEBOOK_CLIENT_ID || 'FacebookClientID',
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || 'Facebook',
     }),
     Apple({
       clientId: process.env.APPLE_CLIENT_ID || 'AppleClientID',

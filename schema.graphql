@@ -164,6 +164,7 @@ input AccountRelateToOneForCreateInput {
 
 type Account {
   id: ID!
+  name: String
   user: User
   firstName: String
   surname: String

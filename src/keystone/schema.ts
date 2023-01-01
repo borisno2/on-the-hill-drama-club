@@ -60,7 +60,8 @@ export const lists: Lists = {
       provider: select({
         options: [
           { label: 'Credentials', value: 'credentials' },
-          { label: 'Auth0', value: 'auth0' },
+          { label: 'Google', value: 'google' },
+          { label: 'Apple', value: 'apple' },
         ],
         validation: { isRequired: true },
       }),
@@ -80,6 +81,14 @@ export const lists: Lists = {
   Account: list({
     access: allowAll,
     fields: {
+      name: virtual({
+        field: graphql.field({
+          type: graphql.String,
+          resolve: async (item) => {
+            return `${item.firstName} ${item.surname}`
+          },
+        }),
+      }),
       user: relationship({ ref: 'User.account', many: false }),
       firstName: text({ validation: { isRequired: true } }),
       surname: text({ validation: { isRequired: true } }),
