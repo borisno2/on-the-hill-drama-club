@@ -109,8 +109,8 @@ export const authOptions: AuthOptions = {
             emailVerified: !!appleProfile?.email_verified,
             account: {
               create: {
-                firstName: appleProfile?.given_name,
-                surname: appleProfile?.family_name,
+                firstName: appleProfile?.given_name || 'PLEASE_UPDATE',
+                surname: appleProfile?.family_name || 'PLEASE_UPDATE',
                 phone: appleProfile?.phone_number || 'PLEASE_UPDATE',
                 streetAddress:
                   appleProfile?.address?.street_address || 'PLEASE_UPDATE',
