@@ -33,7 +33,7 @@ module.exports = withTsGql(
     },
     async rewrites() {
       return {
-        beforeFiles: [
+        afterFiles: [
           {
             source: '/admin',
             destination: `${KEYSTONE_URL}/admin`,

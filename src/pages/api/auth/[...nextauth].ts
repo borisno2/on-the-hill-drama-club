@@ -93,12 +93,14 @@ export const authOptions: AuthOptions = {
     },
     async session({ session, token }) {
       const { id, email, role, account } = token
+      const allowAdminUI = role === 'ADMIN'
       return {
         ...session,
         user: {
           ...session.user,
           name: account?.firstName + ' ' + account?.surname,
         },
+        allowAdminUI,
         data: {
           id,
           firstName: account?.firstName,

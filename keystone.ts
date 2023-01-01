@@ -1,6 +1,3 @@
-import { Context } from '.keystone/types'
-import { SessionStrategy } from '@keystone-6/core/types'
-import { getSession as getNextAuthSession } from 'next-auth/react'
 import dotenv from 'dotenv-flow'
 import * as Path from 'path'
 
@@ -9,20 +6,6 @@ import { config } from '@keystone-6/core'
 import { lists } from './src/keystone/schema'
 
 dotenv.config()
-
-const session: SessionStrategy<any> = {
-  get: async ({ context }) => {
-    const { req, res } = context
-    if (!req || !res) return null
-    return (await getNextAuthSession({ req })) as Context['session']
-  },
-  start: async () => {
-    console.log('session start not used')
-  },
-  end: async () => {
-    console.log('session end not used')
-  },
-}
 
 export default config({
   db: {
@@ -37,6 +20,7 @@ export default config({
     prismaPreviewFeatures: ['referentialIntegrity'],
   },
   ui: {
+    isAccessAllowed: ({ session }) => session.allowAdminUI,
     getAdditionalFiles: [
       async () => [
         {
@@ -47,9 +31,5 @@ export default config({
       ],
     ],
   },
-  server: {
-    port: 4000,
-  },
   lists,
-  session,
 })

@@ -840,7 +840,6 @@ type Mutation {
   updateBillItems(data: [BillItemUpdateArgs!]!): [BillItem]
   deleteBillItem(where: BillItemWhereUniqueInput!): BillItem
   deleteBillItems(where: [BillItemWhereUniqueInput!]!): [BillItem]
-  endSession: Boolean!
 }
 
 type Query {

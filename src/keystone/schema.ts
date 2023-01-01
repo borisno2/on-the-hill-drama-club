@@ -73,7 +73,7 @@ export const lists: Lists = {
         defaultValue: { kind: 'now' },
       }),
       account: relationship({ ref: 'Account.user', many: false }),
-      role: text(),
+      role: text({ defaultValue: 'ACCOUNT' }),
     },
   }),
 
