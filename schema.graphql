@@ -305,7 +305,7 @@ type Student {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
-  school: StudentSchoolType
+  school: String
   yearLevel: Int
   medical: String
   account: Account
@@ -315,12 +315,6 @@ type Student {
 }
 
 scalar CalendarDay @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
-
-enum StudentSchoolType {
-  SCHOOL
-  HOME
-  OTHER
-}
 
 input StudentWhereUniqueInput {
   id: ID
@@ -334,7 +328,7 @@ input StudentWhereInput {
   firstName: StringFilter
   surname: StringFilter
   dateOfBirth: CalendarDayFilter
-  school: StudentSchoolTypeNullableFilter
+  school: StringFilter
   yearLevel: IntFilter
   medical: StringNullableFilter
   account: AccountWhereInput
@@ -351,13 +345,6 @@ input CalendarDayFilter {
   gt: CalendarDay
   gte: CalendarDay
   not: CalendarDayFilter
-}
-
-input StudentSchoolTypeNullableFilter {
-  equals: StudentSchoolType
-  in: [StudentSchoolType!]
-  notIn: [StudentSchoolType!]
-  not: StudentSchoolTypeNullableFilter
 }
 
 input StringNullableFilter {
@@ -409,7 +396,7 @@ input StudentUpdateInput {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
-  school: StudentSchoolType
+  school: String
   yearLevel: Int
   medical: String
   account: AccountRelateToOneForUpdateInput
@@ -433,7 +420,7 @@ input StudentCreateInput {
   firstName: String
   surname: String
   dateOfBirth: CalendarDay
-  school: StudentSchoolType
+  school: String
   yearLevel: Int
   medical: String
   account: AccountRelateToOneForCreateInput
@@ -450,50 +437,23 @@ type Lesson {
   id: ID!
   name: String
   time: String
-  day: LessonDayType
+  day: String
   minYear: Int
   maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  type: LessonTypeType
+  type: String
   location: String
-  status: LessonStatusType
+  status: String
   description: String
   createdAt: DateTime
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
 }
 
-enum LessonDayType {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
-  SUNDAY
-}
-
 scalar Decimal
-
-enum LessonTypeType {
-  TERM
-  HOLIDAY
-  TRIAL
-  ONCE
-  OTHER
-}
-
-enum LessonStatusType {
-  UPCOMING
-  CURRENT
-  CLOSED
-  FULL
-  ENROL
-  PREVIOUS
-}
 
 input LessonWhereUniqueInput {
   id: ID
@@ -506,26 +466,19 @@ input LessonWhereInput {
   id: IDFilter
   name: StringFilter
   time: StringFilter
-  day: LessonDayTypeNullableFilter
+  day: StringFilter
   minYear: IntFilter
   maxYear: IntFilter
   cost: DecimalNullableFilter
   quantity: IntNullableFilter
   startDate: CalendarDayNullableFilter
   endDate: CalendarDayNullableFilter
-  type: LessonTypeTypeNullableFilter
+  type: StringFilter
   location: StringFilter
-  status: LessonStatusTypeNullableFilter
+  status: StringFilter
   description: StringNullableFilter
   createdAt: DateTimeNullableFilter
   enrolments: EnrolmentManyRelationFilter
-}
-
-input LessonDayTypeNullableFilter {
-  equals: LessonDayType
-  in: [LessonDayType!]
-  notIn: [LessonDayType!]
-  not: LessonDayTypeNullableFilter
 }
 
 input DecimalNullableFilter {
@@ -561,20 +514,6 @@ input CalendarDayNullableFilter {
   not: CalendarDayNullableFilter
 }
 
-input LessonTypeTypeNullableFilter {
-  equals: LessonTypeType
-  in: [LessonTypeType!]
-  notIn: [LessonTypeType!]
-  not: LessonTypeTypeNullableFilter
-}
-
-input LessonStatusTypeNullableFilter {
-  equals: LessonStatusType
-  in: [LessonStatusType!]
-  notIn: [LessonStatusType!]
-  not: LessonStatusTypeNullableFilter
-}
-
 input LessonOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -596,16 +535,16 @@ input LessonOrderByInput {
 input LessonUpdateInput {
   name: String
   time: String
-  day: LessonDayType
+  day: String
   minYear: Int
   maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  type: LessonTypeType
+  type: String
   location: String
-  status: LessonStatusType
+  status: String
   description: String
   createdAt: DateTime
   enrolments: EnrolmentRelateToManyForUpdateInput
@@ -619,16 +558,16 @@ input LessonUpdateArgs {
 input LessonCreateInput {
   name: String
   time: String
-  day: LessonDayType
+  day: String
   minYear: Int
   maxYear: Int
   cost: Decimal
   quantity: Int
   startDate: CalendarDay
   endDate: CalendarDay
-  type: LessonTypeType
+  type: String
   location: String
-  status: LessonStatusType
+  status: String
   description: String
   createdAt: DateTime
   enrolments: EnrolmentRelateToManyForCreateInput
@@ -638,15 +577,8 @@ type Enrolment {
   id: ID!
   lesson: Lesson
   student: Student
-  status: EnrolmentStatusType
+  status: String
   createdAt: DateTime
-}
-
-enum EnrolmentStatusType {
-  ENROLED
-  PENDING
-  CANCELLED
-  PAID
 }
 
 input EnrolmentWhereUniqueInput {
@@ -660,15 +592,8 @@ input EnrolmentWhereInput {
   id: IDFilter
   lesson: LessonWhereInput
   student: StudentWhereInput
-  status: EnrolmentStatusTypeNullableFilter
+  status: StringFilter
   createdAt: DateTimeNullableFilter
-}
-
-input EnrolmentStatusTypeNullableFilter {
-  equals: EnrolmentStatusType
-  in: [EnrolmentStatusType!]
-  notIn: [EnrolmentStatusType!]
-  not: EnrolmentStatusTypeNullableFilter
 }
 
 input EnrolmentOrderByInput {
@@ -680,7 +605,7 @@ input EnrolmentOrderByInput {
 input EnrolmentUpdateInput {
   lesson: LessonRelateToOneForUpdateInput
   student: StudentRelateToOneForUpdateInput
-  status: EnrolmentStatusType
+  status: String
   createdAt: DateTime
 }
 
@@ -704,7 +629,7 @@ input EnrolmentUpdateArgs {
 input EnrolmentCreateInput {
   lesson: LessonRelateToOneForCreateInput
   student: StudentRelateToOneForCreateInput
-  status: EnrolmentStatusType
+  status: String
   createdAt: DateTime
 }
 

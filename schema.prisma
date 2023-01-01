@@ -44,48 +44,48 @@ model Account {
 }
 
 model Student {
-  id          String            @id @default(cuid())
-  firstName   String            @default("")
-  surname     String            @default("")
-  dateOfBirth DateTime          @mysql.Date
-  school      StudentSchoolType
+  id          String      @id @default(cuid())
+  firstName   String      @default("")
+  surname     String      @default("")
+  dateOfBirth DateTime    @mysql.Date
+  school      String
   yearLevel   Int
-  medical     String?           @mysql.Text
-  account     Account?          @relation("Student_account", fields: [accountId], references: [id])
-  accountId   String?           @map("account")
-  enrolments  Enrolment[]       @relation("Enrolment_student")
-  createdAt   DateTime?         @default(now())
+  medical     String?     @mysql.Text
+  account     Account?    @relation("Student_account", fields: [accountId], references: [id])
+  accountId   String?     @map("account")
+  enrolments  Enrolment[] @relation("Enrolment_student")
+  createdAt   DateTime?   @default(now())
 
   @@index([accountId])
 }
 
 model Lesson {
-  id          String           @id @default(cuid())
-  name        String           @default("")
-  time        String           @default("")
-  day         LessonDayType
+  id          String      @id @default(cuid())
+  name        String      @default("")
+  time        String      @default("")
+  day         String
   minYear     Int
   maxYear     Int
-  cost        Decimal?         @mysql.Decimal(18, 2)
+  cost        Decimal?    @mysql.Decimal(18, 2)
   quantity    Int?
-  startDate   DateTime?        @mysql.Date
-  endDate     DateTime?        @mysql.Date
-  type        LessonTypeType
-  location    String           @default("")
-  status      LessonStatusType
-  description String?          @mysql.Text
-  createdAt   DateTime?        @default(now())
-  enrolments  Enrolment[]      @relation("Enrolment_lesson")
+  startDate   DateTime?   @mysql.Date
+  endDate     DateTime?   @mysql.Date
+  type        String
+  location    String      @default("")
+  status      String
+  description String?     @mysql.Text
+  createdAt   DateTime?   @default(now())
+  enrolments  Enrolment[] @relation("Enrolment_lesson")
 }
 
 model Enrolment {
-  id        String              @id @default(cuid())
-  lesson    Lesson?             @relation("Enrolment_lesson", fields: [lessonId], references: [id])
-  lessonId  String?             @map("lesson")
-  student   Student?            @relation("Enrolment_student", fields: [studentId], references: [id])
-  studentId String?             @map("student")
-  status    EnrolmentStatusType
-  createdAt DateTime?           @default(now())
+  id        String    @id @default(cuid())
+  lesson    Lesson?   @relation("Enrolment_lesson", fields: [lessonId], references: [id])
+  lessonId  String?   @map("lesson")
+  student   Student?  @relation("Enrolment_student", fields: [studentId], references: [id])
+  studentId String?   @map("student")
+  status    String
+  createdAt DateTime? @default(now())
 
   @@index([lessonId])
   @@index([studentId])
@@ -115,44 +115,4 @@ model BillItem {
   createdAt DateTime? @default(now())
 
   @@index([billId])
-}
-
-enum StudentSchoolType {
-  SCHOOL
-  HOME
-  OTHER
-}
-
-enum LessonDayType {
-  MONDAY
-  TUESDAY
-  WEDNESDAY
-  THURSDAY
-  FRIDAY
-  SATURDAY
-  SUNDAY
-}
-
-enum LessonTypeType {
-  TERM
-  HOLIDAY
-  TRIAL
-  ONCE
-  OTHER
-}
-
-enum LessonStatusType {
-  UPCOMING
-  CURRENT
-  CLOSED
-  FULL
-  ENROL
-  PREVIOUS
-}
-
-enum EnrolmentStatusType {
-  ENROLED
-  PENDING
-  CANCELLED
-  PAID
 }

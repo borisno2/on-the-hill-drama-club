@@ -1,3 +1,11 @@
+import {
+  schoolOptions,
+  dayOptions,
+  lessonTypeOptions,
+  lessonStatusOptions,
+  enrolmentStatusOptions,
+  billStatusOptions,
+} from '../types/selectOptions'
 import { graphql, list } from '@keystone-6/core'
 import { allowAll, denyAll } from '@keystone-6/core/access'
 import {
@@ -103,12 +111,7 @@ export const lists: Lists = {
       dateOfBirth: calendarDay({ validation: { isRequired: true } }),
       school: select({
         validation: { isRequired: true },
-        type: 'enum',
-        options: [
-          { label: 'School', value: 'SCHOOL' },
-          { label: 'Home Educated', value: 'HOME' },
-          { label: 'Other', value: 'OTHER' },
-        ],
+        options: schoolOptions,
       }),
       yearLevel: integer({ validation: { isRequired: true } }),
       medical: text({
@@ -133,16 +136,7 @@ export const lists: Lists = {
       time: text({ validation: { isRequired: true } }),
       day: select({
         validation: { isRequired: true },
-        type: 'enum',
-        options: [
-          { label: 'Monday', value: 'MONDAY' },
-          { label: 'Tuesday', value: 'TUESDAY' },
-          { label: 'Wednesday', value: 'WEDNESDAY' },
-          { label: 'Thursday', value: 'THURSDAY' },
-          { label: 'Friday', value: 'FRIDAY' },
-          { label: 'Saturday', value: 'SATURDAY' },
-          { label: 'Sunday', value: 'SUNDAY' },
-        ],
+        options: dayOptions,
       }),
       minYear: integer({ validation: { isRequired: true } }),
       maxYear: integer({ validation: { isRequired: true } }),
@@ -152,27 +146,12 @@ export const lists: Lists = {
       endDate: calendarDay(),
       type: select({
         validation: { isRequired: true },
-        type: 'enum',
-        options: [
-          { label: 'Term', value: 'TERM' },
-          { label: 'Holiday', value: 'HOLIDAY' },
-          { label: 'Trial', value: 'TRIAL' },
-          { label: 'Once Off', value: 'ONCE' },
-          { label: 'Other', value: 'OTHER' },
-        ],
+        options: lessonTypeOptions,
       }),
       location: text({ validation: { isRequired: true } }),
       status: select({
         validation: { isRequired: true },
-        type: 'enum',
-        options: [
-          { label: 'Upcoming', value: 'UPCOMING' },
-          { label: 'Current', value: 'CURRENT' },
-          { label: 'Enrolments Closed', value: 'CLOSED' },
-          { label: 'Class Full', value: 'FULL' },
-          { label: 'Enrolments Open', value: 'ENROL' },
-          { label: 'Previous', value: 'PREVIOUS' },
-        ],
+        options: lessonStatusOptions,
       }),
       description: text({
         ui: { displayMode: 'textarea' },
@@ -195,13 +174,7 @@ export const lists: Lists = {
       student: relationship({ ref: 'Student.enrolments', many: false }),
       status: select({
         validation: { isRequired: true },
-        type: 'enum',
-        options: [
-          { label: 'Enroled', value: 'ENROLED' },
-          { label: 'Pending', value: 'PENDING' },
-          { label: 'Cancelled', value: 'CANCELLED' },
-          { label: 'Paid', value: 'PAID' },
-        ],
+        options: enrolmentStatusOptions,
       }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
@@ -239,13 +212,7 @@ export const lists: Lists = {
       }),
       status: select({
         validation: { isRequired: true },
-        options: [
-          { label: 'Pending', value: 'PENDING' },
-          { label: 'Overdue', value: 'OVERDUE' },
-          { label: 'Partially Paid', value: 'PARTIALLY_PAID' },
-          { label: 'Paid', value: 'PAID' },
-          { label: 'Cancelled', value: 'CANCELLED' },
-        ],
+        options: billStatusOptions,
       }),
       items: relationship({ ref: 'BillItem.bill', many: true }),
       createdAt: timestamp({

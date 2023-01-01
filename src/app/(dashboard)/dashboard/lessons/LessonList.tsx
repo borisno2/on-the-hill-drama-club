@@ -5,22 +5,7 @@ import { LessonWhereInput } from "../../../../../__generated__/ts-gql/@schema";
 import { GET_LESSONS } from "./queries";
 import labelHelper from "lib/labelHelper";
 import { formatDate } from "lib/formatDate";
-
-const classTypes = [
-    { label: 'Term', value: 'TERM' },
-    { label: 'Holiday', value: 'HOLIDAY' },
-    { label: 'Trial', value: 'TRIAL' },
-    { label: 'Once Off', value: 'ONCE' },
-    { label: 'Other', value: 'OTHER' }
-]
-const classStatus = [
-    { label: 'Upcoming', value: 'UPCOMING' },
-    { label: 'Current', value: 'CURRENT' },
-    { label: 'Enrolments Open', value: 'ENROL' },
-    { label: 'Previous', value: 'PREVIOUS' },
-    { label: 'Enrolments Closed', value: 'CLOSED' },
-    { label: 'Class Full', value: 'FULL' },
-]
+import { lessonTypeOptions, lessonStatusOptions } from "types/selectOptions";
 
 export default async function ClassList({ where, studentId, enroled = false }: { where?: LessonWhereInput, studentId?: string, enroled?: boolean }) {
     const context = await getSessionContext();
@@ -37,7 +22,7 @@ export default async function ClassList({ where, studentId, enroled = false }: {
                                         <p className="truncate text-sm font-medium text-indigo-600">{lesson.name}</p>
                                         <div className="ml-2 flex flex-shrink-0">
                                             <p className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                                {lesson.type ? labelHelper(classTypes, lesson.type) : 'Other'}
+                                                {lesson.type ? labelHelper(lessonTypeOptions, lesson.type) : 'Other'}
                                             </p>
                                         </div>
                                     </div>
@@ -45,7 +30,7 @@ export default async function ClassList({ where, studentId, enroled = false }: {
                                         <div className="sm:flex">
                                             <p className="flex items-center text-sm text-gray-500">
                                                 <UsersIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                {lesson.status ? labelHelper(classStatus, lesson.status) : 'Upcoming'} {enroled && `- enroled`} {lesson.status === 'ENROL' && '- Click to enrol in this class'}
+                                                {lesson.status ? labelHelper(lessonStatusOptions, lesson.status) : 'Upcoming'} {enroled && `- enroled`} {lesson.status === 'ENROL' && '- Click to enrol in this class'}
                                             </p>
                                             <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                                 <MapPinIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />

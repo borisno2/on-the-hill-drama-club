@@ -1,6 +1,6 @@
 "use client"
 
-import { gql } from "@ts-gql/tag/no-transform";
+import { gql, OperationData } from "@ts-gql/tag/no-transform";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { client } from "util/request";
@@ -10,6 +10,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 import { Formik, FormikHelpers } from "formik";
 import { z } from "zod";
 import DropDown from "./DropDown";
+import { GET_STUDENT_BY_ID } from "app/(dashboard)/dashboard/students/queries";
 
 type Student = {
     id: string;
@@ -25,7 +26,7 @@ type Values = {
     firstName: string;
     surname: string;
     dateOfBirth: string;
-    school: 'SCHOOL' | 'HOME' | 'OTHER';
+    school: string;
     yearLevel: number;
     medical: string;
 };
@@ -58,7 +59,7 @@ const ADD_STUDENT = gql`
     }
     `as import("../../__generated__/ts-gql/ADD_STUDENT").type
 
-export default function Student({ student }: { student?: Student }) {
+export default function Student({ student }: { student?: OperationData<typeof GET_STUDENT_BY_ID>['student'] }) {
     const router = useRouter();
     const initialValues = {
         firstName: student?.firstName || '',
