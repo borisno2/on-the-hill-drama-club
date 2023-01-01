@@ -27,7 +27,7 @@ type NavigationProps = {
 const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
     { name: 'Students', href: '/dashboard/students', icon: UsersIcon },
-    { name: 'lessons', href: '/dashboard/lessons', icon: FolderIcon },
+    { name: 'Lessons', href: '/dashboard/lessons', icon: FolderIcon },
     { name: 'Account', href: '/dashboard/account', icon: ScaleIcon },
     //{ name: 'Calendar', href: '/dashboard/calendar', icon: CalendarIcon },
     //{ name: 'Notifications', href: '/dashboard/notifications', icon: InboxIcon },

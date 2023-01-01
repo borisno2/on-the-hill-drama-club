@@ -1,7 +1,7 @@
 export default function Head() {
     return (
         <>
-            <title>lessons - On the Hill Performing Arts</title>
+            <title>Lessons - On the Hill Performing Arts</title>
         </>
     )
 }

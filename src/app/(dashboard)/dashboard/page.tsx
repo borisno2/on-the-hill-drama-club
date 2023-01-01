@@ -27,7 +27,7 @@ export default async function Portal() {
     const cards = [
         //{ name: 'Account balance', href: '/dashboard/account', icon: ScaleIcon, amount: '$30,659.45' },
         { name: 'Students', href: '/dashboard/students', icon: UsersIcon, amount: students ? students.length : 0 },
-        { name: 'lessons', href: '/dashboard/lessons', icon: BuildingOfficeIcon, amount: students ? students.reduce((acc, student) => acc + (student.enrolments ? student.enrolments.length : 0), 0) : 0 },
+        { name: 'Lessons', href: '/dashboard/lessons', icon: BuildingOfficeIcon, amount: students ? students.reduce((acc, student) => acc + (student.enrolments ? student.enrolments.length : 0), 0) : 0 },
         // More items...
     ]
     return (
