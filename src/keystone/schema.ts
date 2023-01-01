@@ -7,7 +7,7 @@ import {
   billStatusOptions,
 } from '../types/selectOptions'
 import { graphql, list } from '@keystone-6/core'
-import { allowAll, denyAll } from '@keystone-6/core/access'
+import { allOperations, allowAll } from '@keystone-6/core/access'
 import {
   text,
   relationship,
@@ -22,22 +22,31 @@ import {
 } from '@keystone-6/core/fields'
 import { document } from '@keystone-6/fields-document'
 import type { Lists, Context } from '.keystone/types'
-import { gql } from '@ts-gql/tag/no-transform'
+import {
+  accountFilter,
+  billFilter,
+  billItemFilter,
+  enrolmentFilter,
+  GET_BILL_ITEMS_TOTAL,
+  isAdmin,
+  isLoggedIn,
+  studentFilter,
+  userFilter,
+} from './helpers'
 import { Decimal } from 'decimal.js'
-
-const GET_BILL_ITEMS_TOTAL = gql`
-  query GET_BILL_ITEMS_TOTAL($id: ID!) {
-    billItems(where: { bill: { id: { equals: $id } } }) {
-      id
-      amount
-    }
-  }
-` as import('../../__generated__/ts-gql/GET_BILL_ITEMS_TOTAL').type
 
 const decimalScale = 2
 export const lists: Lists = {
   User: list({
-    access: allowAll,
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: isLoggedIn,
+      },
+      filter: {
+        query: userFilter,
+      },
+    },
     fields: {
       name: virtual({
         field: graphql.field({
@@ -79,7 +88,16 @@ export const lists: Lists = {
   }),
 
   Account: list({
-    access: allowAll,
+    access: {
+      operation: {
+        ...allOperations(isLoggedIn),
+        delete: isAdmin,
+      },
+      filter: {
+        query: accountFilter,
+        update: accountFilter,
+      },
+    },
     fields: {
       name: virtual({
         field: graphql.field({
@@ -105,7 +123,16 @@ export const lists: Lists = {
   }),
 
   Student: list({
-    access: allowAll,
+    access: {
+      operation: {
+        ...allOperations(isLoggedIn),
+        delete: isAdmin,
+      },
+      filter: {
+        query: studentFilter,
+        update: studentFilter,
+      },
+    },
     fields: {
       name: virtual({
         field: graphql.field({
@@ -139,7 +166,12 @@ export const lists: Lists = {
   }),
 
   Lesson: list({
-    access: allowAll,
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: allowAll,
+      },
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       time: text({ validation: { isRequired: true } }),
@@ -177,7 +209,16 @@ export const lists: Lists = {
   }),
 
   Enrolment: list({
-    access: allowAll,
+    access: {
+      operation: {
+        ...allOperations(isLoggedIn),
+        delete: isAdmin,
+      },
+      filter: {
+        query: enrolmentFilter,
+        update: enrolmentFilter,
+      },
+    },
     fields: {
       lesson: relationship({ ref: 'Lesson.enrolments', many: false }),
       student: relationship({ ref: 'Student.enrolments', many: false }),
@@ -192,7 +233,15 @@ export const lists: Lists = {
   }),
 
   Bill: list({
-    access: allowAll,
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: isLoggedIn,
+      },
+      filter: {
+        query: billFilter,
+      },
+    },
     fields: {
       name: text(),
       account: relationship({ ref: 'Account.bills', many: false }),
@@ -231,7 +280,15 @@ export const lists: Lists = {
   }),
 
   BillItem: list({
-    access: allowAll,
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: isLoggedIn,
+      },
+      filter: {
+        query: billItemFilter,
+      },
+    },
     fields: {
       name: text(),
       bill: relationship({ ref: 'Bill.items', many: false }),

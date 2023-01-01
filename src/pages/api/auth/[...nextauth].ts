@@ -143,8 +143,8 @@ export const authOptions: AuthOptions = {
           name: account?.firstName + ' ' + account?.surname,
         },
         allowAdminUI,
+        userId: id,
         data: {
-          id,
           firstName: account?.firstName,
           surname: account?.surname,
           emailVerified: token.emailVerified,

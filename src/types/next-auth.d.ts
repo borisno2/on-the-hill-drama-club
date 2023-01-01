@@ -14,9 +14,9 @@ declare module 'next-auth' {
     failMessage?: string | null
   }
   interface Session {
-    adminUIAccess?: boolean
+    adminUIAccess: boolean
+    userId: string
     data: {
-      id: string
       firstName?: string | null
       surname?: string | null
       email: string | null
