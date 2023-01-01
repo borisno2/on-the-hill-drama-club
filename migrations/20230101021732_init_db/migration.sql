@@ -1,12 +1,17 @@
 -- CreateTable
 CREATE TABLE `User` (
     `id` VARCHAR(191) NOT NULL,
-    `name` VARCHAR(191) NOT NULL DEFAULT '',
     `email` VARCHAR(191) NOT NULL DEFAULT '',
-    `password` VARCHAR(191) NOT NULL,
+    `emailVerified` BOOLEAN NOT NULL DEFAULT false,
+    `emailVerificationToken` VARCHAR(191) NOT NULL DEFAULT '',
+    `emailVerificationTokenExpiry` DATETIME(3) NULL,
+    `provider` VARCHAR(191) NOT NULL,
+    `password` VARCHAR(191) NULL,
+    `subjectId` VARCHAR(191) NOT NULL DEFAULT '',
     `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `role` VARCHAR(191) NOT NULL DEFAULT '',
 
-    UNIQUE INDEX `User_email_key`(`email`),
+    UNIQUE INDEX `User_subjectId_key`(`subjectId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -14,8 +19,13 @@ CREATE TABLE `User` (
 CREATE TABLE `Account` (
     `id` VARCHAR(191) NOT NULL,
     `user` VARCHAR(191) NULL,
-    `name` VARCHAR(191) NOT NULL DEFAULT '',
+    `firstName` VARCHAR(191) NOT NULL DEFAULT '',
+    `surname` VARCHAR(191) NOT NULL DEFAULT '',
     `phone` VARCHAR(191) NOT NULL DEFAULT '',
+    `streetAddress` VARCHAR(191) NOT NULL DEFAULT '',
+    `suburb` VARCHAR(191) NOT NULL DEFAULT '',
+    `postcode` INTEGER NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `Account_user_key`(`user`),
     PRIMARY KEY (`id`)
@@ -24,27 +34,36 @@ CREATE TABLE `Account` (
 -- CreateTable
 CREATE TABLE `Student` (
     `id` VARCHAR(191) NOT NULL,
-    `name` VARCHAR(191) NOT NULL DEFAULT '',
-    `dateOfBirth` DATE NULL,
+    `firstName` VARCHAR(191) NOT NULL DEFAULT '',
+    `surname` VARCHAR(191) NOT NULL DEFAULT '',
+    `dateOfBirth` DATE NOT NULL,
+    `school` VARCHAR(191) NOT NULL,
+    `yearLevel` INTEGER NOT NULL,
+    `medical` TEXT NULL,
     `account` VARCHAR(191) NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     INDEX `Student_account_idx`(`account`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Class` (
+CREATE TABLE `Lesson` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL DEFAULT '',
     `time` VARCHAR(191) NOT NULL DEFAULT '',
-    `minimumAge` INTEGER NULL,
-    `maximumAge` INTEGER NULL,
-    `cost` INTEGER NULL,
+    `day` VARCHAR(191) NOT NULL,
+    `minYear` INTEGER NOT NULL,
+    `maxYear` INTEGER NOT NULL,
+    `cost` DECIMAL(18, 2) NULL,
     `quantity` INTEGER NULL,
     `startDate` DATE NULL,
     `endDate` DATE NULL,
-    `frequency` VARCHAR(191) NOT NULL DEFAULT '',
+    `type` VARCHAR(191) NOT NULL,
     `location` VARCHAR(191) NOT NULL DEFAULT '',
+    `status` VARCHAR(191) NOT NULL,
+    `description` TEXT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -52,10 +71,12 @@ CREATE TABLE `Class` (
 -- CreateTable
 CREATE TABLE `Enrolment` (
     `id` VARCHAR(191) NOT NULL,
-    `class` VARCHAR(191) NULL,
+    `lesson` VARCHAR(191) NULL,
     `student` VARCHAR(191) NULL,
+    `status` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    INDEX `Enrolment_class_idx`(`class`),
+    INDEX `Enrolment_lesson_idx`(`lesson`),
     INDEX `Enrolment_student_idx`(`student`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -67,8 +88,8 @@ CREATE TABLE `Bill` (
     `account` VARCHAR(191) NULL,
     `date` DATE NULL,
     `dueDate` DATE NULL,
-    `amount` INTEGER NULL,
-    `status` VARCHAR(191) NOT NULL DEFAULT '',
+    `status` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     INDEX `Bill_account_idx`(`account`),
     PRIMARY KEY (`id`)
@@ -79,6 +100,9 @@ CREATE TABLE `BillItem` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL DEFAULT '',
     `bill` VARCHAR(191) NULL,
+    `quantity` INTEGER NULL,
+    `amount` DECIMAL(18, 2) NULL,
+    `createdAt` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     INDEX `BillItem_bill_idx`(`bill`),
     PRIMARY KEY (`id`)
