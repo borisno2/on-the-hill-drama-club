@@ -12,15 +12,6 @@ import { z } from "zod";
 import DropDown from "./DropDown";
 import { GET_STUDENT_BY_ID } from "app/(dashboard)/dashboard/students/queries";
 
-type Student = {
-    id: string;
-    firstName: string | null;
-    surname: string | null;
-    dateOfBirth: string | null;
-    school: 'SCHOOL' | 'HOME' | 'OTHER' | null;
-    yearLevel: number | null;
-    medical: string | null;
-};
 
 type Values = {
     firstName: string;

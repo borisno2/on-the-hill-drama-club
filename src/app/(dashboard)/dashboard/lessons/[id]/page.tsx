@@ -8,6 +8,7 @@ import { GET_LESSON_BY_ID } from '../queries'
 import { GET_STUDENT_BY_ID } from '../../students/queries'
 import { Suspense } from 'react'
 import EnrolStudentList from './EnrolStudentList'
+import { OperationData } from '@ts-gql/tag'
 
 
 export default async function LessonPage({
@@ -21,7 +22,7 @@ export default async function LessonPage({
         redirect('/dashboard/lessons')
     }
     const context = await getSessionContext()
-    let studentData: Promise<typeof GET_STUDENT_BY_ID['___type']['result']> = Promise.resolve({ __typename: 'Query', student: null })
+    let studentData: Promise<OperationData<typeof GET_STUDENT_BY_ID>> = Promise.resolve({ __typename: 'Query', student: null })
     if (searchParams.studentId && isCuid(searchParams.studentId)) {
         studentData = context.graphql.run({
             query: GET_STUDENT_BY_ID,

@@ -1,4 +1,4 @@
-import { gql } from '@ts-gql/tag/no-transform';
+import { gql, OperationData } from '@ts-gql/tag/no-transform';
 import { getSessionContext } from 'app/KeystoneContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -24,7 +24,7 @@ const GET_STUDENTS_ENROLMENTS = gql`
     }
     `as import("../../../../../../__generated__/ts-gql/GET_STUDENTS_ENROLMENTS").type
 
-export default async function StudentList({ studentId, lesson }: { studentId: string, lesson: NonNullable<typeof GET_LESSON_BY_ID['___type']['result']['lesson']> }) {
+export default async function StudentList({ studentId, lesson }: { studentId: string, lesson: NonNullable<OperationData<typeof GET_LESSON_BY_ID>['lesson']> }) {
     const router = useRouter();
     const context = await getSessionContext();
     if (lesson.maxYear === null || !lesson.minYear === null) {
