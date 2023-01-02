@@ -31,6 +31,20 @@ module.exports = withTsGql(
         },
       ],
     },
+    async redirects() {
+      return [
+        {
+          source: '/enrol',
+          destination: '/auth/register',
+          permanent: true,
+        },
+        {
+          source: '/enroll',
+          destination: '/auth/register',
+          permanent: true,
+        },
+      ]
+    },
     async rewrites() {
       return {
         afterFiles: [
