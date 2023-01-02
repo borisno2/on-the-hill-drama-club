@@ -18,7 +18,7 @@ export default function RootLayout({ children }: AppProps) {
             <body className="h-full">
                 <AuthContext>
                     {children}
-                    <footer className="bottom-0 md:fixed relative flex-1 py-6 flex flex-1 flex-col md:pl-64">
+                    <footer className="w-full bottom-0 md:fixed relative flex-1 py-6 flex flex-1 flex-col md:pl-64">
                         <Container.Outer>
                             <div className="border-t border-zinc-100 pt-4 pb-6 dark:border-zinc-700/40">
                                 <Container.Inner>
