@@ -99,9 +99,9 @@ export default function DashboardLayout({ children, PageName }: NavigationProps)
                                     <div className="flex flex-shrink-0 items-center px-4">
                                         <Link href="/" aria-label='Home' title='Home'>
                                             <Image
-                                                className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                                alt="Your Company"
+                                                className="mx-auto w-auto"
+                                                src='/emily-logo.png'
+                                                alt="Emily Calder - School of Performing Arts"
                                                 width={40}
                                                 height={40}
                                             />
@@ -162,11 +162,11 @@ export default function DashboardLayout({ children, PageName }: NavigationProps)
                         <div className="flex flex-shrink-0 items-center px-4">
                             <Link href="/" aria-label='Home' title='Home'>
                                 <Image
+                                    className="mx-auto w-auto"
+                                    src='/emily-logo.png'
+                                    alt="Emily Calder - School of Performing Arts"
                                     width={40}
                                     height={40}
-                                    className="h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                    alt="Your Company"
                                 />
                             </Link>
                         </div>

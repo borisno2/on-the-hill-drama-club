@@ -99,11 +99,11 @@ export const Header = () => {
             <Link href="/">
               <span className="sr-only">Emily Calder - School of Performing Arts</span>
               <Image
-                width='40'
-                height='40'
-                className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
+                className="mx-auto w-auto"
+                src='/emily-logo.png'
+                alt="Emily Calder - School of Performing Arts"
+                width={100}
+                height={100}
               />
             </Link>
           </div>
@@ -257,11 +257,11 @@ export const Header = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <Image
-                    className="h-8 w-auto"
-                    width='40'
-                    height='40'
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company"
+                    className="mx-auto w-auto"
+                    src='/emily-logo.png'
+                    alt="Emily Calder - School of Performing Arts"
+                    width={40}
+                    height={40}
                   />
                 </div>
                 <div className="-mr-2">

@@ -315,6 +315,7 @@ export default function RegisterForm() {
                                 </div>
                             </div>
                             <Turnstile
+                                className="flex justify-center"
                                 ref={ref}
                                 options={{ theme: 'light', responseFieldName: 'turnstileRes' }}
                                 siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
