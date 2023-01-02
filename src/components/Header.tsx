@@ -19,8 +19,9 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 import SignInButton from './SignInButton'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import Link from 'next/link'
 
-const solutions = [
+const lessons = [
   {
     name: 'Private Music Lessons',
     description: '',
@@ -38,7 +39,7 @@ const solutions = [
     name: 'Music Theory',
     description: "",
     href: '#',
-    icon: Squares2X2Icon,
+    icon: BookmarkSquareIcon,
   },
   {
     name: 'Teen Theatre and Performance',
@@ -46,37 +47,36 @@ const solutions = [
     href: '#',
     icon: ArrowPathIcon,
   },
-  { name: 'Workshops', description: "", href: '#', icon: ShieldCheckIcon },
 ]
 const callsToAction = [
-  { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Contact Sales', href: '#', icon: PhoneIcon },
+  { name: 'Enrol', href: '/auth/register', icon: PlayIcon },
+  { name: 'Contact', href: '/contact', icon: PhoneIcon },
 ]
 const resources = [
   {
     name: 'Term Dates',
-    description: '',
-    href: '#',
-    icon: LifebuoyIcon,
+    description: 'See upcoming Important Dates',
+    href: '/calendar',
+    icon: CalendarIcon,
   },
   {
     name: 'Our Ethos',
-    description: '',
-    href: '#',
+    description: 'Teaching Ethos and Values',
+    href: '/values',
     icon: BookmarkSquareIcon,
   },
   {
     name: 'Enrol',
-    description: '',
-    href: '#',
-    icon: CalendarIcon,
+    description: 'Enrol in a Lesson or Workshop',
+    href: '/auth/register',
+    icon: BookmarkSquareIcon,
   },
-  { name: 'Upcoming Events', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
-]
-const recentPosts = [
-  { id: 1, name: 'Boost your conversion rate', href: '#' },
-  { id: 2, name: 'How to use search engine optimization to drive traffic to your site', href: '#' },
-  { id: 3, name: 'Improve your customer experience', href: '#' },
+  {
+    name: 'Student Portal',
+    description: 'Manage your Lessons and Account',
+    href: '/dashboard',
+    icon: Bars3Icon,
+  },
 ]
 
 function classNames(...classes: string[]) {
@@ -91,7 +91,7 @@ export const Header = () => {
         <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Emily Calder - School of Performing Arts</span>
               <Image
                 width='40'
                 height='40'
@@ -117,7 +117,7 @@ export const Header = () => {
                       'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                     )}
                   >
-                    <span>Solutions</span>
+                    <span>Lessons</span>
                     <ChevronDownIcon
                       className={classNames(
                         open ? 'text-gray-600' : 'text-gray-400',
@@ -139,7 +139,7 @@ export const Header = () => {
                     <Popover.Panel className="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform px-2 sm:px-0 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2">
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                          {solutions.map((item) => (
+                          {lessons.map((item) => (
                             <a
                               key={item.name}
                               href={item.href}
@@ -173,11 +173,11 @@ export const Header = () => {
               )}
             </Popover>
 
-            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Pricing
+            <a href="/lessons/fees" className="text-base font-medium text-gray-500 hover:text-gray-900">
+              Fees
             </a>
-            <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Docs
+            <a href="/lessons/timetable" className="text-base font-medium text-gray-500 hover:text-gray-900">
+              Timetable
             </a>
 
             <Popover className="relative">
@@ -225,26 +225,7 @@ export const Header = () => {
                             </a>
                           ))}
                         </div>
-                        <div className="bg-gray-50 px-5 py-5 sm:px-8 sm:py-8">
-                          <div>
-                            <h3 className="text-base font-medium text-gray-500">Recent Posts</h3>
-                            <ul role="list" className="mt-4 space-y-4">
-                              {recentPosts.map((post) => (
-                                <li key={post.id} className="truncate text-base">
-                                  <a href={post.href} className="font-medium text-gray-900 hover:text-gray-700">
-                                    {post.name}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className="mt-5 text-sm">
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                              View all posts
-                              <span aria-hidden="true"> &rarr;</span>
-                            </a>
-                          </div>
-                        </div>
+
                       </div>
                     </Popover.Panel>
                   </Transition>
@@ -289,7 +270,7 @@ export const Header = () => {
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {solutions.map((item) => (
+                  {lessons.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -304,12 +285,12 @@ export const Header = () => {
             </div>
             <div className="space-y-6 py-6 px-5">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Pricing
+                <a href="/lessons/fees" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                  Fees
                 </a>
 
-                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Docs
+                <a href="/lessons/timetable" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                  Timetable
                 </a>
                 {resources.map((item) => (
                   <a
@@ -323,25 +304,33 @@ export const Header = () => {
               </div>
               <div>
                 {session ? (
-                  <a
-                    onClick={() => signOut()}
-                    className="flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 bg-white text-base font-medium text-gray-900 shadow-sm hover:bg-gray-100"
-                  >
-                    Sign Out
-                  </a>
-                ) : (
                   <>
                     <a
-                      onClick={() => signIn('auth0')}
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                      onClick={() => signOut()}
+                      className="flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 bg-white text-base font-medium text-gray-900 shadow-sm hover:bg-gray-100"
                     >
-                      Sign up
+                      Sign Out
                     </a>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Existing customer?{' '}
-                      <a onClick={() => signIn('auth0')} className="text-indigo-600 hover:text-indigo-500">
+                      <Link href='/dashboard' className="text-indigo-600 hover:text-indigo-500">
+                        Student Portal
+                      </Link>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/auth/register"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    >
+                      Sign up
+                    </Link>
+                    <p className="mt-6 text-center text-base font-medium text-gray-500">
+                      Existing account?{' '}
+                      <Link href='/auth/signin' className="text-indigo-600 hover:text-indigo-500">
                         Sign in
-                      </a>
+                      </Link>
                     </p>
                   </>
                 )}
