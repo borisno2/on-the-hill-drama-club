@@ -6,6 +6,7 @@ import { GET_LESSONS } from "./queries";
 import labelHelper from "lib/labelHelper";
 import { formatDate } from "lib/formatDate";
 import { lessonTypeOptions, lessonStatusOptions } from "types/selectOptions";
+import EnrolButton from "components/EnrolButton";
 
 export default async function ClassList({ where, studentId, enroled = false }: { where?: LessonWhereInput, studentId?: string, enroled?: boolean }) {
     const context = await getSessionContext();
@@ -30,7 +31,7 @@ export default async function ClassList({ where, studentId, enroled = false }: {
                                         <div className="sm:flex">
                                             <p className="flex items-center text-sm text-gray-500">
                                                 <UsersIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                {lesson.status ? labelHelper(lessonStatusOptions, lesson.status) : 'Upcoming'} {enroled && `- enroled`} {lesson.status === 'ENROL' && '- Click to enrol in this class'}
+                                                {lesson.status ? labelHelper(lessonStatusOptions, lesson.status) : 'Upcoming'} {enroled && `- Enroled`} - Click to view lesson details
                                             </p>
                                             <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                                 <MapPinIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
@@ -46,6 +47,9 @@ export default async function ClassList({ where, studentId, enroled = false }: {
                                     </div>
                                 </div>
                             </Link>
+                            <div className="float-right">
+                                {studentId && !enroled ? (<EnrolButton studentId={studentId} lessonId={lesson.id} />) : null}
+                            </div>
                         </li>
                     ))}
                 </ul>)}

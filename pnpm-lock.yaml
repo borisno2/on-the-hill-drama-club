@@ -27,6 +27,7 @@ specifiers:
   clsx: ^1.2.1
   concurrently: ^7.6.0
   cuid: ^2.1.8
+  dayjs: ^1.11.7
   decimal.js: ^10.4.3
   dotenv: ^16.0.3
   dotenv-flow: ^3.2.0
@@ -72,6 +73,7 @@ dependencies:
   aws-crt: 1.15.5
   clsx: 1.2.1
   cuid: 2.1.8
+  dayjs: 1.11.7
   decimal.js: 10.4.3
   dotenv: 16.0.3
   dotenv-flow: 3.2.0

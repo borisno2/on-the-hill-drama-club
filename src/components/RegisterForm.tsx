@@ -292,7 +292,7 @@ export default function RegisterForm() {
                                     </div>
 
                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                        <label htmlFor="postalcode" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="postcode" className="block text-sm font-medium text-gray-700">
                                             Postcode
                                         </label>
                                         <input
@@ -300,7 +300,7 @@ export default function RegisterForm() {
                                             value={values.postcode}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            type="text"
+                                            type="number"
                                             name="postcode"
                                             id="postcode"
                                             autoComplete="postal-code"

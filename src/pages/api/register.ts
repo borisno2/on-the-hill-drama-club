@@ -4,24 +4,40 @@ import cuid from 'cuid'
 import { z } from 'zod'
 
 const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || 'Turnstile'
-
+// regex to ensure the string is not 'PLEASE_CHANGE'
+const updateRegex = /^(?!PLEASE_CHANGE).*$/
 const registerSchema = z
   .object({
     turnstileRes: z.string(),
-    firstName: z.string(),
-    surname: z.string(),
+    firstName: z.string().regex(updateRegex, {
+      message: 'Please update your first name',
+    }),
+    surname: z.string().regex(updateRegex, {
+      message: 'Please update your surname',
+    }),
     phone: z
       .string()
       .length(10, { message: 'Please enter a valid 10 digit phone number' })
       .regex(/^\d+$/, {
         message: 'Please enter a valid 10 digit phone number',
       }),
-    suburb: z.string(),
+    suburb: z.string().regex(updateRegex, {
+      message: 'Please update your suburb',
+    }),
     postcode: z
       .number()
       .min(1000, { message: 'Please enter a valid postcode' })
       .max(9999, { message: 'Please enter a valid postcode' }),
-    streetAddress: z.string(),
+    streetAddress: z.string().regex(updateRegex, {
+      message: 'Please update your street address',
+    }),
+    secondContactName: z.string(),
+    secondContactPhone: z
+      .string()
+      .length(10, { message: 'Please enter a valid 10 digit phone number' })
+      .regex(/^\d+$/, {
+        message: 'Please enter a valid 10 digit phone number',
+      }),
     email: z.string().email({ message: 'Please enter a valid email address' }),
     password: z
       .string()
@@ -82,6 +98,8 @@ export default async function handler(
             suburb: data.suburb,
             postcode: data.postcode,
             streetAddress: data.streetAddress,
+            secondContactName: data.secondContactName,
+            secondContactPhone: data.secondContactPhone,
           },
         },
       },

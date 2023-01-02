@@ -5,36 +5,24 @@ import { redirect } from 'next/navigation'
 import { isCuid } from 'cuid'
 
 import { GET_LESSON_BY_ID } from '../queries'
-import { GET_STUDENT_BY_ID } from '../../students/queries'
 import { Suspense } from 'react'
 import EnrolStudentList from './EnrolStudentList'
-import { OperationData } from '@ts-gql/tag'
 
 
 export default async function LessonPage({
     params,
-    searchParams,
 }: {
     params: { id?: string }
-    searchParams: { studentId?: string }
 }) {
     if (!params.id || !isCuid(params.id)) {
         redirect('/dashboard/lessons')
     }
     const context = await getSessionContext()
-    let studentData: Promise<OperationData<typeof GET_STUDENT_BY_ID>> = Promise.resolve({ __typename: 'Query', student: null })
-    if (searchParams.studentId && isCuid(searchParams.studentId)) {
-        studentData = context.graphql.run({
-            query: GET_STUDENT_BY_ID,
-            variables: { id: searchParams.studentId },
-        })
-    }
 
-    const lessonData = context.graphql.run({
+    const { lesson } = await context.graphql.run({
         query: GET_LESSON_BY_ID,
         variables: { id: params.id },
     })
-    const [{ lesson }, { student }] = await Promise.all([lessonData, studentData])
     if (!lesson) {
         redirect('/dashboard/students')
     }
@@ -75,7 +63,7 @@ export default async function LessonPage({
                             </div>
                         </dl>
                         {/* @ts-expect-error Server Component */}
-                        <EnrolStudentList studentId={student?.id} />
+                        <EnrolStudentList lesson={lesson} />
                     </div>
                 </Suspense>
             </div>

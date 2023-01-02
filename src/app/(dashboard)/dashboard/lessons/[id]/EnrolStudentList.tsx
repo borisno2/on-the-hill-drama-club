@@ -1,9 +1,11 @@
 import { gql, OperationData } from '@ts-gql/tag/no-transform';
 import { getSessionContext } from 'app/KeystoneContext';
+import EnrolButton from 'components/EnrolButton';
 import Link from 'next/link';
+import labelHelper from "lib/labelHelper";
 import { useRouter } from 'next/navigation';
-import { GET_STUDENTS } from "../../students/queries";
 import { type GET_LESSON_BY_ID } from '../queries'
+import { enrolmentStatusOptions } from 'types/selectOptions';
 
 
 const GET_STUDENTS_ENROLMENTS = gql`
@@ -15,6 +17,7 @@ const GET_STUDENTS_ENROLMENTS = gql`
             surname
             enrolments {
                 id
+                status
                 lesson {
                     id
                     name
@@ -24,7 +27,7 @@ const GET_STUDENTS_ENROLMENTS = gql`
     }
     `as import("../../../../../../__generated__/ts-gql/GET_STUDENTS_ENROLMENTS").type
 
-export default async function StudentList({ studentId, lesson }: { studentId: string, lesson: NonNullable<OperationData<typeof GET_LESSON_BY_ID>['lesson']> }) {
+export default async function StudentList({ lesson }: { lesson: NonNullable<OperationData<typeof GET_LESSON_BY_ID>['lesson']> }) {
     const router = useRouter();
     const context = await getSessionContext();
     if (lesson.maxYear === null || !lesson.minYear === null) {
@@ -65,10 +68,14 @@ export default async function StudentList({ studentId, lesson }: { studentId: st
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.surname}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.yearLevel}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-
-                                            <Link href={`/dashboard/students/${student.id}`} className="text-indigo-600 hover:text-indigo-900">
-                                                Edit/Enrol in Class <span className="sr-only">, {student.firstName}</span>
-                                            </Link>
+                                            {student.enrolments?.some((enrolment) => enrolment.lesson?.id === lesson.id
+                                            ) ? (
+                                                <p> Enrolment Status - {
+                                                    labelHelper(enrolmentStatusOptions, student.enrolments?.find((enrolment) => enrolment.lesson?.id === lesson.id)?.status || 'ERROR')}
+                                                </p>
+                                            ) : (
+                                                <EnrolButton studentId={student.id} lessonId={lesson.id} />
+                                            )}
                                         </td>
                                     </tr>
                                 )) : <tr>

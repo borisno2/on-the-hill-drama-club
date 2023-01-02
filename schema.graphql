@@ -169,6 +169,8 @@ type Account {
   firstName: String
   surname: String
   phone: String
+  secondContactName: String
+  secondContactPhone: String
   students(where: StudentWhereInput! = {}, orderBy: [StudentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Student!]
   studentsCount(where: StudentWhereInput! = {}): Int
   bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0): [Bill!]
@@ -192,6 +194,8 @@ input AccountWhereInput {
   firstName: StringFilter
   surname: StringFilter
   phone: StringFilter
+  secondContactName: StringFilter
+  secondContactPhone: StringFilter
   students: StudentManyRelationFilter
   bills: BillManyRelationFilter
   streetAddress: StringFilter
@@ -228,6 +232,8 @@ input AccountOrderByInput {
   firstName: OrderDirection
   surname: OrderDirection
   phone: OrderDirection
+  secondContactName: OrderDirection
+  secondContactPhone: OrderDirection
   streetAddress: OrderDirection
   suburb: OrderDirection
   postcode: OrderDirection
@@ -239,6 +245,8 @@ input AccountUpdateInput {
   firstName: String
   surname: String
   phone: String
+  secondContactName: String
+  secondContactPhone: String
   students: StudentRelateToManyForUpdateInput
   bills: BillRelateToManyForUpdateInput
   streetAddress: String
@@ -277,6 +285,8 @@ input AccountCreateInput {
   firstName: String
   surname: String
   phone: String
+  secondContactName: String
+  secondContactPhone: String
   students: StudentRelateToManyForCreateInput
   bills: BillRelateToManyForCreateInput
   streetAddress: String

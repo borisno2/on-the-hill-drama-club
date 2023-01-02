@@ -29,18 +29,20 @@ model User {
 }
 
 model Account {
-  id            String    @id @default(cuid())
-  user          User?     @relation("Account_user", fields: [userId], references: [id])
-  userId        String?   @unique @map("user")
-  firstName     String    @default("")
-  surname       String    @default("")
-  phone         String    @default("")
-  students      Student[] @relation("Student_account")
-  bills         Bill[]    @relation("Bill_account")
-  streetAddress String    @default("")
-  suburb        String    @default("")
-  postcode      Int
-  createdAt     DateTime? @default(now())
+  id                 String    @id @default(cuid())
+  user               User?     @relation("Account_user", fields: [userId], references: [id])
+  userId             String?   @unique @map("user")
+  firstName          String    @default("PLEASE_UPDATE")
+  surname            String    @default("PLEASE_UPDATE")
+  phone              String    @default("PLEASE_UPDATE")
+  secondContactName  String    @default("PLEASE_UPDATE")
+  secondContactPhone String    @default("PLEASE_UPDATE")
+  students           Student[] @relation("Student_account")
+  bills              Bill[]    @relation("Bill_account")
+  streetAddress      String    @default("PLEASE_UPDATE")
+  suburb             String    @default("PLEASE_UPDATE")
+  postcode           Int       @default(3550)
+  createdAt          DateTime? @default(now())
 }
 
 model Student {

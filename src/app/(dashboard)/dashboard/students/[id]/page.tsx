@@ -29,6 +29,13 @@ export default async function Students({
         AND: {
             maxYear: { gte: student.yearLevel },
             minYear: { lte: student.yearLevel },
+            enrolments: {
+                none: {
+                    student: {
+                        id: { equals: student.id }
+                    }
+                }
+            }
         }
     }
     const enroledWhere = {
@@ -48,7 +55,7 @@ export default async function Students({
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <h2 className="text-2xl font-bold text-gray-900">Enroled Lessons</h2>
                     {/* @ts-expect-error Server Component */}
-                    <LessonList where={enroledWhere} studentId={student.id} enroled={false} />
+                    <LessonList where={enroledWhere} studentId={student.id} enroled={true} />
                 </div>
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
 

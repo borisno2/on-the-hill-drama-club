@@ -17,6 +17,8 @@ type User = {
     suburb: string | null;
     postcode: number | null;
     streetAddress: string | null;
+    secondContactName: string | null;
+    secondContactPhone: string | null;
 };
 
 type Values = {
@@ -26,6 +28,8 @@ type Values = {
     suburb: string;
     postcode: number;
     streetAddress: string;
+    secondContactName: string;
+    secondContactPhone: string;
 }
 
 const UPDATE_ACCOUNT = gql`
@@ -46,6 +50,8 @@ export default function ProfileForm({ user }: { user: User }) {
         suburb: user.suburb || '',
         postcode: user.postcode || 3550,
         streetAddress: user.streetAddress || '',
+        secondContactName: user.secondContactName || '',
+        secondContactPhone: user.secondContactPhone || '',
     }
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
@@ -72,14 +78,33 @@ export default function ProfileForm({ user }: { user: User }) {
     }
     const validate = (values: Values) => {
         const errors: Partial<Values> = {};
+        // regex to ensure the string is not 'PLEASE_CHANGE'
+        const updateRegex = /^(?!PLEASE_UPDATE).*$/
         const registerSchema = z.object({
-            firstName: z.string().min(1, { message: "Please enter your first name" }),
-            surname: z.string().min(1, { message: "Please enter your surname" }),
+            firstName: z.string().min(1, { message: "Please enter your first name" }).regex(updateRegex, {
+                message: 'Please update your first name',
+            }),
+            surname: z.string().min(1, { message: "Please enter your surname" }).regex(updateRegex, {
+                message: 'Please update your surname',
+            }),
             phone: z.string().length(10, { message: "Please enter a valid 10 digit phone number" }).regex(/^\d+$/, { message: "Please enter a valid 10 digit phone number" }),
-            suburb: z.string().min(1, { message: "Please enter your Suburb" }),
+            suburb: z.string().min(1, { message: "Please enter your Suburb" }).regex(updateRegex, {
+                message: 'Please update your Suburb',
+            }),
             postcode: z.number().min(1000, { message: "Please enter a valid postcode" }).max(9999, { message: "Please enter a valid postcode" }),
-            streetAddress: z.string().min(5, { message: "Please enter your Street Address" }),
-            email: z.string().email({ message: "Please enter a valid email address" }),
+            streetAddress: z.string().min(5, { message: "Please enter your Street Address" }).regex(updateRegex, {
+                message: 'Please update your Street Address',
+            }),
+            secondContactName: z.string().regex(updateRegex, {
+                message: 'Please update your second contact name',
+            }),
+            secondContactPhone: z
+                .string()
+                .length(10, { message: 'Please enter a valid 10 digit phone number' })
+                .regex(/^\d+$/, {
+                    message: 'Please enter a valid 10 digit phone number',
+                }),
+
         })
         const result = registerSchema.safeParse(values)
         if (!result.success) {
@@ -193,12 +218,56 @@ export default function ProfileForm({ user }: { user: User }) {
                                                 name="phone"
                                                 id="phone"
                                                 title="phone"
-                                                autoComplete="family-name"
+                                                autoComplete="tel"
                                                 className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                                             />
                                             {touched.phone && errors.phone &&
                                                 <div className="block text-sm font-medium text-red-700">
                                                     {errors.phone}
+                                                </div>}
+                                        </div>
+                                    </div>
+
+                                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                        <label htmlFor="secondContactName" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                            Secondary Contact Name
+                                        </label>
+                                        <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                value={values.secondContactName}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                title="Second Contact Name"
+                                                type="text"
+                                                name="secondContactName"
+                                                id="secondContactName"
+                                                className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
+                                            />
+                                            {touched.secondContactName && errors.secondContactName &&
+                                                <div className="block text-sm font-medium text-red-700">
+                                                    {errors.secondContactName}
+                                                </div>}
+                                        </div>
+                                    </div>
+
+                                    <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                            Secondary Contact Phone Number
+                                        </label>
+                                        <div className="mt-1 sm:col-span-2 sm:mt-0">
+                                            <input
+                                                value={values.secondContactPhone}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                type="text"
+                                                name="secondContactPhone"
+                                                id="secondContactPhone"
+                                                title="secondContactPhone"
+                                                className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
+                                            />
+                                            {touched.secondContactPhone && errors.secondContactPhone &&
+                                                <div className="block text-sm font-medium text-red-700">
+                                                    {errors.secondContactPhone}
                                                 </div>}
                                         </div>
                                     </div>
@@ -251,7 +320,7 @@ export default function ProfileForm({ user }: { user: User }) {
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                         <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                            Post code
+                                            Postcode
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
                                             <input
@@ -259,7 +328,7 @@ export default function ProfileForm({ user }: { user: User }) {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 value={values.postcode}
-                                                type="text"
+                                                type="number"
                                                 name="postcode"
                                                 id="postcode"
                                                 autoComplete="postal-code"
@@ -284,7 +353,7 @@ export default function ProfileForm({ user }: { user: User }) {
                                 </button>
                                 <button
                                     type="submit"
-                                    disabled={isSubmitting || !isValid || isPending}
+                                    disabled={isSubmitting || isPending}
                                     className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 >
                                     {isSubmitting || isPending ? 'Loading...' : 'Save'}

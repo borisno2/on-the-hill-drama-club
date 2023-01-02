@@ -11,6 +11,9 @@ import { Formik, FormikHelpers } from "formik";
 import { z } from "zod";
 import DropDown from "./DropDown";
 import { GET_STUDENT_BY_ID } from "app/(dashboard)/dashboard/students/queries";
+import dayjs from "dayjs"
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
 
 
 type Values = {
@@ -193,7 +196,8 @@ export default function Student({ student }: { student?: OperationData<typeof GE
                                                 value={{ startDate: values.dateOfBirth, endDate: values.dateOfBirth }}
                                                 onChange={dates => {
                                                     if (!dates || !dates.startDate) return;
-                                                    const value = new Date(dates.startDate).toISOString().split('T')[0];
+                                                    dayjs.extend(customParseFormat)
+                                                    const value = dayjs(dates.startDate, 'YYYY-M-D').format("YYYY-MM-DD")
                                                     handleChange({ target: { name: 'dateOfBirth', value } })
                                                 }}
                                                 asSingle={true}
@@ -266,8 +270,6 @@ export default function Student({ student }: { student?: OperationData<typeof GE
                                 </div>
                             </div>
                         </div>
-
-                        <ErrorPop error={error} setError={setError} />
 
                         <div className="pt-5">
                             <div className="flex justify-end">

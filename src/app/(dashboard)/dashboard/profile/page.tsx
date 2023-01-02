@@ -18,6 +18,8 @@ const GET_ACCOUNT = gql`
                 streetAddress
                 suburb
                 postcode
+                secondContactName
+                secondContactPhone
             }
         }
     }
@@ -25,8 +27,8 @@ const GET_ACCOUNT = gql`
 
 export default async function Profile() {
     const context = await getSessionContext();
-    const { id } = context.session.data
-    const { user } = await context.graphql.run({ query: GET_ACCOUNT, variables: { id: id } })
+    const { userId } = context.session
+    const { user } = await context.graphql.run({ query: GET_ACCOUNT, variables: { id: userId } })
     if (!user || !user.account) {
         redirect('/dashboard/new-account')
     }

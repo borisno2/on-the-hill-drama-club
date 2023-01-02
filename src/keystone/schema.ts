@@ -108,14 +108,40 @@ export const lists: Lists = {
         }),
       }),
       user: relationship({ ref: 'User.account', many: false }),
-      firstName: text({ validation: { isRequired: true } }),
-      surname: text({ validation: { isRequired: true } }),
-      phone: text({ validation: { isRequired: true } }),
+      firstName: text({
+        validation: { isRequired: true },
+        defaultValue: 'PLEASE_UPDATE',
+      }),
+      surname: text({
+        validation: { isRequired: true },
+        defaultValue: 'PLEASE_UPDATE',
+      }),
+      phone: text({
+        validation: { isRequired: true },
+        defaultValue: 'PLEASE_UPDATE',
+      }),
+      secondContactName: text({
+        validation: { isRequired: true },
+        defaultValue: 'PLEASE_UPDATE',
+      }),
+      secondContactPhone: text({
+        validation: { isRequired: true },
+        defaultValue: 'PLEASE_UPDATE',
+      }),
       students: relationship({ ref: 'Student.account', many: true }),
       bills: relationship({ ref: 'Bill.account', many: true }),
-      streetAddress: text({ validation: { isRequired: true } }),
-      suburb: text({ validation: { isRequired: true } }),
-      postcode: integer({ validation: { isRequired: true } }),
+      streetAddress: text({
+        validation: { isRequired: true },
+        defaultValue: 'PLEASE_UPDATE',
+      }),
+      suburb: text({
+        validation: { isRequired: true },
+        defaultValue: 'PLEASE_UPDATE',
+      }),
+      postcode: integer({
+        validation: { isRequired: true },
+        defaultValue: 3550,
+      }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),

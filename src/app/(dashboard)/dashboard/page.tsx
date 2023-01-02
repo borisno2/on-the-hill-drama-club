@@ -3,6 +3,8 @@ import { getSessionContext } from "app/KeystoneContext";
 import DashboardLayout from "../DashboardLayout";
 import Link from "next/link";
 import { gql } from "@ts-gql/tag/no-transform";
+import { Session } from "next-auth";
+import { redirect, useRouter } from "next/navigation";
 
 const GET_STUDENT_ENROLMENTS = gql`
     query GET_STUDENT_ENROLMENTS {
@@ -23,6 +25,18 @@ const GET_STUDENT_ENROLMENTS = gql`
 
 export default async function Portal() {
     const context = await getSessionContext();
+    const session = context.session as Session
+    const accounts = await context.db.Account.findMany({ where: { user: { id: { equals: session.userId } } } })
+
+    if (!accounts || accounts.length === 0 || !accounts[0].id) {
+        redirect('/auth/register')
+    }
+    const profileComplete = Object.values(accounts[0]).every(value => value !== 'PLEASE_UPDATE')
+    if (!profileComplete) {
+        // redirect to profile page if profile is not complete
+        redirect('/dashboard/profile')
+    }
+
     const { students } = await context.graphql.run({ query: GET_STUDENT_ENROLMENTS })
     const cards = [
         //{ name: 'Account balance', href: '/dashboard/account', icon: ScaleIcon, amount: '$30,659.45' },

@@ -90,8 +90,8 @@ export const authOptions: AuthOptions = {
             emailVerified: googleProfile?.email_verified,
             account: {
               create: {
-                firstName: googleProfile?.given_name,
-                surname: googleProfile?.family_name,
+                firstName: googleProfile?.given_name || 'PLEASE_UPDATE',
+                surname: googleProfile?.family_name || 'PLEASE_UPDATE',
                 phone: googleProfile?.phone_number || 'PLEASE_UPDATE',
                 streetAddress:
                   googleProfile?.address?.street_address || 'PLEASE_UPDATE',
