@@ -2,17 +2,17 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
-  ArrowPathIcon,
+  AcademicCapIcon,
   Bars3Icon,
   BookmarkSquareIcon,
   CalendarIcon,
-  ChartBarIcon,
-  CursorArrowRaysIcon,
-  LifebuoyIcon,
+  GlobeAsiaAustraliaIcon,
+  MusicalNoteIcon,
+  PaperAirplaneIcon,
+  PencilSquareIcon,
   PhoneIcon,
-  PlayIcon,
-  ShieldCheckIcon,
   Squares2X2Icon,
+  StarIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
@@ -26,30 +26,36 @@ const lessons = [
     name: 'Private Music Lessons',
     description: '',
     href: '#',
-    icon: ChartBarIcon,
+    icon: MusicalNoteIcon,
   },
   {
     name: 'Junior Drama Club',
     description: '',
     href: '#',
-    icon: CursorArrowRaysIcon,
+    icon: StarIcon,
   },
-  { name: 'Orchestra', description: "", href: '#', icon: ShieldCheckIcon },
+  { name: 'Orchestra', description: "", href: '#', icon: GlobeAsiaAustraliaIcon },
   {
     name: 'Music Theory',
     description: "",
     href: '#',
-    icon: BookmarkSquareIcon,
+    icon: AcademicCapIcon,
+  },
+  {
+    name: 'Early Childhood Music',
+    description: '',
+    href: '#',
+    icon: Squares2X2Icon,
   },
   {
     name: 'Teen Theatre and Performance',
     description: '',
     href: '#',
-    icon: ArrowPathIcon,
+    icon: PaperAirplaneIcon,
   },
 ]
 const callsToAction = [
-  { name: 'Enrol', href: '/auth/register', icon: PlayIcon },
+  { name: 'Enrol', href: '/auth/register', icon: PencilSquareIcon },
   { name: 'Contact', href: '/contact', icon: PhoneIcon },
 ]
 const resources = [
@@ -69,7 +75,7 @@ const resources = [
     name: 'Enrol',
     description: 'Enrol in a Lesson or Workshop',
     href: '/auth/register',
-    icon: BookmarkSquareIcon,
+    icon: PencilSquareIcon,
   },
   {
     name: 'Student Portal',
@@ -90,7 +96,7 @@ export const Header = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <Link href="/">
               <span className="sr-only">Emily Calder - School of Performing Arts</span>
               <Image
                 width='40'
@@ -99,7 +105,7 @@ export const Header = () => {
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
               />
-            </a>
+            </Link>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
             <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -140,7 +146,7 @@ export const Header = () => {
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {lessons.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
                               href={item.href}
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
@@ -150,19 +156,19 @@ export const Header = () => {
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
                               </div>
-                            </a>
+                            </Link>
                           ))}
                         </div>
                         <div className="space-y-6 bg-gray-50 px-5 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
                           {callsToAction.map((item) => (
                             <div key={item.name} className="flow-root">
-                              <a
+                              <Link
                                 href={item.href}
                                 className="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100"
                               >
                                 <item.icon className="h-6 w-6 flex-shrink-0 text-gray-400" aria-hidden="true" />
                                 <span className="ml-3">{item.name}</span>
-                              </a>
+                              </Link>
                             </div>
                           ))}
                         </div>
@@ -173,12 +179,12 @@ export const Header = () => {
               )}
             </Popover>
 
-            <a href="/lessons/fees" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link href="/lessons/fees" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Fees
-            </a>
-            <a href="/lessons/timetable" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            </Link>
+            <Link href="/lessons/timetable" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Timetable
-            </a>
+            </Link>
 
             <Popover className="relative">
               {({ open }) => (
@@ -212,7 +218,7 @@ export const Header = () => {
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {resources.map((item) => (
-                            <a
+                            <Link
                               key={item.name}
                               href={item.href}
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
@@ -222,7 +228,7 @@ export const Header = () => {
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
                               </div>
-                            </a>
+                            </Link>
                           ))}
                         </div>
 
@@ -233,9 +239,6 @@ export const Header = () => {
               )}
             </Popover>
           </Popover.Group>
-          <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <SignInButton />
-          </div>
         </div>
       </div>
 
@@ -271,35 +274,35 @@ export const Header = () => {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {lessons.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"
                     >
                       <item.icon className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true" />
                       <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
-                    </a>
+                    </Link>
                   ))}
                 </nav>
               </div>
             </div>
             <div className="space-y-6 py-6 px-5">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <a href="/lessons/fees" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                <Link href="/lessons/fees" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Fees
-                </a>
+                </Link>
 
-                <a href="/lessons/timetable" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                <Link href="/lessons/timetable" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Timetable
-                </a>
+                </Link>
                 {resources.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className="text-base font-medium text-gray-900 hover:text-gray-700"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
               <div>
