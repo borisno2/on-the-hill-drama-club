@@ -1,7 +1,7 @@
 export default function Head() {
     return (
         <>
-            <title>Calendar - On the Hill Performing Arts</title>
+            <title>Calendar - Emily Calder - School of Performing Arts</title>
         </>
     )
 }

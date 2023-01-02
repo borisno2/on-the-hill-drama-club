@@ -2,7 +2,6 @@ import AuthContext from 'app/AuthContext'
 
 import 'styles/tailwind.css'
 import 'focus-visible'
-import { Footer } from 'components/Footer';
 import { Container } from 'components/Container';
 import Link from 'next/link';
 
