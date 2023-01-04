@@ -18,7 +18,7 @@ const GET_STUDENTS_ENROLMENTS = gql`
             enrolments {
                 id
                 status
-                lesson {
+                lessonTerm {
                     id
                     name
                 }
@@ -27,13 +27,13 @@ const GET_STUDENTS_ENROLMENTS = gql`
     }
     `as import("../../../../../../__generated__/ts-gql/GET_STUDENTS_ENROLMENTS").type
 
-export default async function StudentList({ lesson }: { lesson: NonNullable<OperationData<typeof GET_LESSON_BY_ID>['lesson']> }) {
+export default async function StudentList({ lessonTerm }: { lessonTerm: NonNullable<OperationData<typeof GET_LESSON_BY_ID>['lessonTerm']> }) {
     const router = useRouter();
     const context = await getSessionContext();
-    if (lesson.maxYear === null || !lesson.minYear === null) {
+    if (lessonTerm.lesson?.maxYear === null || !lessonTerm.lesson?.minYear === null) {
         router.push('/dashboard/lessons')
     }
-    const { students } = await context.graphql.run({ query: GET_STUDENTS_ENROLMENTS, variables: { minYear: lesson.minYear!, maxYear: lesson.maxYear! } })
+    const { students } = await context.graphql.run({ query: GET_STUDENTS_ENROLMENTS, variables: { minYear: lessonTerm.lesson?.minYear!, maxYear: lessonTerm.lesson?.maxYear! } })
     return (
         <div className="mt-8 flex flex-col">
             <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -68,13 +68,13 @@ export default async function StudentList({ lesson }: { lesson: NonNullable<Oper
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.surname}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.yearLevel}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            {student.enrolments?.some((enrolment) => enrolment.lesson?.id === lesson.id
+                                            {student.enrolments?.some((enrolment) => enrolment.lessonTerm?.id === lessonTerm.id
                                             ) ? (
                                                 <p> Enrolment Status - {
-                                                    labelHelper(enrolmentStatusOptions, student.enrolments?.find((enrolment) => enrolment.lesson?.id === lesson.id)?.status || 'ERROR')}
+                                                    labelHelper(enrolmentStatusOptions, student.enrolments?.find((enrolment) => enrolment.lessonTerm?.id === lessonTerm.id)?.status || 'ERROR')}
                                                 </p>
                                             ) : (
-                                                <EnrolButton studentId={student.id} lessonId={lesson.id} />
+                                                <EnrolButton studentId={student.id} lessonId={lessonTerm.id} />
                                             )}
                                         </td>
                                     </tr>

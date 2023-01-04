@@ -61,35 +61,79 @@ model Student {
   @@index([accountId])
 }
 
-model Lesson {
-  id          String      @id @default(cuid())
-  name        String      @default("")
-  time        String      @default("")
-  day         String
-  minYear     Int
-  maxYear     Int
-  cost        Decimal?    @mysql.Decimal(18, 2)
-  quantity    Int?
-  startDate   DateTime?   @mysql.Date
-  endDate     DateTime?   @mysql.Date
+model LessonCategory {
+  id          String   @id @default(cuid())
+  name        String   @default("")
+  slug        String   @default("")
+  cost        String   @default("")
   type        String
-  location    String      @default("")
-  status      String
-  description String?     @mysql.Text
-  createdAt   DateTime?   @default(now())
-  enrolments  Enrolment[] @relation("Enrolment_lesson")
+  length      String   @default("")
+  description String?  @mysql.Text
+  lessons     Lesson[] @relation("Lesson_lessonCategory")
+}
+
+model ImportantDate {
+  id          String   @id @default(cuid())
+  name        String   @default("")
+  date        DateTime @mysql.Date
+  brief       String   @default("")
+  description String?  @mysql.Text
+}
+
+model Term {
+  id          String       @id @default(cuid())
+  name        String       @default("")
+  quantity    Int
+  year        Int
+  startDate   DateTime     @mysql.Date
+  endDate     DateTime     @mysql.Date
+  lessonTerms LessonTerm[] @relation("LessonTerm_term")
+}
+
+model LessonTerm {
+  id         String      @id @default(cuid())
+  location   String      @default("")
+  status     String
+  term       Term?       @relation("LessonTerm_term", fields: [termId], references: [id])
+  termId     String?     @map("term")
+  lesson     Lesson?     @relation("LessonTerm_lesson", fields: [lessonId], references: [id])
+  lessonId   String?     @map("lesson")
+  enrolments Enrolment[] @relation("Enrolment_lessonTerm")
+  createdAt  DateTime?   @default(now())
+
+  @@index([termId])
+  @@index([lessonId])
+}
+
+model Lesson {
+  id               String          @id @default(cuid())
+  name             String          @default("")
+  lessonCategory   LessonCategory? @relation("Lesson_lessonCategory", fields: [lessonCategoryId], references: [id])
+  lessonCategoryId String?         @map("lessonCategory")
+  description      String?         @mysql.Text
+  cost             Int
+  time             String          @default("")
+  lengthMin        Int
+  day              String
+  minYear          Int
+  maxYear          Int
+  location         String          @default("")
+  createdAt        DateTime?       @default(now())
+  lessonTerms      LessonTerm[]    @relation("LessonTerm_lesson")
+
+  @@index([lessonCategoryId])
 }
 
 model Enrolment {
-  id        String    @id @default(cuid())
-  lesson    Lesson?   @relation("Enrolment_lesson", fields: [lessonId], references: [id])
-  lessonId  String?   @map("lesson")
-  student   Student?  @relation("Enrolment_student", fields: [studentId], references: [id])
-  studentId String?   @map("student")
-  status    String
-  createdAt DateTime? @default(now())
+  id           String      @id @default(cuid())
+  lessonTerm   LessonTerm? @relation("Enrolment_lessonTerm", fields: [lessonTermId], references: [id])
+  lessonTermId String?     @map("lessonTerm")
+  student      Student?    @relation("Enrolment_student", fields: [studentId], references: [id])
+  studentId    String?     @map("student")
+  status       String
+  createdAt    DateTime?   @default(now())
 
-  @@index([lessonId])
+  @@index([lessonTermId])
   @@index([studentId])
 }
 

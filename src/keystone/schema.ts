@@ -20,7 +20,7 @@ import {
   decimal,
   checkbox,
 } from '@keystone-6/core/fields'
-import { document } from '@keystone-6/fields-document'
+//import { document } from '@keystone-6/fields-document'
 import type { Lists, Context } from '.keystone/types'
 import {
   accountFilter,
@@ -191,6 +191,109 @@ export const lists: Lists = {
     },
   }),
 
+  LessonCategory: list({
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: allowAll,
+      },
+    },
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      slug: text({ validation: { isRequired: true } }),
+      cost: text({
+        ui: { description: 'Cost per lesson - to show on website' },
+      }),
+      type: select({
+        validation: { isRequired: true },
+        options: lessonTypeOptions,
+      }),
+      length: text({
+        ui: { description: 'Length of lesson - to show on website' },
+      }),
+      description: text({
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+      }),
+      lessons: relationship({ ref: 'Lesson.lessonCategory', many: true }),
+    },
+  }),
+
+  ImportantDate: list({
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: allowAll,
+      },
+    },
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      date: calendarDay({ validation: { isRequired: true } }),
+      brief: text({ validation: { isRequired: true } }),
+      description: text({
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+      }),
+    },
+  }),
+
+  Term: list({
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: allowAll,
+      },
+    },
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      quantity: integer({ validation: { isRequired: true } }),
+      year: integer({ validation: { isRequired: true } }),
+      startDate: calendarDay({ validation: { isRequired: true } }),
+      endDate: calendarDay({ validation: { isRequired: true } }),
+      lessonTerms: relationship({ ref: 'LessonTerm.term', many: true }),
+    },
+  }),
+
+  LessonTerm: list({
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: allowAll,
+      },
+    },
+    fields: {
+      name: virtual({
+        field: graphql.field({
+          type: graphql.String,
+          resolve: async (item, args, context) => {
+            const lessonTerm = await context.query.LessonTerm.findOne({
+              where: { id: item.id },
+              query: 'term { id name }, lesson { id name }',
+            })
+            return `${lessonTerm.lesson.name} - ${lessonTerm.term.name}`
+          },
+        }),
+      }),
+      location: text({ validation: { isRequired: true } }),
+      status: select({
+        validation: { isRequired: true },
+        options: lessonStatusOptions,
+      }),
+      term: relationship({ ref: 'Term.lessonTerms', many: false }),
+      lesson: relationship({ ref: 'Lesson.lessonTerms', many: false }),
+      enrolments: relationship({ ref: 'Enrolment.lessonTerm', many: true }),
+      createdAt: timestamp({
+        defaultValue: { kind: 'now' },
+      }),
+    },
+  }),
+
   Lesson: list({
     access: {
       operation: {
@@ -200,25 +303,9 @@ export const lists: Lists = {
     },
     fields: {
       name: text({ validation: { isRequired: true } }),
-      time: text({ validation: { isRequired: true } }),
-      day: select({
-        validation: { isRequired: true },
-        options: dayOptions,
-      }),
-      minYear: integer({ validation: { isRequired: true } }),
-      maxYear: integer({ validation: { isRequired: true } }),
-      cost: decimal({ scale: decimalScale }),
-      quantity: integer(),
-      startDate: calendarDay(),
-      endDate: calendarDay(),
-      type: select({
-        validation: { isRequired: true },
-        options: lessonTypeOptions,
-      }),
-      location: text({ validation: { isRequired: true } }),
-      status: select({
-        validation: { isRequired: true },
-        options: lessonStatusOptions,
+      lessonCategory: relationship({
+        ref: 'LessonCategory.lessons',
+        many: false,
       }),
       description: text({
         ui: { displayMode: 'textarea' },
@@ -227,10 +314,30 @@ export const lists: Lists = {
           isNullable: true,
         },
       }),
+      cost: integer({
+        validation: { isRequired: true },
+        ui: {
+          description: 'Cost per lesson in cents - to be used for billing',
+        },
+      }),
+      time: text({ validation: { isRequired: true } }),
+      lengthMin: integer({
+        validation: { isRequired: true },
+        ui: {
+          description: 'Length of lesson in minutes - to show on timetable',
+        },
+      }),
+      day: select({
+        validation: { isRequired: true },
+        options: dayOptions,
+      }),
+      minYear: integer({ validation: { isRequired: true } }),
+      maxYear: integer({ validation: { isRequired: true } }),
+      location: text({ validation: { isRequired: true } }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
-      enrolments: relationship({ ref: 'Enrolment.lesson', many: true }),
+      lessonTerms: relationship({ ref: 'LessonTerm.lesson', many: true }),
     },
   }),
 
@@ -246,7 +353,7 @@ export const lists: Lists = {
       },
     },
     fields: {
-      lesson: relationship({ ref: 'Lesson.enrolments', many: false }),
+      lessonTerm: relationship({ ref: 'LessonTerm.enrolments', many: false }),
       student: relationship({ ref: 'Student.enrolments', many: false }),
       status: select({
         validation: { isRequired: true },

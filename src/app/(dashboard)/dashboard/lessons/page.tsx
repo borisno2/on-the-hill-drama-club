@@ -2,7 +2,7 @@ import DashboardLayout from "../../DashboardLayout"
 import ClassList from "./LessonList"
 import { getSessionContext } from "app/KeystoneContext";
 import { GET_STUDENTS } from "../students/queries";
-import { LessonWhereInput } from "../../../../../__generated__/ts-gql/@schema";
+import { LessonTermWhereInput } from "../../../../../__generated__/ts-gql/@schema";
 
 
 export default async function lessons() {
@@ -14,14 +14,16 @@ export default async function lessons() {
     // remove duplicates
     const uniqueYearLevels = [...new Set(yearLevels)]
     // create a class where clause to filter lessons by year level
-    let availableWhere: LessonWhereInput = {}
+    let availableWhere: LessonTermWhereInput = {}
     if (uniqueYearLevels.length > 0) {
-        availableWhere = { OR: uniqueYearLevels.map(yearLevel => ({ AND: [{ maxYear: { gte: yearLevel } }, { minYear: { lte: yearLevel } }] })) }
-    }
-    // create a class where clause to filter lessons by student id
-    let enroledWhere: LessonWhereInput = {}
-    if (studentIds.length > 0) {
-        enroledWhere = { enrolments: { some: { student: { id: { in: studentIds } } } } }
+        availableWhere = {
+            lesson: { OR: uniqueYearLevels.map(yearLevel => ({ AND: [{ maxYear: { gte: yearLevel } }, { minYear: { lte: yearLevel } }] })) }
+        }
+        // create a class where clause to filter lessons by student id
+        let enroledWhere: LessonTermWhereInput = {}
+        if (studentIds.length > 0) {
+            enroledWhere = { enrolments: { some: { student: { id: { in: studentIds } } } } }
+        }
     }
 
     return (

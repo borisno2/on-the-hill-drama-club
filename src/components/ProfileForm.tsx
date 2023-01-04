@@ -41,7 +41,7 @@ const UPDATE_ACCOUNT = gql`
     }
 `as import("../../__generated__/ts-gql/UPDATE_ACCOUNT").type;
 
-export default function ProfileForm({ user }: { user: User }) {
+export default function ProfileForm({ user, redirectOnSave }: { user: User, redirectOnSave: boolean }) {
     const router = useRouter();
     const initialValues = {
         firstName: user.firstName || '',
@@ -67,6 +67,9 @@ export default function ProfileForm({ user }: { user: User }) {
             setSuccess(true);
             setSubmitting(false);
             startTransition(() => {
+                if (redirectOnSave) {
+                    router.push('/dashboard');
+                }
                 router.refresh();
             });
         } catch (error) {

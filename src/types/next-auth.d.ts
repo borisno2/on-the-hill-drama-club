@@ -19,6 +19,7 @@ declare module 'next-auth' {
     data: {
       firstName?: string | null
       surname?: string | null
+      accountId?: string | null
       email: string | null
       role: string | null
     }

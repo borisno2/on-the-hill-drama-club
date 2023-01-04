@@ -19,11 +19,11 @@ export default async function LessonPage({
     }
     const context = await getSessionContext()
 
-    const { lesson } = await context.graphql.run({
+    const { lessonTerm } = await context.graphql.run({
         query: GET_LESSON_BY_ID,
         variables: { id: params.id },
     })
-    if (!lesson) {
+    if (!lessonTerm) {
         redirect('/dashboard/students')
     }
 
@@ -31,27 +31,27 @@ export default async function LessonPage({
         <DashboardLayout PageName="Lessons">
             <div className="py-4">
                 <Suspense fallback={<div>Loading...</div>}>
-                    <h1 className="text-2xl font-bold text-gray-900">{lesson.name}</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">{lessonTerm.lesson?.name}</h1>
 
                     <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
                         <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                             <div className="sm:col-span-1">
                                 <dt className="text-sm font-medium text-gray-500">Day of the Week</dt>
-                                <dd className="mt-1 text-sm text-gray-900">{lesson.day}</dd>
+                                <dd className="mt-1 text-sm text-gray-900">{lessonTerm.lesson?.day}</dd>
                             </div>
 
                             <div className="sm:col-span-1">
                                 <dt className="text-sm font-medium text-gray-500">Time of the Day</dt>
-                                <dd className="mt-1 text-sm text-gray-900">{lesson.time}</dd>
+                                <dd className="mt-1 text-sm text-gray-900">{lessonTerm.lesson?.time}</dd>
                             </div>
 
                             <div className="sm:col-span-1">
                                 <dt className="text-sm font-medium text-gray-500">Year Level</dt>
-                                <dd className="mt-1 text-sm text-gray-900">{lesson.minYear} - {lesson.maxYear}</dd>
+                                <dd className="mt-1 text-sm text-gray-900">{lessonTerm.lesson?.minYear} - {lessonTerm.lesson?.maxYear}</dd>
                             </div>
                             <div className="sm:col-span-1">
                                 <dt className="text-sm font-medium text-gray-500">Cost Per Lesson</dt>
-                                <dd className="mt-1 text-sm text-gray-900">${lesson.cost}</dd>
+                                <dd className="mt-1 text-sm text-gray-900">${lessonTerm.lesson?.lessonCategory?.cost}</dd>
                             </div>
 
                             <div className="sm:col-span-2">
@@ -59,7 +59,7 @@ export default async function LessonPage({
                                 <dd
                                     className="mt-1 max-w-prose space-y-5 text-sm text-gray-900"
                                 />
-                                {lesson.description}
+                                {lessonTerm.lesson?.description}
                             </div>
                         </dl>
                         {/* @ts-expect-error Server Component */}

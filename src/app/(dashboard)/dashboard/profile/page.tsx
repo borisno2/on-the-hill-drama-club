@@ -25,7 +25,11 @@ const GET_ACCOUNT = gql`
     }
 `as import("../../../../../__generated__/ts-gql/GET_ACCOUNT").type
 
-export default async function Profile() {
+export default async function Profile({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined }; }) {
+    let redirectOnSave: boolean = false
+    if (searchParams?.incomplete === 'true') {
+        redirectOnSave = true
+    }
     const context = await getSessionContext();
     const { userId } = context.session
     const { user } = await context.graphql.run({ query: GET_ACCOUNT, variables: { id: userId } })
@@ -42,7 +46,7 @@ export default async function Profile() {
     return (
         <DashboardLayout PageName="Profile">
             <div className="py-4">
-                <ProfileForm user={profile} />
+                <ProfileForm user={profile} redirectOnSave={redirectOnSave} />
             </div>
         </DashboardLayout>
     )

@@ -27,17 +27,26 @@ export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = gql`
         id
         status
         createdAt
-        lesson {
+        lessonTerm {
           id
           name
-          startDate
-          endDate
-          day
-          time
-          cost
-          type
           location
           status
+          term {
+            id
+            startDate
+            endDate
+          }
+          lesson {
+            id
+            day
+            time
+            lessonCategory {
+              id
+              cost
+              type
+            }
+          }
         }
       }
     }
@@ -64,7 +73,10 @@ export const ENROL_STUDENT_IN_LESSON = gql`
       where: { id: $studentId }
       data: {
         enrolments: {
-          create: { status: "PENDING", lesson: { connect: { id: $lessonId } } }
+          create: {
+            status: "PENDING"
+            lessonTerm: { connect: { id: $lessonId } }
+          }
         }
       }
     ) {
@@ -72,7 +84,7 @@ export const ENROL_STUDENT_IN_LESSON = gql`
       name
       enrolments {
         id
-        lesson {
+        lessonTerm {
           id
         }
       }

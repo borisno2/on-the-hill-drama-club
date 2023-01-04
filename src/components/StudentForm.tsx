@@ -53,7 +53,7 @@ const ADD_STUDENT = gql`
     }
     `as import("../../__generated__/ts-gql/ADD_STUDENT").type
 
-export default function Student({ student }: { student?: OperationData<typeof GET_STUDENT_BY_ID>['student'] }) {
+export default function Student({ student, accountId }: { student?: OperationData<typeof GET_STUDENT_BY_ID>['student'], accountId: string }) {
     const router = useRouter();
     const initialValues = {
         firstName: student?.firstName || '',
@@ -68,10 +68,13 @@ export default function Student({ student }: { student?: OperationData<typeof GE
 
     const onSubmit = async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         setSubmitting(true);
+        const data = {
+            ...values, account: { connect: { id: accountId } }
+        }
         try {
             if (!student) {
                 const newStudent = await client.request(ADD_STUDENT, {
-                    data: values,
+                    data,
                 });
                 if (!newStudent?.createStudent?.id) {
                     setError(true);

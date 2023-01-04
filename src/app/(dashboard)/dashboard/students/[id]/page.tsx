@@ -7,6 +7,7 @@ import { isCuid } from 'cuid'
 
 import LessonList from '../../lessons/LessonList'
 import { GET_STUDENT_BY_ID } from '../queries'
+import { Session } from 'next-auth'
 
 
 export default async function Students({
@@ -18,6 +19,7 @@ export default async function Students({
         redirect('/dashboard/students')
     }
     const context = await getSessionContext()
+    const session: Session = context.session
     const { student } = await context.graphql.run({
         query: GET_STUDENT_BY_ID,
         variables: { id: params.id },
@@ -27,8 +29,11 @@ export default async function Students({
     }
     const availableWhere = {
         AND: {
-            maxYear: { gte: student.yearLevel },
-            minYear: { lte: student.yearLevel },
+            lesson: {
+                maxYear: { gte: student.yearLevel },
+                minYear: { lte: student.yearLevel },
+
+            },
             enrolments: {
                 none: {
                     student: {
@@ -51,7 +56,7 @@ export default async function Students({
     return (
         <DashboardLayout PageName="Students">
             <div className="py-4">
-                <StudentForm student={{ ...student }} />
+                <StudentForm student={{ ...student }} accountId={session.data.accountId!} />
                 <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <h2 className="text-2xl font-bold text-gray-900">Enroled Lessons</h2>
                     {/* @ts-expect-error Server Component */}

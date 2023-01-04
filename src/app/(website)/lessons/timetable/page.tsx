@@ -9,6 +9,7 @@ export default function Home() {
                     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
                         <h3 className="text-lg font-medium leading-6 text-gray-900">2023 Timetable</h3>
                     </div>
+                    {/* @ts-expect-error Server Component */}
                     <Timetable />
                 </section>
             </Container>

@@ -1,7 +1,24 @@
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon } from '@heroicons/react/20/solid'
+import { gql } from "@ts-gql/tag/no-transform"
+import { getSessionContext } from "keystone/context"
 
+const GET_LESSON_TIMETABLE = gql`
+    query GET_LESSON_TIMETABLE {
+        lessons {
+            id
+            name
+            time
+            day
+            location
+            lessonCategory {
+                id
+                slug
+                }
+        }}
+        `as import("../../../../../__generated__/ts-gql/GET_LESSON_TIMETABLE").type
 
-export default function Timetable() {
+export default async function Timetable() {
+    const context = await getSessionContext()
+    const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE })
 
     return (
         <div className="flex h-full flex-col">
@@ -174,17 +191,21 @@ export default function Timetable() {
                                 className="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8"
                                 style={{ gridTemplateRows: '1.75rem repeat(288, minmax(0, 1fr)) auto' }}
                             >
-                                <li className="relative mt-px flex sm:col-start-1" style={{ gridRow: '138 / span 26' }}>
-                                    <a
-                                        href="#"
-                                        className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
-                                    >
-                                        <p className="order-1 font-semibold text-blue-700">Junior Drama Club</p>
-                                        <p className="text-blue-500 group-hover:text-blue-700">
-                                            <time dateTime="2022-01-12T06:00">2:30 PM</time>
-                                        </p>
-                                    </a>
-                                </li>
+                                {lessons ? lessons.map((lesson) => (
+                                    <li
+                                        key={lesson.id}
+                                        className="relative mt-px flex sm:col-start-1" style={{ gridRow: '138 / span 27' }}>
+                                        <a
+                                            href={`/lessons/${lesson.lessonCategory?.slug}`}
+                                            className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
+                                        >
+                                            <p className="order-1 font-semibold text-blue-700">Junior Drama Club</p>
+                                            <p className="text-blue-500 group-hover:text-blue-700">
+                                                <time dateTime="14:30">2:30 PM</time>
+                                            </p>
+                                        </a>
+                                    </li>
+                                )) : null}
                                 <li className="relative mt-px flex sm:col-start-3" style={{ gridRow: '92 / span 30' }}>
                                     <a
                                         href="#"

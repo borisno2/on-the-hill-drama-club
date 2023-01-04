@@ -444,27 +444,314 @@ input EnrolmentRelateToManyForCreateInput {
   connect: [EnrolmentWhereUniqueInput!]
 }
 
+type LessonCategory {
+  id: ID!
+  name: String
+  slug: String
+  cost: String
+  type: String
+  length: String
+  description: String
+  lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0): [Lesson!]
+  lessonsCount(where: LessonWhereInput! = {}): Int
+}
+
+input LessonCategoryWhereUniqueInput {
+  id: ID
+}
+
+input LessonCategoryWhereInput {
+  AND: [LessonCategoryWhereInput!]
+  OR: [LessonCategoryWhereInput!]
+  NOT: [LessonCategoryWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  slug: StringFilter
+  cost: StringFilter
+  type: StringFilter
+  length: StringFilter
+  description: StringNullableFilter
+  lessons: LessonManyRelationFilter
+}
+
+input LessonManyRelationFilter {
+  every: LessonWhereInput
+  some: LessonWhereInput
+  none: LessonWhereInput
+}
+
+input LessonCategoryOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  slug: OrderDirection
+  cost: OrderDirection
+  type: OrderDirection
+  length: OrderDirection
+  description: OrderDirection
+}
+
+input LessonCategoryUpdateInput {
+  name: String
+  slug: String
+  cost: String
+  type: String
+  length: String
+  description: String
+  lessons: LessonRelateToManyForUpdateInput
+}
+
+input LessonRelateToManyForUpdateInput {
+  disconnect: [LessonWhereUniqueInput!]
+  set: [LessonWhereUniqueInput!]
+  create: [LessonCreateInput!]
+  connect: [LessonWhereUniqueInput!]
+}
+
+input LessonCategoryUpdateArgs {
+  where: LessonCategoryWhereUniqueInput!
+  data: LessonCategoryUpdateInput!
+}
+
+input LessonCategoryCreateInput {
+  name: String
+  slug: String
+  cost: String
+  type: String
+  length: String
+  description: String
+  lessons: LessonRelateToManyForCreateInput
+}
+
+input LessonRelateToManyForCreateInput {
+  create: [LessonCreateInput!]
+  connect: [LessonWhereUniqueInput!]
+}
+
+type ImportantDate {
+  id: ID!
+  name: String
+  date: CalendarDay
+  brief: String
+  description: String
+}
+
+input ImportantDateWhereUniqueInput {
+  id: ID
+}
+
+input ImportantDateWhereInput {
+  AND: [ImportantDateWhereInput!]
+  OR: [ImportantDateWhereInput!]
+  NOT: [ImportantDateWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  date: CalendarDayFilter
+  brief: StringFilter
+  description: StringNullableFilter
+}
+
+input ImportantDateOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  date: OrderDirection
+  brief: OrderDirection
+  description: OrderDirection
+}
+
+input ImportantDateUpdateInput {
+  name: String
+  date: CalendarDay
+  brief: String
+  description: String
+}
+
+input ImportantDateUpdateArgs {
+  where: ImportantDateWhereUniqueInput!
+  data: ImportantDateUpdateInput!
+}
+
+input ImportantDateCreateInput {
+  name: String
+  date: CalendarDay
+  brief: String
+  description: String
+}
+
+type Term {
+  id: ID!
+  name: String
+  quantity: Int
+  year: Int
+  startDate: CalendarDay
+  endDate: CalendarDay
+  lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0): [LessonTerm!]
+  lessonTermsCount(where: LessonTermWhereInput! = {}): Int
+}
+
+input TermWhereUniqueInput {
+  id: ID
+}
+
+input TermWhereInput {
+  AND: [TermWhereInput!]
+  OR: [TermWhereInput!]
+  NOT: [TermWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  quantity: IntFilter
+  year: IntFilter
+  startDate: CalendarDayFilter
+  endDate: CalendarDayFilter
+  lessonTerms: LessonTermManyRelationFilter
+}
+
+input LessonTermManyRelationFilter {
+  every: LessonTermWhereInput
+  some: LessonTermWhereInput
+  none: LessonTermWhereInput
+}
+
+input TermOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  quantity: OrderDirection
+  year: OrderDirection
+  startDate: OrderDirection
+  endDate: OrderDirection
+}
+
+input TermUpdateInput {
+  name: String
+  quantity: Int
+  year: Int
+  startDate: CalendarDay
+  endDate: CalendarDay
+  lessonTerms: LessonTermRelateToManyForUpdateInput
+}
+
+input LessonTermRelateToManyForUpdateInput {
+  disconnect: [LessonTermWhereUniqueInput!]
+  set: [LessonTermWhereUniqueInput!]
+  create: [LessonTermCreateInput!]
+  connect: [LessonTermWhereUniqueInput!]
+}
+
+input TermUpdateArgs {
+  where: TermWhereUniqueInput!
+  data: TermUpdateInput!
+}
+
+input TermCreateInput {
+  name: String
+  quantity: Int
+  year: Int
+  startDate: CalendarDay
+  endDate: CalendarDay
+  lessonTerms: LessonTermRelateToManyForCreateInput
+}
+
+input LessonTermRelateToManyForCreateInput {
+  create: [LessonTermCreateInput!]
+  connect: [LessonTermWhereUniqueInput!]
+}
+
+type LessonTerm {
+  id: ID!
+  name: String
+  location: String
+  status: String
+  term: Term
+  lesson: Lesson
+  enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
+  enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
+  createdAt: DateTime
+}
+
+input LessonTermWhereUniqueInput {
+  id: ID
+}
+
+input LessonTermWhereInput {
+  AND: [LessonTermWhereInput!]
+  OR: [LessonTermWhereInput!]
+  NOT: [LessonTermWhereInput!]
+  id: IDFilter
+  location: StringFilter
+  status: StringFilter
+  term: TermWhereInput
+  lesson: LessonWhereInput
+  enrolments: EnrolmentManyRelationFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input LessonTermOrderByInput {
+  id: OrderDirection
+  location: OrderDirection
+  status: OrderDirection
+  createdAt: OrderDirection
+}
+
+input LessonTermUpdateInput {
+  location: String
+  status: String
+  term: TermRelateToOneForUpdateInput
+  lesson: LessonRelateToOneForUpdateInput
+  enrolments: EnrolmentRelateToManyForUpdateInput
+  createdAt: DateTime
+}
+
+input TermRelateToOneForUpdateInput {
+  create: TermCreateInput
+  connect: TermWhereUniqueInput
+  disconnect: Boolean
+}
+
+input LessonRelateToOneForUpdateInput {
+  create: LessonCreateInput
+  connect: LessonWhereUniqueInput
+  disconnect: Boolean
+}
+
+input LessonTermUpdateArgs {
+  where: LessonTermWhereUniqueInput!
+  data: LessonTermUpdateInput!
+}
+
+input LessonTermCreateInput {
+  location: String
+  status: String
+  term: TermRelateToOneForCreateInput
+  lesson: LessonRelateToOneForCreateInput
+  enrolments: EnrolmentRelateToManyForCreateInput
+  createdAt: DateTime
+}
+
+input TermRelateToOneForCreateInput {
+  create: TermCreateInput
+  connect: TermWhereUniqueInput
+}
+
+input LessonRelateToOneForCreateInput {
+  create: LessonCreateInput
+  connect: LessonWhereUniqueInput
+}
+
 type Lesson {
   id: ID!
   name: String
+  lessonCategory: LessonCategory
+  description: String
+  cost: Int
   time: String
+  lengthMin: Int
   day: String
   minYear: Int
   maxYear: Int
-  cost: Decimal
-  quantity: Int
-  startDate: CalendarDay
-  endDate: CalendarDay
-  type: String
   location: String
-  status: String
-  description: String
   createdAt: DateTime
-  enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
-  enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
+  lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0): [LessonTerm!]
+  lessonTermsCount(where: LessonTermWhereInput! = {}): Int
 }
-
-scalar Decimal
 
 input LessonWhereUniqueInput {
   id: ID
@@ -476,89 +763,52 @@ input LessonWhereInput {
   NOT: [LessonWhereInput!]
   id: IDFilter
   name: StringFilter
+  lessonCategory: LessonCategoryWhereInput
+  description: StringNullableFilter
+  cost: IntFilter
   time: StringFilter
+  lengthMin: IntFilter
   day: StringFilter
   minYear: IntFilter
   maxYear: IntFilter
-  cost: DecimalNullableFilter
-  quantity: IntNullableFilter
-  startDate: CalendarDayNullableFilter
-  endDate: CalendarDayNullableFilter
-  type: StringFilter
   location: StringFilter
-  status: StringFilter
-  description: StringNullableFilter
   createdAt: DateTimeNullableFilter
-  enrolments: EnrolmentManyRelationFilter
-}
-
-input DecimalNullableFilter {
-  equals: Decimal
-  in: [Decimal!]
-  notIn: [Decimal!]
-  lt: Decimal
-  lte: Decimal
-  gt: Decimal
-  gte: Decimal
-  not: DecimalNullableFilter
-}
-
-input IntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: IntNullableFilter
-}
-
-input CalendarDayNullableFilter {
-  equals: CalendarDay
-  in: [CalendarDay!]
-  notIn: [CalendarDay!]
-  lt: CalendarDay
-  lte: CalendarDay
-  gt: CalendarDay
-  gte: CalendarDay
-  not: CalendarDayNullableFilter
+  lessonTerms: LessonTermManyRelationFilter
 }
 
 input LessonOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  description: OrderDirection
+  cost: OrderDirection
   time: OrderDirection
+  lengthMin: OrderDirection
   day: OrderDirection
   minYear: OrderDirection
   maxYear: OrderDirection
-  cost: OrderDirection
-  quantity: OrderDirection
-  startDate: OrderDirection
-  endDate: OrderDirection
-  type: OrderDirection
   location: OrderDirection
-  status: OrderDirection
-  description: OrderDirection
   createdAt: OrderDirection
 }
 
 input LessonUpdateInput {
   name: String
+  lessonCategory: LessonCategoryRelateToOneForUpdateInput
+  description: String
+  cost: Int
   time: String
+  lengthMin: Int
   day: String
   minYear: Int
   maxYear: Int
-  cost: Decimal
-  quantity: Int
-  startDate: CalendarDay
-  endDate: CalendarDay
-  type: String
   location: String
-  status: String
-  description: String
   createdAt: DateTime
-  enrolments: EnrolmentRelateToManyForUpdateInput
+  lessonTerms: LessonTermRelateToManyForUpdateInput
+}
+
+input LessonCategoryRelateToOneForUpdateInput {
+  create: LessonCategoryCreateInput
+  connect: LessonCategoryWhereUniqueInput
+  disconnect: Boolean
 }
 
 input LessonUpdateArgs {
@@ -568,25 +818,27 @@ input LessonUpdateArgs {
 
 input LessonCreateInput {
   name: String
+  lessonCategory: LessonCategoryRelateToOneForCreateInput
+  description: String
+  cost: Int
   time: String
+  lengthMin: Int
   day: String
   minYear: Int
   maxYear: Int
-  cost: Decimal
-  quantity: Int
-  startDate: CalendarDay
-  endDate: CalendarDay
-  type: String
   location: String
-  status: String
-  description: String
   createdAt: DateTime
-  enrolments: EnrolmentRelateToManyForCreateInput
+  lessonTerms: LessonTermRelateToManyForCreateInput
+}
+
+input LessonCategoryRelateToOneForCreateInput {
+  create: LessonCategoryCreateInput
+  connect: LessonCategoryWhereUniqueInput
 }
 
 type Enrolment {
   id: ID!
-  lesson: Lesson
+  lessonTerm: LessonTerm
   student: Student
   status: String
   createdAt: DateTime
@@ -601,7 +853,7 @@ input EnrolmentWhereInput {
   OR: [EnrolmentWhereInput!]
   NOT: [EnrolmentWhereInput!]
   id: IDFilter
-  lesson: LessonWhereInput
+  lessonTerm: LessonTermWhereInput
   student: StudentWhereInput
   status: StringFilter
   createdAt: DateTimeNullableFilter
@@ -614,15 +866,15 @@ input EnrolmentOrderByInput {
 }
 
 input EnrolmentUpdateInput {
-  lesson: LessonRelateToOneForUpdateInput
+  lessonTerm: LessonTermRelateToOneForUpdateInput
   student: StudentRelateToOneForUpdateInput
   status: String
   createdAt: DateTime
 }
 
-input LessonRelateToOneForUpdateInput {
-  create: LessonCreateInput
-  connect: LessonWhereUniqueInput
+input LessonTermRelateToOneForUpdateInput {
+  create: LessonTermCreateInput
+  connect: LessonTermWhereUniqueInput
   disconnect: Boolean
 }
 
@@ -638,15 +890,15 @@ input EnrolmentUpdateArgs {
 }
 
 input EnrolmentCreateInput {
-  lesson: LessonRelateToOneForCreateInput
+  lessonTerm: LessonTermRelateToOneForCreateInput
   student: StudentRelateToOneForCreateInput
   status: String
   createdAt: DateTime
 }
 
-input LessonRelateToOneForCreateInput {
-  create: LessonCreateInput
-  connect: LessonWhereUniqueInput
+input LessonTermRelateToOneForCreateInput {
+  create: LessonTermCreateInput
+  connect: LessonTermWhereUniqueInput
 }
 
 input StudentRelateToOneForCreateInput {
@@ -667,6 +919,8 @@ type Bill {
   createdAt: DateTime
 }
 
+scalar Decimal
+
 input BillWhereUniqueInput {
   id: ID
 }
@@ -683,6 +937,17 @@ input BillWhereInput {
   status: StringFilter
   items: BillItemManyRelationFilter
   createdAt: DateTimeNullableFilter
+}
+
+input CalendarDayNullableFilter {
+  equals: CalendarDay
+  in: [CalendarDay!]
+  notIn: [CalendarDay!]
+  lt: CalendarDay
+  lte: CalendarDay
+  gt: CalendarDay
+  gte: CalendarDay
+  not: CalendarDayNullableFilter
 }
 
 input BillItemManyRelationFilter {
@@ -763,6 +1028,28 @@ input BillItemWhereInput {
   createdAt: DateTimeNullableFilter
 }
 
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
+input DecimalNullableFilter {
+  equals: Decimal
+  in: [Decimal!]
+  notIn: [Decimal!]
+  lt: Decimal
+  lte: Decimal
+  gt: Decimal
+  gte: Decimal
+  not: DecimalNullableFilter
+}
+
 input BillItemOrderByInput {
   id: OrderDirection
   name: OrderDirection
@@ -827,6 +1114,30 @@ type Mutation {
   updateStudents(data: [StudentUpdateArgs!]!): [Student]
   deleteStudent(where: StudentWhereUniqueInput!): Student
   deleteStudents(where: [StudentWhereUniqueInput!]!): [Student]
+  createLessonCategory(data: LessonCategoryCreateInput!): LessonCategory
+  createLessonCategories(data: [LessonCategoryCreateInput!]!): [LessonCategory]
+  updateLessonCategory(where: LessonCategoryWhereUniqueInput!, data: LessonCategoryUpdateInput!): LessonCategory
+  updateLessonCategories(data: [LessonCategoryUpdateArgs!]!): [LessonCategory]
+  deleteLessonCategory(where: LessonCategoryWhereUniqueInput!): LessonCategory
+  deleteLessonCategories(where: [LessonCategoryWhereUniqueInput!]!): [LessonCategory]
+  createImportantDate(data: ImportantDateCreateInput!): ImportantDate
+  createImportantDates(data: [ImportantDateCreateInput!]!): [ImportantDate]
+  updateImportantDate(where: ImportantDateWhereUniqueInput!, data: ImportantDateUpdateInput!): ImportantDate
+  updateImportantDates(data: [ImportantDateUpdateArgs!]!): [ImportantDate]
+  deleteImportantDate(where: ImportantDateWhereUniqueInput!): ImportantDate
+  deleteImportantDates(where: [ImportantDateWhereUniqueInput!]!): [ImportantDate]
+  createTerm(data: TermCreateInput!): Term
+  createTerms(data: [TermCreateInput!]!): [Term]
+  updateTerm(where: TermWhereUniqueInput!, data: TermUpdateInput!): Term
+  updateTerms(data: [TermUpdateArgs!]!): [Term]
+  deleteTerm(where: TermWhereUniqueInput!): Term
+  deleteTerms(where: [TermWhereUniqueInput!]!): [Term]
+  createLessonTerm(data: LessonTermCreateInput!): LessonTerm
+  createLessonTerms(data: [LessonTermCreateInput!]!): [LessonTerm]
+  updateLessonTerm(where: LessonTermWhereUniqueInput!, data: LessonTermUpdateInput!): LessonTerm
+  updateLessonTerms(data: [LessonTermUpdateArgs!]!): [LessonTerm]
+  deleteLessonTerm(where: LessonTermWhereUniqueInput!): LessonTerm
+  deleteLessonTerms(where: [LessonTermWhereUniqueInput!]!): [LessonTerm]
   createLesson(data: LessonCreateInput!): Lesson
   createLessons(data: [LessonCreateInput!]!): [Lesson]
   updateLesson(where: LessonWhereUniqueInput!, data: LessonUpdateInput!): Lesson
@@ -863,6 +1174,18 @@ type Query {
   students(where: StudentWhereInput! = {}, orderBy: [StudentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Student!]
   student(where: StudentWhereUniqueInput!): Student
   studentsCount(where: StudentWhereInput! = {}): Int
+  lessonCategories(where: LessonCategoryWhereInput! = {}, orderBy: [LessonCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0): [LessonCategory!]
+  lessonCategory(where: LessonCategoryWhereUniqueInput!): LessonCategory
+  lessonCategoriesCount(where: LessonCategoryWhereInput! = {}): Int
+  importantDates(where: ImportantDateWhereInput! = {}, orderBy: [ImportantDateOrderByInput!]! = [], take: Int, skip: Int! = 0): [ImportantDate!]
+  importantDate(where: ImportantDateWhereUniqueInput!): ImportantDate
+  importantDatesCount(where: ImportantDateWhereInput! = {}): Int
+  terms(where: TermWhereInput! = {}, orderBy: [TermOrderByInput!]! = [], take: Int, skip: Int! = 0): [Term!]
+  term(where: TermWhereUniqueInput!): Term
+  termsCount(where: TermWhereInput! = {}): Int
+  lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0): [LessonTerm!]
+  lessonTerm(where: LessonTermWhereUniqueInput!): LessonTerm
+  lessonTermsCount(where: LessonTermWhereInput! = {}): Int
   lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0): [Lesson!]
   lesson(where: LessonWhereUniqueInput!): Lesson
   lessonsCount(where: LessonWhereInput! = {}): Int

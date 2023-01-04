@@ -148,6 +148,7 @@ export const authOptions: AuthOptions = {
           firstName: account?.firstName,
           surname: account?.surname,
           emailVerified: token.emailVerified,
+          accountId: account?.id,
           email,
           role,
         },

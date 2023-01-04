@@ -14,9 +14,13 @@ const GET_STUDENT_ENROLMENTS = gql`
             surname
             enrolments {
                 id
-                lesson {
+                lessonTerm {
                     id
                     name
+                    lesson {
+                        id
+                        name
+                    }
                 }
             }
         }
@@ -34,7 +38,7 @@ export default async function Portal() {
     const profileComplete = Object.values(accounts[0]).every(value => value !== 'PLEASE_UPDATE')
     if (!profileComplete) {
         // redirect to profile page if profile is not complete
-        redirect('/dashboard/profile')
+        redirect('/dashboard/profile?incomplete=true')
     }
 
     const { students } = await context.graphql.run({ query: GET_STUDENT_ENROLMENTS })

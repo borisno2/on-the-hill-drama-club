@@ -13,18 +13,15 @@ export const keystoneContext: Context =
 if (process.env.NODE_ENV !== 'production')
   (globalThis as any).keystoneContext = keystoneContext
 
-export async function getSessionContext({
-  req,
-  res,
-}:
-  | {
-      req: NextApiRequest
-      res: NextApiResponse
-    }
-  | { req: never; res: never }) {
+export async function getSessionContext(props?: {
+  req: NextApiRequest
+  res: NextApiResponse
+}) {
   let session = null
-  if (req && res)
+  if (props) {
+    const { req, res } = props
     session = await unstable_getServerSession(req, res, authOptions)
+  }
   // running in the app directory, so we don't need to pass req and res
   else session = await unstable_getServerSession(authOptions)
   return keystoneContext.withSession(session)

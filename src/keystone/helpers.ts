@@ -1,5 +1,6 @@
 import { gql } from '@ts-gql/tag/no-transform'
 import { Session } from 'next-auth'
+import { StudentWhereInput } from '../../__generated__/ts-gql/@schema'
 
 export const GET_BILL_ITEMS_TOTAL = gql`
   query GET_BILL_ITEMS_TOTAL($id: ID!) {
@@ -23,7 +24,11 @@ export function accountFilter({ session }: { session: Session }) {
   return { user: { id: { equals: session.userId } } }
 }
 
-export function studentFilter({ session }: { session: Session }) {
+export function studentFilter({
+  session,
+}: {
+  session: Session
+}): StudentWhereInput | true {
   if (session.data.role === 'ADMIN') return true
   return {
     account: {
