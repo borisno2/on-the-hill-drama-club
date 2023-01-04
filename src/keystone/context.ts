@@ -16,14 +16,16 @@ if (process.env.NODE_ENV !== 'production')
 export async function getSessionContext({
   req,
   res,
-}: {
-  req?: NextApiRequest
-  res?: NextApiResponse
-}) {
+}:
+  | {
+      req: NextApiRequest
+      res: NextApiResponse
+    }
+  | { req: never; res: never }) {
   let session = null
   if (req && res)
     session = await unstable_getServerSession(req, res, authOptions)
+  // running in the app directory, so we don't need to pass req and res
   else session = await unstable_getServerSession(authOptions)
-  const context = keystoneContext.withSession(session)
-  return context
+  return keystoneContext.withSession(session)
 }

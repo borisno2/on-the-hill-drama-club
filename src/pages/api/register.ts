@@ -60,7 +60,10 @@ export default async function handler(
 
   const zParse = registerSchema.safeParse(req.body)
 
-  if (!zParse.success) return res.status(400).json({ error: 'Invalid data' })
+  if (!zParse.success)
+    return res
+      .status(400)
+      .json({ error: 'Invalid data', errors: zParse.error.issues })
   const { data } = zParse
   form.append('secret', SECRET_KEY)
   form.append('response', data.turnstileRes)
