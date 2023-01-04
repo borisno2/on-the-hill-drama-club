@@ -25,32 +25,32 @@ const lessons = [
   {
     name: 'Private Music Lessons',
     description: '',
-    href: '#',
+    href: '/lessons/music',
     icon: MusicalNoteIcon,
   },
   {
-    name: 'Junior Drama Club',
+    name: 'Drama Club',
     description: '',
-    href: '#',
+    href: '/lessons/drama-club',
     icon: StarIcon,
   },
   { name: 'Orchestra', description: "", href: '#', icon: GlobeAsiaAustraliaIcon },
   {
     name: 'Music Theory',
     description: "",
-    href: '#',
+    href: '/lessons/music-theory',
     icon: AcademicCapIcon,
   },
   {
     name: 'Early Childhood Music',
     description: '',
-    href: '#',
+    href: '/lessons/early-childhood-music',
     icon: Squares2X2Icon,
   },
   {
     name: 'Teen Theatre and Performance',
     description: '',
-    href: '#',
+    href: '/teen-theatre-and-performance',
     icon: PaperAirplaneIcon,
   },
 ]
