@@ -1,5 +1,5 @@
 import { gql, OperationData } from '@ts-gql/tag/no-transform';
-import { getSessionContext } from 'app/KeystoneContext';
+import { getSessionContext } from 'keystone/context';
 import EnrolButton from 'components/EnrolButton';
 import Link from 'next/link';
 import labelHelper from "lib/labelHelper";

@@ -4,7 +4,7 @@ import { getCsrfToken } from "next-auth/react"
 import Link from "next/link"
 import Image from "next/image"
 import { redirect } from 'next/navigation';
-import { getSessionContext } from "app/KeystoneContext";
+import { getSessionContext } from "keystone/context";
 
 export default async function RegisterPage({
     searchParams,

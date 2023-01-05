@@ -1,4 +1,4 @@
-import { getSessionContext } from 'app/KeystoneContext';
+import { getSessionContext } from 'keystone/context';
 import Link from 'next/link';
 import { GET_STUDENTS } from "./queries";
 

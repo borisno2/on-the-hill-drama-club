@@ -1,5 +1,5 @@
 import { gql } from "@ts-gql/tag/no-transform";
-import { getSessionContext } from "app/KeystoneContext";
+import { getSessionContext } from "keystone/context";
 import ProfileForm from "components/ProfileForm"
 import { redirect } from "next/navigation";
 import DashboardLayout from "../../DashboardLayout"

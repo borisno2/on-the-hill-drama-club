@@ -1,5 +1,5 @@
 import { BuildingOfficeIcon, CheckCircleIcon, IdentificationIcon, ScaleIcon, StopCircleIcon, UsersIcon } from "@heroicons/react/24/outline";
-import { getSessionContext } from "app/KeystoneContext";
+import { getSessionContext } from "keystone/context";
 import DashboardLayout from "../DashboardLayout";
 import Link from "next/link";
 import { gql } from "@ts-gql/tag/no-transform";
@@ -33,7 +33,7 @@ export default async function Portal() {
     const accounts = await context.db.Account.findMany({ where: { user: { id: { equals: session.userId } } } })
 
     if (!accounts || accounts.length === 0 || !accounts[0].id) {
-        redirect('/auth/register')
+        redirect('/api/auth/signout')
     }
     const profileComplete = Object.values(accounts[0]).every(value => value !== 'PLEASE_UPDATE')
     if (!profileComplete) {

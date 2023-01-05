@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
-import { getSessionContext } from "app/KeystoneContext";
+import { getSessionContext } from "keystone/context";
 import { LessonTermWhereInput } from "../../../../../__generated__/ts-gql/@schema";
 import { GET_LESSONS } from "./queries";
 import labelHelper from "lib/labelHelper";

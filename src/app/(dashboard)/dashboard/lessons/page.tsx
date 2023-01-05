@@ -1,6 +1,6 @@
 import DashboardLayout from "../../DashboardLayout"
 import ClassList from "./LessonList"
-import { getSessionContext } from "app/KeystoneContext";
+import { getSessionContext } from "keystone/context";
 import { GET_STUDENTS } from "../students/queries";
 import { LessonTermWhereInput } from "../../../../../__generated__/ts-gql/@schema";
 

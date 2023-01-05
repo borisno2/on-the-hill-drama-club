@@ -1,5 +1,5 @@
 import DashboardLayout from '../../../DashboardLayout'
-import { getSessionContext } from 'app/KeystoneContext'
+import { getSessionContext } from 'keystone/context'
 
 import { redirect } from 'next/navigation'
 import { isCuid } from 'cuid'

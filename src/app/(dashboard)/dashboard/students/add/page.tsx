@@ -1,4 +1,4 @@
-import { getSessionContext } from "app/KeystoneContext";
+import { getSessionContext } from "keystone/context";
 import StudentForm from "components/StudentForm"
 import DashboardLayout from "../../../DashboardLayout"
 

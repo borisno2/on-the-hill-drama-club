@@ -1,6 +1,6 @@
 import DashboardLayout from "../../DashboardLayout"
 import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
-import { getSessionContext } from "app/KeystoneContext";
+import { getSessionContext } from "keystone/context";
 import Link from "next/link";
 import StudentList from "./StudentList";
 
