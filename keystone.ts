@@ -16,7 +16,6 @@ export default config({
     additionalPrismaDatasourceProperties: {
       referentialIntegrity: 'prisma',
     },
-    useMigrations: true,
     prismaPreviewFeatures: ['referentialIntegrity'],
   },
   ui: {

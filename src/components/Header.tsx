@@ -23,18 +23,18 @@ import Link from 'next/link'
 
 const lessons = [
   {
-    name: 'Private Music Lessons',
+    name: 'Private Music Tuition',
     description: '',
-    href: '/lessons/music',
+    href: '/lessons/private-music-tuition',
     icon: MusicalNoteIcon,
   },
   {
-    name: 'Drama Club',
+    name: 'The Old Church on The Hill - Drama Club',
     description: '',
     href: '/lessons/drama-club',
     icon: StarIcon,
   },
-  { name: 'Orchestra', description: "", href: '#', icon: GlobeAsiaAustraliaIcon },
+  { name: 'Only Strings', description: "Orchestra", href: '/lessons/only-strings-orchestra', icon: GlobeAsiaAustraliaIcon },
   {
     name: 'Music Theory',
     description: "",
@@ -42,15 +42,15 @@ const lessons = [
     icon: AcademicCapIcon,
   },
   {
-    name: 'Early Childhood Music',
-    description: '',
-    href: '/lessons/early-childhood-music',
+    name: 'Musical Munchkins',
+    description: 'Early Childhood Music',
+    href: '/lessons/musical-munchkins',
     icon: Squares2X2Icon,
   },
   {
-    name: 'Teen Theatre and Performance',
-    description: '',
-    href: '/teen-theatre-and-performance',
+    name: 'Drama Teens',
+    description: 'Teen Theatre and Performance',
+    href: '/lessons/drama-teens',
     icon: PaperAirplaneIcon,
   },
 ]

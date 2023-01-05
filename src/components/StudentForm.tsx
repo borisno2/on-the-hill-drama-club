@@ -144,7 +144,7 @@ export default function Student({ student, accountId }: { student?: OperationDat
                                 </div>
                                 <div className="space-y-6 sm:space-y-5">
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             First name
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -167,7 +167,7 @@ export default function Student({ student, accountId }: { student?: OperationDat
                                     </div>
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="surname" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Surname
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -217,7 +217,7 @@ export default function Student({ student, accountId }: { student?: OperationDat
 
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="yearLevel" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Year Level - Enter 0 for Prep
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -249,7 +249,7 @@ export default function Student({ student, accountId }: { student?: OperationDat
                                     />
 
                                     <div>
-                                        <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="medical" className="block text-sm font-medium text-gray-700">
                                             Any relivate medical information including action required in an emergency
                                         </label>
                                         <div className="mt-1">

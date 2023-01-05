@@ -64,7 +64,7 @@ model Student {
 model LessonCategory {
   id          String   @id @default(cuid())
   name        String   @default("")
-  slug        String   @default("")
+  slug        String   @unique @default("")
   cost        String   @default("")
   type        String
   length      String   @default("")

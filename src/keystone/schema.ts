@@ -200,7 +200,7 @@ export const lists: Lists = {
     },
     fields: {
       name: text({ validation: { isRequired: true } }),
-      slug: text({ validation: { isRequired: true } }),
+      slug: text({ validation: { isRequired: true }, isIndexed: 'unique' }),
       cost: text({
         ui: { description: 'Cost per lesson - to show on website' },
       }),

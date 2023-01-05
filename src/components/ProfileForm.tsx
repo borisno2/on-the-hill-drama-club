@@ -162,7 +162,7 @@ export default function ProfileForm({ user, redirectOnSave }: { user: User, redi
 
                                 <div className="space-y-6 sm:space-y-5">
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             First name
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -185,7 +185,7 @@ export default function ProfileForm({ user, redirectOnSave }: { user: User, redi
                                     </div>
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="surname" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Surname
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -209,7 +209,7 @@ export default function ProfileForm({ user, redirectOnSave }: { user: User, redi
 
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Phone Number
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -254,7 +254,7 @@ export default function ProfileForm({ user, redirectOnSave }: { user: User, redi
                                     </div>
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="secondContactPhone" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Secondary Contact Phone Number
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -276,7 +276,7 @@ export default function ProfileForm({ user, redirectOnSave }: { user: User, redi
                                     </div>
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="street-address" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Street address
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -299,7 +299,7 @@ export default function ProfileForm({ user, redirectOnSave }: { user: User, redi
                                     </div>
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="city" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="suburb" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Suburb
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
@@ -322,7 +322,7 @@ export default function ProfileForm({ user, redirectOnSave }: { user: User, redi
                                     </div>
 
                                     <div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                        <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        <label htmlFor="postcode" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                                             Postcode
                                         </label>
                                         <div className="mt-1 sm:col-span-2 sm:mt-0">
