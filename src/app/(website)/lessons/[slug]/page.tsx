@@ -40,7 +40,7 @@ export default async function Page({ params: { slug } }: { params: { slug: strin
                 <h3 className="text-lg font-medium leading-6 text-gray-900">{lessonCategory.name}</h3>
             </div>
             <p className="mt-4 text-lg leading-7 text-gray-500">{lessonCategory.description}</p>
-            {lessonCategory.lessons?.length === 0 && (
+            {lessonCategory.lessons?.length !== 0 && (
                 <div className="mt-6">
                     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
                         <h3 className="text-lg font-medium leading-6 text-gray-900">Available Lessons</h3>
@@ -50,8 +50,8 @@ export default async function Page({ params: { slug } }: { params: { slug: strin
                             <li key={lesson.id} className="bg-white shadow overflow-hidden sm:rounded-lg">
                                 <div className="px-4 py-5 sm:px-6">
                                     <h3 className="text-lg leading-6 font-medium text-gray-900">
-                                        <Link href={`/dashboard/lessons/${lesson.id}`}>
-                                            <a className="hover:underline">{lesson.name}</a>
+                                        <Link className="hover:underline" href={`/dashboard/lessons/${lesson.id}`}>
+                                            {lesson.name}
                                         </Link>
                                     </h3>
                                     <p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">{lesson.description}</p>
@@ -71,12 +71,18 @@ export default async function Page({ params: { slug } }: { params: { slug: strin
                                             <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">{lesson.day}</dd>
                                         </div>
                                         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-                                            <dt className="text-sm leading-5 font-medium text-gray-500">Age</dt>
+                                            <dt className="text-sm leading-5 font-medium text-gray-500">Year Level</dt>
                                             <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">{lesson.minYear} - {lesson.maxYear}</dd>
                                         </div>
                                         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
                                             <dt className="text-sm leading-5 font-medium text-gray-500">Location</dt>
                                             <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">{lesson.location}</dd>
+                                        </div>
+                                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
+                                            <dt className="text-sm leading-5 font-medium text-gray-500"></dt>
+                                            <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                                                <Button className="mt-6 mx-3 float-right" href="/dashboard">Enrol</Button>
+                                                <Button className="mt-6 mx-3 float-right" href="/contact">Contact</Button></dd>
                                         </div>
                                     </dl>
                                 </div>
@@ -84,8 +90,6 @@ export default async function Page({ params: { slug } }: { params: { slug: strin
                         ))}
                     </ul>
                 </div>)}
-            <Button className="mt-6 mx-3 float-right" href="/dashboard">Enrol</Button>
-            <Button className="mt-6 mx-3 float-right" href="/contact">Contact</Button>
 
         </Container>
     )

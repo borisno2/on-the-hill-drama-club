@@ -9,12 +9,50 @@ const GET_LESSON_TIMETABLE = gql`
             time
             day
             location
+            lengthMin
             lessonCategory {
                 id
                 slug
                 }
         }}
         `as import("../../../../../__generated__/ts-gql/GET_LESSON_TIMETABLE").type
+
+const getColumn = (day: string | null) => {
+    switch (day) {
+        case 'MONDAY':
+            return 'sm:col-start-1'
+        case 'TUESDAY':
+            return 'sm:col-start-2'
+        case 'WEDNESDAY':
+            return 'sm:col-start-3'
+        case 'THURSDAY':
+            return 'sm:col-start-4'
+        case 'FRIDAY':
+            return 'sm:col-start-5'
+        case 'SATURDAY':
+            return 'sm:col-start-6'
+        case 'SUNDAY':
+            return 'sm:col-start-7'
+        default:
+            return 'sm:col-start-0'
+    }
+}
+
+function getRowStart(time: string | null, length: number | null) {
+    const startTime = 9 // 9am
+    const startRow = 2 // 9am
+    if (!time || !length) return '0'
+    const [hours, end] = time.split(':')
+    // take the first two characters of minutes
+    const minutes = end.slice(0, 2)
+    const ap = end.slice(2)
+    // if pm, add 12 to hours
+    const newHours = ap === 'PM' || ap === 'pm' ? parseInt(hours) + 12 : parseInt(hours)
+    // return the row start
+    const rowStart = (startRow + ((newHours - startTime) * 25)) + (parseInt(minutes) * 0.4)
+    return `${rowStart} / span ${length * 0.4}`
+
+}
 
 export default async function Timetable() {
     const context = await getSessionContext()
@@ -194,40 +232,18 @@ export default async function Timetable() {
                                 {lessons ? lessons.map((lesson) => (
                                     <li
                                         key={lesson.id}
-                                        className="relative mt-px flex sm:col-start-1" style={{ gridRow: '138 / span 27' }}>
+                                        className={`relative mt-px flex ${getColumn(lesson.day)}`} style={{ gridRow: getRowStart(lesson.time, lesson.lengthMin) }}>
                                         <a
                                             href={`/lessons/${lesson.lessonCategory?.slug}`}
                                             className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
                                         >
-                                            <p className="order-1 font-semibold text-blue-700">Junior Drama Club</p>
+                                            <p className="order-1 font-semibold text-blue-700">{lesson.name}</p>
                                             <p className="text-blue-500 group-hover:text-blue-700">
-                                                <time dateTime="14:30">2:30 PM</time>
+                                                <time dateTime={lesson.time ? lesson.time : undefined}>{lesson.time}</time>
                                             </p>
                                         </a>
                                     </li>
                                 )) : null}
-                                <li className="relative mt-px flex sm:col-start-3" style={{ gridRow: '92 / span 30' }}>
-                                    <a
-                                        href="#"
-                                        className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-pink-50 p-2 text-xs leading-5 hover:bg-pink-100"
-                                    >
-                                        <p className="order-1 font-semibold text-pink-700">Early Childood Music</p>
-                                        <p className="text-pink-500 group-hover:text-pink-700">
-                                            <time dateTime="2022-01-12T010:30">10:30 AM</time>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li className="relative mt-px hidden sm:col-start-6 sm:flex" style={{ gridRow: '122 / span 24' }}>
-                                    <a
-                                        href="#"
-                                        className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200"
-                                    >
-                                        <p className="order-1 font-semibold text-gray-700">Meeting with design team at Disney</p>
-                                        <p className="text-gray-500 group-hover:text-gray-700">
-                                            <time dateTime="2022-01-15T10:00">10:00 AM</time>
-                                        </p>
-                                    </a>
-                                </li>
                             </ol>
                         </div>
                     </div>
