@@ -5,14 +5,14 @@ export default function Home() {
         <div>
             <Container className="mt-9">
                 <section>
-                    <h1>Emily Calder - School of Performing Arts</h1>
-                    <p>
-                        At Emily Calder - School of Performing Arts, we are passionate about sharing the joy of music and theatre with our students. Our experienced instructors are dedicated to helping each student reach their full potential and achieve their artistic goals.
+                    <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
 
-                        We offer a wide range of lessons for students of all ages and skill levels, including private music lessons in a variety of instruments, group theatre lessons focusing on acting, singing, and dance techniques, and performance opportunities throughout the year. Our welcoming and inclusive community creates a positive and supportive environment for learning and growth.
-
-                        Whether you are a seasoned musician looking to fine-tune your skills or a beginner just starting out, we have a class for you. We believe that the arts have the power to enrich lives and bring people together, and we are excited to share this experience with you at Emily Calder - School of Performing Arts.
-                    </p>
+                        <h3 className="text-lg font-medium leading-6 text-gray-900">Emily Calder - School of Performing Arts</h3>
+                        <p className="mt-4 text-lg leading-7 text-gray-500">
+                            The Arts are for everyone! At Emily Calder&apos;s School of Performing Arts, we sincerely believe that musical and theatrical education should be available to everyone young and old. Through the personalized education provided our students develop learning strategies, self-confidence, goal setting, artistic -expression and performance skills. With the educational
+                            underpinning &apos;that we all learn differently&apos; Emily has developed strategies that align with the learning styles of the student. Creating an individual educational experience tailored to each student. At Emily Calder school of performing arts, we are an inclusive school and believe that students of all abilities should have the opportunity to learn.
+                        </p>
+                    </div>
                 </section>
             </Container>
         </div>
