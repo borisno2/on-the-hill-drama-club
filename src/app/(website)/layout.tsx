@@ -14,8 +14,8 @@ export default function RootLayout({
     children
 }: AppProps) {
     return (
-        <html className="h-full antialiased" lang="en">
-            <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
+        <html lang="en">
+            <body>
                 <AuthContext>
                     <div className="fixed inset-0 flex justify-center sm:px-8">
                         <div className="flex w-full max-w-7xl lg:px-8">

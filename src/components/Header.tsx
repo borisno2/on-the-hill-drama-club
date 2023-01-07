@@ -146,7 +146,7 @@ export const Header = () => {
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {lessons.map((item) => (
-                            <Link
+                            <Popover.Button as={Link}
                               key={item.name}
                               href={item.href}
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
@@ -156,19 +156,19 @@ export const Header = () => {
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
                               </div>
-                            </Link>
+                            </Popover.Button>
                           ))}
                         </div>
                         <div className="space-y-6 bg-gray-50 px-5 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
                           {callsToAction.map((item) => (
                             <div key={item.name} className="flow-root">
-                              <Link
+                              <Popover.Button as={Link}
                                 href={item.href}
                                 className="-m-3 flex items-center rounded-md p-3 text-base font-medium text-gray-900 hover:bg-gray-100"
                               >
                                 <item.icon className="h-6 w-6 flex-shrink-0 text-gray-400" aria-hidden="true" />
                                 <span className="ml-3">{item.name}</span>
-                              </Link>
+                              </Popover.Button>
                             </div>
                           ))}
                         </div>
@@ -218,7 +218,7 @@ export const Header = () => {
                       <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {resources.map((item) => (
-                            <Link
+                            <Popover.Button as={Link}
                               key={item.name}
                               href={item.href}
                               className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
@@ -228,7 +228,7 @@ export const Header = () => {
                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
                               </div>
-                            </Link>
+                            </Popover.Button>
                           ))}
                         </div>
 
@@ -274,35 +274,35 @@ export const Header = () => {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   {lessons.map((item) => (
-                    <Link
+                    <Popover.Button as={Link}
                       key={item.name}
                       href={item.href}
                       className="-m-3 flex items-center rounded-md p-3 hover:bg-gray-50"
                     >
                       <item.icon className="h-6 w-6 flex-shrink-0 text-indigo-600" aria-hidden="true" />
                       <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
-                    </Link>
+                    </Popover.Button>
                   ))}
                 </nav>
               </div>
             </div>
             <div className="space-y-6 py-6 px-5">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <Link href="/lessons/fees" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                <Popover.Button as={Link} href="/lessons/fees" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Fees
-                </Link>
+                </Popover.Button>
 
-                <Link href="/lessons/timetable" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                <Popover.Button as={Link} href="/lessons/timetable" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Timetable
-                </Link>
+                </Popover.Button>
                 {resources.map((item) => (
-                  <Link
+                  <Popover.Button as={Link}
                     key={item.name}
                     href={item.href}
                     className="text-base font-medium text-gray-900 hover:text-gray-700"
                   >
                     {item.name}
-                  </Link>
+                  </Popover.Button>
                 ))}
               </div>
               <div>
@@ -316,24 +316,24 @@ export const Header = () => {
                     </a>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Existing customer?{' '}
-                      <Link href='/dashboard' className="text-indigo-600 hover:text-indigo-500">
+                      <Popover.Button as={Link} href='/dashboard' className="text-indigo-600 hover:text-indigo-500">
                         Student Portal
-                      </Link>
+                      </Popover.Button>
                     </p>
                   </>
                 ) : (
                   <>
-                    <Link
+                    <Popover.Button as={Link}
                       href="/auth/register"
                       className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                     >
                       Sign up
-                    </Link>
+                    </Popover.Button>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Existing account?{' '}
-                      <Link href='/auth/signin' className="text-indigo-600 hover:text-indigo-500">
+                      <Popover.Button as={Link} href='/auth/signin' className="text-indigo-600 hover:text-indigo-500">
                         Sign in
-                      </Link>
+                      </Popover.Button>
                     </p>
                   </>
                 )}
