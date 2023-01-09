@@ -17,7 +17,7 @@ export default function RootLayout({
 }: AppProps) {
     return (
         <html lang="en">
-            <body className={`bg-black`}>
+            <body className={`bg-black ${font.className}`}>
                 <AuthContext>
                     <div className="fixed inset-0 flex justify-center sm:px-8">
                         <div className="flex w-full max-w-7xl lg:px-8">
