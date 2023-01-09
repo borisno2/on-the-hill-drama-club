@@ -1,5 +1,8 @@
 import { gql } from "@ts-gql/tag/no-transform"
 import { getSessionContext } from "keystone/context"
+import Link from "next/link"
+
+export type DayOfTheWeek = 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY'
 
 const GET_LESSON_TIMETABLE = gql`
     query GET_LESSON_TIMETABLE {
@@ -53,11 +56,18 @@ function getRowStart(time: string | null, length: number | null) {
     return `${rowStart} / span ${length * 0.4}`
 
 }
+function DayLink({ day, daySelected }: { day: DayOfTheWeek, daySelected: DayOfTheWeek }) {
+    return (
+        <Link href={`/lessons/timetable?daySelected=${day}`} className={`${daySelected === day ? 'mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white' : null} flex flex-col items-center pt-2 pb-3`}>
+            {day.slice(0, 1)}
+        </Link>
+    )
+}
 
-export default async function Timetable() {
+
+export default async function Timetable({ daySelected }: { daySelected: DayOfTheWeek }) {
     const context = await getSessionContext()
     const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE })
-
     return (
         <div className="flex h-full flex-col">
             <div className="isolate flex flex-auto flex-col overflow-auto bg-white">
@@ -66,27 +76,13 @@ export default async function Timetable() {
                         className="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8"
                     >
                         <div className="grid grid-cols-7 text-sm leading-6 text-gray-500 sm:hidden">
-                            <button type="button" className="flex flex-col items-center pt-2 pb-3">
-                                M
-                            </button>
-                            <button type="button" className="flex flex-col items-center pt-2 pb-3">
-                                T
-                            </button>
-                            <button type="button" className="flex flex-col items-center pt-2 pb-3">
-                                W{' '}
-                            </button>
-                            <button type="button" className="flex flex-col items-center pt-2 pb-3">
-                                T
-                            </button>
-                            <button type="button" className="flex flex-col items-center pt-2 pb-3">
-                                F
-                            </button>
-                            <button type="button" className="flex flex-col items-center pt-2 pb-3">
-                                S
-                            </button>
-                            <button type="button" className="flex flex-col items-center pt-2 pb-3">
-                                S
-                            </button>
+                            <DayLink day='MONDAY' daySelected={daySelected} />
+                            <DayLink day='TUESDAY' daySelected={daySelected} />
+                            <DayLink day='WEDNESDAY' daySelected={daySelected} />
+                            <DayLink day='THURSDAY' daySelected={daySelected} />
+                            <DayLink day='FRIDAY' daySelected={daySelected} />
+                            <DayLink day='SATURDAY' daySelected={daySelected} />
+                            <DayLink day='SUNDAY' daySelected={daySelected} />
                         </div>
 
                         <div className="-mr-px hidden grid-cols-7 divide-x divide-gray-100 border-r border-gray-100 text-sm leading-6 text-gray-500 sm:grid">
@@ -102,8 +98,8 @@ export default async function Timetable() {
                                 </span>
                             </div>
                             <div className="flex items-center justify-center py-3">
-                                <span className="flex items-baseline">
-                                    Wed{' '}
+                                <span>
+                                    Wed
                                 </span>
                             </div>
                             <div className="flex items-center justify-center py-3">
@@ -232,7 +228,7 @@ export default async function Timetable() {
                                 {lessons ? lessons.map((lesson) => (
                                     <li
                                         key={lesson.id}
-                                        className={`relative mt-px flex ${getColumn(lesson.day)}`} style={{ gridRow: getRowStart(lesson.time, lesson.lengthMin) }}>
+                                        className={`relative mt-px ${lesson.day !== daySelected ? 'hidden sm:flex' : 'flex'} ${getColumn(lesson.day)}`} style={{ gridRow: getRowStart(lesson.time, lesson.lengthMin) }}>
                                         <a
                                             href={`/lessons/${lesson.lessonCategory?.slug}`}
                                             className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
@@ -249,6 +245,6 @@ export default async function Timetable() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
