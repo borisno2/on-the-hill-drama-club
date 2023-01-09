@@ -659,7 +659,6 @@ input LessonTermRelateToManyForCreateInput {
 type LessonTerm {
   id: ID!
   name: String
-  location: String
   status: String
   term: Term
   lesson: Lesson
@@ -677,7 +676,6 @@ input LessonTermWhereInput {
   OR: [LessonTermWhereInput!]
   NOT: [LessonTermWhereInput!]
   id: IDFilter
-  location: StringFilter
   status: StringFilter
   term: TermWhereInput
   lesson: LessonWhereInput
@@ -687,13 +685,11 @@ input LessonTermWhereInput {
 
 input LessonTermOrderByInput {
   id: OrderDirection
-  location: OrderDirection
   status: OrderDirection
   createdAt: OrderDirection
 }
 
 input LessonTermUpdateInput {
-  location: String
   status: String
   term: TermRelateToOneForUpdateInput
   lesson: LessonRelateToOneForUpdateInput
@@ -719,7 +715,6 @@ input LessonTermUpdateArgs {
 }
 
 input LessonTermCreateInput {
-  location: String
   status: String
   term: TermRelateToOneForCreateInput
   lesson: LessonRelateToOneForCreateInput

@@ -280,7 +280,6 @@ export const lists: Lists = {
           },
         }),
       }),
-      location: text({ validation: { isRequired: true } }),
       status: select({
         validation: { isRequired: true },
         options: lessonStatusOptions,

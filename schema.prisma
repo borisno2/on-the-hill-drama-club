@@ -92,7 +92,6 @@ model Term {
 
 model LessonTerm {
   id         String      @id @default(cuid())
-  location   String      @default("")
   status     String
   term       Term?       @relation("LessonTerm_term", fields: [termId], references: [id])
   termId     String?     @map("term")
