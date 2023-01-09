@@ -18,6 +18,7 @@ export const GET_LESSONS = gql`
         minYear
         day
         time
+        location
         lessonCategory {
           id
           cost
@@ -25,7 +26,6 @@ export const GET_LESSONS = gql`
         }
       }
       status
-      location
     }
   }
 ` as import('../../../../../__generated__/ts-gql/GET_LESSONS').type
@@ -44,6 +44,7 @@ export const GET_LESSON_BY_ID = gql`
         minYear
         day
         time
+        location
         lessonCategory {
           id
           type
@@ -56,7 +57,6 @@ export const GET_LESSON_BY_ID = gql`
         endDate
         quantity
       }
-      location
       enrolments {
         id
         student {

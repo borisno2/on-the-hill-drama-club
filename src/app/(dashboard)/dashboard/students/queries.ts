@@ -30,7 +30,7 @@ export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = gql`
         lessonTerm {
           id
           name
-          location
+
           status
           term {
             id
@@ -41,6 +41,7 @@ export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = gql`
             id
             day
             time
+            location
             lessonCategory {
               id
               cost
