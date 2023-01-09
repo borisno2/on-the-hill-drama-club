@@ -9,7 +9,7 @@ export default function TimetablePage({ searchParams }: { searchParams: { daySel
             daySelected = searchParams.daySelected as DayOfTheWeek
         }
         else {
-            redirect('/lessons/timetable')
+            redirect('/timetable')
         }
     }
     return (

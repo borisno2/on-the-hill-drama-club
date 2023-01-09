@@ -55,7 +55,7 @@ const lessons = [
   },
 ]
 const callsToAction = [
-  { name: 'Enrol', href: '/auth/register', icon: PencilSquareIcon },
+  { name: 'Enrol', href: '/dashboard', icon: PencilSquareIcon },
   { name: 'Contact', href: '/contact', icon: PhoneIcon },
 ]
 const resources = [
@@ -74,7 +74,7 @@ const resources = [
   {
     name: 'Enrol',
     description: 'Enrol in a Lesson or Workshop',
-    href: '/auth/register',
+    href: '/dashboard',
     icon: PencilSquareIcon,
   },
   {
@@ -179,10 +179,10 @@ export const Header = () => {
               )}
             </Popover>
 
-            <Link href="/lessons/fees" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link href="/fees" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Fees
             </Link>
-            <Link href="/lessons/timetable" className="text-base font-medium text-gray-500 hover:text-gray-900">
+            <Link href="/timetable" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Timetable
             </Link>
 
@@ -288,11 +288,11 @@ export const Header = () => {
             </div>
             <div className="space-y-6 py-6 px-5">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <Popover.Button as={Link} href="/lessons/fees" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                <Popover.Button as={Link} href="/fees" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Fees
                 </Popover.Button>
 
-                <Popover.Button as={Link} href="/lessons/timetable" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                <Popover.Button as={Link} href="/timetable" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Timetable
                 </Popover.Button>
                 {resources.map((item) => (

@@ -9,6 +9,7 @@ specifiers:
   '@keystone-6/core': 4.0.1
   '@keystone-6/fields-document': ^6.0.0
   '@marsidev/react-turnstile': ^0.0.5
+  '@next/font': ^13.1.1
   '@preconstruct/next': ^4.0.0
   '@prisma/client': 4.3.1
   '@tailwindcss/forms': ^0.5.3
@@ -61,6 +62,7 @@ dependencies:
   '@keystone-6/core': 4.0.1_hjbzuu4i6utmq5fqgrw6dkpfym
   '@keystone-6/fields-document': 6.0.0_p4lzonqttd5ia3egdkuv2l3maa
   '@marsidev/react-turnstile': 0.0.5_biqbaboplfbrettd7655fr4n2y
+  '@next/font': 13.1.1
   '@preconstruct/next': 4.0.0
   '@prisma/client': 4.3.1
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.4
@@ -3293,6 +3295,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.1.1:
+    resolution: {integrity: sha512-amygRorS05hYK1/XQRZo5qBl7l2fpHnezeKU/cNveWU5QJg+sg8gMGkUXHtvesNKpiKIJshBRH1TzvO+2sKpvQ==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.1.1:
     resolution: {integrity: sha512-qnFCx1kT3JTWhWve4VkeWuZiyjG0b5T6J2iWuin74lORCupdrNukxkq9Pm+Z7PsatxuwVJMhjUoYz7H4cWzx2A==}

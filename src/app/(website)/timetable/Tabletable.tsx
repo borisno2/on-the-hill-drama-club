@@ -18,7 +18,7 @@ const GET_LESSON_TIMETABLE = gql`
                 slug
                 }
         }}
-        `as import("../../../../../__generated__/ts-gql/GET_LESSON_TIMETABLE").type
+        `as import("../../../../__generated__/ts-gql/GET_LESSON_TIMETABLE").type
 
 const getColumn = (day: string | null) => {
     switch (day) {
@@ -58,7 +58,7 @@ function getRowStart(time: string | null, length: number | null) {
 }
 function DayLink({ day, daySelected }: { day: DayOfTheWeek, daySelected: DayOfTheWeek }) {
     return (
-        <Link href={`/lessons/timetable?daySelected=${day}`} className={`${daySelected === day ? 'mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white' : null} flex flex-col items-center pt-2 pb-3`}>
+        <Link href={`/timetable?daySelected=${day}`} className={`${daySelected === day ? 'mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white' : null} flex flex-col items-center pt-2 pb-3`}>
             {day.slice(0, 1)}
         </Link>
     )

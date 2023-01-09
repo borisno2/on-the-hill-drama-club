@@ -13,7 +13,7 @@ const GET_LESSON_CATEFORY_FEES = gql`
             cost
             length
         }
-    }`as import("../../../../../__generated__/ts-gql/GET_LESSON_CATEFORY_FEES").type
+    }`as import("../../../../__generated__/ts-gql/GET_LESSON_CATEFORY_FEES").type
 
 export default async function Fees() {
     const context = await getSessionContext()
