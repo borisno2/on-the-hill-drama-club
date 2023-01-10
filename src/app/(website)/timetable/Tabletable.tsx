@@ -49,6 +49,27 @@ const getColumn = (day: string | null) => {
   }
 }
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ')
+}
+function getColour(slug?: string | null) {
+  switch (slug) {
+    case 'private-music-tuition':
+      return 'red'
+    case 'drama-club':
+      return 'blue'
+    case 'only-strings-orchestra':
+      return 'green'
+    case 'music-theory':
+      return 'purple'
+    case 'musical-munchkins':
+      return 'pink'
+    case 'drama-teens':
+      return 'teal'
+    default:
+      return 'gray'
+  }
+}
 function getRowStart(time: string | null, length: number | null) {
   const startTime = 9 // 9am
   const startRow = 2 // 9am
@@ -65,6 +86,7 @@ function getRowStart(time: string | null, length: number | null) {
     startRow + (newHours - startTime) * 25 + parseInt(minutes) * 0.4
   return `${rowStart} / span ${length * 0.4}`
 }
+
 function DayLink({
   day,
   daySelected,
@@ -72,20 +94,21 @@ function DayLink({
   day: DayOfTheWeek
   daySelected: DayOfTheWeek
 }) {
+  const selected = 'bg-zinc-600 text-white'
+  const notSelected = 'bg-zinc-100 text-zinc-600'
   return (
     <Link
       href={`/timetable?daySelected=${day}`}
       className="flex flex-col items-center pt-2 pb-2"
     >
-      {daySelected === day ? (
-        <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-600 font-semibold text-white">
-          {day.slice(0, 1)}
-        </span>
-      ) : (
-        <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 font-semibold text-zinc-600">
-          {day.slice(0, 1)}
-        </span>
-      )}
+      <span
+        className={classNames(
+          daySelected === day ? selected : notSelected,
+          'mt-1 flex h-8 w-8 items-center justify-center rounded-full font-semibold'
+        )}
+      >
+        {day.slice(0, 1)}
+      </span>
     </Link>
   )
 }
@@ -247,28 +270,54 @@ export default async function Timetable({
                   ? lessons.map((lesson) => (
                       <li
                         key={lesson.id}
-                        className={`relative mt-px ${
-                          lesson.day !== daySelected ? 'hidden sm:flex' : 'flex'
-                        } ${getColumn(lesson.day)}`}
+                        className={classNames(
+                          'relative mt-px',
+                          lesson.day !== daySelected
+                            ? 'hidden sm:flex'
+                            : 'flex',
+                          getColumn(lesson.day)
+                        )}
                         style={{
                           gridRow: getRowStart(lesson.time, lesson.lengthMin),
                         }}
                       >
-                        <a
+                        <Link
                           href={`/lessons/${lesson.lessonCategory?.slug}`}
-                          className="group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs leading-5 hover:bg-blue-100"
+                          className={classNames(
+                            'group absolute inset-1 flex flex-col overflow-y-auto rounded-lg p-2 text-xs leading-5',
+                            `bg-${getColour(
+                              lesson.lessonCategory?.slug
+                            )}-50 hover:bg-${getColour(
+                              lesson.lessonCategory?.slug
+                            )}-100`
+                          )}
                         >
-                          <p className="order-1 font-semibold text-blue-700">
+                          <p
+                            className={classNames(
+                              'order-1 font-semibold',
+                              `text-${getColour(
+                                lesson.lessonCategory?.slug
+                              )}-700`
+                            )}
+                          >
                             {lesson.name}
                           </p>
-                          <p className="text-blue-500 group-hover:text-blue-700">
+                          <p
+                            className={classNames(
+                              `text-${getColour(
+                                lesson.lessonCategory?.slug
+                              )}-500 group-hover:text-${getColour(
+                                lesson.lessonCategory?.slug
+                              )}-700`
+                            )}
+                          >
                             <time
                               dateTime={lesson.time ? lesson.time : undefined}
                             >
                               {lesson.time}
                             </time>
                           </p>
-                        </a>
+                        </Link>
                       </li>
                     ))
                   : null}
