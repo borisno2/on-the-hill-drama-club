@@ -10,7 +10,7 @@ type AppProps = {
   children: React.ReactNode
 }
 
-const font = Libre_Bodoni({ subsets: ['serif'] })
+const font = Libre_Bodoni({ subsets: ['latin'] })
 
 export default function RootLayout({ children }: AppProps) {
   return (
