@@ -52,24 +52,64 @@ const getColumn = (day: string | null) => {
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
-function getColour(slug?: string | null) {
+
+function getBGColour(slug?: string | null) {
   switch (slug) {
     case 'private-music-tuition':
-      return 'red'
+      return 'bg-red-50 hover:bg-red-100'
     case 'drama-club':
-      return 'blue'
+      return 'bg-blue-50 hover:bg-blue-100'
     case 'only-strings-orchestra':
-      return 'green'
+      return 'bg-green-50 hover:bg-green-100'
     case 'music-theory':
-      return 'purple'
+      return 'bg-purple-50 hover:bg-purple-100'
     case 'musical-munchkins':
-      return 'pink'
+      return 'bg-pink-50 hover:bg-pink-100'
     case 'drama-teens':
-      return 'teal'
+      return 'bg-teal-50 hover:bg-teal-100'
     default:
-      return 'gray'
+      return 'bg-gray-50 hover:bg-gray-100'
   }
 }
+
+function getNameColour(slug?: string | null) {
+  switch (slug) {
+    case 'private-music-tuition':
+      return 'text-red-700'
+    case 'drama-club':
+      return 'text-blue-700'
+    case 'only-strings-orchestra':
+      return 'text-green-700'
+    case 'music-theory':
+      return 'text-purple-700'
+    case 'musical-munchkins':
+      return 'text-pink-700'
+    case 'drama-teens':
+      return 'text-teal-700'
+    default:
+      return 'text-gray-700'
+  }
+}
+
+function getTimeColour(slug?: string | null) {
+  switch (slug) {
+    case 'private-music-tuition':
+      return 'text-red-500 group-hover:text-red-700'
+    case 'drama-club':
+      return 'text-blue-500 group-hover:text-blue-700'
+    case 'only-strings-orchestra':
+      return 'text-green-500 group-hover:text-green-700'
+    case 'music-theory':
+      return 'text-purple-500 group-hover:text-purple-700'
+    case 'musical-munchkins':
+      return 'text-pink-500 group-hover:text-pink-700'
+    case 'drama-teens':
+      return 'text-teal-500 group-hover:text-teal-700'
+    default:
+      return 'text-gray-500 group-hover:text-gray-700'
+  }
+}
+
 function getRowStart(time: string | null, length: number | null) {
   const startTime = 9 // 9am
   const startRow = 2 // 9am
@@ -268,58 +308,48 @@ export default async function Timetable({
               >
                 {lessons
                   ? lessons.map((lesson) => (
-                      <li
-                        key={lesson.id}
+                    <li
+                      key={lesson.id}
+                      className={classNames(
+                        'relative mt-px',
+                        lesson.day !== daySelected
+                          ? 'hidden sm:flex'
+                          : 'flex',
+                        getColumn(lesson.day)
+                      )}
+                      style={{
+                        gridRow: getRowStart(lesson.time, lesson.lengthMin),
+                      }}
+                    >
+                      <Link
+                        href={`/lessons/${lesson.lessonCategory?.slug}`}
                         className={classNames(
-                          'relative mt-px',
-                          lesson.day !== daySelected
-                            ? 'hidden sm:flex'
-                            : 'flex',
-                          getColumn(lesson.day)
+                          'group absolute inset-1 flex flex-col overflow-y-auto rounded-lg p-2 text-xs leading-5',
+                          getBGColour(
+                            lesson.lessonCategory?.slug)
                         )}
-                        style={{
-                          gridRow: getRowStart(lesson.time, lesson.lengthMin),
-                        }}
                       >
-                        <Link
-                          href={`/lessons/${lesson.lessonCategory?.slug}`}
+                        <p
                           className={classNames(
-                            'group absolute inset-1 flex flex-col overflow-y-auto rounded-lg p-2 text-xs leading-5',
-                            `bg-${getColour(
-                              lesson.lessonCategory?.slug
-                            )}-50 hover:bg-${getColour(
-                              lesson.lessonCategory?.slug
-                            )}-100`
+                            'order-1 font-semibold',
+                            getNameColour(
+                              lesson.lessonCategory?.slug)
                           )}
                         >
-                          <p
-                            className={classNames(
-                              'order-1 font-semibold',
-                              `text-${getColour(
-                                lesson.lessonCategory?.slug
-                              )}-700`
-                            )}
+                          {lesson.name}
+                        </p>
+                        <p
+                          className={getTimeColour(lesson.lessonCategory?.slug)}
+                        >
+                          <time
+                            dateTime={lesson.time ? lesson.time : undefined}
                           >
-                            {lesson.name}
-                          </p>
-                          <p
-                            className={classNames(
-                              `text-${getColour(
-                                lesson.lessonCategory?.slug
-                              )}-500 group-hover:text-${getColour(
-                                lesson.lessonCategory?.slug
-                              )}-700`
-                            )}
-                          >
-                            <time
-                              dateTime={lesson.time ? lesson.time : undefined}
-                            >
-                              {lesson.time}
-                            </time>
-                          </p>
-                        </Link>
-                      </li>
-                    ))
+                            {lesson.time}
+                          </time>
+                        </p>
+                      </Link>
+                    </li>
+                  ))
                   : null}
               </ol>
             </div>
