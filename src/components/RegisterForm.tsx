@@ -155,7 +155,7 @@ export default function RegisterForm() {
                                         Personal Information
                                     </h3>
                                     <p className="mt-1 text-sm text-gray-500">
-                                        Use a permanent address where you can recieve mail.
+                                        Please use your details here, the next step will be to add each individual student&apos;s details
                                     </p>
                                 </div>
 
