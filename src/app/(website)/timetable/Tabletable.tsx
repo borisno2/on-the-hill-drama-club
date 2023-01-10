@@ -115,6 +115,7 @@ function getRowStart(time: string | null, length: number | null) {
   const startRow = 2 // 9am
   if (!time || !length) return '0'
   const [hours, end] = time.split(':')
+  if (!hours || !end) return '0'
   // take the first two characters of minutes
   const minutes = end.slice(0, 2)
   const ap = end.slice(2)
@@ -315,7 +316,8 @@ export default async function Timetable({
                         lesson.day !== daySelected
                           ? 'hidden sm:flex'
                           : 'flex',
-                        getColumn(lesson.day)
+                        getColumn(lesson.day),
+                        getRowStart(lesson.time, lesson.lengthMin) === '0' ? 'hidden sm:hidden' : '',
                       )}
                       style={{
                         gridRow: getRowStart(lesson.time, lesson.lengthMin),

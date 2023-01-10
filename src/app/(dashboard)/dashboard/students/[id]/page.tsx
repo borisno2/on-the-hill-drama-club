@@ -29,6 +29,7 @@ export default async function Students({
     }
     const availableWhere = {
         AND: {
+            status: { in: ['UPCOMING', 'ENROL'] },
             lesson: {
                 maxYear: { gte: student.yearLevel },
                 minYear: { lte: student.yearLevel },
@@ -46,9 +47,31 @@ export default async function Students({
     const enroledWhere = {
         enrolments: {
             some: {
-                student: {
-                    id: { equals: student.id }
-                }
+                AND: [
+                    {
+                        status: { equals: 'ENROLED' }
+                    },
+                    {
+                        student: {
+                            id: { equals: student.id }
+                        }
+                    }]
+            }
+        }
+    }
+
+    const pendingWhere = {
+        enrolments: {
+            some: {
+                AND: [
+                    {
+                        status: { equals: 'PENDING' }
+                    },
+                    {
+                        student: {
+                            id: { equals: student.id }
+                        }
+                    }]
             }
         }
     }
@@ -57,13 +80,18 @@ export default async function Students({
         <DashboardLayout PageName="Students">
             <div className="py-4">
                 <StudentForm student={{ ...student }} accountId={session.data.accountId!} />
-                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                    <h2 className="text-2xl font-bold text-gray-900">Enroled Lessons</h2>
+                <div className="py-5 space-y-8 divide-y divide-gray-200 sm:space-y-5">
+
+                    <h2 className="text-2xl font-bold text-gray-900">Lessons Pending</h2>
+                    {/* @ts-expect-error Server Component */}
+                    <LessonList where={pendingWhere} studentId={student.id} enroled={true} />
+                </div>
+                <div className="py-5 space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                    <h2 className="text-2xl font-bold text-gray-900">Confirmed Enroled Lessons</h2>
                     {/* @ts-expect-error Server Component */}
                     <LessonList where={enroledWhere} studentId={student.id} enroled={true} />
                 </div>
-                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-
+                <div className="py-5 space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <h2 className="text-2xl font-bold text-gray-900">Available Lessons</h2>
                     {/* @ts-expect-error Server Component */}
                     <LessonList where={availableWhere} studentId={student.id} enroled={false} />

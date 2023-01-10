@@ -51,7 +51,7 @@ export default async function LessonPage({
                             </div>
                             <div className="sm:col-span-1">
                                 <dt className="text-sm font-medium text-gray-500">Cost Per Lesson</dt>
-                                <dd className="mt-1 text-sm text-gray-900">${lessonTerm.lesson?.lessonCategory?.cost}</dd>
+                                <dd className="mt-1 text-sm text-gray-900">{lessonTerm.lesson?.lessonCategory?.cost}</dd>
                             </div>
 
                             <div className="sm:col-span-2">
@@ -63,7 +63,7 @@ export default async function LessonPage({
                             </div>
                         </dl>
                         {/* @ts-expect-error Server Component */}
-                        <EnrolStudentList lesson={lesson} />
+                        <EnrolStudentList lessonTerm={lessonTerm} />
                     </div>
                 </Suspense>
             </div>

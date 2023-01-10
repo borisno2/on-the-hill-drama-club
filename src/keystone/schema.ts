@@ -357,6 +357,15 @@ export const lists: Lists = {
       status: select({
         validation: { isRequired: true },
         options: enrolmentStatusOptions,
+        access: {
+          create: ({ session, inputData }) => {
+            if (inputData.status === 'PENDING') {
+              return true
+            }
+            return isAdmin(session)
+          },
+          update: isAdmin,
+        },
       }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },

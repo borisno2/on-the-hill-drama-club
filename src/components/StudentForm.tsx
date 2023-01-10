@@ -13,6 +13,7 @@ import DropDown from "./DropDown";
 import { GET_STUDENT_BY_ID } from "app/(dashboard)/dashboard/students/queries";
 import dayjs from "dayjs"
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { ArrowDownIcon } from "@heroicons/react/24/outline";
 
 
 
@@ -276,6 +277,10 @@ export default function Student({ student, accountId }: { student?: OperationDat
 
                         <div className="pt-5">
                             <div className="flex justify-end">
+                                {student && <div className="px-8 flex absolute right-1/3">
+                                    <ArrowDownIcon height={20} />
+                                    <p>Scroll Down for Enrollment details</p>
+                                </div>}
                                 <button
                                     type="button"
                                     onClick={() => { router.push('/dashboard/students') }}
@@ -290,6 +295,8 @@ export default function Student({ student, accountId }: { student?: OperationDat
                                 >
                                     {isSubmitting ? 'Loading...' : !student ? 'Add' : 'Save'}
                                 </button>
+
+
                             </div>
                         </div>
                     </form>

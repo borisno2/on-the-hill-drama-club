@@ -136,9 +136,15 @@ export default async function Page({
                                             {lesson.lengthMin} minutes
                                         </td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <Button className="float-right mx-3 mt-6" href="/dashboard">
-                                                Enrol
-                                            </Button>
+                                            {lesson.time === 'TBD' ? (
+
+                                                <Button className="float-right mx-3 mt-6" href="/contact">
+                                                    Contact
+                                                </Button>
+                                            ) : (
+                                                <Button className="float-right mx-3 mt-6" href="/dashboard">
+                                                    Enrol
+                                                </Button>)}
                                         </td>
                                     </tr>
                                 ))}
