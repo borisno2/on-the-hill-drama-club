@@ -45,7 +45,7 @@ const getColumn = (day: string | null) => {
     case 'SUNDAY':
       return 'sm:col-start-7'
     default:
-      return 'sm:col-start-0'
+      return 'hidden sm:hidden'
   }
 }
 

@@ -12,6 +12,7 @@ export const dayOptions = [
   { label: 'Friday', value: 'FRIDAY' },
   { label: 'Saturday', value: 'SATURDAY' },
   { label: 'Sunday', value: 'SUNDAY' },
+  { label: 'To Be Determined', value: 'TBD' },
 ]
 
 export const lessonTypeOptions = [
