@@ -210,7 +210,7 @@ export default async function Timetable({
               {/* Horizontal lines */}
               <div
                 className="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100"
-                style={{ gridTemplateRows: 'repeat(23, minmax(3.5rem, 1fr))' }}
+                style={{ gridTemplateRows: 'repeat(27, minmax(3.5rem, 1fr))' }}
               >
                 <div className="row-end-1 h-7"></div>
 
@@ -283,6 +283,18 @@ export default async function Timetable({
                 <div>
                   <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     8PM
+                  </div>
+                </div>
+                <div />
+                <div>
+                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                    9PM
+                  </div>
+                </div>
+                <div />
+                <div>
+                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                    10PM
                   </div>
                 </div>
                 <div />
