@@ -109,7 +109,7 @@ export default function Student({ student, accountId }: { student?: OperationDat
             surname: z.string().min(1, { message: "Please enter Student's surname" }),
             dateOfBirth: z.string().min(1, { message: "Please enter Student's date of birth" }),
             school: z.string().regex(/SCHOOL|HOME|OTHER/, { message: "Please select a schooling type" }),
-            yearLevel: z.number().min(0, { message: "Please enter Student's year level - use 0 for Prep" }).max(12, { message: "Please enter a valid year level" }),
+            yearLevel: z.number().min(0, { message: "Please enter Student's year level - use 0 for Prep" }).max(13, { message: "Please enter a valid year level - Enter 13 for out of school" }),
             medical: z.string().optional(),
         })
         const result = registerSchema.safeParse(values)
