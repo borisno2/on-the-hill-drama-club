@@ -124,7 +124,7 @@ function getRowStart(time: string | null, length: number | null) {
     ap === 'PM' || ap === 'pm' ? parseInt(hours) + 12 : parseInt(hours)
   // return the row start
   const rowStart =
-    startRow + (newHours - startTime) * 25 + parseInt(minutes) * 0.4
+    startRow + (newHours - startTime) * 21 + parseInt(minutes) * 0.4
   return `${rowStart} / span ${length * 0.4}`
 }
 
