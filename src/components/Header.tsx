@@ -6,6 +6,8 @@ import {
   Bars3Icon,
   BookmarkSquareIcon,
   CalendarIcon,
+  CreditCardIcon,
+  EyeIcon,
   GlobeAsiaAustraliaIcon,
   MusicalNoteIcon,
   PaperAirplaneIcon,
@@ -53,6 +55,12 @@ const lessons = [
     href: '/lessons/drama-teens',
     icon: PaperAirplaneIcon,
   },
+  {
+    name: 'Theatre Making Workshops',
+    description: 'Props, Costumes, Set and all things Theatre Making',
+    href: '/lessons/theatre-making-workshops',
+    icon: EyeIcon,
+  },
 ]
 const callsToAction = [
   { name: 'Enrol', href: '/dashboard', icon: PencilSquareIcon },
@@ -66,10 +74,16 @@ const resources = [
     icon: CalendarIcon,
   },
   {
-    name: 'Our Ethos',
+    name: 'About',
     description: 'Teaching Ethos and Values',
-    href: '/values',
+    href: '/about',
     icon: BookmarkSquareIcon,
+  },
+  {
+    name: 'Billing and Accounts',
+    description: 'Billing Policy including refunds and cancellations',
+    href: '/fees',
+    icon: CreditCardIcon,
   },
   {
     name: 'Enrol',

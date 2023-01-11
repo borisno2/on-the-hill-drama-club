@@ -63,6 +63,18 @@ export default async function Fees() {
                             </div>
                         </div>
                     </div>
+                    <div className="sm:flex sm:items-center pt-10">
+                        <div className="sm:flex-auto">
+                            <h1 className="text-lg font-semibold text-gray-900">Invoices and Lesson Cancelations</h1>
+
+                            <p className="mt-4 text-lg leading-7 text-gray-500">
+                                In 2023 we will be returning to a termly invoice structure for all group and individual lessons, an invoice for the term will be emailed to you at the beginning of term and is to be paid no later than week 3.
+                            </p>
+                            <p className="mt-4 text-lg leading-7 text-gray-500">
+                                Missed lessons that have been paid in advance, will be credited to the next terms invoice if 24hr notice of the absents is given.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </Container>
         </div>
