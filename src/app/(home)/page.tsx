@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { Container } from "components/Container";
 import Images from "./Images";
 
@@ -13,7 +12,7 @@ export default function Home() {
                     </h1>
                 </div>
             </Container>
-            <Images />
+            <Images slug='home' />
             <Container className="mt-9">
                 <section>
                     <div className="border-b border-gray-200 px-4 py-5 sm:px-6">

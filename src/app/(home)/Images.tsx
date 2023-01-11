@@ -26,6 +26,17 @@ import DramaTeensImage3 from 'images/photos/drama_teens_image-3.jpg'
 import DramaTeensImage4 from 'images/photos/drama_teens_image-4.jpg'
 import DramaTeensImage5 from 'images/photos/drama_teens_image-5.jpg'
 import MusicTheoryImage1 from 'images/photos/music_theory_image-1.jpg'
+import AboutUsImage1 from 'images/photos/about_us_image-1.jpg'
+import HomePageImage1 from 'images/photos/home_page_image-1.jpg'
+import HomePageImage2 from 'images/photos/home_page_image-2.jpg'
+import HomePageImage3 from 'images/photos/home_page_image-3.jpg'
+import HomePageImage4 from 'images/photos/home_page_image-4.jpg'
+import HomePageImage5 from 'images/photos/home_page_image-5.jpg'
+import TheatreMakingImage1 from 'images/photos/theatre_making_image-1.jpg'
+import TheatreMakingImage2 from 'images/photos/theatre_making_image-2.jpg'
+import TheatreMakingImage3 from 'images/photos/theatre_making_image-3.jpg'
+import TheatreMakingImage4 from 'images/photos/theatre_making_image-4.jpg'
+import TheatreMakingImage5 from 'images/photos/theatre_making_image-5.jpg'
 
 import Photos from 'components/Photos'
 
@@ -41,6 +52,15 @@ export default function Images({ slug }: { slug?: string }) {
         MusicImage4,
         MusicImage5,
       ]
+      break
+    case 'about':
+      images = [AboutUsImage1]
+      break
+    case 'theatre-making-workshops':
+      images = [TheatreMakingImage1, TheatreMakingImage2, TheatreMakingImage3, TheatreMakingImage4, TheatreMakingImage5]
+      break
+    case 'home':
+      images = [HomePageImage1, HomePageImage2, HomePageImage3, HomePageImage4, HomePageImage5]
       break
     case 'drama-club':
       images = [DramaClubImage1, DramaClubImage2, DramaClubImage3, DramaClubImage4, DramaClubImage5]
