@@ -83,16 +83,22 @@ export default async function Students({
                 <div className="py-5 space-y-8 divide-y divide-gray-200 sm:space-y-5">
 
                     <h2 className="text-2xl font-bold text-gray-900">Lessons Pending</h2>
+                    <p className="text-sm text-gray-500">Lessons pending confirmation from Emily</p>
+
                     {/* @ts-expect-error Server Component */}
                     <LessonList where={pendingWhere} studentId={student.id} enroled={true} />
                 </div>
                 <div className="py-5 space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <h2 className="text-2xl font-bold text-gray-900">Confirmed Enroled Lessons</h2>
+                    <p className="text-sm text-gray-500">Lessons confirmed by Emily</p>
+
                     {/* @ts-expect-error Server Component */}
                     <LessonList where={enroledWhere} studentId={student.id} enroled={true} />
                 </div>
                 <div className="py-5 space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <h2 className="text-2xl font-bold text-gray-900">Available Lessons</h2>
+                    <p className="text-sm text-gray-500">Lessons that match this students class year</p>
+
                     {/* @ts-expect-error Server Component */}
                     <LessonList where={availableWhere} studentId={student.id} enroled={false} />
                 </div>
