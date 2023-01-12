@@ -30,7 +30,6 @@ export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = gql`
         lessonTerm {
           id
           name
-
           status
           term {
             id
@@ -92,3 +91,44 @@ export const ENROL_STUDENT_IN_LESSON = gql`
     }
   }
 ` as import('../../../../../__generated__/ts-gql/ENROL_STUDENT_IN_LESSON').type
+
+export const GET_ENROLMENT_BY_ID = gql`
+  query GET_ENROLMENT_BY_ID($id: ID!) {
+    enrolment(where: { id: $id }) {
+      id
+      status
+      createdAt
+      student {
+        id
+        firstName
+        surname
+        account {
+          id
+          firstName
+          user {
+            id
+            email
+          }
+        }
+      }
+      lessonTerm {
+        id
+        name
+        status
+        term {
+          id
+          name
+          startDate
+          endDate
+        }
+        lesson {
+          id
+          day
+          time
+          name
+          location
+        }
+      }
+    }
+  }
+` as import('../../../../../__generated__/ts-gql/GET_ENROLMENT_BY_ID').type

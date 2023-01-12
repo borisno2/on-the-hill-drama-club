@@ -26,7 +26,7 @@ export default async function handler(
       })
       if (adminCount === 0) {
         const userId = process.env.MAKE_ADMIN_ADDRESS
-        if (userId === context.session.userId) {
+        if (context.session && userId === context.session.userId) {
           await context.sudo().query.User.updateOne({
             where: { id: userId },
             data: { role: 'ADMIN' },

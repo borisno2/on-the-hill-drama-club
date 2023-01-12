@@ -5,6 +5,15 @@ export async function seedDatabase() {
   const context = keystoneContext.sudo()
 
   try {
+    const emailSettings = await context.db.EmailSettings.findOne({})
+    if (!emailSettings) {
+      await context.db.EmailSettings.createOne({
+        data: {
+          fromEmail: 'test@test.com',
+          enrolmentConfirmationTemplate: 'd-123456',
+        },
+      })
+    }
     // Check if any lesson categories exist
     const lessonCategoriesExist = await context.db.LessonCategory.count()
     let seed = 0
