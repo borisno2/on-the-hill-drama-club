@@ -368,16 +368,24 @@ export const lists: Lists = {
       },
     },
     hooks: {
-      afterOperation: async ({ operation, item, resolvedData, context }) => {
+      afterOperation: async ({
+        originalItem,
+        operation,
+        item,
+        resolvedData,
+        context,
+      }) => {
         if (
-          operation in ['create', 'update'] &&
+          operation === 'update' &&
           resolvedData &&
-          resolvedData.status === 'ENROLED'
+          resolvedData.status === 'ENROLED' &&
+          originalItem.status === 'PENDING'
         ) {
           const { enrolment } = await context.graphql.run({
             query: GET_ENROLMENT_BY_ID,
             variables: { id: item.id },
           })
+
           if (
             !enrolment ||
             !enrolment.student ||
@@ -390,16 +398,20 @@ export const lists: Lists = {
             !enrolment.student.account.user.email ||
             !process.env.SENDGRID_API_KEY
           ) {
+            console.log('Missing Data')
+
             return
           }
           const emailSettings = await context
             .sudo()
             .db.EmailSettings.findOne({})
+
           if (
             !emailSettings ||
-            emailSettings.enrolmentConfirmationTemplate ||
-            emailSettings.fromEmail
+            !emailSettings.enrolmentConfirmationTemplate ||
+            !emailSettings.fromEmail
           ) {
+            console.log('Missing Email Settings')
             return
           }
           const dynamicData = {
@@ -415,7 +427,9 @@ export const lists: Lists = {
             to: enrolment.student.account.user.email,
             templateId: emailSettings.enrolmentConfirmationTemplate,
             dynamicTemplateData: dynamicData,
-            from: emailSettings.fromEmail,
+            from: {
+              email: emailSettings.fromEmail,
+            },
           }
 
           sendEmail(emailData)
