@@ -123,6 +123,12 @@ model Lesson {
   @@index([lessonCategoryId])
 }
 
+model EmailSettings {
+  id                            Int    @id
+  fromEmail                     String @default("")
+  enrolmentConfirmationTemplate String @default("")
+}
+
 model Enrolment {
   id           String      @id @default(cuid())
   lessonTerm   LessonTerm? @relation("Enrolment_lessonTerm", fields: [lessonTermId], references: [id])
