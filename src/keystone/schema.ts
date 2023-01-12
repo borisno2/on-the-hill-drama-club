@@ -34,6 +34,10 @@ import {
   userFilter,
 } from './helpers'
 import { Decimal } from 'decimal.js'
+import sendEmail from '../lib/sendEmail'
+import { GET_ENROLMENT_BY_ID } from '../app/(dashboard)/dashboard/students/queries'
+import { formatDate } from '../lib/formatDate'
+import labelHelper from '../lib/labelHelper'
 
 const decimalScale = 2
 export const lists: Lists = {
@@ -339,7 +343,19 @@ export const lists: Lists = {
       lessonTerms: relationship({ ref: 'LessonTerm.lesson', many: true }),
     },
   }),
-
+  EmailSettings: list({
+    access: isAdmin,
+    isSingleton: true,
+    graphql: {
+      plural: 'EmailSettingss',
+    },
+    fields: {
+      fromEmail: text({ validation: { isRequired: true } }),
+      enrolmentConfirmationTemplate: text({
+        validation: { isRequired: true },
+      }),
+    },
+  }),
   Enrolment: list({
     access: {
       operation: {
@@ -349,6 +365,67 @@ export const lists: Lists = {
       filter: {
         query: enrolmentFilter,
         update: enrolmentFilter,
+      },
+    },
+    hooks: {
+      afterOperation: async ({
+        listKey,
+        operation,
+        item,
+        resolvedData,
+        context,
+      }) => {
+        if (
+          operation in ['create', 'update'] &&
+          resolvedData &&
+          resolvedData.status === 'ENROL'
+        ) {
+          const { enrolment } = await context.graphql.run({
+            query: GET_ENROLMENT_BY_ID,
+            variables: { id: item.id },
+          })
+          if (
+            !enrolment ||
+            !enrolment.student ||
+            !enrolment.student.account ||
+            !enrolment.lessonTerm ||
+            !enrolment.lessonTerm.lesson ||
+            !enrolment.lessonTerm.term ||
+            !enrolment.lessonTerm.lesson.day ||
+            !enrolment.student.account.user ||
+            !enrolment.student.account.user.email ||
+            !process.env.SENDGRID_API_KEY
+          ) {
+            return
+          }
+          const emailSettings = await context
+            .sudo()
+            .db.EmailSettings.findOne({})
+          if (
+            !emailSettings ||
+            emailSettings.enrolmentConfirmationTemplate ||
+            emailSettings.fromEmail
+          ) {
+            return
+          }
+          const dynamicData = {
+            firstName: enrolment.student.account.firstName,
+            studentFirstName: enrolment.student.firstName,
+            lessonName: enrolment.lessonTerm.lesson.name,
+            termName: enrolment.lessonTerm.term.name,
+            startDate: formatDate(enrolment.lessonTerm.term.startDate),
+            weekDay: labelHelper(dayOptions, enrolment.lessonTerm.lesson.day),
+            startTime: enrolment.lessonTerm.lesson.time,
+          }
+          const emailData = {
+            to: enrolment.student.account.user.email,
+            templateId: emailSettings.enrolmentConfirmationTemplate,
+            dynamicTemplateData: dynamicData,
+            from: emailSettings.fromEmail,
+          }
+
+          sendEmail(emailData)
+        }
       },
     },
     fields: {
