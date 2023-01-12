@@ -368,13 +368,7 @@ export const lists: Lists = {
       },
     },
     hooks: {
-      afterOperation: async ({
-        listKey,
-        operation,
-        item,
-        resolvedData,
-        context,
-      }) => {
+      afterOperation: async ({ operation, item, resolvedData, context }) => {
         if (
           operation in ['create', 'update'] &&
           resolvedData &&
