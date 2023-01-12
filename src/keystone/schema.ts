@@ -372,7 +372,7 @@ export const lists: Lists = {
         if (
           operation in ['create', 'update'] &&
           resolvedData &&
-          resolvedData.status === 'ENROL'
+          resolvedData.status === 'ENROLED'
         ) {
           const { enrolment } = await context.graphql.run({
             query: GET_ENROLMENT_BY_ID,
