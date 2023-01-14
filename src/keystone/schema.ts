@@ -431,8 +431,8 @@ export const lists: Lists = {
               email: emailSettings.fromEmail,
             },
           }
-
-          sendEmail(emailData)
+          console.log('Sending Email')
+          await sendEmail(emailData)
         }
       },
     },

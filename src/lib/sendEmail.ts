@@ -12,7 +12,7 @@ type emailData = {
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '')
 
-export default function sendEmail(data: emailData) {
+export default async function sendEmail(data: emailData) {
   let email = { ...data }
   if (email.to.includes('@test.com')) {
     email.to = process.env.TEST_EMAIL || 'no-reply@openaas.com.au'
@@ -22,12 +22,13 @@ export default function sendEmail(data: emailData) {
   }
 
   const msg = { ...email }
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error) => {
-      console.error('Email Error: ', error)
-    })
+  try {
+    await sgMail.send(msg)
+  } catch (error: any) {
+    console.error(error)
+
+    if (error.response) {
+      console.error(error.response.body)
+    }
+  }
 }
