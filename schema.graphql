@@ -872,6 +872,51 @@ input EmailSettingsCreateInput {
   enrolmentConfirmationTemplate: String
 }
 
+type QuickBooksSettings {
+  id: ID!
+  realmId: String
+  accessToken: String
+  refreshToken: String
+}
+
+input QuickBooksSettingsWhereUniqueInput {
+  id: ID
+}
+
+input QuickBooksSettingsWhereInput {
+  AND: [QuickBooksSettingsWhereInput!]
+  OR: [QuickBooksSettingsWhereInput!]
+  NOT: [QuickBooksSettingsWhereInput!]
+  id: IDFilter
+  realmId: StringFilter
+  accessToken: StringNullableFilter
+  refreshToken: StringFilter
+}
+
+input QuickBooksSettingsOrderByInput {
+  id: OrderDirection
+  realmId: OrderDirection
+  accessToken: OrderDirection
+  refreshToken: OrderDirection
+}
+
+input QuickBooksSettingsUpdateInput {
+  realmId: String
+  accessToken: String
+  refreshToken: String
+}
+
+input QuickBooksSettingsUpdateArgs {
+  where: QuickBooksSettingsWhereUniqueInput! = {id: 1}
+  data: QuickBooksSettingsUpdateInput!
+}
+
+input QuickBooksSettingsCreateInput {
+  realmId: String
+  accessToken: String
+  refreshToken: String
+}
+
 type Enrolment {
   id: ID!
   lessonTerm: LessonTerm
@@ -1181,11 +1226,17 @@ type Mutation {
   deleteLesson(where: LessonWhereUniqueInput!): Lesson
   deleteLessons(where: [LessonWhereUniqueInput!]!): [Lesson]
   createEmailSettings(data: EmailSettingsCreateInput!): EmailSettings
-  createEmailSettingss(data: [EmailSettingsCreateInput!]!): [EmailSettings]
+  createManyEmailSettings(data: [EmailSettingsCreateInput!]!): [EmailSettings]
   updateEmailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}, data: EmailSettingsUpdateInput!): EmailSettings
-  updateEmailSettingss(data: [EmailSettingsUpdateArgs!]!): [EmailSettings]
+  updateManyEmailSettings(data: [EmailSettingsUpdateArgs!]!): [EmailSettings]
   deleteEmailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}): EmailSettings
-  deleteEmailSettingss(where: [EmailSettingsWhereUniqueInput!]!): [EmailSettings]
+  deleteManyEmailSettings(where: [EmailSettingsWhereUniqueInput!]!): [EmailSettings]
+  createQuickBooksSettings(data: QuickBooksSettingsCreateInput!): QuickBooksSettings
+  createManyQuickBooksSettings(data: [QuickBooksSettingsCreateInput!]!): [QuickBooksSettings]
+  updateQuickBooksSettings(where: QuickBooksSettingsWhereUniqueInput! = {id: 1}, data: QuickBooksSettingsUpdateInput!): QuickBooksSettings
+  updateManyQuickBooksSettings(data: [QuickBooksSettingsUpdateArgs!]!): [QuickBooksSettings]
+  deleteQuickBooksSettings(where: QuickBooksSettingsWhereUniqueInput! = {id: 1}): QuickBooksSettings
+  deleteManyQuickBooksSettings(where: [QuickBooksSettingsWhereUniqueInput!]!): [QuickBooksSettings]
   createEnrolment(data: EnrolmentCreateInput!): Enrolment
   createEnrolments(data: [EnrolmentCreateInput!]!): [Enrolment]
   updateEnrolment(where: EnrolmentWhereUniqueInput!, data: EnrolmentUpdateInput!): Enrolment
@@ -1231,9 +1282,12 @@ type Query {
   lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0): [Lesson!]
   lesson(where: LessonWhereUniqueInput!): Lesson
   lessonsCount(where: LessonWhereInput! = {}): Int
-  emailSettingss(where: EmailSettingsWhereInput! = {id: {equals: 1}}, orderBy: [EmailSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0): [EmailSettings!]
+  manyEmailSettings(where: EmailSettingsWhereInput! = {id: {equals: 1}}, orderBy: [EmailSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0): [EmailSettings!]
   emailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}): EmailSettings
-  emailSettingssCount(where: EmailSettingsWhereInput! = {id: {equals: 1}}): Int
+  manyEmailSettingsCount(where: EmailSettingsWhereInput! = {id: {equals: 1}}): Int
+  manyQuickBooksSettings(where: QuickBooksSettingsWhereInput! = {id: {equals: 1}}, orderBy: [QuickBooksSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0): [QuickBooksSettings!]
+  quickBooksSettings(where: QuickBooksSettingsWhereUniqueInput! = {id: 1}): QuickBooksSettings
+  manyQuickBooksSettingsCount(where: QuickBooksSettingsWhereInput! = {id: {equals: 1}}): Int
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrolment(where: EnrolmentWhereUniqueInput!): Enrolment
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int

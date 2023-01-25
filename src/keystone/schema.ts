@@ -347,13 +347,33 @@ export const lists: Lists = {
     access: isAdmin,
     isSingleton: true,
     graphql: {
-      plural: 'EmailSettingss',
+      plural: 'ManyEmailSettings',
     },
     fields: {
       fromEmail: text({ validation: { isRequired: true } }),
       enrolmentConfirmationTemplate: text({
         validation: { isRequired: true },
       }),
+    },
+  }),
+
+  QuickBooksSettings: list({
+    access: isAdmin,
+    isSingleton: true,
+    graphql: {
+      plural: 'ManyQuickBooksSettings',
+    },
+    fields: {
+      realmId: text({ validation: { isRequired: true } }),
+      accessToken: text({
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+        validation: { isRequired: true },
+      }),
+      refreshToken: text({ validation: { isRequired: true } }),
     },
   }),
   Enrolment: list({
