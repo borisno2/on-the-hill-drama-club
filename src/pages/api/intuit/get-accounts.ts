@@ -11,11 +11,19 @@ export default async function handler(
   if (!qbo) {
     return res.status(403).send('Not authorized')
   }
-  qbo.findAccounts(function (_, accounts) {
-    accounts.QueryResponse.Account.forEach(function (account) {
-      console.log(account.Name)
-    })
-  })
+  qbo.findAccounts(
+    {
+      AccountType: 'Expense',
+      desc: 'MetaData.LastUpdatedTime',
+      limit: 5,
+      offset: 5,
+    },
+    function (_, accounts) {
+      accounts.QueryResponse.Account.forEach(function (account) {
+        console.log(account.Name)
+      })
+    }
+  )
   //const settings = await context.sudo().db.QuickBooksSettings.findOne({})
   //const url =
   //  qbo.environment == 'sandbox'

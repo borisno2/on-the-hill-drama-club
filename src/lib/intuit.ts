@@ -6,6 +6,9 @@ export const clientKey = process.env.QUICKBOOKS_CLIENT_ID
 export const clientSecret = process.env.QUICKBOOKS_CLIENT_SECRET
 
 async function getQBOAccess({ context }: { context: Context }) {
+  if (!clientKey || !clientSecret) {
+    throw new Error('Missing QuickBooks client key or secret')
+  }
   const oauthClient = new OAuthClient({
     clientId: clientKey,
     clientSecret: clientSecret,
@@ -13,7 +16,7 @@ async function getQBOAccess({ context }: { context: Context }) {
     redirectUri: 'http://localhost:3000/api/intuit/callback',
   })
   const settings = await context.sudo().db.QuickBooksSettings.findOne({})
-  if (!settings) {
+  if (!settings || !settings.accessToken || !settings.refreshToken) {
     return null
   }
   oauthClient.setToken(settings.accessToken, settings.refreshToken)
@@ -40,6 +43,9 @@ async function getQBOAccess({ context }: { context: Context }) {
   }
 }
 export async function getQBClient({ context }: { context: Context }) {
+  if (!clientKey || !clientSecret) {
+    throw new Error('Missing QuickBooks client key or secret')
+  }
   const oauthClient = new OAuthClient({
     clientId: clientKey,
     clientSecret: clientSecret,
@@ -48,7 +54,7 @@ export async function getQBClient({ context }: { context: Context }) {
   })
 
   const qboAuth = await context.sudo().db.QuickBooksSettings.findOne({})
-  if (qboAuth) {
+  if (qboAuth && qboAuth.accessToken && qboAuth.refreshToken) {
     oauthClient.setToken(qboAuth.accessToken, qboAuth.refreshToken)
 
     if (!oauthClient.isAccessTokenValid()) {
@@ -73,7 +79,13 @@ export async function getQBClient({ context }: { context: Context }) {
 
 export async function getQBO({ context }: { context: Context }) {
   const qboAuth = await getQBOAccess({ context })
-  if (!qboAuth) {
+  if (
+    !qboAuth ||
+    !qboAuth.accessToken ||
+    !qboAuth.realmId ||
+    !clientKey ||
+    !clientSecret
+  ) {
     return null
   }
 

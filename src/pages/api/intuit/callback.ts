@@ -8,6 +8,9 @@ export default async function handler(
 ) {
   // Parse the redirect URL for authCode and exchange them for tokens
   const parseRedirect = req.url
+  if (!parseRedirect) {
+    return res.status(403).send('Invalid redirect')
+  }
   const context = await getSessionContext({ req, res })
   const oauthClient = await getQBClient({ context })
   console.log('oauthClient', oauthClient)
