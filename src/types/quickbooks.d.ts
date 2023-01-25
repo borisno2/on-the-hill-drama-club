@@ -53,5 +53,64 @@ declare module 'node-quickbooks' {
         accounts: { QueryResponse: { Account: any[] } }
       ) => void
     ): void
+    public createCustomer(
+      customer: CreateQBCustomer,
+      callback: (
+        error: Error,
+        customer: { QueryResponse: { Customer: ReturnQBCustomer } }
+      ) => void
+    )
+    public findCustomers(
+      query: Record<string, any>,
+      callback: (
+        error: Error,
+        customers: { QueryResponse: { Customer: ReturnQBCustomer[] } }
+      ) => void
+    ): void
   }
+}
+
+type MetaData = {
+  CreateTime: string
+  LastUpdatedTime: string
+}
+type ReturnQBCustomer = {
+  domain: string
+  id: string
+  CurrencyRef: {
+    name: string
+    value: string
+  }
+  DefaultTaxCodeRef: {
+    value: string
+  }
+  Active: boolean
+  sparse: boolean
+  BillAddr: CreateQBCustomer['BillAddr'] & { Id: string }
+  MetaData: MetaData
+} & CreateQBCustomer
+
+type CreateQBCustomer = {
+  FullyQualifiedName?: string
+  PrimaryEmailAddr?: {
+    Address?: string
+  }
+  DisplayName: string
+  Suffix?: string
+  Title?: string
+  MiddleName?: string
+  Notes?: string
+  FamilyName?: string
+  PrimaryPhone?: {
+    FreeFormNumber?: string
+  }
+  CompanyName?: string
+  BillAddr?: {
+    CountrySubDivisionCode?: string
+    City?: string
+    PostalCode?: string
+    Line1?: string
+    Country?: string
+  }
+  GivenName?: string
 }
