@@ -8,12 +8,16 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const context = await getSessionContext({ req, res })
-  const qbo = await getQBClient({ context })
+  if (!context.session || context.session?.data.role !== 'ADMIN') {
+    return res.status(403).send('Not authorized')
+  } else {
+    const qbo = await getQBClient({ context })
 
-  return res.redirect(
-    qbo.authorizeUri({
-      scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
-      state: 'testState',
-    })
-  )
+    return res.redirect(
+      qbo.authorizeUri({
+        scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
+        state: 'testState',
+      })
+    )
+  }
 }
