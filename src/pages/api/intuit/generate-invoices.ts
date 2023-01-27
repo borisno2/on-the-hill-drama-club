@@ -42,6 +42,7 @@ const GET_ACCOUNTS_FOR_INVOICE = gql`
         }
       ) {
         id
+        name
         firstName
         surname
         enrolments(
@@ -187,6 +188,7 @@ export default async function handler(
             .mul(term.quantity)
             .toDecimalPlaces(2),
           DetailType: 'SalesItemLineDetail',
+          Description: `${student.name} - ${lessonTerm.name}`,
           SalesItemLineDetail: {
             Qty: new Decimal(term.quantity),
             UnitPrice: new Decimal(lesson.cost)
@@ -210,29 +212,25 @@ export default async function handler(
       CustomerRef: {
         value: customerId.toString(),
       },
-      CurrencyRef: {
-        value: 'AUD',
-      },
       Line: lineItems,
     }
-    console.log('Invoice', JSON.stringify(invoice))
 
     try {
       const newInvoice = await createInvoice(invoice, qbo)
       if (newInvoice === null) {
         continue
       }
-      const sentInvoice = await sendInvoicePdf(
-        newInvoice.Id,
-        account.user?.email!,
-        qbo
-      )
-      if (sentInvoice === null || !sentInvoice.Id) {
-        continue
-      }
+      //const sentInvoice = await sendInvoicePdf(
+      //  newInvoice.Id,
+      //  account.user?.email!,
+      //  qbo
+      //)
+      //if (sentInvoice === null || !sentInvoice.Id) {
+      //  continue
+      //}
       invoicesSent.push({
         accountId: account.id,
-        qboId: parseInt(sentInvoice.Id),
+        qboId: parseInt(newInvoice.Id),
       })
       await context.db.Enrolment.updateMany({ data: enrolmentUpdates })
     } catch (error) {
