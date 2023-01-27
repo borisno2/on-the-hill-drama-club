@@ -34,10 +34,7 @@ import {
   userFilter,
 } from './helpers'
 import { Decimal } from 'decimal.js'
-import sendEmail from '../lib/sendEmail'
-import { GET_ENROLMENT_BY_ID } from '../app/(dashboard)/dashboard/students/queries'
-import { formatDate } from '../lib/formatDate'
-import labelHelper from '../lib/labelHelper'
+import { enrolAfterOperation } from './hooks/enrolment'
 
 const decimalScale = 2
 export const lists: Lists = {
@@ -146,6 +143,8 @@ export const lists: Lists = {
         validation: { isRequired: true },
         defaultValue: 3550,
       }),
+      qboSyncToken: integer(),
+      qboId: integer(),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
@@ -222,6 +221,7 @@ export const lists: Lists = {
           isNullable: true,
         },
       }),
+      qboItemId: integer(),
       lessons: relationship({ ref: 'Lesson.lessonCategory', many: true }),
     },
   }),
@@ -347,13 +347,33 @@ export const lists: Lists = {
     access: isAdmin,
     isSingleton: true,
     graphql: {
-      plural: 'EmailSettingss',
+      plural: 'ManyEmailSettings',
     },
     fields: {
       fromEmail: text({ validation: { isRequired: true } }),
       enrolmentConfirmationTemplate: text({
         validation: { isRequired: true },
       }),
+    },
+  }),
+
+  QuickBooksSettings: list({
+    access: isAdmin,
+    isSingleton: true,
+    graphql: {
+      plural: 'ManyQuickBooksSettings',
+    },
+    fields: {
+      realmId: text({ validation: { isRequired: true } }),
+      accessToken: text({
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+        validation: { isRequired: true },
+      }),
+      refreshToken: text({ validation: { isRequired: true } }),
     },
   }),
   Enrolment: list({
@@ -368,73 +388,7 @@ export const lists: Lists = {
       },
     },
     hooks: {
-      afterOperation: async ({
-        originalItem,
-        operation,
-        item,
-        resolvedData,
-        context,
-      }) => {
-        if (
-          operation === 'update' &&
-          resolvedData &&
-          resolvedData.status === 'ENROLED' &&
-          originalItem.status === 'PENDING'
-        ) {
-          const { enrolment } = await context.graphql.run({
-            query: GET_ENROLMENT_BY_ID,
-            variables: { id: item.id },
-          })
-
-          if (
-            !enrolment ||
-            !enrolment.student ||
-            !enrolment.student.account ||
-            !enrolment.lessonTerm ||
-            !enrolment.lessonTerm.lesson ||
-            !enrolment.lessonTerm.term ||
-            !enrolment.lessonTerm.lesson.day ||
-            !enrolment.student.account.user ||
-            !enrolment.student.account.user.email ||
-            !process.env.SENDGRID_API_KEY
-          ) {
-            console.log('Missing Data')
-
-            return
-          }
-          const emailSettings = await context
-            .sudo()
-            .db.EmailSettings.findOne({})
-
-          if (
-            !emailSettings ||
-            !emailSettings.enrolmentConfirmationTemplate ||
-            !emailSettings.fromEmail
-          ) {
-            console.log('Missing Email Settings')
-            return
-          }
-          const dynamicData = {
-            firstName: enrolment.student.account.firstName,
-            studentFirstName: enrolment.student.firstName,
-            lessonName: enrolment.lessonTerm.lesson.name,
-            termName: enrolment.lessonTerm.term.name,
-            startDate: formatDate(enrolment.lessonTerm.term.startDate),
-            weekDay: labelHelper(dayOptions, enrolment.lessonTerm.lesson.day),
-            startTime: enrolment.lessonTerm.lesson.time,
-          }
-          const emailData = {
-            to: enrolment.student.account.user.email,
-            templateId: emailSettings.enrolmentConfirmationTemplate,
-            dynamicTemplateData: dynamicData,
-            from: {
-              email: emailSettings.fromEmail,
-            },
-          }
-          console.log('Sending Email')
-          await sendEmail(emailData)
-        }
-      },
+      afterOperation: enrolAfterOperation,
     },
     fields: {
       lessonTerm: relationship({ ref: 'LessonTerm.enrolments', many: false }),

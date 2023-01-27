@@ -34,6 +34,8 @@ export const enrolmentStatusOptions = [
   { label: 'Enroled', value: 'ENROLED' },
   { label: 'Pending', value: 'PENDING' },
   { label: 'Cancelled', value: 'CANCELLED' },
+  { label: 'Completed', value: 'COMPLETED' },
+  { label: 'Invoiced', value: 'INVOICED' },
   { label: 'Paid', value: 'PAID' },
 ]
 export const billStatusOptions = [
