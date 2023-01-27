@@ -178,6 +178,8 @@ type Account {
   streetAddress: String
   suburb: String
   postcode: Int
+  qboSyncToken: Int
+  qboId: Int
   createdAt: DateTime
 }
 
@@ -201,6 +203,8 @@ input AccountWhereInput {
   streetAddress: StringFilter
   suburb: StringFilter
   postcode: IntFilter
+  qboSyncToken: IntNullableFilter
+  qboId: IntNullableFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -227,6 +231,17 @@ input IntFilter {
   not: IntFilter
 }
 
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
 input AccountOrderByInput {
   id: OrderDirection
   firstName: OrderDirection
@@ -237,6 +252,8 @@ input AccountOrderByInput {
   streetAddress: OrderDirection
   suburb: OrderDirection
   postcode: OrderDirection
+  qboSyncToken: OrderDirection
+  qboId: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -252,6 +269,8 @@ input AccountUpdateInput {
   streetAddress: String
   suburb: String
   postcode: Int
+  qboSyncToken: Int
+  qboId: Int
   createdAt: DateTime
 }
 
@@ -292,6 +311,8 @@ input AccountCreateInput {
   streetAddress: String
   suburb: String
   postcode: Int
+  qboSyncToken: Int
+  qboId: Int
   createdAt: DateTime
 }
 
@@ -452,6 +473,7 @@ type LessonCategory {
   type: String
   length: String
   description: String
+  qboItemId: Int
   lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0): [Lesson!]
   lessonsCount(where: LessonWhereInput! = {}): Int
 }
@@ -472,6 +494,7 @@ input LessonCategoryWhereInput {
   type: StringFilter
   length: StringFilter
   description: StringNullableFilter
+  qboItemId: IntNullableFilter
   lessons: LessonManyRelationFilter
 }
 
@@ -489,6 +512,7 @@ input LessonCategoryOrderByInput {
   type: OrderDirection
   length: OrderDirection
   description: OrderDirection
+  qboItemId: OrderDirection
 }
 
 input LessonCategoryUpdateInput {
@@ -498,6 +522,7 @@ input LessonCategoryUpdateInput {
   type: String
   length: String
   description: String
+  qboItemId: Int
   lessons: LessonRelateToManyForUpdateInput
 }
 
@@ -520,6 +545,7 @@ input LessonCategoryCreateInput {
   type: String
   length: String
   description: String
+  qboItemId: Int
   lessons: LessonRelateToManyForCreateInput
 }
 
@@ -1107,17 +1133,6 @@ input BillItemWhereInput {
   quantity: IntNullableFilter
   amount: DecimalNullableFilter
   createdAt: DateTimeNullableFilter
-}
-
-input IntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: IntNullableFilter
 }
 
 input DecimalNullableFilter {

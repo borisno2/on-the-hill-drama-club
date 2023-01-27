@@ -42,6 +42,8 @@ model Account {
   streetAddress      String    @default("PLEASE_UPDATE")
   suburb             String    @default("PLEASE_UPDATE")
   postcode           Int       @default(3550)
+  qboSyncToken       Int?
+  qboId              Int?
   createdAt          DateTime? @default(now())
 }
 
@@ -69,6 +71,7 @@ model LessonCategory {
   type        String
   length      String   @default("")
   description String?  @mysql.Text
+  qboItemId   Int?
   lessons     Lesson[] @relation("Lesson_lessonCategory")
 }
 

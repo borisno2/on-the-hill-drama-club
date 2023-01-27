@@ -1,4 +1,3 @@
-// declare the types for intuit-oauth and node-quickbooks in src/types/intuit.d.ts:
 declare module 'intuit-oauth' {
   export default class OAuthClient {
     constructor(options: {
@@ -33,6 +32,12 @@ declare module 'intuit-oauth' {
   }
 }
 declare module 'node-quickbooks' {
+  import {
+    CreateQBCustomer,
+    ReturnQBCustomer,
+    ReturnQBInvoice,
+    CreateQBInvoice,
+  } from './qbo'
   export default class QuickBooks {
     constructor(
       consumerKey: string,
@@ -55,11 +60,17 @@ declare module 'node-quickbooks' {
     ): void
     public createCustomer(
       customer: CreateQBCustomer,
-      callback: (
-        error: Error,
-        customer: { QueryResponse: { Customer: ReturnQBCustomer } }
-      ) => void
-    )
+      callback: (error: Error, customer: ReturnQBCustomer) => void
+    ): void
+    public createInvoice(
+      invoice: CreateQBInvoice,
+      callback: (error: Error, invoice: ReturnQBInvoice) => void
+    ): void
+    public sendInvoicePdf(
+      invoiceId: string,
+      sendTo?: string,
+      callback: (error: Error, invoice: ReturnQBInvoice) => void
+    ): void
     public findCustomers(
       query: Record<string, any>,
       callback: (
@@ -68,49 +79,4 @@ declare module 'node-quickbooks' {
       ) => void
     ): void
   }
-}
-
-type MetaData = {
-  CreateTime: string
-  LastUpdatedTime: string
-}
-type ReturnQBCustomer = {
-  domain: string
-  id: string
-  CurrencyRef: {
-    name: string
-    value: string
-  }
-  DefaultTaxCodeRef: {
-    value: string
-  }
-  Active: boolean
-  sparse: boolean
-  BillAddr: CreateQBCustomer['BillAddr'] & { Id: string }
-  MetaData: MetaData
-} & CreateQBCustomer
-
-type CreateQBCustomer = {
-  FullyQualifiedName?: string
-  PrimaryEmailAddr?: {
-    Address?: string
-  }
-  DisplayName: string
-  Suffix?: string
-  Title?: string
-  MiddleName?: string
-  Notes?: string
-  FamilyName?: string
-  PrimaryPhone?: {
-    FreeFormNumber?: string
-  }
-  CompanyName?: string
-  BillAddr?: {
-    CountrySubDivisionCode?: string
-    City?: string
-    PostalCode?: string
-    Line1?: string
-    Country?: string
-  }
-  GivenName?: string
 }
