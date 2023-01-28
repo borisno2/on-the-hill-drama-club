@@ -61,6 +61,8 @@ export const messageAfterOperation: ListHooks<Lists.Message.TypeInfo>['afterOper
         })
         .flat()
         .filter((email) => email !== '')
+        // Remove duplicates
+        .filter((email, index, self) => self.indexOf(email) === index)
       // Send the email
       const emailData = {
         to: emailAddresses,

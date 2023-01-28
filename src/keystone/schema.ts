@@ -434,6 +434,7 @@ export const lists: Lists = {
       name: text({ validation: { isRequired: true } }),
       status: select({
         validation: { isRequired: true },
+        defaultValue: 'DRAFT',
         options: messageStatusOptions,
       }),
       content: text({

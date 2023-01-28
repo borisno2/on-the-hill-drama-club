@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Message` MODIFY `status` VARCHAR(191) NOT NULL DEFAULT 'DRAFT';

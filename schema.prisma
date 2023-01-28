@@ -157,7 +157,7 @@ model Enrolment {
 model Message {
   id          String       @id @default(cuid())
   name        String       @default("")
-  status      String
+  status      String       @default("DRAFT")
   content     String?      @mysql.Text
   lessonTerms LessonTerm[] @relation("LessonTerm_messages")
   sentAt      DateTime?
