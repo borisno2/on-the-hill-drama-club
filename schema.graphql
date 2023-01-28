@@ -690,6 +690,8 @@ type LessonTerm {
   lesson: Lesson
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
+  messages(where: MessageWhereInput! = {}, orderBy: [MessageOrderByInput!]! = [], take: Int, skip: Int! = 0): [Message!]
+  messagesCount(where: MessageWhereInput! = {}): Int
   createdAt: DateTime
 }
 
@@ -706,7 +708,14 @@ input LessonTermWhereInput {
   term: TermWhereInput
   lesson: LessonWhereInput
   enrolments: EnrolmentManyRelationFilter
+  messages: MessageManyRelationFilter
   createdAt: DateTimeNullableFilter
+}
+
+input MessageManyRelationFilter {
+  every: MessageWhereInput
+  some: MessageWhereInput
+  none: MessageWhereInput
 }
 
 input LessonTermOrderByInput {
@@ -720,6 +729,7 @@ input LessonTermUpdateInput {
   term: TermRelateToOneForUpdateInput
   lesson: LessonRelateToOneForUpdateInput
   enrolments: EnrolmentRelateToManyForUpdateInput
+  messages: MessageRelateToManyForUpdateInput
   createdAt: DateTime
 }
 
@@ -735,6 +745,13 @@ input LessonRelateToOneForUpdateInput {
   disconnect: Boolean
 }
 
+input MessageRelateToManyForUpdateInput {
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  create: [MessageCreateInput!]
+  connect: [MessageWhereUniqueInput!]
+}
+
 input LessonTermUpdateArgs {
   where: LessonTermWhereUniqueInput!
   data: LessonTermUpdateInput!
@@ -745,6 +762,7 @@ input LessonTermCreateInput {
   term: TermRelateToOneForCreateInput
   lesson: LessonRelateToOneForCreateInput
   enrolments: EnrolmentRelateToManyForCreateInput
+  messages: MessageRelateToManyForCreateInput
   createdAt: DateTime
 }
 
@@ -756,6 +774,11 @@ input TermRelateToOneForCreateInput {
 input LessonRelateToOneForCreateInput {
   create: LessonCreateInput
   connect: LessonWhereUniqueInput
+}
+
+input MessageRelateToManyForCreateInput {
+  create: [MessageCreateInput!]
+  connect: [MessageWhereUniqueInput!]
 }
 
 type Lesson {
@@ -862,6 +885,7 @@ type EmailSettings {
   id: ID!
   fromEmail: String
   enrolmentConfirmationTemplate: String
+  lessonTermMessageTemplate: String
 }
 
 input EmailSettingsWhereUniqueInput {
@@ -875,17 +899,20 @@ input EmailSettingsWhereInput {
   id: IDFilter
   fromEmail: StringFilter
   enrolmentConfirmationTemplate: StringFilter
+  lessonTermMessageTemplate: StringFilter
 }
 
 input EmailSettingsOrderByInput {
   id: OrderDirection
   fromEmail: OrderDirection
   enrolmentConfirmationTemplate: OrderDirection
+  lessonTermMessageTemplate: OrderDirection
 }
 
 input EmailSettingsUpdateInput {
   fromEmail: String
   enrolmentConfirmationTemplate: String
+  lessonTermMessageTemplate: String
 }
 
 input EmailSettingsUpdateArgs {
@@ -896,6 +923,7 @@ input EmailSettingsUpdateArgs {
 input EmailSettingsCreateInput {
   fromEmail: String
   enrolmentConfirmationTemplate: String
+  lessonTermMessageTemplate: String
 }
 
 type QuickBooksSettings {
@@ -1011,6 +1039,66 @@ input LessonTermRelateToOneForCreateInput {
 input StudentRelateToOneForCreateInput {
   create: StudentCreateInput
   connect: StudentWhereUniqueInput
+}
+
+type Message {
+  id: ID!
+  name: String
+  status: String
+  content: String
+  lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0): [LessonTerm!]
+  lessonTermsCount(where: LessonTermWhereInput! = {}): Int
+  sentAt: DateTime
+  createdAt: DateTime
+}
+
+input MessageWhereUniqueInput {
+  id: ID
+}
+
+input MessageWhereInput {
+  AND: [MessageWhereInput!]
+  OR: [MessageWhereInput!]
+  NOT: [MessageWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  status: StringFilter
+  content: StringNullableFilter
+  lessonTerms: LessonTermManyRelationFilter
+  sentAt: DateTimeNullableFilter
+  createdAt: DateTimeNullableFilter
+}
+
+input MessageOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  status: OrderDirection
+  content: OrderDirection
+  sentAt: OrderDirection
+  createdAt: OrderDirection
+}
+
+input MessageUpdateInput {
+  name: String
+  status: String
+  content: String
+  lessonTerms: LessonTermRelateToManyForUpdateInput
+  sentAt: DateTime
+  createdAt: DateTime
+}
+
+input MessageUpdateArgs {
+  where: MessageWhereUniqueInput!
+  data: MessageUpdateInput!
+}
+
+input MessageCreateInput {
+  name: String
+  status: String
+  content: String
+  lessonTerms: LessonTermRelateToManyForCreateInput
+  sentAt: DateTime
+  createdAt: DateTime
 }
 
 type Bill {
@@ -1258,6 +1346,12 @@ type Mutation {
   updateEnrolments(data: [EnrolmentUpdateArgs!]!): [Enrolment]
   deleteEnrolment(where: EnrolmentWhereUniqueInput!): Enrolment
   deleteEnrolments(where: [EnrolmentWhereUniqueInput!]!): [Enrolment]
+  createMessage(data: MessageCreateInput!): Message
+  createMessages(data: [MessageCreateInput!]!): [Message]
+  updateMessage(where: MessageWhereUniqueInput!, data: MessageUpdateInput!): Message
+  updateMessages(data: [MessageUpdateArgs!]!): [Message]
+  deleteMessage(where: MessageWhereUniqueInput!): Message
+  deleteMessages(where: [MessageWhereUniqueInput!]!): [Message]
   createBill(data: BillCreateInput!): Bill
   createBills(data: [BillCreateInput!]!): [Bill]
   updateBill(where: BillWhereUniqueInput!, data: BillUpdateInput!): Bill
@@ -1306,6 +1400,9 @@ type Query {
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0): [Enrolment!]
   enrolment(where: EnrolmentWhereUniqueInput!): Enrolment
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
+  messages(where: MessageWhereInput! = {}, orderBy: [MessageOrderByInput!]! = [], take: Int, skip: Int! = 0): [Message!]
+  message(where: MessageWhereUniqueInput!): Message
+  messagesCount(where: MessageWhereInput! = {}): Int
   bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0): [Bill!]
   bill(where: BillWhereUniqueInput!): Bill
   billsCount(where: BillWhereInput! = {}): Int

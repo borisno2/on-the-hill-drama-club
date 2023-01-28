@@ -1,6 +1,11 @@
+import { ListFilterAccessControl } from '@keystone-6/core/types'
+import { Lists } from '.keystone/types'
 import { gql } from '@ts-gql/tag/no-transform'
 import { Session } from 'next-auth'
-import { StudentWhereInput } from '../../__generated__/ts-gql/@schema'
+import {
+  MessageWhereInput,
+  StudentWhereInput,
+} from '../../__generated__/ts-gql/@schema'
 
 export const GET_BILL_ITEMS_TOTAL = gql`
   query GET_BILL_ITEMS_TOTAL($id: ID!) {
@@ -84,4 +89,31 @@ export function billItemFilter({ session }: { session: Session }) {
 export function userFilter({ session }: { session: Session }) {
   if (session.data.role === 'ADMIN') return true
   return { id: { equals: session.userId } }
+}
+
+export function messageFilter({
+  session,
+}: {
+  session: Session
+}): MessageWhereInput | boolean {
+  if (session.data.role === 'ADMIN') return true
+  return {
+    lessonTerms: {
+      some: {
+        enrolments: {
+          some: {
+            student: {
+              account: {
+                user: {
+                  id: {
+                    equals: session.userId,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  }
 }

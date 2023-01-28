@@ -1,7 +1,7 @@
 import sgMail from '@sendgrid/mail'
 
 type emailData = {
-  to: string
+  to: string | string[]
   from: {
     email: string
     name?: string
