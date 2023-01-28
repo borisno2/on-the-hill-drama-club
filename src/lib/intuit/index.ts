@@ -43,10 +43,16 @@ async function getQBOAccess({ context }: { context: Context }) {
   }
 }
 function getCallbackURL() {
-  if (process.env.NODE_ENV === 'production' && process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}/api/intuit/callback`
+  if (process.env.VERCEL_ENV === 'production') {
+    return `https://www.emilycalder.com.au/api/intuit/callback`
+  } else if (
+    process.env.VERCEL_ENV === 'development' ||
+    process.env.VERCEL_ENV === 'preview'
+  ) {
+    return `https://emily-calder.vercel.app/api/intuit/callback`
+  } else {
+    return 'http://localhost:3000/api/intuit/callback'
   }
-  return 'http://localhost:3000/api/intuit/callback'
 }
 
 export async function getQBClient({ context }: { context: Context }) {
