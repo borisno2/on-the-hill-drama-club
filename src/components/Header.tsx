@@ -9,6 +9,7 @@ import {
   CreditCardIcon,
   EyeIcon,
   GlobeAsiaAustraliaIcon,
+  KeyIcon,
   MusicalNoteIcon,
   PaperAirplaneIcon,
   PencilSquareIcon,
@@ -53,6 +54,12 @@ const lessons = [
     description: 'Teen Theatre and Performance',
     href: '/lessons/drama-teens',
     icon: PaperAirplaneIcon,
+  },
+  {
+    name: 'Advanced Actors',
+    description: 'Advanced Theatre and Performance',
+    href: '/lessons/advanced-actors',
+    icon: KeyIcon,
   },
   {
     name: 'Theatre Making Workshops',
