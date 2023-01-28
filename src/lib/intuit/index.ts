@@ -42,6 +42,13 @@ async function getQBOAccess({ context }: { context: Context }) {
     realmId: settings.realmId,
   }
 }
+function getCallbackURL() {
+  if (process.env.NODE_ENV === 'production' && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}/api/intuit/callback`
+  }
+  return 'http://localhost:3000/api/intuit/callback'
+}
+
 export async function getQBClient({ context }: { context: Context }) {
   if (!clientKey || !clientSecret) {
     throw new Error('Missing QuickBooks client key or secret')
@@ -49,8 +56,9 @@ export async function getQBClient({ context }: { context: Context }) {
   const oauthClient = new OAuthClient({
     clientId: clientKey,
     clientSecret: clientSecret,
-    environment: 'sandbox',
-    redirectUri: 'http://localhost:3000/api/intuit/callback',
+    environment:
+      process.env.VERCEL_ENV === 'production' ? 'production' : 'sandbox',
+    redirectUri: getCallbackURL(),
   })
 
   const qboAuth = await context.sudo().db.QuickBooksSettings.findOne({})
