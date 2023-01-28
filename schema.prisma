@@ -101,6 +101,7 @@ model LessonTerm {
   lesson     Lesson?     @relation("LessonTerm_lesson", fields: [lessonId], references: [id])
   lessonId   String?     @map("lesson")
   enrolments Enrolment[] @relation("Enrolment_lessonTerm")
+  messages   Message[]   @relation("LessonTerm_messages")
   createdAt  DateTime?   @default(now())
 
   @@index([termId])
@@ -130,6 +131,7 @@ model EmailSettings {
   id                            Int    @id
   fromEmail                     String @default("")
   enrolmentConfirmationTemplate String @default("")
+  lessonTermMessageTemplate     String @default("")
 }
 
 model QuickBooksSettings {
@@ -150,6 +152,16 @@ model Enrolment {
 
   @@index([lessonTermId])
   @@index([studentId])
+}
+
+model Message {
+  id          String       @id @default(cuid())
+  name        String       @default("")
+  status      String
+  content     String?      @mysql.Text
+  lessonTerms LessonTerm[] @relation("LessonTerm_messages")
+  sentAt      DateTime?
+  createdAt   DateTime?    @default(now())
 }
 
 model Bill {

@@ -45,3 +45,10 @@ export const billStatusOptions = [
   { label: 'Paid', value: 'PAID' },
   { label: 'Cancelled', value: 'CANCELLED' },
 ]
+
+export const messageStatusOptions = [
+  { label: 'Draft', value: 'DRAFT' },
+  { label: 'Queued', value: 'QUEUED' },
+  { label: 'Sent', value: 'SENT' },
+  { label: 'Failed', value: 'FAILED' },
+]

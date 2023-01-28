@@ -5,6 +5,7 @@ import {
   lessonStatusOptions,
   enrolmentStatusOptions,
   billStatusOptions,
+  messageStatusOptions,
 } from '../types/selectOptions'
 import { graphql, list } from '@keystone-6/core'
 import { allOperations, allowAll } from '@keystone-6/core/access'
@@ -30,11 +31,13 @@ import {
   GET_BILL_ITEMS_TOTAL,
   isAdmin,
   isLoggedIn,
+  messageFilter,
   studentFilter,
   userFilter,
 } from './helpers'
 import { Decimal } from 'decimal.js'
 import { enrolAfterOperation } from './hooks/enrolment'
+import { messageAfterOperation } from './hooks/message'
 
 const decimalScale = 2
 export const lists: Lists = {
@@ -291,6 +294,7 @@ export const lists: Lists = {
       term: relationship({ ref: 'Term.lessonTerms', many: false }),
       lesson: relationship({ ref: 'Lesson.lessonTerms', many: false }),
       enrolments: relationship({ ref: 'Enrolment.lessonTerm', many: true }),
+      messages: relationship({ ref: 'Message.lessonTerms', many: true }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
@@ -354,6 +358,7 @@ export const lists: Lists = {
       enrolmentConfirmationTemplate: text({
         validation: { isRequired: true },
       }),
+      lessonTermMessageTemplate: text(),
     },
   }),
 
@@ -406,6 +411,41 @@ export const lists: Lists = {
           update: isAdmin,
         },
       }),
+      createdAt: timestamp({
+        defaultValue: { kind: 'now' },
+      }),
+    },
+  }),
+
+  Message: list({
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: isLoggedIn,
+      },
+      filter: {
+        query: messageFilter,
+      },
+    },
+    hooks: {
+      afterOperation: messageAfterOperation,
+    },
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      status: select({
+        validation: { isRequired: true },
+        options: messageStatusOptions,
+      }),
+      content: text({
+        validation: { isRequired: true },
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+      }),
+      lessonTerms: relationship({ ref: 'LessonTerm.messages', many: true }),
+      sentAt: timestamp(),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
