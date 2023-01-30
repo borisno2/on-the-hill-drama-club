@@ -102,7 +102,7 @@ model LessonTerm {
   lessonId        String?     @map("lesson")
   enrolments      Enrolment[] @relation("Enrolment_lessonTerm")
   messages        Message[]   @relation("LessonTerm_messages")
-  numberOfLessons Int
+  numberOfLessons Int         @default(0)
   createdAt       DateTime?   @default(now())
 
   @@index([termId])
