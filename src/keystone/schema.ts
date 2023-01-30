@@ -297,6 +297,7 @@ export const lists: Lists = {
       messages: relationship({ ref: 'Message.lessonTerms', many: true }),
       numberOfLessons: integer({
         validation: { isRequired: true },
+        defaultValue: 0,
         ui: {
           description: 'Number of lessons in this term',
         },
