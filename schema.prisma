@@ -94,15 +94,16 @@ model Term {
 }
 
 model LessonTerm {
-  id         String      @id @default(cuid())
-  status     String
-  term       Term?       @relation("LessonTerm_term", fields: [termId], references: [id])
-  termId     String?     @map("term")
-  lesson     Lesson?     @relation("LessonTerm_lesson", fields: [lessonId], references: [id])
-  lessonId   String?     @map("lesson")
-  enrolments Enrolment[] @relation("Enrolment_lessonTerm")
-  messages   Message[]   @relation("LessonTerm_messages")
-  createdAt  DateTime?   @default(now())
+  id              String      @id @default(cuid())
+  status          String
+  term            Term?       @relation("LessonTerm_term", fields: [termId], references: [id])
+  termId          String?     @map("term")
+  lesson          Lesson?     @relation("LessonTerm_lesson", fields: [lessonId], references: [id])
+  lessonId        String?     @map("lesson")
+  enrolments      Enrolment[] @relation("Enrolment_lessonTerm")
+  messages        Message[]   @relation("LessonTerm_messages")
+  numberOfLessons Int
+  createdAt       DateTime?   @default(now())
 
   @@index([termId])
   @@index([lessonId])

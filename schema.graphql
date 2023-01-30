@@ -692,6 +692,7 @@ type LessonTerm {
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
   messages(where: MessageWhereInput! = {}, orderBy: [MessageOrderByInput!]! = [], take: Int, skip: Int! = 0): [Message!]
   messagesCount(where: MessageWhereInput! = {}): Int
+  numberOfLessons: Int
   createdAt: DateTime
 }
 
@@ -709,6 +710,7 @@ input LessonTermWhereInput {
   lesson: LessonWhereInput
   enrolments: EnrolmentManyRelationFilter
   messages: MessageManyRelationFilter
+  numberOfLessons: IntFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -721,6 +723,7 @@ input MessageManyRelationFilter {
 input LessonTermOrderByInput {
   id: OrderDirection
   status: OrderDirection
+  numberOfLessons: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -730,6 +733,7 @@ input LessonTermUpdateInput {
   lesson: LessonRelateToOneForUpdateInput
   enrolments: EnrolmentRelateToManyForUpdateInput
   messages: MessageRelateToManyForUpdateInput
+  numberOfLessons: Int
   createdAt: DateTime
 }
 
@@ -763,6 +767,7 @@ input LessonTermCreateInput {
   lesson: LessonRelateToOneForCreateInput
   enrolments: EnrolmentRelateToManyForCreateInput
   messages: MessageRelateToManyForCreateInput
+  numberOfLessons: Int
   createdAt: DateTime
 }
 
