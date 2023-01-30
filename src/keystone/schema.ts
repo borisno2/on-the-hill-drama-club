@@ -295,6 +295,12 @@ export const lists: Lists = {
       lesson: relationship({ ref: 'Lesson.lessonTerms', many: false }),
       enrolments: relationship({ ref: 'Enrolment.lessonTerm', many: true }),
       messages: relationship({ ref: 'Message.lessonTerms', many: true }),
+      numberOfLessons: integer({
+        validation: { isRequired: true },
+        ui: {
+          description: 'Number of lessons in this term',
+        },
+      }),
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),

@@ -57,11 +57,7 @@ const GET_ACCOUNTS_FOR_INVOICE = gql`
           lessonTerm {
             id
             name
-            term {
-              id
-              name
-              quantity
-            }
+            numberOfLessons
             lesson {
               id
               cost
@@ -171,26 +167,25 @@ export default async function handler(
           continue
         }
         const { lessonTerm } = enrolment
-        const { lesson, term } = lessonTerm
+        const { lesson } = lessonTerm
         if (
           lesson === null ||
-          term === null ||
           lesson.cost === null ||
-          term.quantity === null ||
           lesson.lessonCategory === null ||
-          !lesson.lessonCategory.qboItemId
+          !lesson.lessonCategory.qboItemId ||
+          lessonTerm.numberOfLessons === null
         ) {
           continue
         }
         lineItems.push({
           Amount: new Decimal(lesson.cost)
             .dividedBy(100)
-            .mul(term.quantity)
+            .mul(lessonTerm.numberOfLessons)
             .toDecimalPlaces(2),
           DetailType: 'SalesItemLineDetail',
           Description: `${student.name} - ${lessonTerm.name}`,
           SalesItemLineDetail: {
-            Qty: new Decimal(term.quantity),
+            Qty: new Decimal(lessonTerm.numberOfLessons),
             UnitPrice: new Decimal(lesson.cost)
               .dividedBy(100)
               .toDecimalPlaces(2),
