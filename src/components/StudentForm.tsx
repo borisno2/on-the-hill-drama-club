@@ -102,7 +102,6 @@ export default function Student({
         })
 
         setSuccess(true)
-        setDone(true)
         setSubmitting(false)
         router.refresh()
       }
