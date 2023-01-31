@@ -2,6 +2,20 @@ import { Context } from '.keystone/types'
 import OAuthClient from 'intuit-oauth'
 import QuickBooks from 'node-quickbooks'
 
+function getCallbackURL() {
+  if (process.env.VERCEL_ENV === 'production') {
+    return `https://www.emilycalder.com.au/api/intuit/callback`
+  } else if (
+    process.env.VERCEL_ENV === 'development' ||
+    process.env.VERCEL_ENV === 'preview'
+  ) {
+    return `https://emily-calder.vercel.app/api/intuit/callback`
+  } else {
+    return 'http://localhost:3000/api/intuit/callback'
+  }
+}
+
+const useSandBox = process.env.VERCEL_ENV !== 'production'
 export const clientKey = process.env.QUICKBOOKS_CLIENT_ID
 export const clientSecret = process.env.QUICKBOOKS_CLIENT_SECRET
 
@@ -12,8 +26,8 @@ async function getQBOAccess({ context }: { context: Context }) {
   const oauthClient = new OAuthClient({
     clientId: clientKey,
     clientSecret: clientSecret,
-    environment: 'sandbox',
-    redirectUri: 'http://localhost:3000/api/intuit/callback',
+    environment: useSandBox ? 'sandbox' : 'production',
+    redirectUri: getCallbackURL(),
   })
   const settings = await context.sudo().db.QuickBooksSettings.findOne({})
   if (!settings || !settings.accessToken || !settings.refreshToken) {
@@ -42,18 +56,6 @@ async function getQBOAccess({ context }: { context: Context }) {
     realmId: settings.realmId,
   }
 }
-function getCallbackURL() {
-  if (process.env.VERCEL_ENV === 'production') {
-    return `https://www.emilycalder.com.au/api/intuit/callback`
-  } else if (
-    process.env.VERCEL_ENV === 'development' ||
-    process.env.VERCEL_ENV === 'preview'
-  ) {
-    return `https://emily-calder.vercel.app/api/intuit/callback`
-  } else {
-    return 'http://localhost:3000/api/intuit/callback'
-  }
-}
 
 export async function getQBClient({ context }: { context: Context }) {
   if (!clientKey || !clientSecret) {
@@ -62,8 +64,7 @@ export async function getQBClient({ context }: { context: Context }) {
   const oauthClient = new OAuthClient({
     clientId: clientKey,
     clientSecret: clientSecret,
-    environment:
-      process.env.VERCEL_ENV === 'production' ? 'production' : 'sandbox',
+    environment: useSandBox ? 'sandbox' : 'production',
     redirectUri: getCallbackURL(),
   })
 
@@ -109,7 +110,7 @@ export async function getQBO({ context }: { context: Context }) {
     qboAuth.accessToken /* oAuth access token */,
     false /* no token secret for oAuth 2.0 */,
     qboAuth?.realmId,
-    true /* use a sandbox account */,
+    useSandBox /* use a sandbox account */,
     false /* turn debugging on */,
     4 /* minor version */,
     '2.0' /* oauth version */,
