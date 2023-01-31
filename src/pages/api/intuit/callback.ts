@@ -16,14 +16,11 @@ export default async function handler(
     return res.status(403).send('Not authorized')
   } else {
     const oauthClient = await getQBClient({ context })
-    console.log('oauthClient', oauthClient)
-    console.log('parseRedirect', parseRedirect)
 
     // Exchange the auth code retrieved from the **req.url** on the redirectUri
     oauthClient
       .createToken(parseRedirect)
       .then(function (authResponse) {
-        console.log('The Token is  ' + JSON.stringify(authResponse.getJson()))
         // Store the token in the database
         const settings = context
           .sudo()
