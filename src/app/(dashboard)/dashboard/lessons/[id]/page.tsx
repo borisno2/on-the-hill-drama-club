@@ -8,7 +8,7 @@ import { GET_LESSON_BY_ID } from '../queries'
 import { Suspense } from 'react'
 import EnrolStudentList from './EnrolStudentList'
 
-
+export const dynamic = 'force-dynamic'
 export default async function LessonPage({
     params,
 }: {
