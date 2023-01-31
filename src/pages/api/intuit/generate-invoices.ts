@@ -111,6 +111,7 @@ export default async function handler(
   if (qbo === null) {
     return res.status(500).send('QBO client not found')
   }
+  const errors: { message: string; error: any }[] = []
   // Create the invoices for each account
   const invoicesSent: { accountId: string; qboId: number }[] = []
   for await (const account of accounts) {
@@ -121,22 +122,29 @@ export default async function handler(
     let customerId = account.qboId
     if (qboId === null) {
       // create the customer in QBO and update the account
-      const customer = await createCustomer(
-        {
-          DisplayName: account.name!,
-          GivenName: account.firstName!,
-          FamilyName: account.surname!,
-          PrimaryEmailAddr: {
-            Address: account.user?.email!,
-          },
-        },
-        qbo
-      )
-      if (customer === null) {
-        continue
-      }
-      customerId = parseInt(customer.Id)
       try {
+        const customer = await createCustomer(
+          {
+            DisplayName: account.name!,
+            GivenName: account.firstName!,
+            FamilyName: account.surname!,
+            PrimaryEmailAddr: {
+              Address: account.user?.email!,
+            },
+          },
+          qbo
+        )
+
+        if (customer === null) {
+          errors.push({
+            message: `Customer ${account.name} with id ${account.id} returned null`,
+            error: null,
+          })
+          continue
+        }
+
+        customerId = parseInt(customer.Id)
+
         await context.db.Account.updateOne({
           where: { id: account.id },
           data: {
@@ -146,10 +154,18 @@ export default async function handler(
         })
       } catch (error) {
         console.error(error)
+        errors.push({
+          message: `Error creating customer ${account.name} with id ${account.id}`,
+          error,
+        })
         continue
       }
     }
     if (!customerId) {
+      errors.push({
+        message: `Customer ${account.name} with id ${account.id} has no QBO id`,
+        error: null,
+      })
       continue
     }
     const enrolmentUpdates: {
@@ -175,6 +191,10 @@ export default async function handler(
           !lesson.lessonCategory.qboItemId ||
           lessonTerm.numberOfLessons === null
         ) {
+          errors.push({
+            message: `Lesson with id ${lesson?.id} has no cost or category or number of lessons`,
+            error: null,
+          })
           continue
         }
         lineItems.push({
@@ -213,6 +233,10 @@ export default async function handler(
     try {
       const newInvoice = await createInvoice(invoice, qbo)
       if (newInvoice === null) {
+        errors.push({
+          message: `Invoice for account ${account.name} with id ${account.id} returned null`,
+          error: null,
+        })
         continue
       }
       //const sentInvoice = await sendInvoicePdf(
@@ -230,8 +254,12 @@ export default async function handler(
       await context.db.Enrolment.updateMany({ data: enrolmentUpdates })
     } catch (error) {
       console.error(error)
+      errors.push({
+        message: `Error creating invoice for account ${account.name} with id ${account.id}`,
+        error,
+      })
       continue
     }
   }
-  return res.status(200).json({ invoicesSent, accounts })
+  return res.status(200).json({ invoicesSent, accounts, errors })
 }
