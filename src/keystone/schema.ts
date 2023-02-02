@@ -37,7 +37,7 @@ import {
 } from './helpers'
 import { Decimal } from 'decimal.js'
 import { enrolAfterOperation } from './hooks/enrolment'
-import { messageAfterOperation } from './hooks/message'
+import { inngest } from 'inngestFunctions'
 
 const decimalScale = 2
 export const lists: Lists = {
@@ -435,7 +435,9 @@ export const lists: Lists = {
       },
     },
     hooks: {
-      afterOperation: messageAfterOperation,
+      afterOperation: async (args) => {
+        await inngest.send('app/messages.saved', { data: args })
+      },
     },
     fields: {
       name: text({ validation: { isRequired: true } }),
