@@ -449,7 +449,8 @@ export const lists: Lists = {
           originalItem.status === 'DRAFT'
         ) {
           const inngest = new Inngest({ name: 'Emily Calder ARTS' })
-          await inngest.send('app/messages.saved', {
+          await inngest.send({
+            name: 'app/messages.saved',
             data: {
               item,
               session: context.session,
