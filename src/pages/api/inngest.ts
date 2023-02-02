@@ -1,7 +1,6 @@
 import { createFunction } from 'inngest'
 import { serve } from 'inngest/next'
 import { messageAfterOperation, MessageHook } from 'keystone/hooks/message'
-import { Lists, Context } from '.keystone/types'
 
 type AfterMessageSaved = {
   name: 'app/message.saved'
