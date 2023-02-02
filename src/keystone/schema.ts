@@ -435,9 +435,27 @@ export const lists: Lists = {
       },
     },
     hooks: {
-      afterOperation: async (args) => {
-        const inngest = new Inngest({ name: 'Emily Calder ARTS' })
-        await inngest.send('app/messages.saved', { data: args })
+      afterOperation: async ({
+        operation,
+        resolvedData,
+        originalItem,
+        item,
+        context,
+      }) => {
+        if (
+          operation === 'update' &&
+          resolvedData &&
+          resolvedData.status === 'QUEUED' &&
+          originalItem.status === 'DRAFT'
+        ) {
+          const inngest = new Inngest({ name: 'Emily Calder ARTS' })
+          await inngest.send('app/messages.saved', {
+            data: {
+              item,
+              session: context.session,
+            },
+          })
+        }
       },
     },
     fields: {

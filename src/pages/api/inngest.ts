@@ -1,6 +1,9 @@
 import { createFunction } from 'inngest'
 import { serve } from 'inngest/next'
-import { messageAfterOperation, MessageHook } from 'keystone/hooks/message'
+import {
+  messageAfterUpdateOperation,
+  MessageHook,
+} from 'keystone/hooks/message'
 
 type AfterMessageSaved = {
   name: 'app/message.saved'
@@ -26,7 +29,7 @@ const messageAfterOperationFunction = createFunction<AfterMessageSaved>(
   'app/message.saved',
   async ({ event }) => {
     if (!event.data) return
-    await messageAfterOperation(event?.data)
+    await messageAfterUpdateOperation(event?.data)
   }
 )
 
