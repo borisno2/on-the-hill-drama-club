@@ -37,7 +37,7 @@ import {
 } from './helpers'
 import { Decimal } from 'decimal.js'
 import { enrolAfterOperation } from './hooks/enrolment'
-import { inngest } from 'inngestFunctions'
+import { inngest } from '../inngestFunctions'
 
 const decimalScale = 2
 export const lists: Lists = {
