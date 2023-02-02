@@ -4,6 +4,7 @@ import 'styles/tailwind.css'
 import 'focus-visible'
 import { Container } from 'components/Container';
 import Link from 'next/link';
+import { AnalyticsWrapper } from 'components/Analytics';
 
 type AppProps = {
   children: React.ReactNode;
@@ -34,6 +35,7 @@ export default function RootLayout({
             </Container.Outer>
           </footer>
         </AuthContext>
+        <AnalyticsWrapper />
       </body>
     </html>
   );

@@ -24,6 +24,7 @@ specifiers:
   '@types/node': ^18.11.18
   '@types/react': ^18.0.27
   '@types/react-dom': ^18.0.10
+  '@vercel/analytics': ^0.1.8
   autoprefixer: ^10.4.13
   aws-crt: ^1.15.8
   clsx: ^1.2.1
@@ -76,6 +77,7 @@ dependencies:
   '@ts-gql/next': 17.0.0_geby35jtnxiaox3zmodjvon224
   '@ts-gql/tag': 0.7.0_graphql@16.6.0
   '@types/dotenv-flow': 3.2.0
+  '@vercel/analytics': 0.1.8_react@18.2.0
   autoprefixer: 10.4.13_postcss@8.4.21
   aws-crt: 1.15.8
   clsx: 1.2.1
@@ -4363,6 +4365,14 @@ packages:
       '@typescript-eslint/types': 5.49.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@vercel/analytics/0.1.8_react@18.2.0:
+    resolution: {integrity: sha512-PQrOI8BJ9qUiVJuQfnKiJd15eDjDJH9TBKsNeMrtelT4NAk7d9mBVz1CoZkvoFnHQ0OW7Xnqmr1F2nScfAnznQ==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@wry/context/0.7.0:
     resolution: {integrity: sha512-LcDAiYWRtwAoSOArfk7cuYvFXytxfVrdX7yxoUmK7pPITLk5jYh2F8knCwS7LjgYL8u1eidPlKKV6Ikqq0ODqQ==}
