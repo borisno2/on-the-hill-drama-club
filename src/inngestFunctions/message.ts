@@ -2,12 +2,19 @@ import { Context } from '.keystone/types'
 import sendEmail from 'lib/sendEmail'
 import { GET_MESSAGE_TO_SEND } from 'app/(dashboard)/dashboard/notifications/queries'
 import { keystoneContext } from 'keystone/context'
-import { MessageHook } from 'types/inngest'
+import { SendMessageHook, SendMessageEvent } from 'types/inngest'
+import { createFunction } from 'inngest'
 
-export const messageAfterUpdateOperation = async ({
-  item,
-  session,
-}: MessageHook) => {
+export const sendMessageFunction = createFunction<SendMessageEvent>(
+  'Message Saved Hook',
+  'app/message.saved',
+  async ({ event }) => {
+    if (!event.data) return
+    await sendMessage(event?.data)
+  }
+)
+
+const sendMessage = async ({ item, session }: SendMessageHook) => {
   const context: Context = keystoneContext.withSession(session)
 
   const { message } = await context.graphql.run({
