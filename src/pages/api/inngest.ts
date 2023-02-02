@@ -1,21 +1,7 @@
 import { createFunction } from 'inngest'
 import { serve } from 'inngest/next'
-import {
-  messageAfterUpdateOperation,
-  MessageHook,
-} from 'keystone/hooks/message'
-
-type AfterMessageSaved = {
-  name: 'app/message.saved'
-  data: MessageHook
-  user: {
-    id: string
-  }
-}
-
-type Events = {
-  'app/message.saved': AfterMessageSaved
-}
+import { messageAfterUpdateOperation } from 'inngestFunctions/message'
+import { AfterMessageSaved } from 'types/inngest'
 
 const myFn = createFunction(
   'My BG Fn',

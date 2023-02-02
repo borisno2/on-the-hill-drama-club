@@ -1,17 +1,14 @@
-import { Lists, Context } from '.keystone/types'
-import sendEmail from '../../lib/sendEmail'
-import { GET_MESSAGE_TO_SEND } from '../../app/(dashboard)/dashboard/notifications/queries'
-import { keystoneContext } from '../context'
+import { Context } from '.keystone/types'
+import sendEmail from 'lib/sendEmail'
+import { GET_MESSAGE_TO_SEND } from 'app/(dashboard)/dashboard/notifications/queries'
+import { keystoneContext } from 'keystone/context'
+import { MessageHook } from 'types/inngest'
 
-export type MessageHook = {
-  item: Lists.Message.TypeInfo['item']
-  session: Context['session']
-}
 export const messageAfterUpdateOperation = async ({
   item,
   session,
 }: MessageHook) => {
-  const context = keystoneContext.withSession(session)
+  const context: Context = keystoneContext.withSession(session)
 
   const { message } = await context.graphql.run({
     query: GET_MESSAGE_TO_SEND,

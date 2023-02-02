@@ -38,6 +38,7 @@ import {
 import { Decimal } from 'decimal.js'
 import { enrolAfterOperation } from './hooks/enrolment'
 import { Inngest } from 'inngest'
+import { Events } from 'types/inngest'
 
 const decimalScale = 2
 export const lists: Lists = {
@@ -448,7 +449,7 @@ export const lists: Lists = {
           resolvedData.status === 'QUEUED' &&
           originalItem.status === 'DRAFT'
         ) {
-          const inngest = new Inngest({ name: 'Emily Calder ARTS' })
+          const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
           await inngest.send({
             name: 'app/message.saved',
             data: {
