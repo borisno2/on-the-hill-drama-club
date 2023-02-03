@@ -43,7 +43,6 @@ const Account: Lists.Account = list({
           name: 'app/account.created',
           data: {
             item,
-            session: context.session,
           },
         })
       }

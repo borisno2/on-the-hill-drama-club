@@ -28,13 +28,19 @@ export const createQuickBooksCustomerFunction =
     'Create QuickBooks Customer Hook',
     'app/account.created',
     async ({ event }) => {
-      const { item, session } = event.data
-      const context: Context = keystoneContext.withSession(session)
-      const qbo = await getQBO({ context })
-      const { account } = await context.graphql.run({
-        query: GET_ACCOUNT_BY_ID,
-        variables: { id: item.id },
+      const { item } = event.data
+      const context: Context = keystoneContext.sudo()
+      const qbo = await getQBO({ context }).catch((error) => {
+        throw new Error('Error getting QBO', { cause: error })
       })
+      const { account } = await context.graphql
+        .run({
+          query: GET_ACCOUNT_BY_ID,
+          variables: { id: item.id },
+        })
+        .catch((error) => {
+          throw new Error('Error getting account', { cause: error })
+        })
       if (account && account.qboId !== null && qbo) {
         // create the customer in QBO and update the account
         try {

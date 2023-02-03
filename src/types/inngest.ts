@@ -11,7 +11,6 @@ export type EnrolmentConfirmationHook = {
 
 export type AccountCreatedHook = {
   item: Lists.Account.TypeInfo['item']
-  session: Context['session']
 }
 
 export type SendMessageEvent = {
