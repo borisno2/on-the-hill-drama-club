@@ -15,6 +15,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone postinstall && ts-gql build",
     "migrate": "keystone prisma migrate deploy",
+    "seed-data": "tsx seed-data.ts",
     "migrate:gen": "keystone postinstall --fix && keystone prisma migrate dev",
     "start:keystone": "next start .keystone/admin",
     "start:next": "next start",
