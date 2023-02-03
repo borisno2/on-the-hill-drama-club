@@ -1,7 +1,6 @@
 // you don't need this if you're building something outside of the Keystone repo
 const withPreconstruct = require('@preconstruct/next')
 const KEYSTONE_URL = process.env.KEYSTONE_URL || 'http://localhost:4000'
-const Path = require('path')
 const { withTsGql } = require('@ts-gql/next')
 
 /** @type {import('next').NextConfig} */
@@ -15,21 +14,6 @@ module.exports = withTsGql(
       scrollRestoration: true,
       appDir: true,
       serverComponentsExternalPackages: ['graphql'],
-    },
-    images: {
-      dangerouslyAllowSVG: true,
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'images.unsplash.com',
-          pathname: '/*',
-        },
-        {
-          protocol: 'https',
-          hostname: 'tailwindui.com',
-          pathname: '/img/**/*',
-        },
-      ],
     },
     async redirects() {
       return [
