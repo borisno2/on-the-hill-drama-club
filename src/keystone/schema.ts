@@ -3,11 +3,11 @@ import {
   dayOptions,
   lessonTypeOptions,
   lessonStatusOptions,
-  enrolmentStatusOptions,
   billStatusOptions,
   messageStatusOptions,
 } from '../types/selectOptions'
 import { graphql, list } from '@keystone-6/core'
+import Enrolment from './lists/enrolment'
 import { allOperations, allowAll } from '@keystone-6/core/access'
 import {
   text,
@@ -21,13 +21,11 @@ import {
   decimal,
   checkbox,
 } from '@keystone-6/core/fields'
-//import { document } from '@keystone-6/fields-document'
 import type { Lists, Context } from '.keystone/types'
 import {
   accountFilter,
   billFilter,
   billItemFilter,
-  enrolmentFilter,
   GET_BILL_ITEMS_TOTAL,
   isAdmin,
   isLoggedIn,
@@ -36,8 +34,8 @@ import {
   userFilter,
 } from './helpers'
 import { Decimal } from 'decimal.js'
-import { enrolAfterOperation } from './hooks/enrolment'
-import { messageAfterOperation } from './hooks/message'
+import { Inngest } from 'inngest'
+import { Events } from 'types/inngest'
 
 const decimalScale = 2
 export const lists: Lists = {
@@ -388,42 +386,7 @@ export const lists: Lists = {
       refreshToken: text({ validation: { isRequired: true } }),
     },
   }),
-  Enrolment: list({
-    access: {
-      operation: {
-        ...allOperations(isLoggedIn),
-        delete: isAdmin,
-      },
-      filter: {
-        query: enrolmentFilter,
-        update: enrolmentFilter,
-      },
-    },
-    hooks: {
-      afterOperation: enrolAfterOperation,
-    },
-    fields: {
-      lessonTerm: relationship({ ref: 'LessonTerm.enrolments', many: false }),
-      student: relationship({ ref: 'Student.enrolments', many: false }),
-      status: select({
-        validation: { isRequired: true },
-        options: enrolmentStatusOptions,
-        access: {
-          create: ({ session, inputData }) => {
-            if (inputData.status === 'PENDING') {
-              return true
-            }
-            return isAdmin(session)
-          },
-          update: isAdmin,
-        },
-      }),
-      createdAt: timestamp({
-        defaultValue: { kind: 'now' },
-      }),
-    },
-  }),
-
+  Enrolment,
   Message: list({
     access: {
       operation: {
@@ -435,7 +398,29 @@ export const lists: Lists = {
       },
     },
     hooks: {
-      afterOperation: messageAfterOperation,
+      afterOperation: async ({
+        operation,
+        resolvedData,
+        originalItem,
+        item,
+        context,
+      }) => {
+        if (
+          operation === 'update' &&
+          resolvedData &&
+          resolvedData.status === 'QUEUED' &&
+          originalItem.status === 'DRAFT'
+        ) {
+          const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
+          await inngest.send({
+            name: 'app/message.saved',
+            data: {
+              item,
+              session: context.session,
+            },
+          })
+        }
+      },
     },
     fields: {
       name: text({ validation: { isRequired: true } }),

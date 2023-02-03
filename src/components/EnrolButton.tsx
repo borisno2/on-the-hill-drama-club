@@ -1,6 +1,6 @@
 'use client'
 
-import { ENROL_STUDENT_IN_LESSON } from "app/(dashboard)/dashboard/students/queries"
+import { ENROL_STUDENT_IN_LESSON } from "app/dashboard/students/queries"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
 import { client } from "util/request"
