@@ -9,7 +9,6 @@ export const sendMessageFunction = createFunction<SendMessageEvent>(
   'Message Saved Hook',
   'app/message.saved',
   async ({ event }) => {
-    if (!event.data) return
     await sendMessage(event?.data)
   }
 )

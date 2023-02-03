@@ -16,7 +16,6 @@ export const sendEnrolmentConfirmationFunction =
     'Enrolment Confirmation Hook',
     'app/enrolment.enroled',
     async ({ event }) => {
-      if (!event.data) return
       await sendConfirmationEmail(event?.data)
     }
   )

@@ -3,8 +3,14 @@ export type SendMessageHook = {
   item: Lists.Message.TypeInfo['item']
   session: Context['session']
 }
+
 export type EnrolmentConfirmationHook = {
   item: Lists.Enrolment.TypeInfo['item']
+  session: Context['session']
+}
+
+export type AccountCreatedHook = {
+  item: Lists.Account.TypeInfo['item']
   session: Context['session']
 }
 
@@ -18,7 +24,13 @@ export type SendEnrolmentConfirmationEvent = {
   data: EnrolmentConfirmationHook
 }
 
+export type CreateQuickBooksCustomerEvent = {
+  name: 'app/account.created'
+  data: AccountCreatedHook
+}
+
 export type Events = {
   'app/message.saved': SendMessageEvent
   'app/enrolment.enroled': SendEnrolmentConfirmationEvent
+  'app/account.created': CreateQuickBooksCustomerEvent
 }
