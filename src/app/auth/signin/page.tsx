@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { getCsrfToken } from "next-auth/react"
-import SignInForm from 'components/SignInForm';
+import SignInForm from './SignInForm';
 import { SocialLogins } from 'components/SocialLogins';
 import Link from 'next/link';
 import emilyLogo from 'public/emily-logo.png';

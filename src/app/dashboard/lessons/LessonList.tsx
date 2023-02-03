@@ -6,7 +6,7 @@ import { GET_LESSONS } from './queries'
 import labelHelper from 'lib/labelHelper'
 import { formatDate } from 'lib/formatDate'
 import { lessonTypeOptions, lessonStatusOptions } from 'types/selectOptions'
-import EnrolButton from 'components/EnrolButton'
+import EnrolButton from './EnrolButton'
 
 export default async function ClassList({
   where,

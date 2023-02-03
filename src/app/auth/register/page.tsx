@@ -1,4 +1,4 @@
-import RegisterForm from "components/RegisterForm"
+import RegisterForm from "./RegisterForm"
 import { SocialLogins } from "components/SocialLogins"
 import { getCsrfToken } from "next-auth/react"
 import Link from "next/link"

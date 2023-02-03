@@ -1,6 +1,6 @@
 import DashboardLayout from '../../DashboardLayout'
 import { getSessionContext } from 'keystone/context'
-import StudentForm from 'components/StudentForm'
+import StudentForm from '../StudentForm'
 
 import { redirect } from 'next/navigation'
 import { isCuid } from 'cuid'

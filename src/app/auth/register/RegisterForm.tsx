@@ -1,7 +1,7 @@
 'use client'
 import { signIn } from 'next-auth/react'
 import { useRef, useState } from 'react'
-import ErrorPop from './ErrorPop'
+import ErrorPop from 'components/ErrorPop'
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { Formik, FormikHelpers } from 'formik'
 import { z } from 'zod'

@@ -4,12 +4,12 @@ import { gql, OperationData } from '@ts-gql/tag/no-transform'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { client } from 'util/request'
-import ErrorPop from './ErrorPop'
-import SuccessPop from './SuccessPop'
+import ErrorPop from 'components/ErrorPop'
+import SuccessPop from 'components/SuccessPop'
 import Datepicker from 'react-tailwindcss-datepicker'
 import { Formik, FormikHelpers } from 'formik'
 import { z } from 'zod'
-import DropDown from './DropDown'
+import DropDown from 'components/DropDown'
 import { GET_STUDENT_BY_ID } from 'app/dashboard/students/queries'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
@@ -36,7 +36,7 @@ const UPDATE_STUDENT = gql`
       medical
     }
   }
-` as import('../../__generated__/ts-gql/UPDATE_STUDENT').type
+` as import('../../../../__generated__/ts-gql/UPDATE_STUDENT').type
 
 const ADD_STUDENT = gql`
   mutation ADD_STUDENT($data: StudentCreateInput!) {
@@ -50,7 +50,7 @@ const ADD_STUDENT = gql`
       medical
     }
   }
-` as import('../../__generated__/ts-gql/ADD_STUDENT').type
+` as import('../../../../__generated__/ts-gql/ADD_STUDENT').type
 
 export default function Student({
     student,
