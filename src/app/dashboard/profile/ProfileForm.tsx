@@ -4,8 +4,8 @@ import { Formik, FormikHelpers } from 'formik';
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { client } from "util/request";
-import ErrorPop from "./ErrorPop";
-import SuccessPop from "./SuccessPop";
+import ErrorPop from "components/ErrorPop";
+import SuccessPop from "components/SuccessPop";
 import { z } from "zod";
 
 type User = {
@@ -39,7 +39,7 @@ const UPDATE_ACCOUNT = gql`
             phone
         }
     }
-`as import("../../__generated__/ts-gql/UPDATE_ACCOUNT").type;
+`as import("../../../../__generated__/ts-gql/UPDATE_ACCOUNT").type;
 
 export default function ProfileForm({ user, redirectOnSave }: { user: User, redirectOnSave: boolean }) {
     const router = useRouter();
