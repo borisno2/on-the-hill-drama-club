@@ -51,7 +51,9 @@ export const createQuickBooksCustomerFunction =
           )
 
           if (customer === null) {
-            throw new Error('Error creating customer')
+            throw new Error('Error creating customer', {
+              cause: 'Create customer returned null',
+            })
           }
 
           await context.db.Account.updateOne({
@@ -62,7 +64,7 @@ export const createQuickBooksCustomerFunction =
             },
           })
         } catch (error) {
-          throw new Error(JSON.stringify(error))
+          throw new Error('Errpr creating customer', { cause: error })
         }
       }
     }
