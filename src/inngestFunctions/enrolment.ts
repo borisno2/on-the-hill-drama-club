@@ -1,6 +1,6 @@
 import { Context } from '.keystone/types'
 import sendEmail from 'lib/sendEmail'
-import { GET_ENROLMENT_BY_ID } from 'app/(dashboard)/dashboard/students/queries'
+import { GET_ENROLMENT_BY_ID } from 'app/dashboard/students/queries'
 import { formatDate } from 'lib/formatDate'
 import labelHelper from 'lib/labelHelper'
 import { dayOptions } from 'types/selectOptions'
@@ -13,7 +13,7 @@ import { keystoneContext } from 'keystone/context'
 
 export const sendEnrolmentConfirmationFunction =
   createFunction<SendEnrolmentConfirmationEvent>(
-    'Message Saved Hook',
+    'Enrolment Confirmation Hook',
     'app/enrolment.enroled',
     async ({ event }) => {
       if (!event.data) return
