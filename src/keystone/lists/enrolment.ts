@@ -44,8 +44,35 @@ const Enrollment: Lists.Enrolment = list({
     },
   },
   fields: {
-    lessonTerm: relationship({ ref: 'LessonTerm.enrolments', many: false }),
-    student: relationship({ ref: 'Student.enrolments', many: false }),
+    lessonTerm: relationship({
+      ref: 'LessonTerm.enrolments',
+      many: false,
+      access: {
+        update: isAdmin,
+      },
+    }),
+    student: relationship({
+      ref: 'Student.enrolments',
+      many: false,
+      access: {
+        create: async ({ inputData, session, context }) => {
+          if (session.data?.role === 'ADMIN') {
+            return true
+          }
+          // Check if the logged in use has access to the student
+          const student = await context.query.Student.findOne({
+            where: {
+              id: inputData.student?.connect?.id,
+            },
+            query: 'id account { id }',
+          })
+          // If the student's account id matches the logged in user's account id
+          return student.account.id === session.data.accountId
+        },
+        // Only admins can update the student relationship
+        update: isAdmin,
+      },
+    }),
     status: select({
       validation: { isRequired: true },
       options: enrolmentStatusOptions,
@@ -56,6 +83,14 @@ const Enrollment: Lists.Enrolment = list({
           }
           return isAdmin(session)
         },
+        update: isAdmin,
+      },
+    }),
+    billItem: relationship({
+      ref: 'BillItem.enrolment',
+      many: false,
+      access: {
+        create: isAdmin,
         update: isAdmin,
       },
     }),

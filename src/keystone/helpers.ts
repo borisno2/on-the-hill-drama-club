@@ -11,7 +11,7 @@ export const GET_BILL_ITEMS_TOTAL = gql`
   query GET_BILL_ITEMS_TOTAL($id: ID!) {
     billItems(where: { bill: { id: { equals: $id } } }) {
       id
-      amount
+      total
     }
   }
 ` as import('../../__generated__/ts-gql/GET_BILL_ITEMS_TOTAL').type

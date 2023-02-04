@@ -84,13 +84,14 @@ model ImportantDate {
 }
 
 model Term {
-  id          String       @id @default(cuid())
-  name        String       @default("")
-  quantity    Int
-  year        Int
-  startDate   DateTime     @mysql.Date
-  endDate     DateTime     @mysql.Date
-  lessonTerms LessonTerm[] @relation("LessonTerm_term")
+  id             String       @id @default(cuid())
+  name           String       @default("")
+  quantity       Int
+  year           Int
+  startDate      DateTime     @mysql.Date
+  endDate        DateTime     @mysql.Date
+  lessonTerms    LessonTerm[] @relation("LessonTerm_term")
+  from_Bill_term Bill[]       @relation("Bill_term")
 }
 
 model LessonTerm {
@@ -149,6 +150,7 @@ model Enrolment {
   student      Student?    @relation("Enrolment_student", fields: [studentId], references: [id])
   studentId    String?     @map("student")
   status       String
+  billItem     BillItem?   @relation("BillItem_enrolment")
   createdAt    DateTime?   @default(now())
 
   @@index([lessonTermId])
@@ -166,27 +168,36 @@ model Message {
 }
 
 model Bill {
-  id        String     @id @default(cuid())
-  name      String     @default("")
-  account   Account?   @relation("Bill_account", fields: [accountId], references: [id])
-  accountId String?    @map("account")
-  date      DateTime?  @mysql.Date
-  dueDate   DateTime?  @mysql.Date
-  status    String
-  items     BillItem[] @relation("BillItem_bill")
-  createdAt DateTime?  @default(now())
+  id           String     @id @default(cuid())
+  name         String     @default("")
+  account      Account?   @relation("Bill_account", fields: [accountId], references: [id])
+  accountId    String?    @map("account")
+  date         DateTime?  @mysql.Date
+  dueDate      DateTime?  @mysql.Date
+  status       String
+  term         Term?      @relation("Bill_term", fields: [termId], references: [id])
+  termId       String?    @map("term")
+  items        BillItem[] @relation("BillItem_bill")
+  qboSyncToken Int?
+  qboId        Int?
+  createdAt    DateTime?  @default(now())
 
   @@index([accountId])
+  @@index([termId])
 }
 
 model BillItem {
-  id        String    @id @default(cuid())
-  name      String    @default("")
-  bill      Bill?     @relation("BillItem_bill", fields: [billId], references: [id])
-  billId    String?   @map("bill")
-  quantity  Int?
-  amount    Decimal?  @mysql.Decimal(18, 2)
-  createdAt DateTime? @default(now())
+  id           String     @id @default(cuid())
+  name         String     @default("")
+  bill         Bill?      @relation("BillItem_bill", fields: [billId], references: [id])
+  billId       String?    @map("bill")
+  quantity     Int        @default(1)
+  amount       Int
+  enrolment    Enrolment? @relation("BillItem_enrolment", fields: [enrolmentId], references: [id])
+  enrolmentId  String?    @unique @map("enrolment")
+  qboSyncToken Int?
+  qboId        Int?
+  createdAt    DateTime?  @default(now())
 
   @@index([billId])
 }

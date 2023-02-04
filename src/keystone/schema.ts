@@ -1,5 +1,4 @@
 import {
-  schoolOptions,
   dayOptions,
   lessonTypeOptions,
   lessonStatusOptions,
@@ -19,10 +18,11 @@ import {
   checkbox,
 } from '@keystone-6/core/fields'
 import type { Lists, Context } from '.keystone/types'
-import { isAdmin, isLoggedIn, studentFilter, userFilter } from './helpers'
+import { isAdmin, isLoggedIn, userFilter } from './helpers'
 import Account from './lists/account'
 import { Bill, BillItem } from './lists/billing'
 import Message from './lists/message'
+import Student from './lists/student'
 
 export const lists: Lists = {
   User: list({
@@ -70,55 +70,17 @@ export const lists: Lists = {
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
-      account: relationship({ ref: 'Account.user', many: false }),
+      account: relationship({
+        ref: 'Account.user',
+        many: false,
+      }),
       role: text({ defaultValue: 'ACCOUNT' }),
     },
   }),
 
   Account,
 
-  Student: list({
-    access: {
-      operation: {
-        ...allOperations(isLoggedIn),
-        delete: isAdmin,
-      },
-      filter: {
-        query: studentFilter,
-        update: studentFilter,
-      },
-    },
-    fields: {
-      name: virtual({
-        field: graphql.field({
-          type: graphql.String,
-          resolve: async (item) => {
-            return `${item.firstName} ${item.surname}`
-          },
-        }),
-      }),
-      firstName: text({ validation: { isRequired: true } }),
-      surname: text({ validation: { isRequired: true } }),
-      dateOfBirth: calendarDay({ validation: { isRequired: true } }),
-      school: select({
-        validation: { isRequired: true },
-        options: schoolOptions,
-      }),
-      yearLevel: integer({ validation: { isRequired: true } }),
-      medical: text({
-        ui: { displayMode: 'textarea' },
-        db: {
-          nativeType: 'Text',
-          isNullable: true,
-        },
-      }),
-      account: relationship({ ref: 'Account.students', many: false }),
-      enrolments: relationship({ ref: 'Enrolment.student', many: true }),
-      createdAt: timestamp({
-        defaultValue: { kind: 'now' },
-      }),
-    },
-  }),
+  Student,
 
   LessonCategory: list({
     access: {

@@ -16,6 +16,7 @@ const Account: Lists.Account = list({
   access: {
     operation: {
       ...allOperations(isLoggedIn),
+      create: isAdmin,
       delete: isAdmin,
     },
     filter: {
@@ -57,7 +58,13 @@ const Account: Lists.Account = list({
         },
       }),
     }),
-    user: relationship({ ref: 'User.account', many: false }),
+    user: relationship({
+      ref: 'User.account',
+      many: false,
+      access: {
+        update: isAdmin,
+      },
+    }),
     firstName: text({
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
@@ -78,8 +85,20 @@ const Account: Lists.Account = list({
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
-    students: relationship({ ref: 'Student.account', many: true }),
-    bills: relationship({ ref: 'Bill.account', many: true }),
+    students: relationship({
+      ref: 'Student.account',
+      many: true,
+      access: {
+        update: isAdmin,
+      },
+    }),
+    bills: relationship({
+      ref: 'Bill.account',
+      many: true,
+      access: {
+        update: isAdmin,
+      },
+    }),
     streetAddress: text({
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
