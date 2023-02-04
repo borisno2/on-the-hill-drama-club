@@ -7,7 +7,7 @@ import { createFunction } from 'inngest'
 
 export const sendMessageFunction = createFunction<SendMessageEvent>(
   'Message Saved Hook',
-  'app/message.saved',
+  'app/message.queued',
   async ({ event }) => {
     await sendMessage(event?.data)
   }
