@@ -3,7 +3,6 @@ import { graphql, list } from '@keystone-6/core'
 import { allOperations } from '@keystone-6/core/access'
 import {
   calendarDay,
-  decimal,
   integer,
   relationship,
   select,
@@ -21,8 +20,6 @@ import {
   isLoggedIn,
 } from '../helpers'
 
-const decimalScale = 2
-
 export const Bill: Lists.Bill = list({
   access: {
     operation: {
@@ -39,6 +36,9 @@ export const Bill: Lists.Bill = list({
     date: calendarDay(),
     dueDate: calendarDay(),
     total: virtual({
+      ui: {
+        description: 'Total of all bill items in Dollars',
+      },
       field: graphql.field({
         type: graphql.Decimal,
         resolve: async (item, args, context) => {
@@ -50,11 +50,11 @@ export const Bill: Lists.Bill = list({
           let val: Decimal & { scaleToPrint?: number } = new Decimal(0)
           if (billItems && billItems.length) {
             val = billItems.reduce(
-              (acc, billItem) => acc.add(billItem.amount),
+              (acc, billItem) => acc.add(billItem.total),
               new Decimal(0)
             )
           }
-          val.scaleToPrint = decimalScale
+          val.scaleToPrint = 2
           return val
         },
       }),
@@ -63,7 +63,10 @@ export const Bill: Lists.Bill = list({
       validation: { isRequired: true },
       options: billStatusOptions,
     }),
+    term: relationship({ ref: 'Term', many: false }),
     items: relationship({ ref: 'BillItem.bill', many: true }),
+    qboSyncToken: integer(),
+    qboId: integer(),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),
@@ -83,20 +86,29 @@ export const BillItem: Lists.BillItem = list({
   fields: {
     name: text(),
     bill: relationship({ ref: 'Bill.items', many: false }),
-    quantity: integer(),
-    amount: decimal({ scale: decimalScale }),
+    quantity: integer({ validation: { isRequired: true }, defaultValue: 1 }),
+    amount: integer({
+      validation: { isRequired: true },
+      ui: { description: 'Amount in Cents' },
+    }),
     total: virtual({
+      ui: {
+        description: 'Total Dollars',
+      },
       field: graphql.field({
-        type: graphql.Decimal,
+        type: graphql.nonNull(graphql.Decimal),
         resolve: (item) => {
           let val: Decimal & { scaleToPrint?: number } = new Decimal(0.0)
           if (item.amount && item.quantity)
             val = new Decimal(item.amount).mul(item.quantity)
-          val.scaleToPrint = decimalScale
+          val.scaleToPrint = 2
           return val
         },
       }),
     }),
+    enrolment: relationship({ ref: 'Enrolment.billItem', many: false }),
+    qboSyncToken: integer(),
+    qboId: integer(),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),

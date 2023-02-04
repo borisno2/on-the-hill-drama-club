@@ -166,27 +166,31 @@ model Message {
 }
 
 model Bill {
-  id        String     @id @default(cuid())
-  name      String     @default("")
-  account   Account?   @relation("Bill_account", fields: [accountId], references: [id])
-  accountId String?    @map("account")
-  date      DateTime?  @mysql.Date
-  dueDate   DateTime?  @mysql.Date
-  status    String
-  items     BillItem[] @relation("BillItem_bill")
-  createdAt DateTime?  @default(now())
+  id           String     @id @default(cuid())
+  name         String     @default("")
+  account      Account?   @relation("Bill_account", fields: [accountId], references: [id])
+  accountId    String?    @map("account")
+  date         DateTime?  @mysql.Date
+  dueDate      DateTime?  @mysql.Date
+  status       String
+  items        BillItem[] @relation("BillItem_bill")
+  qboSyncToken Int?
+  qboId        Int?
+  createdAt    DateTime?  @default(now())
 
   @@index([accountId])
 }
 
 model BillItem {
-  id        String    @id @default(cuid())
-  name      String    @default("")
-  bill      Bill?     @relation("BillItem_bill", fields: [billId], references: [id])
-  billId    String?   @map("bill")
-  quantity  Int?
-  amount    Decimal?  @mysql.Decimal(18, 2)
-  createdAt DateTime? @default(now())
+  id           String    @id @default(cuid())
+  name         String    @default("")
+  bill         Bill?     @relation("BillItem_bill", fields: [billId], references: [id])
+  billId       String?   @map("bill")
+  quantity     Int       @default(1)
+  amount       Int
+  qboSyncToken Int?
+  qboId        Int?
+  createdAt    DateTime? @default(now())
 
   @@index([billId])
 }
