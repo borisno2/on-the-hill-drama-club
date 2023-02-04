@@ -41,7 +41,12 @@ export const createQuickBooksCustomerFunction =
         .catch((error) => {
           throw new Error('Error getting account', { cause: error })
         })
-      if (account && account.qboId !== null && qbo) {
+      if (!qbo) throw new Error('Could not get QBO client')
+      if (!account) throw new Error('Could not get account')
+      if (!account.user?.email) throw new Error('Could not get account email')
+      if (account.qboId !== null) {
+        return `Account ${account.name} already has a QB customer with id ${account.qboId}`
+      } else {
         // create the customer in QBO and update the account
         try {
           const customer = await createCustomer(
@@ -50,7 +55,7 @@ export const createQuickBooksCustomerFunction =
               GivenName: account.firstName!,
               FamilyName: account.surname!,
               PrimaryEmailAddr: {
-                Address: account.user?.email!,
+                Address: account.user.email!,
               },
             },
             qbo
@@ -69,6 +74,7 @@ export const createQuickBooksCustomerFunction =
               qboSyncToken: parseInt(customer.SyncToken),
             },
           })
+          return `Created QB customer ${account.name} with id ${account.qboId}`
         } catch (error) {
           throw new Error('Errpr creating customer', { cause: error })
         }
