@@ -3,11 +3,10 @@ import {
   dayOptions,
   lessonTypeOptions,
   lessonStatusOptions,
-  enrolmentStatusOptions,
-  billStatusOptions,
   messageStatusOptions,
 } from '../types/selectOptions'
 import { graphql, list } from '@keystone-6/core'
+import Enrolment from './lists/enrolment'
 import { allOperations, allowAll } from '@keystone-6/core/access'
 import {
   text,
@@ -18,28 +17,21 @@ import {
   calendarDay,
   integer,
   virtual,
-  decimal,
   checkbox,
 } from '@keystone-6/core/fields'
-//import { document } from '@keystone-6/fields-document'
 import type { Lists, Context } from '.keystone/types'
 import {
-  accountFilter,
-  billFilter,
-  billItemFilter,
-  enrolmentFilter,
-  GET_BILL_ITEMS_TOTAL,
   isAdmin,
   isLoggedIn,
   messageFilter,
   studentFilter,
   userFilter,
 } from './helpers'
-import { Decimal } from 'decimal.js'
-import { enrolAfterOperation } from './hooks/enrolment'
-import { messageAfterOperation } from './hooks/message'
+import { Inngest } from 'inngest'
+import { Events } from 'types/inngest'
+import Account from './lists/account'
+import { Bill, BillItem } from './lists/billing'
 
-const decimalScale = 2
 export const lists: Lists = {
   User: list({
     access: {
@@ -91,68 +83,7 @@ export const lists: Lists = {
     },
   }),
 
-  Account: list({
-    access: {
-      operation: {
-        ...allOperations(isLoggedIn),
-        delete: isAdmin,
-      },
-      filter: {
-        query: accountFilter,
-        update: accountFilter,
-      },
-    },
-    fields: {
-      name: virtual({
-        field: graphql.field({
-          type: graphql.String,
-          resolve: async (item) => {
-            return `${item.firstName} ${item.surname}`
-          },
-        }),
-      }),
-      user: relationship({ ref: 'User.account', many: false }),
-      firstName: text({
-        validation: { isRequired: true },
-        defaultValue: 'PLEASE_UPDATE',
-      }),
-      surname: text({
-        validation: { isRequired: true },
-        defaultValue: 'PLEASE_UPDATE',
-      }),
-      phone: text({
-        validation: { isRequired: true },
-        defaultValue: 'PLEASE_UPDATE',
-      }),
-      secondContactName: text({
-        validation: { isRequired: true },
-        defaultValue: 'PLEASE_UPDATE',
-      }),
-      secondContactPhone: text({
-        validation: { isRequired: true },
-        defaultValue: 'PLEASE_UPDATE',
-      }),
-      students: relationship({ ref: 'Student.account', many: true }),
-      bills: relationship({ ref: 'Bill.account', many: true }),
-      streetAddress: text({
-        validation: { isRequired: true },
-        defaultValue: 'PLEASE_UPDATE',
-      }),
-      suburb: text({
-        validation: { isRequired: true },
-        defaultValue: 'PLEASE_UPDATE',
-      }),
-      postcode: integer({
-        validation: { isRequired: true },
-        defaultValue: 3550,
-      }),
-      qboSyncToken: integer(),
-      qboId: integer(),
-      createdAt: timestamp({
-        defaultValue: { kind: 'now' },
-      }),
-    },
-  }),
+  Account,
 
   Student: list({
     access: {
@@ -388,42 +319,7 @@ export const lists: Lists = {
       refreshToken: text({ validation: { isRequired: true } }),
     },
   }),
-  Enrolment: list({
-    access: {
-      operation: {
-        ...allOperations(isLoggedIn),
-        delete: isAdmin,
-      },
-      filter: {
-        query: enrolmentFilter,
-        update: enrolmentFilter,
-      },
-    },
-    hooks: {
-      afterOperation: enrolAfterOperation,
-    },
-    fields: {
-      lessonTerm: relationship({ ref: 'LessonTerm.enrolments', many: false }),
-      student: relationship({ ref: 'Student.enrolments', many: false }),
-      status: select({
-        validation: { isRequired: true },
-        options: enrolmentStatusOptions,
-        access: {
-          create: ({ session, inputData }) => {
-            if (inputData.status === 'PENDING') {
-              return true
-            }
-            return isAdmin(session)
-          },
-          update: isAdmin,
-        },
-      }),
-      createdAt: timestamp({
-        defaultValue: { kind: 'now' },
-      }),
-    },
-  }),
-
+  Enrolment,
   Message: list({
     access: {
       operation: {
@@ -435,7 +331,29 @@ export const lists: Lists = {
       },
     },
     hooks: {
-      afterOperation: messageAfterOperation,
+      afterOperation: async ({
+        operation,
+        resolvedData,
+        originalItem,
+        item,
+        context,
+      }) => {
+        if (
+          operation === 'update' &&
+          resolvedData &&
+          resolvedData.status === 'QUEUED' &&
+          originalItem.status === 'DRAFT'
+        ) {
+          const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
+          await inngest.send({
+            name: 'app/message.saved',
+            data: {
+              item,
+              session: context.session,
+            },
+          })
+        }
+      },
     },
     fields: {
       name: text({ validation: { isRequired: true } }),
@@ -459,84 +377,6 @@ export const lists: Lists = {
       }),
     },
   }),
-
-  Bill: list({
-    access: {
-      operation: {
-        ...allOperations(isAdmin),
-        query: isLoggedIn,
-      },
-      filter: {
-        query: billFilter,
-      },
-    },
-    fields: {
-      name: text(),
-      account: relationship({ ref: 'Account.bills', many: false }),
-      date: calendarDay(),
-      dueDate: calendarDay(),
-      total: virtual({
-        field: graphql.field({
-          type: graphql.Decimal,
-          resolve: async (item, args, context) => {
-            const data = await context.graphql.run({
-              query: GET_BILL_ITEMS_TOTAL,
-              variables: { id: item.id },
-            })
-            const billItems = data.billItems
-            let val: Decimal & { scaleToPrint?: number } = new Decimal(0)
-            if (billItems && billItems.length) {
-              val = billItems.reduce(
-                (acc, billItem) => acc.add(billItem.amount),
-                new Decimal(0)
-              )
-            }
-            val.scaleToPrint = decimalScale
-            return val
-          },
-        }),
-      }),
-      status: select({
-        validation: { isRequired: true },
-        options: billStatusOptions,
-      }),
-      items: relationship({ ref: 'BillItem.bill', many: true }),
-      createdAt: timestamp({
-        defaultValue: { kind: 'now' },
-      }),
-    },
-  }),
-
-  BillItem: list({
-    access: {
-      operation: {
-        ...allOperations(isAdmin),
-        query: isLoggedIn,
-      },
-      filter: {
-        query: billItemFilter,
-      },
-    },
-    fields: {
-      name: text(),
-      bill: relationship({ ref: 'Bill.items', many: false }),
-      quantity: integer(),
-      amount: decimal({ scale: decimalScale }),
-      total: virtual({
-        field: graphql.field({
-          type: graphql.Decimal,
-          resolve: (item) => {
-            let val: Decimal & { scaleToPrint?: number } = new Decimal(0.0)
-            if (item.amount && item.quantity)
-              val = new Decimal(item.amount).mul(item.quantity)
-            val.scaleToPrint = decimalScale
-            return val
-          },
-        }),
-      }),
-      createdAt: timestamp({
-        defaultValue: { kind: 'now' },
-      }),
-    },
-  }),
+  Bill,
+  BillItem,
 }
