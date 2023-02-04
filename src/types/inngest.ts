@@ -14,7 +14,7 @@ export type AccountCreatedHook = {
 }
 
 export type SendMessageEvent = {
-  name: 'app/message.saved'
+  name: 'app/message.queued'
   data: SendMessageHook
 }
 
@@ -29,7 +29,7 @@ export type CreateQuickBooksCustomerEvent = {
 }
 
 export type Events = {
-  'app/message.saved': SendMessageEvent
+  'app/message.queued': SendMessageEvent
   'app/enrolment.enroled': SendEnrolmentConfirmationEvent
   'app/account.created': CreateQuickBooksCustomerEvent
 }

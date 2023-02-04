@@ -3,7 +3,6 @@ import {
   dayOptions,
   lessonTypeOptions,
   lessonStatusOptions,
-  messageStatusOptions,
 } from '../types/selectOptions'
 import { graphql, list } from '@keystone-6/core'
 import Enrolment from './lists/enrolment'
@@ -20,17 +19,10 @@ import {
   checkbox,
 } from '@keystone-6/core/fields'
 import type { Lists, Context } from '.keystone/types'
-import {
-  isAdmin,
-  isLoggedIn,
-  messageFilter,
-  studentFilter,
-  userFilter,
-} from './helpers'
-import { Inngest } from 'inngest'
-import { Events } from 'types/inngest'
+import { isAdmin, isLoggedIn, studentFilter, userFilter } from './helpers'
 import Account from './lists/account'
 import { Bill, BillItem } from './lists/billing'
+import Message from './lists/message'
 
 export const lists: Lists = {
   User: list({
@@ -320,63 +312,7 @@ export const lists: Lists = {
     },
   }),
   Enrolment,
-  Message: list({
-    access: {
-      operation: {
-        ...allOperations(isAdmin),
-        query: isLoggedIn,
-      },
-      filter: {
-        query: messageFilter,
-      },
-    },
-    hooks: {
-      afterOperation: async ({
-        operation,
-        resolvedData,
-        originalItem,
-        item,
-        context,
-      }) => {
-        if (
-          operation === 'update' &&
-          resolvedData &&
-          resolvedData.status === 'QUEUED' &&
-          originalItem.status === 'DRAFT'
-        ) {
-          const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
-          await inngest.send({
-            name: 'app/message.saved',
-            data: {
-              item,
-              session: context.session,
-            },
-          })
-        }
-      },
-    },
-    fields: {
-      name: text({ validation: { isRequired: true } }),
-      status: select({
-        validation: { isRequired: true },
-        defaultValue: 'DRAFT',
-        options: messageStatusOptions,
-      }),
-      content: text({
-        validation: { isRequired: true },
-        ui: { displayMode: 'textarea' },
-        db: {
-          nativeType: 'Text',
-          isNullable: true,
-        },
-      }),
-      lessonTerms: relationship({ ref: 'LessonTerm.messages', many: true }),
-      sentAt: timestamp(),
-      createdAt: timestamp({
-        defaultValue: { kind: 'now' },
-      }),
-    },
-  }),
+  Message,
   Bill,
   BillItem,
 }
