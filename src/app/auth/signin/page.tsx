@@ -1,9 +1,7 @@
 import Image from 'next/image';
-import { getCsrfToken } from "next-auth/react"
 import SignInForm from './SignInForm';
 import { SocialLogins } from 'components/SocialLogins';
 import Link from 'next/link';
-import emilyLogo from 'public/emily-logo.png';
 
 
 export default async function SignInPage({
@@ -11,7 +9,6 @@ export default async function SignInPage({
 }: {
     searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-    const csrfToken = await getCsrfToken()
     const callbackUrl = typeof searchParams?.callbackUrl === 'string' ? searchParams?.callbackUrl : "/dashboard"
     return (
         <>
@@ -37,8 +34,8 @@ export default async function SignInPage({
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <SignInForm callbackUrl={callbackUrl} csrfToken={csrfToken} />
-                        <SocialLogins callbackUrl={callbackUrl} csrfToken={csrfToken} />
+                        <SignInForm callbackUrl={callbackUrl} />
+                        <SocialLogins callbackUrl={callbackUrl} />
                     </div>
                 </div>
             </div>

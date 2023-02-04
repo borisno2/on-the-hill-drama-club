@@ -1,7 +1,7 @@
 "use client"
 import { signIn } from 'next-auth/react'
 
-export function SocialLogins({ callbackUrl, csrfToken }: { callbackUrl: string, csrfToken?: string }) {
+export function SocialLogins({ callbackUrl }: { callbackUrl: string }) {
     return (
         <div className="mt-6">
             <div className="relative">
@@ -16,7 +16,7 @@ export function SocialLogins({ callbackUrl, csrfToken }: { callbackUrl: string, 
 
                 <div>
                     <button
-                        onClick={() => signIn('google', { callbackUrl, csrfToken })}
+                        onClick={() => signIn('google', { callbackUrl })}
                         className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                     >
                         <span className="sr-only">Sign in with Google</span>
@@ -31,7 +31,7 @@ export function SocialLogins({ callbackUrl, csrfToken }: { callbackUrl: string, 
 
                 <div>
                     <button
-                        onClick={() => signIn('apple', { callbackUrl, csrfToken })}
+                        onClick={() => signIn('apple', { callbackUrl })}
                         className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                     >
                         <span className="sr-only">Sign in with Apple</span>

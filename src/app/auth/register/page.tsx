@@ -1,6 +1,5 @@
 import RegisterForm from "./RegisterForm"
 import { SocialLogins } from "components/SocialLogins"
-import { getCsrfToken } from "next-auth/react"
 import Link from "next/link"
 import Image from "next/image"
 import { redirect } from 'next/navigation';
@@ -15,7 +14,6 @@ export default async function RegisterPage({
     if (context.session) {
         redirect('/dashboard')
     }
-    const csrfToken = await getCsrfToken()
     const callbackUrl = typeof searchParams?.callbackUrl === 'string' ? searchParams?.callbackUrl : "/dashboard"
     return (
         <div className="flex items-center justify-center">
@@ -32,7 +30,7 @@ export default async function RegisterPage({
                 <h1 className="text-2xl font-bold">Register</h1>
                 <p className="text-sm text-gray-500">If you already have an account <Link href="/auth/signin" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</Link></p>
                 <p className="text-sm text-gray-500">To setup a new account, fill in your details below and click submit</p>
-                <SocialLogins callbackUrl={callbackUrl} csrfToken={csrfToken} />
+                <SocialLogins callbackUrl={callbackUrl} />
                 <RegisterForm />
             </div>
         </div>

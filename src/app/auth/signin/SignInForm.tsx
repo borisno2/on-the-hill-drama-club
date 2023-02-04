@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { Turnstile } from "@marsidev/react-turnstile";
 
-export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: string, csrfToken?: string }) {
+export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -18,7 +18,7 @@ export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: st
 
 
         try {
-            await signIn('credentials', { email, password, callbackUrl, turnstileRes: token, csrfToken });
+            await signIn('credentials', { email, password, callbackUrl, turnstileRes: token });
         } catch {
             setError("Failed to log in");
         }
@@ -27,7 +27,6 @@ export default function SignInForm({ callbackUrl, csrfToken }: { callbackUrl: st
     return (
         <form className="space-y-6" onSubmit={handleSubmit}>
             <input name="callbackUrl" type="hidden" defaultValue={callbackUrl} />
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                     Email address
