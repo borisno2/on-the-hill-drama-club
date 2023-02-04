@@ -74,7 +74,7 @@ export const createQuickBooksCustomerFunction =
               qboSyncToken: parseInt(customer.SyncToken),
             },
           })
-          return `Created QB customer ${account.name} with id ${account.qboId}`
+          return `Created QB customer ${account.name} with id ${customer.Id}`
         } catch (error) {
           throw new Error('Errpr creating customer', { cause: error })
         }
