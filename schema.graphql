@@ -981,6 +981,7 @@ type Enrolment {
   lessonTerm: LessonTerm
   student: Student
   status: String
+  billItem: BillItem
   createdAt: DateTime
 }
 
@@ -996,6 +997,7 @@ input EnrolmentWhereInput {
   lessonTerm: LessonTermWhereInput
   student: StudentWhereInput
   status: StringFilter
+  billItem: BillItemWhereInput
   createdAt: DateTimeNullableFilter
 }
 
@@ -1009,6 +1011,7 @@ input EnrolmentUpdateInput {
   lessonTerm: LessonTermRelateToOneForUpdateInput
   student: StudentRelateToOneForUpdateInput
   status: String
+  billItem: BillItemRelateToOneForUpdateInput
   createdAt: DateTime
 }
 
@@ -1024,6 +1027,12 @@ input StudentRelateToOneForUpdateInput {
   disconnect: Boolean
 }
 
+input BillItemRelateToOneForUpdateInput {
+  create: BillItemCreateInput
+  connect: BillItemWhereUniqueInput
+  disconnect: Boolean
+}
+
 input EnrolmentUpdateArgs {
   where: EnrolmentWhereUniqueInput!
   data: EnrolmentUpdateInput!
@@ -1033,6 +1042,7 @@ input EnrolmentCreateInput {
   lessonTerm: LessonTermRelateToOneForCreateInput
   student: StudentRelateToOneForCreateInput
   status: String
+  billItem: BillItemRelateToOneForCreateInput
   createdAt: DateTime
 }
 
@@ -1044,6 +1054,11 @@ input LessonTermRelateToOneForCreateInput {
 input StudentRelateToOneForCreateInput {
   create: StudentCreateInput
   connect: StudentWhereUniqueInput
+}
+
+input BillItemRelateToOneForCreateInput {
+  create: BillItemCreateInput
+  connect: BillItemWhereUniqueInput
 }
 
 type Message {
@@ -1114,6 +1129,7 @@ type Bill {
   dueDate: CalendarDay
   total: Decimal
   status: String
+  term: Term
   items(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0): [BillItem!]
   itemsCount(where: BillItemWhereInput! = {}): Int
   qboSyncToken: Int
@@ -1137,6 +1153,7 @@ input BillWhereInput {
   date: CalendarDayNullableFilter
   dueDate: CalendarDayNullableFilter
   status: StringFilter
+  term: TermWhereInput
   items: BillItemManyRelationFilter
   qboSyncToken: IntNullableFilter
   qboId: IntNullableFilter
@@ -1177,6 +1194,7 @@ input BillUpdateInput {
   date: CalendarDay
   dueDate: CalendarDay
   status: String
+  term: TermRelateToOneForUpdateInput
   items: BillItemRelateToManyForUpdateInput
   qboSyncToken: Int
   qboId: Int
@@ -1201,6 +1219,7 @@ input BillCreateInput {
   date: CalendarDay
   dueDate: CalendarDay
   status: String
+  term: TermRelateToOneForCreateInput
   items: BillItemRelateToManyForCreateInput
   qboSyncToken: Int
   qboId: Int
@@ -1219,6 +1238,7 @@ type BillItem {
   quantity: Int
   amount: Int
   total: Decimal!
+  enrolment: Enrolment
   qboSyncToken: Int
   qboId: Int
   createdAt: DateTime
@@ -1237,6 +1257,7 @@ input BillItemWhereInput {
   bill: BillWhereInput
   quantity: IntFilter
   amount: IntFilter
+  enrolment: EnrolmentWhereInput
   qboSyncToken: IntNullableFilter
   qboId: IntNullableFilter
   createdAt: DateTimeNullableFilter
@@ -1257,6 +1278,7 @@ input BillItemUpdateInput {
   bill: BillRelateToOneForUpdateInput
   quantity: Int
   amount: Int
+  enrolment: EnrolmentRelateToOneForUpdateInput
   qboSyncToken: Int
   qboId: Int
   createdAt: DateTime
@@ -1265,6 +1287,12 @@ input BillItemUpdateInput {
 input BillRelateToOneForUpdateInput {
   create: BillCreateInput
   connect: BillWhereUniqueInput
+  disconnect: Boolean
+}
+
+input EnrolmentRelateToOneForUpdateInput {
+  create: EnrolmentCreateInput
+  connect: EnrolmentWhereUniqueInput
   disconnect: Boolean
 }
 
@@ -1278,6 +1306,7 @@ input BillItemCreateInput {
   bill: BillRelateToOneForCreateInput
   quantity: Int
   amount: Int
+  enrolment: EnrolmentRelateToOneForCreateInput
   qboSyncToken: Int
   qboId: Int
   createdAt: DateTime
@@ -1286,6 +1315,11 @@ input BillItemCreateInput {
 input BillRelateToOneForCreateInput {
   create: BillCreateInput
   connect: BillWhereUniqueInput
+}
+
+input EnrolmentRelateToOneForCreateInput {
+  create: EnrolmentCreateInput
+  connect: EnrolmentWhereUniqueInput
 }
 
 """
