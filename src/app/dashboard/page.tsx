@@ -4,7 +4,7 @@ import DashboardLayout from "./DashboardLayout";
 import Link from "next/link";
 import { gql } from "@ts-gql/tag/no-transform";
 import { Session } from "next-auth";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const GET_STUDENT_ENROLMENTS = gql`
     query GET_STUDENT_ENROLMENTS {
@@ -33,12 +33,12 @@ export default async function Portal() {
     const accounts = await context.db.Account.findMany({ where: { user: { id: { equals: session.userId } } } })
 
     if (!accounts || accounts.length === 0 || !accounts[0].id) {
-        redirect('/api/auth/signout')
+        return redirect('/api/auth/signout')
     }
     const profileComplete = Object.values(accounts[0]).every(value => value !== 'PLEASE_UPDATE')
     if (!profileComplete) {
         // redirect to profile page if profile is not complete
-        redirect('/dashboard/profile?incomplete=true')
+        return redirect('/dashboard/profile?incomplete=true')
     }
 
     const { students } = await context.graphql.run({ query: GET_STUDENT_ENROLMENTS })
