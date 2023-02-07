@@ -38,7 +38,7 @@ export default async function Portal() {
   const context = await getSessionContext()
   const session = context.session as Session
   if (!session) {
-    return redirect('/api/auth/signin')
+    return redirect('/auth/signin')
   }
   const accounts = await context.db.Account.findMany({
     where: { user: { id: { equals: session.userId } } },
