@@ -38,21 +38,21 @@ export default async function Portal() {
   const context = await getSessionContext()
   const session = context.session as Session
   if (!session) {
-    return redirect('/auth/signin')
+    redirect('/auth/signin')
   }
   const accounts = await context.db.Account.findMany({
     where: { user: { id: { equals: session.userId } } },
   })
 
   if (!accounts || accounts.length === 0 || !accounts[0].id) {
-    return redirect('/api/auth/signout')
+    redirect('/api/auth/signout')
   }
   const profileComplete = Object.values(accounts[0]).every(
     (value) => value !== 'PLEASE_UPDATE'
   )
   if (!profileComplete) {
     // redirect to profile page if profile is not complete
-    return redirect('/dashboard/profile?incomplete=true')
+    redirect('/dashboard/profile?incomplete=true')
   }
 
   const { students } = await context.graphql.run({
