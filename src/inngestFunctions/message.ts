@@ -2,10 +2,9 @@ import { Context } from '.keystone/types'
 import sendEmail from 'lib/sendEmail'
 import { GET_MESSAGE_TO_SEND } from 'app/dashboard/notifications/queries'
 import { keystoneContext } from 'keystone/context'
-import { SendMessageHook, SendMessageEvent } from 'types/inngest'
-import { createFunction } from 'inngest'
+import { inngest, SendMessageHook } from 'lib/inngest/client'
 
-export const sendMessageFunction = createFunction<SendMessageEvent>(
+export const sendMessageFunction = inngest.createFunction(
   'Message Saved Hook',
   'app/message.queued',
   async ({ event }) => {
