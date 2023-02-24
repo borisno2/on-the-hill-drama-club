@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'production')
 export async function getSessionContext(props?: {
   req: NextApiRequest
   res: NextApiResponse
-}) {
+}): Context {
   let session = null
   if (props) {
     const { req, res } = props
