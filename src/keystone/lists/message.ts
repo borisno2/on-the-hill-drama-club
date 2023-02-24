@@ -2,9 +2,8 @@ import { Lists } from '.keystone/types'
 import { list } from '@keystone-6/core'
 import { allOperations } from '@keystone-6/core/access'
 import { relationship, select, text, timestamp } from '@keystone-6/core/fields'
-import { Inngest } from 'inngest'
 import { messageStatusOptions } from '../../types/selectOptions'
-import { Events } from '../../types/inngest'
+import { inngest } from '../../lib/inngest/client'
 import { messageFilter, isAdmin, isLoggedIn } from '../helpers'
 
 const Message: Lists.Message = list({
@@ -31,7 +30,6 @@ const Message: Lists.Message = list({
         resolvedData.status === 'QUEUED' &&
         originalItem.status === 'DRAFT'
       ) {
-        const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
         await inngest.send({
           name: 'app/message.queued',
           data: {

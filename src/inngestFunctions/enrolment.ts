@@ -4,21 +4,16 @@ import { GET_ENROLMENT_BY_ID } from 'app/dashboard/students/queries'
 import { formatDate } from 'lib/formatDate'
 import labelHelper from 'lib/labelHelper'
 import { dayOptions } from 'types/selectOptions'
-import { createFunction } from 'inngest'
-import {
-  SendEnrolmentConfirmationEvent,
-  EnrolmentConfirmationHook,
-} from 'types/inngest'
+import { EnrolmentConfirmationHook, inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
 
-export const sendEnrolmentConfirmationFunction =
-  createFunction<SendEnrolmentConfirmationEvent>(
-    'Enrolment Confirmation Hook',
-    'app/enrolment.enroled',
-    async ({ event }) => {
-      await sendConfirmationEmail(event?.data)
-    }
-  )
+export const sendEnrolmentConfirmationFunction = inngest.createFunction(
+  'Enrolment Confirmation Hook',
+  'app/enrolment.enroled',
+  async ({ event }) => {
+    await sendConfirmationEmail(event?.data)
+  }
+)
 
 const sendConfirmationEmail = async ({
   item,

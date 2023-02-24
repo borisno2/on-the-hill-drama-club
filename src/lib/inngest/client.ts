@@ -1,3 +1,4 @@
+import { Inngest } from 'inngest'
 import { Lists, Context } from '.keystone/types'
 export type SendMessageHook = {
   item: Lists.Message.TypeInfo['item']
@@ -33,3 +34,5 @@ export type Events = {
   'app/enrolment.enroled': SendEnrolmentConfirmationEvent
   'app/account.created': CreateQuickBooksCustomerEvent
 }
+
+export const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })

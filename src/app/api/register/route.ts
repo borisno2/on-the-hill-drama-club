@@ -1,7 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { headers } from 'next/headers'
 import { keystoneContext } from 'keystone/context'
 import cuid from 'cuid'
 import { z } from 'zod'
+import { NextRequest, NextResponse } from 'next/server'
 
 const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || 'Turnstile'
 // regex to ensure the string is not 'PLEASE_CHANGE'
@@ -52,22 +53,23 @@ const registerSchema = z
       })
     }
   })
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+
+export async function POST(req: NextRequest) {
   const form = new URLSearchParams()
-
   const zParse = registerSchema.safeParse(req.body)
-
   if (!zParse.success)
-    return res
-      .status(400)
-      .json({ error: 'Invalid data', errors: zParse.error.issues })
+    return NextResponse.json(
+      {
+        error: 'Invalid data',
+        errors: zParse.error.issues,
+      },
+      { status: 400 }
+    )
   const { data } = zParse
   form.append('secret', SECRET_KEY)
   form.append('response', data.turnstileRes)
-  form.append('remoteip', req.headers['x-forwarded-for'] as string)
+  const headersList = headers()
+  form.append('remoteip', headersList.get('x-forwarded-for') as string)
 
   const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
   const result = await fetch(url, {
@@ -78,13 +80,13 @@ export default async function handler(
   const outcome = await result.json()
 
   if (!outcome.success) {
-    return res.status(403).json({ error: 'Verification failed' })
+    return NextResponse.json({ error: 'Verification failed' }, { status: 403 })
   }
   const existingUser = await keystoneContext.sudo().db.User.count({
     where: { email: { equals: data.email } },
   })
   if (existingUser > 0) {
-    return res.status(400).json({ error: 'Error Creating User' })
+    return NextResponse.json({ error: 'Error Creating User' }, { status: 400 })
   }
   try {
     const user = await keystoneContext.sudo().db.User.createOne({
@@ -108,11 +110,14 @@ export default async function handler(
       },
     })
     if (!user || !user.id || user.email !== data.email) {
-      return res.status(400).json({ error: 'Error Creating User' })
+      return NextResponse.json(
+        { error: 'Error Creating User' },
+        { status: 400 }
+      )
     }
-    return res.status(200).json({ success: true })
+    return NextResponse.json({ success: true }, { status: 200 })
   } catch (e) {
     console.error(e)
-    return res.status(400).json({ error: 'Error Creating User' })
+    return NextResponse.json({ error: 'Error Creating User' }, { status: 400 })
   }
 }
