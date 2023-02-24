@@ -2,8 +2,7 @@ import { Lists } from '.keystone/types'
 import { list } from '@keystone-6/core'
 import { allOperations } from '@keystone-6/core/access'
 import { relationship, select, timestamp } from '@keystone-6/core/fields'
-import { Inngest } from 'inngest'
-import { Events } from '../../types/inngest'
+import { inngest } from '../../lib/inngest/client'
 import { enrolmentStatusOptions } from '../../types/selectOptions'
 import { enrolmentFilter, isAdmin, isLoggedIn } from '../helpers'
 
@@ -32,7 +31,6 @@ const Enrollment: Lists.Enrolment = list({
         resolvedData.status === 'ENROLED' &&
         originalItem.status === 'PENDING'
       ) {
-        const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
         await inngest.send({
           name: 'app/enrolment.enroled',
           data: {

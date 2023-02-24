@@ -8,8 +8,7 @@ import {
   text,
   integer,
 } from '@keystone-6/core/fields'
-import { Inngest } from 'inngest'
-import { Events } from '../../types/inngest'
+import { inngest } from '../../lib/inngest/client'
 import { accountFilter, isAdmin, isLoggedIn } from '../helpers'
 
 const Account: Lists.Account = list({
@@ -39,7 +38,6 @@ const Account: Lists.Account = list({
           resolvedData.secondContactName !== originalItem.secondContactName &&
           originalItem.secondContactName === 'PLEASE_UPDATE')
       ) {
-        const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
         await inngest.send({
           name: 'app/account.created',
           data: {
