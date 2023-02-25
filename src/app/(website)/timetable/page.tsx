@@ -1,6 +1,12 @@
 import { Container } from 'components/Container'
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import Timetable, { DayOfTheWeek } from './Tabletable'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Timetable'),
+}
 
 export default function TimetablePage({ searchParams }: { searchParams: { daySelected: string } }) {
     let daySelected: DayOfTheWeek = 'MONDAY'

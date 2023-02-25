@@ -4,7 +4,12 @@ import { getSessionContext } from "keystone/context";
 import { formatDate } from "lib/formatDate";
 import { redirect } from "next/navigation";
 import dayjs from "dayjs";
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
 
+export const metadata: Metadata = {
+    ...getMetadata('Important Dates'),
+}
 
 const GET_IMPORTANT_DATES = gql`
     query GET_IMPORTANT_DATES($filterDay: CalendarDay!) {

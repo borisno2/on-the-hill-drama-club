@@ -4,8 +4,11 @@ import { Container } from 'components/Container'
 import { getSessionContext } from 'keystone/context'
 import labelHelper from 'lib/labelHelper'
 import { redirect } from 'next/navigation'
+import { Metadata } from 'next/types'
 import { dayOptions } from 'types/selectOptions'
 import Images from '../../Images'
+import { cache } from 'react';
+import { getMetadata } from 'app/metadata'
 
 const GET_LESSON_CATEGORY_BY_SLUG = gql`
   query GET_LESSON_CATEGORY_BY_SLUG($slug: String!) {
@@ -30,16 +33,31 @@ const GET_LESSON_CATEGORY_BY_SLUG = gql`
     }
   }
 ` as import('../../../../../__generated__/ts-gql/GET_LESSON_CATEGORY_BY_SLUG').type
-export default async function Page({
-    params: { slug },
-}: {
-    params: { slug: string }
-}) {
+
+const getLessonCategory = cache(async (slug: string) => {
     const context = await getSessionContext()
     const { lessonCategory } = await context.graphql.run({
         query: GET_LESSON_CATEGORY_BY_SLUG,
         variables: { slug },
     })
+    return lessonCategory
+})
+
+export async function generateMetadata({
+    params: { slug },
+}: {
+    params: { slug: string }
+}): Promise<Metadata> {
+    const lessonCategory = await getLessonCategory(slug);
+    return getMetadata(lessonCategory.name)
+}
+
+export default async function Page({
+    params: { slug },
+}: {
+    params: { slug: string }
+}) {
+    const lessonCategory = await getLessonCategory(slug);
     if (!lessonCategory) {
         redirect('/')
     }

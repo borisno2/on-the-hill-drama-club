@@ -4,6 +4,12 @@ import { getSessionContext } from "keystone/context";
 import { GET_STUDENTS } from "../students/queries";
 import { LessonTermWhereInput } from "../../../../__generated__/ts-gql/@schema";
 import { redirect } from "next/navigation";
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Lessons - Student Portal'),
+}
 
 
 export default async function lessons() {

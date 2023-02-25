@@ -7,6 +7,12 @@ import { isCuid } from 'cuid'
 import { GET_LESSON_BY_ID } from '../queries'
 import { Suspense } from 'react'
 import EnrolStudentList from './EnrolStudentList'
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Lessons - Student Portal'),
+}
 
 export const dynamic = 'force-dynamic'
 export default async function LessonPage({

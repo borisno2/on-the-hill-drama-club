@@ -8,6 +8,12 @@ import { isCuid } from 'cuid'
 import LessonList from '../../lessons/LessonList'
 import { GET_STUDENT_BY_ID } from '../queries'
 import { Session } from 'next-auth'
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Student Portal'),
+}
 
 export const dynamic = 'force-dynamic'
 export default async function Students({

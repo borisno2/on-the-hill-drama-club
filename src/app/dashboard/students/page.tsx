@@ -1,8 +1,12 @@
 import DashboardLayout from "../DashboardLayout"
-import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
-import { getSessionContext } from "keystone/context";
 import Link from "next/link";
 import StudentList from "./StudentList";
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Students - Student Portal'),
+}
 
 
 export default async function Students() {

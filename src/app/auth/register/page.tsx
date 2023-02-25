@@ -4,6 +4,12 @@ import Link from "next/link"
 import Image from "next/image"
 import { redirect } from 'next/navigation';
 import { getSessionContext } from "keystone/context";
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Register'),
+}
 
 export default async function RegisterPage({
     searchParams,

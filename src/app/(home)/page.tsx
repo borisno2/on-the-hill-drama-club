@@ -1,6 +1,9 @@
 import { Container } from "components/Container";
 import Images from "./Images";
+import type { Metadata } from 'next'
+import { baseMetadata } from "app/metadata";
 
+export const metadata: Metadata = baseMetadata
 
 export default function Home() {
     return (

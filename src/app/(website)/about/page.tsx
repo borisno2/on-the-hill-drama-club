@@ -2,6 +2,12 @@ import clsx from "clsx";
 import { Container } from "components/Container";
 
 import Images from "app/(home)/Images";
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('About'),
+}
 
 
 export default function Page() {
