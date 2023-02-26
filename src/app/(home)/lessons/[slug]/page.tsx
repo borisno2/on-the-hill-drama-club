@@ -49,7 +49,10 @@ export async function generateMetadata({
     params: { slug: string }
 }): Promise<Metadata> {
     const lessonCategory = await getLessonCategory(slug);
-    return getMetadata(lessonCategory.name)
+    if (lessonCategory && lessonCategory.name) {
+        return getMetadata(lessonCategory.name)
+    }
+    return getMetadata('Lessons')
 }
 
 export default async function Page({
