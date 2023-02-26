@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { Container } from "components/Container";
 
 import Images from "app/(home)/Images";
