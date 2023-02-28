@@ -3,6 +3,12 @@ import { Container } from 'components/Container'
 import { getSessionContext } from 'keystone/context'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Fees'),
+}
 
 const GET_LESSON_CATEFORY_FEES = gql`
     query GET_LESSON_CATEFORY_FEES {

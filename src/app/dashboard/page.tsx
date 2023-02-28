@@ -12,6 +12,13 @@ import Link from 'next/link'
 import { gql } from '@ts-gql/tag/no-transform'
 import { Session } from 'next-auth'
 import { redirect } from 'next/navigation'
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+  ...getMetadata('Student Portal'),
+}
+
 
 const GET_STUDENT_ENROLMENTS = gql`
   query GET_STUDENT_ENROLMENTS {
@@ -72,10 +79,10 @@ export default async function Portal() {
       icon: BuildingOfficeIcon,
       amount: students
         ? students.reduce(
-            (acc, student) =>
-              acc + (student.enrolments ? student.enrolments.length : 0),
-            0
-          )
+          (acc, student) =>
+            acc + (student.enrolments ? student.enrolments.length : 0),
+          0
+        )
         : 0,
     },
     // More items...

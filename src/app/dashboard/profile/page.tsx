@@ -3,6 +3,12 @@ import { getSessionContext } from "keystone/context";
 import ProfileForm from "./ProfileForm"
 import { redirect } from "next/navigation";
 import DashboardLayout from "../DashboardLayout"
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Profile - Student Portal'),
+}
 
 const GET_ACCOUNT = gql`
     query GET_ACCOUNT($id: ID!) {

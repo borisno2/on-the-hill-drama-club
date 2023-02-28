@@ -1,4 +1,10 @@
 import { Container } from "components/Container";
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Contact Us'),
+}
 
 export default function Page() {
     return (

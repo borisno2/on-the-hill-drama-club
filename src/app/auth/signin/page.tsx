@@ -2,7 +2,12 @@ import Image from 'next/image';
 import SignInForm from './SignInForm';
 import { SocialLogins } from 'components/SocialLogins';
 import Link from 'next/link';
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
 
+export const metadata: Metadata = {
+    ...getMetadata('Sign In'),
+}
 
 export default async function SignInPage({
     searchParams,

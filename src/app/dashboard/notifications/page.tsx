@@ -1,4 +1,10 @@
 import DashboardLayout from "../DashboardLayout"
+import type { Metadata } from 'next'
+import { getMetadata } from 'app/metadata'
+
+export const metadata: Metadata = {
+    ...getMetadata('Notifications - Student Portal'),
+}
 
 
 export default function Account() {
