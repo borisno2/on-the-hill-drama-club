@@ -10,7 +10,7 @@ We use Inutit's Quickbooks for book keeping, we can generate invoices for the Te
 
 ## Tech Stack
 
-I wanted to try seomthing new, have a super easy deployment experience, and not have the headache of looking after servers.
+I wanted to try something new, have a super easy deployment experience, and not have the headache of looking after servers.
 
 With that in mind I went with the following
 
