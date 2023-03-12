@@ -8,7 +8,6 @@ specifiers:
   '@heroicons/react': ^2.0.16
   '@keystone-6/core': ^5.1.0
   '@marsidev/react-turnstile': ^0.0.5
-  '@next/font': ^13.2.4
   '@prisma/client': 4.11.0
   '@sendgrid/mail': ^7.7.0
   '@tailwindcss/forms': ^0.5.3
@@ -67,7 +66,6 @@ dependencies:
   '@heroicons/react': 2.0.16_react@18.2.0
   '@keystone-6/core': 5.1.0_67s5vprczxg2ap25dgbybw7qhy
   '@marsidev/react-turnstile': 0.0.5_biqbaboplfbrettd7655fr4n2y
-  '@next/font': 13.2.4
   '@prisma/client': 4.11.0
   '@sendgrid/mail': 7.7.0
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
@@ -3196,10 +3194,6 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
-
-  /@next/font/13.2.4:
-    resolution: {integrity: sha512-lMAnuOYjv5g22WhD00u0DQ9u2rTMJH0S64PKE4Sy8Y2q+FJTYs6ZHT2z3VRoI8+AOWSLK4FirpnygcjOienQ9A==}
-    dev: false
 
   /@next/swc-android-arm-eabi/13.2.4:
     resolution: {integrity: sha512-DWlalTSkLjDU11MY11jg17O1gGQzpRccM9Oes2yTqj2DpHndajrXHGxj9HGtJ+idq2k7ImUdJVWS2h2l/EDJOw==}

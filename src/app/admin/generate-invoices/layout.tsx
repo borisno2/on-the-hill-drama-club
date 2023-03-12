@@ -1,6 +1,6 @@
 import AuthContext from 'app/AuthContext'
 
-import { Libre_Bodoni } from '@next/font/google'
+import { Libre_Bodoni } from 'next/font/google'
 import 'styles/tailwind.css'
 import 'focus-visible'
 import { Header } from 'components/Header'
