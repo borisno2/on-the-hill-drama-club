@@ -14,9 +14,8 @@ export default config({
       process.env.DATABASE_URL ||
       'mysql://root:my-secret-pw@localhost:49949/onthehilldrama',
     additionalPrismaDatasourceProperties: {
-      referentialIntegrity: 'prisma',
+      relationMode: 'prisma',
     },
-    prismaPreviewFeatures: ['referentialIntegrity'],
   },
   ui: {
     isAccessAllowed: ({ session }) => session.allowAdminUI,
