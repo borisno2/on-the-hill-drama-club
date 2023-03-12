@@ -2,15 +2,14 @@
 // Modify your Keystone config when you want to change this.
 
 datasource mysql {
-  url                  = env("DATABASE_URL")
-  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
-  provider             = "mysql"
-  referentialIntegrity = "prisma"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider          = "mysql"
+  relationMode      = "prisma"
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 model User {
