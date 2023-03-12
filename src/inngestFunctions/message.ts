@@ -27,9 +27,7 @@ const sendMessage = async ({ item, session }: SendMessageHook) => {
     !message.content ||
     !process.env.SENDGRID_API_KEY
   ) {
-    console.log('Missing Data')
-
-    return
+    throw new Error('Missing Data', { cause: message })
   }
   const emailSettings = await context.sudo().db.EmailSettings.findOne({})
 
@@ -38,8 +36,7 @@ const sendMessage = async ({ item, session }: SendMessageHook) => {
     !emailSettings.lessonTermMessageTemplate ||
     !emailSettings.fromEmail
   ) {
-    console.log('Missing Email Settings')
-    return
+    throw new Error('Missing Email Settings', { cause: emailSettings })
   }
   const dynamicData = {
     subject: message.name,

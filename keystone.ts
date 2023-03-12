@@ -24,7 +24,7 @@ export default config({
       async () => [
         {
           mode: 'copy',
-          inputPath: Path.resolve('./next-config.js'),
+          inputPath: Path.resolve('./keystone-next-config.js'),
           outputPath: 'next.config.js',
         },
       ],
