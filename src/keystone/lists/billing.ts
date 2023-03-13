@@ -11,6 +11,7 @@ import {
   virtual,
 } from '@keystone-6/core/fields'
 import Decimal from 'decimal.js'
+import { inngest } from 'lib/inngest/client'
 import { billStatusOptions } from '../../types/selectOptions'
 import {
   billFilter,
@@ -28,6 +29,23 @@ export const Bill: Lists.Bill = list({
     },
     filter: {
       query: billFilter,
+    },
+  },
+  hooks: {
+    afterOperation: async ({ operation, item, resolvedData, context }) => {
+      if (
+        operation === 'update' &&
+        resolvedData.status === 'APPROVED' &&
+        item.status === 'DRAFT'
+      ) {
+        await inngest.send({
+          name: 'app/bill.approved',
+          data: {
+            item,
+            session: context.session,
+          },
+        })
+      }
     },
   },
   fields: {
@@ -100,7 +118,7 @@ export const BillItem: Lists.BillItem = list({
         resolve: (item) => {
           let val: Decimal & { scaleToPrint?: number } = new Decimal(0.0)
           if (item.amount && item.quantity)
-            val = new Decimal(item.amount).mul(item.quantity)
+            val = new Decimal(item.amount).mul(item.quantity).dividedBy(100)
           val.scaleToPrint = 2
           return val
         },
