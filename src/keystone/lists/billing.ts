@@ -11,7 +11,7 @@ import {
   virtual,
 } from '@keystone-6/core/fields'
 import Decimal from 'decimal.js'
-import { inngest } from 'lib/inngest/client'
+import { inngest } from '../../lib/inngest/client'
 import { billStatusOptions } from '../../types/selectOptions'
 import {
   billFilter,
