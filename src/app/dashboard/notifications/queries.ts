@@ -6,6 +6,7 @@ export const GET_MESSAGE_TO_SEND = gql`
       id
       name
       content
+      status
       lessonTerms {
         id
         name
