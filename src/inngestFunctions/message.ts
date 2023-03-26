@@ -29,6 +29,11 @@ const sendMessage = async ({ item, session }: SendMessageHook) => {
   ) {
     throw new Error('Missing Data', { cause: message })
   }
+
+  if (message.status !== 'QUEUED') {
+    throw new Error('Message is not in the correct state', { cause: message })
+  }
+
   const emailSettings = await context.sudo().db.EmailSettings.findOne({})
 
   if (
@@ -74,12 +79,17 @@ const sendMessage = async ({ item, session }: SendMessageHook) => {
     },
   }
   console.log('Sending Email')
-  await sendEmail(emailData)
-  await context.sudo().db.Message.updateOne({
-    where: { id: item.id },
-    data: {
-      status: 'SENT',
-      sentAt: new Date().toISOString(),
-    },
-  })
+  const [emailResponse] = await sendEmail(emailData)
+  if (emailResponse.statusCode > 399) {
+    throw new Error('Email Failed to Send', { cause: emailResponse })
+  } else {
+    await context.sudo().db.Message.updateOne({
+      where: { id: item.id },
+      data: {
+        status: 'SENT',
+        sentAt: new Date().toISOString(),
+      },
+    })
+  }
+  return emailResponse
 }

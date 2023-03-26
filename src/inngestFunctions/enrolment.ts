@@ -37,9 +37,7 @@ const sendConfirmationEmail = async ({
     !enrolment.student.account.user.email ||
     !process.env.SENDGRID_API_KEY
   ) {
-    console.log('Missing Data')
-
-    return
+    throw new Error('Missing Data', { cause: enrolment })
   }
   const emailSettings = await context.sudo().db.EmailSettings.findOne({})
 
@@ -48,8 +46,7 @@ const sendConfirmationEmail = async ({
     !emailSettings.enrolmentConfirmationTemplate ||
     !emailSettings.fromEmail
   ) {
-    console.log('Missing Email Settings')
-    return
+    throw new Error('Missing Email Settings', { cause: emailSettings })
   }
   const dynamicData = {
     firstName: enrolment.student.account.firstName,
@@ -69,5 +66,9 @@ const sendConfirmationEmail = async ({
     },
   }
   console.log('Sending Email')
-  await sendEmail(emailData)
+  const [emailReturn] = await sendEmail(emailData)
+  if (emailReturn.statusCode > 399) {
+    throw new Error('Email Failed to Send', { cause: emailReturn })
+  }
+  return emailReturn
 }

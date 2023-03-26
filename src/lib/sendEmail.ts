@@ -23,12 +23,8 @@ export default async function sendEmail(data: emailData) {
 
   const msg = { ...email }
   try {
-    await sgMail.send(msg)
+    return await sgMail.send(msg)
   } catch (error: any) {
-    console.error(error)
-
-    if (error.response) {
-      console.error(error.response.body)
-    }
+    throw new Error(error)
   }
 }

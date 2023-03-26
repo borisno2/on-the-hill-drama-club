@@ -1,4 +1,3 @@
-// you don't need this if you're building something outside of the Keystone repo
 const KEYSTONE_URL = process.env.KEYSTONE_URL || 'http://localhost:4000'
 const { withTsGql } = require('@ts-gql/next')
 
