@@ -56,7 +56,7 @@ const registerSchema = z
 
 export async function POST(req: NextRequest) {
   const form = new URLSearchParams()
-  const zParse = registerSchema.safeParse(req.body)
+  const zParse = registerSchema.safeParse(await req.json())
   if (!zParse.success)
     return NextResponse.json(
       {
