@@ -115,6 +115,7 @@ export const GET_ENROLMENT_BY_ID = gql`
         id
         name
         status
+        numberOfLessons
         term {
           id
           name
@@ -127,6 +128,7 @@ export const GET_ENROLMENT_BY_ID = gql`
           time
           name
           location
+          cost
         }
       }
     }
