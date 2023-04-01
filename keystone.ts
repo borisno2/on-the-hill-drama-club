@@ -10,7 +10,6 @@ dotenv.config()
 export default config({
   db: {
     provider: 'mysql',
-    prismaClientPath: 'node_modules/.prisma/client',
     url:
       process.env.DATABASE_URL ||
       'mysql://root:my-secret-pw@localhost:49949/onthehilldrama',
