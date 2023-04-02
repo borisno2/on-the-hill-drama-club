@@ -105,6 +105,7 @@ export const GET_ENROLMENT_BY_ID = gql`
         account {
           id
           firstName
+          name
           user {
             id
             email

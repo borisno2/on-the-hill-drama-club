@@ -75,8 +75,10 @@ export const createBillItemFunction = inngest.createFunction(
         const newBill = await context.sudo().query.Bill.createOne({
           query: 'id items { id }',
           data: {
+            name: `${enrolment.student.account.name} - ${enrolment.lessonTerm.term.name}`,
             account: { connect: { id: enrolment.student.account.id } },
             term: { connect: { id: enrolment.lessonTerm.term.id } },
+            status: 'DRAFT',
             items: {
               create: billItemData,
             },
