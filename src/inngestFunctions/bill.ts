@@ -1,4 +1,4 @@
-import { createInvoice } from 'lib/intuit/invoice'
+import { createInvoice, sendInvoicePdf } from 'lib/intuit/invoice'
 import { Context } from '.keystone/types'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
@@ -109,8 +109,20 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
         )
 
         if (invoice === null) {
-          return `Bill ${bill.name} could not be created in QBO`
+          throw new Error(`Bill ${bill.name} could not be created in QBO`, {
+            cause: invoice,
+          })
         } else {
+          const sentInvoice = await sendInvoicePdf(
+            invoice.Id,
+            bill.account.user?.email!,
+            qbo
+          )
+          if (sentInvoice === null || !sentInvoice.Id) {
+            throw new Error(`Bill ${bill.name} could not be created in QBO`, {
+              cause: sentInvoice,
+            })
+          }
           await context.graphql.run({
             query: UPDATE_BILL_QBO_ID,
             variables: { id: bill.id, qboId: parseInt(invoice.Id) },
