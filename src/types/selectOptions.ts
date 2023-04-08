@@ -39,6 +39,8 @@ export const enrolmentStatusOptions = [
   { label: 'Paid', value: 'PAID' },
 ]
 export const billStatusOptions = [
+  { label: 'Draft', value: 'DRAFT' },
+  { label: 'Approved', value: 'APPROVED' },
   { label: 'Pending', value: 'PENDING' },
   { label: 'Overdue', value: 'OVERDUE' },
   { label: 'Partially Paid', value: 'PARTIALLY_PAID' },

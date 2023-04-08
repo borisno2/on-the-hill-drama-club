@@ -1,38 +1,44 @@
 import { Inngest } from 'inngest'
-import { Lists, Context } from '.keystone/types'
-export type SendMessageHook = {
-  item: Lists.Message.TypeInfo['item']
-  session: Context['session']
-}
+import { Lists } from '.keystone/types'
+import { Session } from 'next-auth'
 
-export type EnrolmentConfirmationHook = {
-  item: Lists.Enrolment.TypeInfo['item']
-  session: Context['session']
-}
-
-export type AccountCreatedHook = {
-  item: Lists.Account.TypeInfo['item']
+export type BillApprovedEvent = {
+  name: 'app/bill.approved'
+  data: {
+    item: Lists.Bill.TypeInfo['item']
+    session: Session
+  }
 }
 
 export type SendMessageEvent = {
   name: 'app/message.queued'
-  data: SendMessageHook
+  data: {
+    item: Lists.Message.TypeInfo['item']
+    session: Session
+  }
 }
 
-export type SendEnrolmentConfirmationEvent = {
+export type EnrolmentConfirmedEvent = {
   name: 'app/enrolment.enroled'
-  data: EnrolmentConfirmationHook
+  data: {
+    item: Lists.Enrolment.TypeInfo['item']
+    session: Session
+  }
 }
 
 export type CreateQuickBooksCustomerEvent = {
   name: 'app/account.created'
-  data: AccountCreatedHook
+  data: {
+    item: Lists.Account.TypeInfo['item']
+    session: Session
+  }
 }
 
 export type Events = {
   'app/message.queued': SendMessageEvent
-  'app/enrolment.enroled': SendEnrolmentConfirmationEvent
+  'app/enrolment.enroled': EnrolmentConfirmedEvent
   'app/account.created': CreateQuickBooksCustomerEvent
+  'app/bill.approved': BillApprovedEvent
 }
 
 export const inngest = new Inngest<Events>({ name: 'Emily Calder ARTS' })
