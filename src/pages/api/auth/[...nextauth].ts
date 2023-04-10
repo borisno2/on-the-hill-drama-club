@@ -31,16 +31,6 @@ type SecretFieldImpl = {
   generateHash: (secret: string) => Promise<string>
   compare: (secret: string, hash: string) => Promise<string>
 }
-function getSecretFieldImpl(
-  schema: GraphQLSchema,
-  listKey: string,
-  fieldKey: string
-): SecretFieldImpl {
-  const gqlOutputType = assertObjectType(schema.getType(listKey))
-  const secretFieldImpl =
-    gqlOutputType.getFields()?.[fieldKey].extensions?.keystoneSecretField
-  return secretFieldImpl as SecretFieldImpl
-}
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -206,11 +196,11 @@ export const authOptions: AuthOptions = {
         if (!outcome.success) {
           return { failMessage: 'TurnstileFailed' }
         }
-        const secretFieldImpl = getSecretFieldImpl(
-          keystoneContext.sudo().graphql.schema,
-          'User',
-          'password'
-        )
+        const secretFieldImpl = assertObjectType(
+          keystoneContext.sudo().graphql.schema.getType('User')
+        ).getFields()?.['password'].extensions
+          ?.keystoneSecretField as SecretFieldImpl
+
         const item = await keystoneContext.sudo().db.User.findMany({
           where: {
             AND: [
