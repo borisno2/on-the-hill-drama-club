@@ -56,7 +56,7 @@
     "next": "^13.3.0",
     "next-auth": "^4.21.1",
     "node-quickbooks": "^2.0.42",
-    "postcss-focus-visible": "^6.0.4",
+    "postcss-focus-visible": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-tailwindcss-datepicker": "^1.5.1",
