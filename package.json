@@ -25,7 +25,7 @@
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
     "@keystone-6/core": "^5.1.0",
-    "@marsidev/react-turnstile": "^0.1.2",
+    "@marsidev/react-turnstile": "^0.2.0",
     "@prisma/client": "4.11.0",
     "@sendgrid/mail": "^7.7.0",
     "@tailwindcss/forms": "^0.5.3",

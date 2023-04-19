@@ -20,8 +20,8 @@ dependencies:
     specifier: ^5.1.0
     version: 5.1.0(@aws-sdk/abort-controller@3.306.0)(@aws-sdk/signature-v4-crt@3.306.0)(@babel/core@7.21.4)(@opentelemetry/api@1.4.1)(@prisma/generator-helper@4.12.0)(aws-crt@1.15.13)(encoding@0.1.13)
   '@marsidev/react-turnstile':
-    specifier: ^0.1.2
-    version: 0.1.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.2.0
+    version: 0.2.0(react-dom@18.2.0)(react@18.2.0)
   '@prisma/client':
     specifier: 4.11.0
     version: 4.11.0(prisma@4.11.0)
@@ -3215,8 +3215,8 @@ packages:
       - '@types/react'
     dev: false
 
-  /@marsidev/react-turnstile@0.1.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-aL1/AdES53yxPJKodT20qwJ9Fs0ZcnYRS+Z7yA8iGGFAi4roOS9iB12Ss7GJrm896hXW/YnW1aAPxc079Sad7A==}
+  /@marsidev/react-turnstile@0.2.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-qnpHFk5Cyjv7pmMu+1hn+l6tzAyq6aECQj26JdcB6r0pbk1W3/7XSA5iiP9b+pMnTq0IzkQa26EU7GyERpoLDw==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
