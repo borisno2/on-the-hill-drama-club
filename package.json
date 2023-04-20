@@ -78,7 +78,7 @@
     "turbo": "^1.8.8",
     "typescript": "^5.0.3"
   },
-  "packageManager": "pnpm@8.2.0",
+  "packageManager": "pnpm@8.3.1",
   "ts-gql": {
     "schema": "schema.graphql",
     "mode": "no-transform"
