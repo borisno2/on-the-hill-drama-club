@@ -113,8 +113,8 @@ dependencies:
     specifier: ^2.0.42
     version: 2.0.42
   postcss-focus-visible:
-    specifier: ^6.0.4
-    version: 6.0.4(postcss@8.4.21)
+    specifier: ^8.0.0
+    version: 8.0.0(postcss@8.4.21)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -9444,9 +9444,9 @@ packages:
       tough-cookie: 2.5.0
     dev: false
 
-  /postcss-focus-visible@6.0.4(postcss@8.4.21):
-    resolution: {integrity: sha512-QcKuUU/dgNsstIK6HELFRT5Y3lbrMLEOwG+A4s5cA+fx3A3y/JTq3X9LaOj3OC3ALH0XqyrgQIgey/MIZ8Wczw==}
-    engines: {node: ^12 || ^14 || >=16}
+  /postcss-focus-visible@8.0.0(postcss@8.4.21):
+    resolution: {integrity: sha512-mLIYkOFGXJSJtFwj9VX5LYUfWbxuwBWQxOqcdKk2p4apCAvsxji0jFpZhOPEpwD9YFbcTi0RWb+9Zam5y7qw5g==}
+    engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
     dependencies:
