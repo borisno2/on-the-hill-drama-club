@@ -1,7 +1,5 @@
 'use client'
-import { Button } from 'components/Button'
 import DropDown from 'components/DropDown'
-import { useState } from 'react'
 
 export default function TermDropDown({
   options,

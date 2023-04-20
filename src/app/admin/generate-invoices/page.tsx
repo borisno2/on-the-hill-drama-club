@@ -1,7 +1,5 @@
 import { Container } from 'components/Container'
-import DropDown from 'components/DropDown'
 import { getSessionContext } from 'keystone/context'
-import TermSelection from '../TermSelection'
 import GenerateInvoiceForm from './GenerateInvoiceForm'
 
 export default async function Page() {
