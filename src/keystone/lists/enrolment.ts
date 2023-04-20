@@ -39,6 +39,19 @@ const Enrollment: Lists.Enrolment = list({
           },
         })
       }
+      if (
+        operation === 'create' &&
+        resolvedData &&
+        resolvedData.status === 'ENROLED'
+      ) {
+        await inngest.send({
+          name: 'app/enrolment.rollOver',
+          data: {
+            item,
+            session: context.session,
+          },
+        })
+      }
     },
   },
   fields: {
