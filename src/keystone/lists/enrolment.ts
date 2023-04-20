@@ -45,7 +45,7 @@ const Enrollment: Lists.Enrolment = list({
         resolvedData.status === 'ENROLED'
       ) {
         await inngest.send({
-          name: 'app/enrolment.rollOver',
+          name: 'app/enrolment.enroled',
           data: {
             item,
             session: context.session,

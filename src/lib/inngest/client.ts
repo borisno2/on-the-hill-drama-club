@@ -34,7 +34,25 @@ export type CreateQuickBooksCustomerEvent = {
   }
 }
 
+export type CopyTermConfirmedEvent = {
+  name: 'app/copyterm.confirmed'
+  data: {
+    item: Lists.Term.TypeInfo['item']
+    session: Session
+  }
+}
+
+export type LessonTermConfirmedEvent = {
+  name: 'app/lessonTerm.confirmed'
+  data: {
+    item: Lists.LessonTerm.TypeInfo['item']
+    session: Session
+  }
+}
+
 export type Events = {
+  'app/lessonTerm.confirmed': LessonTermConfirmedEvent
+  'app/copyterm.confirmed': CopyTermConfirmedEvent
   'app/message.queued': SendMessageEvent
   'app/enrolment.enroled': EnrolmentConfirmedEvent
   'app/account.created': CreateQuickBooksCustomerEvent
