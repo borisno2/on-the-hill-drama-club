@@ -34,7 +34,7 @@
     "@ts-gql/next": "^17.0.0",
     "@ts-gql/tag": "^0.7.0",
     "@types/dotenv-flow": "^3.2.0",
-    "@vercel/analytics": "^0.1.11",
+    "@vercel/analytics": "^1.0.0",
     "autoprefixer": "^10.4.14",
     "aws-crt": "^1.15.13",
     "clsx": "^1.2.1",
