@@ -6,6 +6,7 @@ import { getQBO } from 'lib/intuit'
 
 import { gql } from '@ts-gql/tag/no-transform'
 import Decimal from 'decimal.js'
+import { NonRetriableError } from 'inngest'
 
 const UPDATE_BILL_QBO_ID = gql`
   mutation UPDATE_BILL_QBO_ID($id: ID!, $qboId: Int!) {
@@ -58,9 +59,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
   async ({ event, step }) => {
     const { item, session } = event.data
     const context: Context = keystoneContext.withSession(session)
-    const qbo = await getQBO({ context }).catch((error) => {
-      throw new Error('Error getting QBO', { cause: error })
-    })
+    const qbo = await getQBO({ context })
     const { bill } = await step.run('Get Bill from DB', async () => {
       try {
         return await context.graphql.run({
@@ -68,7 +67,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
           variables: { id: item.id },
         })
       } catch (error) {
-        throw new Error('Error getting bill', { cause: error })
+        throw new NonRetriableError('Error getting bill', { cause: error })
       }
     })
     if (!qbo) throw new Error('Could not get QBO client')
@@ -86,7 +85,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
       const invoice = await step.run('Create Invoice in QBO', async () => {
         if (!bill.account) throw new Error('Could not get bill account')
         if (!bill.items || bill.items.length === 0)
-          throw new Error('Bill has no items')
+          throw new NonRetriableError('Bill has no items')
         try {
           return await createInvoice(
             {
@@ -114,7 +113,9 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
             qbo
           )
         } catch (error) {
-          throw new Error('Error creating invoice', { cause: error })
+          throw new NonRetriableError('Error creating invoice', {
+            cause: error,
+          })
         }
       })
 
@@ -142,7 +143,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
         }
         await step.run('Update Bill to Sent', async () => {
           try {
-            await context.graphql.run({
+            return await context.graphql.run({
               query: UPDATE_BILL_QBO_ID,
               variables: { id: bill.id, qboId: parseInt(invoice.Id) },
             })
