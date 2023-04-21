@@ -39,6 +39,19 @@ const Enrollment: Lists.Enrolment = list({
           },
         })
       }
+      if (
+        operation === 'create' &&
+        resolvedData &&
+        resolvedData.status === 'ENROLED'
+      ) {
+        await inngest.send({
+          name: 'app/enrolment.enroled',
+          data: {
+            item,
+            session: context.session,
+          },
+        })
+      }
     },
   },
   fields: {
@@ -79,7 +92,7 @@ const Enrollment: Lists.Enrolment = list({
           if (inputData.status === 'PENDING') {
             return true
           }
-          return isAdmin(session)
+          return isAdmin({ session })
         },
         update: isAdmin,
       },

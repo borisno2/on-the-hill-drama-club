@@ -613,6 +613,8 @@ type Term {
   endDate: CalendarDay
   lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonTermWhereUniqueInput): [LessonTerm!]
   lessonTermsCount(where: LessonTermWhereInput! = {}): Int
+  termStatus: String
+  copyFrom: Term
 }
 
 input TermWhereUniqueInput {
@@ -630,6 +632,8 @@ input TermWhereInput {
   startDate: CalendarDayFilter
   endDate: CalendarDayFilter
   lessonTerms: LessonTermManyRelationFilter
+  termStatus: StringNullableFilter
+  copyFrom: TermWhereInput
 }
 
 input LessonTermManyRelationFilter {
@@ -645,6 +649,7 @@ input TermOrderByInput {
   year: OrderDirection
   startDate: OrderDirection
   endDate: OrderDirection
+  termStatus: OrderDirection
 }
 
 input TermUpdateInput {
@@ -654,6 +659,8 @@ input TermUpdateInput {
   startDate: CalendarDay
   endDate: CalendarDay
   lessonTerms: LessonTermRelateToManyForUpdateInput
+  termStatus: String
+  copyFrom: TermRelateToOneForUpdateInput
 }
 
 input LessonTermRelateToManyForUpdateInput {
@@ -661,6 +668,12 @@ input LessonTermRelateToManyForUpdateInput {
   set: [LessonTermWhereUniqueInput!]
   create: [LessonTermCreateInput!]
   connect: [LessonTermWhereUniqueInput!]
+}
+
+input TermRelateToOneForUpdateInput {
+  create: TermCreateInput
+  connect: TermWhereUniqueInput
+  disconnect: Boolean
 }
 
 input TermUpdateArgs {
@@ -675,11 +688,18 @@ input TermCreateInput {
   startDate: CalendarDay
   endDate: CalendarDay
   lessonTerms: LessonTermRelateToManyForCreateInput
+  termStatus: String
+  copyFrom: TermRelateToOneForCreateInput
 }
 
 input LessonTermRelateToManyForCreateInput {
   create: [LessonTermCreateInput!]
   connect: [LessonTermWhereUniqueInput!]
+}
+
+input TermRelateToOneForCreateInput {
+  create: TermCreateInput
+  connect: TermWhereUniqueInput
 }
 
 type LessonTerm {
@@ -737,12 +757,6 @@ input LessonTermUpdateInput {
   createdAt: DateTime
 }
 
-input TermRelateToOneForUpdateInput {
-  create: TermCreateInput
-  connect: TermWhereUniqueInput
-  disconnect: Boolean
-}
-
 input LessonRelateToOneForUpdateInput {
   create: LessonCreateInput
   connect: LessonWhereUniqueInput
@@ -769,11 +783,6 @@ input LessonTermCreateInput {
   messages: MessageRelateToManyForCreateInput
   numberOfLessons: Int
   createdAt: DateTime
-}
-
-input TermRelateToOneForCreateInput {
-  create: TermCreateInput
-  connect: TermWhereUniqueInput
 }
 
 input LessonRelateToOneForCreateInput {
