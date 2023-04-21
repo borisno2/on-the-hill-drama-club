@@ -148,8 +148,9 @@ export const lists: Lists = {
         if (
           operation === 'update' &&
           item.copyFromId &&
-          item.termStatus === 'UPCOMING' &&
-          originalItem.termStatus !== 'DRAFT'
+          item.termStatus === 'ENROL' &&
+          (originalItem.termStatus === 'DRAFT' ||
+            originalItem.termStatus === 'UPCOMING')
         ) {
           await inngest.send({
             name: 'app/copyterm.confirmed',
@@ -201,8 +202,9 @@ export const lists: Lists = {
       afterOperation: async ({ operation, context, originalItem, item }) => {
         if (
           operation === 'update' &&
-          item.status === 'UPCOMING' &&
-          originalItem.status !== 'DRAFT'
+          item.status === 'ENROL' &&
+          (originalItem.status === 'DRAFT' ||
+            originalItem.status === 'UPCOMING')
         ) {
           await inngest.send({
             name: 'app/lessonTerm.confirmed',

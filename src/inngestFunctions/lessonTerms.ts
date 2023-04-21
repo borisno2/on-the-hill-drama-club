@@ -61,7 +61,7 @@ export const copyTermFunction = inngest.createFunction(
 
       const standardLessonTerm = {
         numberOfLessons: item.quantity,
-        status: 'PENDING',
+        status: 'DRAFT',
       }
       const lessonTerms = term.lessonTerms.map((lessonTerm) => {
         if (lessonTerm.lesson === null) return standardLessonTerm
@@ -119,7 +119,7 @@ const GET_COPY_FROM_LESSON_TERM = gql`
       }
     ) {
       id
-      enrolments {
+      enrolments(where: { status: { notIn: ["CANCELLED", "PENDING"] } }) {
         id
         student {
           id

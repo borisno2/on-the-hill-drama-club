@@ -92,7 +92,7 @@ const Enrollment: Lists.Enrolment = list({
           if (inputData.status === 'PENDING') {
             return true
           }
-          return isAdmin(session)
+          return isAdmin({ session })
         },
         update: isAdmin,
       },
