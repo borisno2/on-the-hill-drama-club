@@ -82,14 +82,20 @@ model ImportantDate {
 }
 
 model Term {
-  id             String       @id @default(cuid())
-  name           String       @default("")
-  quantity       Int
-  year           Int
-  startDate      DateTime     @mysql.Date
-  endDate        DateTime     @mysql.Date
-  lessonTerms    LessonTerm[] @relation("LessonTerm_term")
-  from_Bill_term Bill[]       @relation("Bill_term")
+  id                 String       @id @default(cuid())
+  name               String       @default("")
+  quantity           Int
+  year               Int
+  startDate          DateTime     @mysql.Date
+  endDate            DateTime     @mysql.Date
+  lessonTerms        LessonTerm[] @relation("LessonTerm_term")
+  termStatus         String?
+  copyFrom           Term?        @relation("Term_copyFrom", fields: [copyFromId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  copyFromId         String?      @map("copyFrom")
+  from_Term_copyFrom Term[]       @relation("Term_copyFrom")
+  from_Bill_term     Bill[]       @relation("Bill_term")
+
+  @@index([copyFromId])
 }
 
 model LessonTerm {

@@ -23,6 +23,7 @@ import Account from './lists/account'
 import { Bill, BillItem } from './lists/billing'
 import Message from './lists/message'
 import Student from './lists/student'
+import { inngest } from '../lib/inngest/client'
 
 export const lists: Lists = {
   User: list({
@@ -142,6 +143,25 @@ export const lists: Lists = {
         query: allowAll,
       },
     },
+    hooks: {
+      afterOperation: async ({ operation, context, originalItem, item }) => {
+        if (
+          operation === 'update' &&
+          item.copyFromId &&
+          item.termStatus === 'ENROL' &&
+          (originalItem.termStatus === 'DRAFT' ||
+            originalItem.termStatus === 'UPCOMING')
+        ) {
+          await inngest.send({
+            name: 'app/copyterm.confirmed',
+            data: {
+              item,
+              session: context.session,
+            },
+          })
+        }
+      },
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       quantity: integer({ validation: { isRequired: true } }),
@@ -149,6 +169,25 @@ export const lists: Lists = {
       startDate: calendarDay({ validation: { isRequired: true } }),
       endDate: calendarDay({ validation: { isRequired: true } }),
       lessonTerms: relationship({ ref: 'LessonTerm.term', many: true }),
+      termStatus: select({
+        options: lessonStatusOptions,
+      }),
+      copyFrom: relationship({
+        ref: 'Term',
+        many: false,
+        label: 'Copy Enrolments from Term',
+        db: {
+          extendPrismaSchema: (schema) =>
+            schema.replace(
+              '[id])',
+              '[id], onDelete: NoAction, onUpdate: NoAction)'
+            ),
+        },
+        ui: {
+          description:
+            'Enrolments from this term will be copied to current term',
+        },
+      }),
     },
   }),
 
@@ -157,6 +196,24 @@ export const lists: Lists = {
       operation: {
         ...allOperations(isAdmin),
         query: allowAll,
+      },
+    },
+    hooks: {
+      afterOperation: async ({ operation, context, originalItem, item }) => {
+        if (
+          operation === 'update' &&
+          item.status === 'ENROL' &&
+          (originalItem.status === 'DRAFT' ||
+            originalItem.status === 'UPCOMING')
+        ) {
+          await inngest.send({
+            name: 'app/lessonTerm.confirmed',
+            data: {
+              item,
+              session: context.session,
+            },
+          })
+        }
       },
     },
     fields: {

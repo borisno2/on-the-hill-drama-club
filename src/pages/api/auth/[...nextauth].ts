@@ -8,7 +8,7 @@ import Apple, { AppleProfile } from 'next-auth/providers/apple'
 import Credentials from 'next-auth/providers/credentials'
 import { keystoneContext } from '../../../keystone/context'
 
-import { assertObjectType, GraphQLSchema } from 'graphql'
+import { assertObjectType } from 'graphql'
 
 const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || 'Turnstile'
 

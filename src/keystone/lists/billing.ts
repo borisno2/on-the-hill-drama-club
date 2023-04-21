@@ -32,11 +32,17 @@ export const Bill: Lists.Bill = list({
     },
   },
   hooks: {
-    afterOperation: async ({ operation, item, resolvedData, context }) => {
+    afterOperation: async ({
+      operation,
+      item,
+      resolvedData,
+      context,
+      originalItem,
+    }) => {
       if (
         operation === 'update' &&
         resolvedData.status === 'APPROVED' &&
-        item.status === 'DRAFT'
+        originalItem.status === 'DRAFT'
       ) {
         await inngest.send({
           name: 'app/bill.approved',

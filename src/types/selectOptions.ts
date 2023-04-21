@@ -23,6 +23,7 @@ export const lessonTypeOptions = [
   { label: 'Other', value: 'OTHER' },
 ]
 export const lessonStatusOptions = [
+  { label: 'Draft', value: 'DRAFT' },
   { label: 'Upcoming', value: 'UPCOMING' },
   { label: 'Current', value: 'CURRENT' },
   { label: 'Enrolments Closed', value: 'CLOSED' },
