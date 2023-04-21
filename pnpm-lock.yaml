@@ -98,8 +98,8 @@ dependencies:
     specifier: ^6.0.0
     version: 6.0.0(encoding@0.1.13)(graphql@16.6.0)
   inngest:
-    specifier: ^1.6.0
-    version: 1.6.0(encoding@0.1.13)(typescript@5.0.3)
+    specifier: ^1.7.0
+    version: 1.7.0(encoding@0.1.13)(typescript@5.0.3)
   intuit-oauth:
     specifier: ^4.0.0
     version: 4.0.0
@@ -7255,8 +7255,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /inngest@1.6.0(encoding@0.1.13)(typescript@5.0.3):
-    resolution: {integrity: sha512-piAWasN3uwzTSbPRFqgOtRNilaUmqyjDMNuzKu7GqO6QAn57zPmVeMSdo6nQVbzn7/EV1axzXwi9pn9RO0aRow==}
+  /inngest@1.7.0(encoding@0.1.13)(typescript@5.0.3):
+    resolution: {integrity: sha512-GRAhKrcVCji8sG8eURR153oNBa8AqNeezM2PX0bJCc1II/m2mq+RH70wQ9/ZSW6LUlhnpAHn7chLdQ0HbA6Grg==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
