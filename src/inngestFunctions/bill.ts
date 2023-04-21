@@ -55,20 +55,22 @@ const GET_BILL_BY_ID = gql`
 export const createQuickBooksInvoiceFunction = inngest.createFunction(
   'Create QuickBooks Invoice Hook',
   'app/bill.approved',
-  async ({ event }) => {
+  async ({ event, step }) => {
     const { item, session } = event.data
     const context: Context = keystoneContext.withSession(session)
     const qbo = await getQBO({ context }).catch((error) => {
       throw new Error('Error getting QBO', { cause: error })
     })
-    const { bill } = await context.graphql
-      .run({
-        query: GET_BILL_BY_ID,
-        variables: { id: item.id },
-      })
-      .catch((error) => {
+    const { bill } = await step.run('Get Bill from DB', async () => {
+      try {
+        return await context.graphql.run({
+          query: GET_BILL_BY_ID,
+          variables: { id: item.id },
+        })
+      } catch (error) {
         throw new Error('Error getting bill', { cause: error })
-      })
+      }
+    })
     if (!qbo) throw new Error('Could not get QBO client')
     if (!bill) throw new Error('Could not get bill')
     if (!bill.account) throw new Error('Could not get bill account')
@@ -81,56 +83,74 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
       return `Bill ${bill.name} already has a QB invoice with id ${bill.qboId}`
     } else {
       // create the invoice in QBO and update the bill
-      try {
-        const invoice = await createInvoice(
-          {
-            CustomerRef: {
-              value: bill.account.qboId!.toString(),
-            },
-            Line: bill.items.map((item) => ({
-              Amount: new Decimal(item.amount!)
-                .dividedBy(100)
-                .mul(item.quantity!)
-                .toDecimalPlaces(2),
-              DetailType: 'SalesItemLineDetail',
-              Description: `${item.enrolment?.student?.name} - ${item.enrolment?.lessonTerm?.name}`,
-              SalesItemLineDetail: {
-                Qty: new Decimal(item.quantity!),
-                UnitPrice: new Decimal(item.amount!)
-                  .dividedBy(100)
-                  .toDecimalPlaces(2),
-                ItemRef: {
-                  value: item.qboId!.toString(),
-                },
+      const invoice = await step.run('Create Invoice in QBO', async () => {
+        if (!bill.account) throw new Error('Could not get bill account')
+        if (!bill.items || bill.items.length === 0)
+          throw new Error('Bill has no items')
+        try {
+          return await createInvoice(
+            {
+              CustomerRef: {
+                value: bill.account.qboId!.toString(),
               },
-            })),
-          },
-          qbo
-        )
-
-        if (invoice === null) {
-          throw new Error(`Bill ${bill.name} could not be created in QBO`, {
-            cause: invoice,
-          })
-        } else {
-          const sentInvoice = await sendInvoicePdf(
-            invoice.Id,
-            bill.account.user?.email!,
+              Line: bill.items.map((item) => ({
+                Amount: new Decimal(item.amount!)
+                  .dividedBy(100)
+                  .mul(item.quantity!)
+                  .toDecimalPlaces(2),
+                DetailType: 'SalesItemLineDetail',
+                Description: `${item.enrolment?.student?.name} - ${item.enrolment?.lessonTerm?.name}`,
+                SalesItemLineDetail: {
+                  Qty: new Decimal(item.quantity!),
+                  UnitPrice: new Decimal(item.amount!)
+                    .dividedBy(100)
+                    .toDecimalPlaces(2),
+                  ItemRef: {
+                    value: item.qboId!.toString(),
+                  },
+                },
+              })),
+            },
             qbo
           )
-          if (sentInvoice === null || !sentInvoice.Id) {
-            throw new Error(`Bill ${bill.name} could not be created in QBO`, {
-              cause: sentInvoice,
-            })
-          }
-          await context.graphql.run({
-            query: UPDATE_BILL_QBO_ID,
-            variables: { id: bill.id, qboId: parseInt(invoice.Id) },
-          })
-          return `Bill ${bill.name} created in QBO with id ${invoice.Id}`
+        } catch (error) {
+          throw new Error('Error creating invoice', { cause: error })
         }
-      } catch (error) {
-        throw new Error('Error creating invoice', { cause: error })
+      })
+
+      if (invoice === null) {
+        throw new Error(`Bill ${bill.name} could not be created in QBO`, {
+          cause: invoice,
+        })
+      } else {
+        const sentInvoice = await step.run('Send Invoice', async () => {
+          if (!bill.account) throw new Error('Could not get bill account')
+          try {
+            return await sendInvoicePdf(
+              invoice.Id,
+              bill.account.user?.email!,
+              qbo
+            )
+          } catch (error) {
+            throw new Error('Error sending invoice', { cause: error })
+          }
+        })
+        if (sentInvoice === null || !sentInvoice.Id) {
+          throw new Error(`Bill ${bill.name} could not be created in QBO`, {
+            cause: sentInvoice,
+          })
+        }
+        await step.run('Update Bill to Sent', async () => {
+          try {
+            await context.graphql.run({
+              query: UPDATE_BILL_QBO_ID,
+              variables: { id: bill.id, qboId: parseInt(invoice.Id) },
+            })
+          } catch (error) {
+            throw new Error('Error updating bill', { cause: error })
+          }
+        })
+        return `Bill ${bill.name} created in QBO with id ${invoice.Id}`
       }
     }
   }
