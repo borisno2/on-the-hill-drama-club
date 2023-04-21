@@ -33,6 +33,13 @@ const GET_BILL_BY_ID = gql`
           lessonTerm {
             id
             name
+            lesson {
+              id
+              lessonCategory {
+                id
+                qboItemId
+              }
+            }
           }
           student {
             id
@@ -81,22 +88,24 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
       const invoice = await createInvoice(
         {
           CustomerRef: {
-            value: bill.account.qboId!.toString(),
+            value: bill.account.qboId.toString(),
           },
-          Line: bill.items.map((item) => ({
-            Amount: new Decimal(item.amount!)
+          Line: bill.items.map((billItem) => ({
+            Amount: new Decimal(billItem.amount!)
               .dividedBy(100)
-              .mul(item.quantity!)
+              .mul(billItem.quantity!)
               .toDecimalPlaces(2),
             DetailType: 'SalesItemLineDetail',
-            Description: `${item.enrolment?.student?.name} - ${item.enrolment?.lessonTerm?.name}`,
+            Description: `${billItem.enrolment?.student?.name} - ${billItem.enrolment?.lessonTerm?.name}`,
             SalesItemLineDetail: {
-              Qty: new Decimal(item.quantity!),
-              UnitPrice: new Decimal(item.amount!)
+              Qty: new Decimal(billItem.quantity!),
+              UnitPrice: new Decimal(billItem.amount!)
                 .dividedBy(100)
                 .toDecimalPlaces(2),
               ItemRef: {
-                value: item.qboId!.toString(),
+                value:
+                  billItem.enrolment?.lessonTerm?.lesson?.lessonCategory?.qboItemId?.toString() ||
+                  '1',
               },
             },
           })),
