@@ -5,6 +5,7 @@ import ErrorPop from 'components/ErrorPop'
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { Formik, FormikHelpers } from 'formik'
 import { z } from 'zod'
+import { registerAccount } from './_action'
 
 interface Values {
   firstName: string
@@ -50,16 +51,10 @@ export default function RegisterForm() {
     const data = values
     ref.current?.reset()
     try {
-      const result = await fetch('/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      if (!result.ok) {
+      const result = await registerAccount(data)
+      if (!result.success) {
         setError(true)
-        throw new Error(result.statusText)
+        throw new Error(result.error)
       }
       const newToken = ref.current?.getResponse()
       await signIn('credentials', {
