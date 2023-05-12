@@ -1,6 +1,6 @@
 'use client'
 
-import { gql, OperationData } from '@ts-gql/tag/no-transform'
+import { OperationData } from '@ts-gql/tag/no-transform'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { client } from 'util/request'
@@ -14,6 +14,7 @@ import { GET_STUDENT_BY_ID } from 'app/dashboard/students/queries'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
+import { createStudent } from 'keystone/context/students'
 
 type Values = {
   firstName: string
@@ -26,34 +27,6 @@ type Values = {
 interface Errors {
   [key: string]: string | undefined
 }
-
-const UPDATE_STUDENT = gql`
-  mutation UPDATE_STUDENT($id: ID!, $data: StudentUpdateInput!) {
-    updateStudent(where: { id: $id }, data: $data) {
-      id
-      firstName
-      surname
-      dateOfBirth
-      school
-      yearLevel
-      medical
-    }
-  }
-` as import('../../../../__generated__/ts-gql/UPDATE_STUDENT').type
-
-const ADD_STUDENT = gql`
-  mutation ADD_STUDENT($data: StudentCreateInput!) {
-    createStudent(data: $data) {
-      id
-      firstName
-      surname
-      dateOfBirth
-      school
-      yearLevel
-      medical
-    }
-  }
-` as import('../../../../__generated__/ts-gql/ADD_STUDENT').type
 
 export default function Student({
   student,
@@ -86,9 +59,7 @@ export default function Student({
     }
     try {
       if (!student) {
-        const newStudent = await client.request(ADD_STUDENT, {
-          data,
-        })
+        const newStudent = await createStudent(data)
         if (!newStudent?.createStudent?.id) {
           setError(true)
           throw new Error('Student not created')

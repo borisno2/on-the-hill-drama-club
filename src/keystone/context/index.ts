@@ -1,5 +1,6 @@
+'user server'
 import { getContext } from '@keystone-6/core/context'
-import config from '../../keystone'
+import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import * as PrismaModule from '@prisma/client'
