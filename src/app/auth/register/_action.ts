@@ -1,8 +1,9 @@
+'use server'
 import { headers } from 'next/headers'
 import { keystoneContext } from 'keystone/context'
 import cuid from 'cuid'
 import { z } from 'zod'
-import { NextRequest, NextResponse } from 'next/server'
+//import { NextRequest, NextResponse } from 'next/server'
 
 const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || 'Turnstile'
 // regex to ensure the string is not 'PLEASE_CHANGE'
@@ -54,18 +55,8 @@ const registerSchema = z
     }
   })
 
-export async function POST(req: NextRequest) {
+export async function registerAccount(data: z.infer<typeof registerSchema>) {
   const form = new URLSearchParams()
-  const zParse = registerSchema.safeParse(await req.json())
-  if (!zParse.success)
-    return NextResponse.json(
-      {
-        error: 'Invalid data',
-        errors: zParse.error.issues,
-      },
-      { status: 400 }
-    )
-  const { data } = zParse
   form.append('secret', SECRET_KEY)
   form.append('response', data.turnstileRes)
   const headersList = headers()
@@ -80,13 +71,14 @@ export async function POST(req: NextRequest) {
   const outcome = await result.json()
 
   if (!outcome.success) {
-    return NextResponse.json({ error: 'Verification failed' }, { status: 403 })
+    console.log('Failed to verify captcha', outcome)
+    return { error: 'Verification failed' }
   }
   const existingUser = await keystoneContext.sudo().db.User.count({
     where: { email: { equals: data.email } },
   })
   if (existingUser > 0) {
-    return NextResponse.json({ error: 'Error Creating User' }, { status: 400 })
+    return { error: 'Error creating user' }
   }
   try {
     const user = await keystoneContext.sudo().db.User.createOne({
@@ -110,14 +102,11 @@ export async function POST(req: NextRequest) {
       },
     })
     if (!user || !user.id || user.email !== data.email) {
-      return NextResponse.json(
-        { error: 'Error Creating User' },
-        { status: 400 }
-      )
+      return { error: 'Error Creating User' }
     }
-    return NextResponse.json({ success: true }, { status: 200 })
+    return { success: true }
   } catch (e) {
     console.error(e)
-    return NextResponse.json({ error: 'Error Creating User' }, { status: 400 })
+    return { error: 'Error creating user' }
   }
 }

@@ -3,5 +3,8 @@ const keystoneConfig =
 
 module.exports = {
   ...keystoneConfig,
+  experimental: {
+    appDir: false,
+  },
   basePath: '/admin',
 };

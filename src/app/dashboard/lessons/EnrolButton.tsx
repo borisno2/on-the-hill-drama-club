@@ -1,9 +1,9 @@
 'use client'
 
 import { ENROL_STUDENT_IN_LESSON } from "app/dashboard/students/queries"
+import { runKeystoneGraphQL } from "keystone/context/graphql"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
-import { client } from "util/request"
 
 
 
@@ -17,7 +17,7 @@ export default function EnrolButton({ studentId, lessonId }: { studentId: string
     const onClick = async () => {
         setIsSubmitting(true)
         try {
-            const studentEnrolment = await client.request(ENROL_STUDENT_IN_LESSON, { studentId, lessonId })
+            const studentEnrolment = await runKeystoneGraphQL({query: ENROL_STUDENT_IN_LESSON, variables: { studentId, lessonId }})
             startTransition(() => {
                 setIsSubmitting(false)
                 if (studentEnrolment.updateStudent && studentEnrolment.updateStudent?.enrolments) {
