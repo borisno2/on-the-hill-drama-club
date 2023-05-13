@@ -3,11 +3,10 @@ import { gql } from '@ts-gql/tag/no-transform'
 import { Formik, FormikHelpers } from 'formik'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
-import { client } from 'util/request'
 import ErrorPop from 'components/ErrorPop'
 import SuccessPop from 'components/SuccessPop'
 import { z } from 'zod'
-import { runKeystoneGraphQL } from 'keystone/context'
+import { runKeystoneGraphQL } from 'keystone/context/graphql'
 
 type User = {
   id: string

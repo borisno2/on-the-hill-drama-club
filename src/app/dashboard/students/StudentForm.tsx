@@ -6,7 +6,7 @@ import { useState } from 'react'
 import ErrorPop from 'components/ErrorPop'
 import SuccessPop from 'components/SuccessPop'
 import Datepicker from 'react-tailwindcss-datepicker'
-import { useForm, SubmitHandler, set } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import DropDown from 'components/DropDown'
@@ -24,9 +24,7 @@ type Values = {
   yearLevel: number
   medical: string
 }
-interface Errors {
-  [key: string]: string | undefined
-}
+
 const studentSchema = z.object({
   firstName: z
     .string()
@@ -73,9 +71,8 @@ export default function Student({
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
-    getValues,
+    control,
     formState: { errors },
   } = useForm<Values>({ resolver: zodResolver(studentSchema) })
   const onSubmit = async (values: Values) => {
@@ -227,17 +224,24 @@ export default function Student({
                 </div>
               </div>
 
-              <DropDown
-                label="Education Type"
-                options={[
-                  { id: 1, label: 'School', value: 'SCHOOL' },
-                  { id: 2, label: 'Home Educated', value: 'HOME' },
-                  { id: 3, label: 'Other', value: 'OTHER' },
-                ]}
-                    value={values.school}
-                    handleChange={handleChange}
-                    name="school"
-              />
+              <Controller
+                control={control}
+                name="school"
+                render={({
+                  field: { onChange, value, name }
+                }) => (
+                  <DropDown
+                    label="Education Type"
+                    options={[
+                      { id: 1, label: 'School', value: 'SCHOOL' },
+                      { id: 2, label: 'Home Educated', value: 'HOME' },
+                      { id: 3, label: 'Other', value: 'OTHER' },
+                    ]}
+                    value={value}
+                    handleChange={onChange}
+                    name={name}
+                  />
+                )} />
 
               <div>
                 <label
@@ -258,7 +262,7 @@ export default function Student({
 
                 {errors.medical && (
                   <div className="block text-sm font-medium text-red-700">
-                    {errors.medical}
+                    {errors.medical.message}
                   </div>
                 )}
               </div>
@@ -291,8 +295,8 @@ export default function Student({
               {isSubmitting || isDone
                 ? 'Loading...'
                 : !student
-                ? 'Add'
-                : 'Save'}
+                  ? 'Add'
+                  : 'Save'}
             </button>
           </div>
         </div>
