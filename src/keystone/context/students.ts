@@ -1,7 +1,7 @@
 'use server'
 import { gql } from '@ts-gql/tag/no-transform'
-import { getSessionContext } from '.'
 import { StudentCreateInput } from '.keystone/types'
+import { getServerActionContext } from './nextAuthFix'
 
 const UPDATE_STUDENT = gql`
   mutation UPDATE_STUDENT($id: ID!, $data: StudentUpdateInput!) {
@@ -32,7 +32,7 @@ const ADD_STUDENT = gql`
 ` as import('../../../__generated__/ts-gql/ADD_STUDENT').type
 
 export async function createStudent({ data }: { data: StudentCreateInput }) {
-  const context = await getSessionContext()
+  const context = await getServerActionContext()
   return await context.graphql.run({ query: ADD_STUDENT, variables: { data } })
 }
 
@@ -43,7 +43,7 @@ export async function updateStudent({
   id: string
   data: StudentCreateInput
 }) {
-  const context = await getSessionContext()
+  const context = await getServerActionContext()
   return await context.graphql.run({
     query: UPDATE_STUDENT,
     variables: { id, data },

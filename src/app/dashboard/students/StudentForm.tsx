@@ -55,7 +55,7 @@ export default function Student({
   accountId: string
 }) {
   const router = useRouter()
-  const initialValues = {
+  const defaultValues = {
     firstName: student?.firstName || '',
     surname: student?.surname || '',
     dateOfBirth: student?.dateOfBirth || '2020-01-01',
@@ -66,7 +66,7 @@ export default function Student({
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
   const [isDone, setDone] = useState<boolean>(false)
-  const [dob, setDob] = useState<string>(initialValues.dateOfBirth)
+  const [dob, setDob] = useState<string>('2020-01-01')
   const [isSubmitting, setSubmitting] = useState(false)
   const {
     register,
@@ -74,7 +74,7 @@ export default function Student({
     setValue,
     control,
     formState: { errors },
-  } = useForm<Values>({ resolver: zodResolver(studentSchema) })
+  } = useForm<Values>({ defaultValues, resolver: zodResolver(studentSchema) })
   const onSubmit = async (values: Values) => {
     setSubmitting(true)
     const data = {
@@ -135,6 +135,7 @@ export default function Student({
                   <input
                     title="First Name"
                     {...register('firstName')}
+                    type='text'
                     autoComplete="given-name"
                     className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                   />
@@ -157,6 +158,7 @@ export default function Student({
                   <input
                     title="Surname"
                     {...register('surname')}
+                    type='text'
                     autoComplete="family-name"
                     className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                   />
@@ -193,7 +195,7 @@ export default function Student({
                     asSingle={true}
                     useRange={false}
                     displayFormat={'DD/MM/YYYY'}
-                    containerClassName="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
+                    containerClassName="relative w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                   />
                   {errors.dateOfBirth && (
                     <div className="block text-sm font-medium text-red-700">
@@ -213,7 +215,8 @@ export default function Student({
                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                   <input
                     title="Year Level"
-                    {...register('yearLevel')}
+                    {...register('yearLevel', {valueAsNumber: true})}
+                    type='number'
                     className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                   />
                   {errors.yearLevel && (
