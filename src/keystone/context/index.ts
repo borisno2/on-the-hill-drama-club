@@ -1,5 +1,5 @@
 import { getContext } from '@keystone-6/core/context'
-import config from '../../keystone'
+import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import * as PrismaModule from '@prisma/client'
@@ -21,7 +21,7 @@ export async function getSessionContext(props?: {
   if (props) {
     const { req, res } = props
     session = await getServerSession(req, res, authOptions)
-  }
+  } 
   // running in the app directory, so we don't need to pass req and res
   else session = await getServerSession(authOptions)
   return keystoneContext.withSession(session)
