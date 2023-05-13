@@ -7,6 +7,7 @@ import { client } from 'util/request'
 import ErrorPop from 'components/ErrorPop'
 import SuccessPop from 'components/SuccessPop'
 import { z } from 'zod'
+import { runKeystoneGraphQL } from 'keystone/context'
 
 type User = {
   id: string
@@ -72,10 +73,10 @@ export default function ProfileForm({
   ) => {
     setSubmitting(true)
     try {
-      await client.request(UPDATE_ACCOUNT, {
+      await runKeystoneGraphQL({query: UPDATE_ACCOUNT, variables: {
         id: user.id,
         data: values,
-      })
+      }})
       setSuccess(true)
       setSubmitting(false)
       startTransition(() => {

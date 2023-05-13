@@ -10,6 +10,9 @@ dependencies:
   '@aws-sdk/signature-v4-crt':
     specifier: ^3.310.0
     version: 3.310.0
+  '@graphql-typed-document-node/core':
+    specifier: ^3.2.0
+    version: 3.2.0(graphql@16.6.0)
   '@headlessui/react':
     specifier: ^1.7.14
     version: 1.7.14(react-dom@18.2.0)(react@18.2.0)

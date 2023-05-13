@@ -30,8 +30,24 @@ const ADD_STUDENT = gql`
     }
   }
 ` as import('../../../__generated__/ts-gql/ADD_STUDENT').type
+const studentAPI = {
 
-export async function createStudent(data: StudentCreateInput) {
+}
+export async function createStudent({ data }: { data: StudentCreateInput }) {
   const context = await getSessionContext()
   return await context.graphql.run({ query: ADD_STUDENT, variables: { data } })
+}
+
+export async function updateStudent({
+  id,
+  data,
+}: {
+  id: string
+  data: StudentCreateInput
+}) {
+  const context = await getSessionContext()
+  return await context.graphql.run({
+    query: UPDATE_STUDENT,
+    variables: { id, data },
+  })
 }

@@ -1,6 +1,6 @@
 'use client'
 import { signIn } from 'next-auth/react'
-import { useRef, useState, useTransition } from 'react'
+import { useRef, useState } from 'react'
 import ErrorPop from 'components/ErrorPop'
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -22,9 +22,7 @@ interface Values {
   streetAddress: string
   turnstileRes: string
 }
-interface Errors {
-  [key: string]: string | undefined
-}
+
 const registerSchema = z
   .object({
     turnstileRes: z.string(),
@@ -83,8 +81,7 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm<Values>({ resolver: zodResolver(registerSchema) })
 
-  const onSubmit: SubmitHandler<Values> = async (values) => {
-    console.log(values)
+  const onSubmit: SubmitHandler<Values> = async (values: Values) => {
     setSubmitting(true)
     const data = values
     ref.current?.reset()
