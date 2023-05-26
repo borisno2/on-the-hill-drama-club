@@ -2,7 +2,6 @@ import {
   BuildingOfficeIcon,
   CheckCircleIcon,
   IdentificationIcon,
-  ScaleIcon,
   StopCircleIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline'
@@ -10,7 +9,6 @@ import { getSessionContext } from 'keystone/context'
 import DashboardLayout from './DashboardLayout'
 import Link from 'next/link'
 import { gql } from '@ts-gql/tag/no-transform'
-import { Session } from 'next-auth'
 import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
@@ -18,7 +16,6 @@ import { getMetadata } from 'app/metadata'
 export const metadata: Metadata = {
   ...getMetadata('Student Portal'),
 }
-
 
 const GET_STUDENT_ENROLMENTS = gql`
   query GET_STUDENT_ENROLMENTS {
@@ -43,7 +40,7 @@ const GET_STUDENT_ENROLMENTS = gql`
 
 export default async function Portal() {
   const context = await getSessionContext()
-  const session = context.session as Session
+  const { session } = context
   if (!session) {
     redirect('/auth/signin')
   }
@@ -79,10 +76,10 @@ export default async function Portal() {
       icon: BuildingOfficeIcon,
       amount: students
         ? students.reduce(
-          (acc, student) =>
-            acc + (student.enrolments ? student.enrolments.length : 0),
-          0
-        )
+            (acc, student) =>
+              acc + (student.enrolments ? student.enrolments.length : 0),
+            0
+          )
         : 0,
     },
     // More items...
@@ -106,7 +103,7 @@ export default async function Portal() {
                   <div className="flex items-center">
                     <IdentificationIcon className="h-16 w-16 rounded-full sm:hidden" />
                     <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:leading-9">
-                      Hello, {context.session.data.firstName}
+                      Hello, {session.data.firstName}
                     </h1>
                   </div>
                   <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
@@ -123,7 +120,7 @@ export default async function Portal() {
 
                     <dt className="sr-only">Account status</dt>
                     <dd className="mt-3 flex items-center text-sm font-medium capitalize text-gray-500 sm:mr-6 sm:mt-0">
-                      {context.session.data.emailVerified ? (
+                      {session.data.emailVerified ? (
                         <>
                           <CheckCircleIcon
                             className="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400"
