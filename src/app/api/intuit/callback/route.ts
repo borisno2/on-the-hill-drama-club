@@ -1,6 +1,5 @@
 import { getServerActionContext } from 'keystone/context/nextAuthFix'
 import { getQBClient } from 'lib/intuit'
-import { redirect } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -45,6 +44,6 @@ export async function GET(request: NextRequest) {
         console.error('The error message is :' + e.originalMessage)
         console.error(e.intuit_tid)
       })
-    redirect('/api/intuit/get-accounts')
+    NextResponse.redirect('/api/intuit/get-accounts')
   }
 }

@@ -2,7 +2,7 @@ import { getServerActionContext } from 'keystone/context/nextAuthFix'
 import { getQBClient } from 'lib/intuit'
 import OAuthClient from 'intuit-oauth'
 import Tokens from 'csrf'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { redirect } from 'next/navigation'
 
 const csrf = new Tokens()
@@ -11,7 +11,7 @@ function generateAntiForgery() {
   return csrf.create(secret)
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const context = await getServerActionContext()
   if (!context.session || context.session?.data.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Not authorized' }, { status: 403 })

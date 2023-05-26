@@ -1,9 +1,9 @@
 import { getServerActionContext } from 'keystone/context/nextAuthFix'
 import { getQBO } from 'lib/intuit'
 import { getAccounts } from 'lib/intuit/accounts'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   const context = await getServerActionContext()
 
   if (!context.session || context.session?.data.role !== 'ADMIN') {
