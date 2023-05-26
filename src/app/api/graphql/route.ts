@@ -1,4 +1,4 @@
-import { keystoneContext, getSessionContext } from 'keystone/context'
+import { keystoneContext } from 'keystone/context'
 import { ApolloServer } from '@apollo/server'
 import { startServerAndCreateNextHandler } from '@as-integrations/next'
 import { NextRequest } from 'next/server'
