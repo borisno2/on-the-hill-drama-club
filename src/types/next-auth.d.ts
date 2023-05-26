@@ -22,6 +22,7 @@ declare module 'next-auth' {
       accountId?: string | null
       email: string | null
       role: string | null
+      emailVerified?: boolean | null
     }
   }
 }

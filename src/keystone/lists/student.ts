@@ -13,11 +13,12 @@ import {
 import { schoolOptions } from '../../types/selectOptions'
 
 import { isAdmin, isLoggedIn, studentFilter } from '../helpers'
+import { Session } from 'next-auth'
 
-const Student: Lists.Student = list({
+const Student: Lists.Student<Session> = list({
   access: {
     operation: {
-      ...allOperations(isLoggedIn),
+      ...allOperations<Lists.Account.TypeInfo<Session>>(isLoggedIn),
       delete: isAdmin,
     },
     filter: {

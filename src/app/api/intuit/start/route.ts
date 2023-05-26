@@ -1,8 +1,9 @@
-import { getSessionContext } from 'keystone/context'
+import { getServerActionContext } from 'keystone/context/nextAuthFix'
 import { getQBClient } from 'lib/intuit'
-import { NextApiRequest, NextApiResponse } from 'next'
 import OAuthClient from 'intuit-oauth'
 import Tokens from 'csrf'
+import { NextRequest, NextResponse } from 'next/server'
+import { redirect } from 'next/navigation'
 
 const csrf = new Tokens()
 function generateAntiForgery() {
@@ -10,17 +11,14 @@ function generateAntiForgery() {
   return csrf.create(secret)
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const context = await getSessionContext({ req, res })
+export async function GET(request: NextRequest) {
+  const context = await getServerActionContext()
   if (!context.session || context.session?.data.role !== 'ADMIN') {
-    return res.status(403).send('Not authorized')
+    return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
   } else {
     const qbo = await getQBClient({ context })
 
-    return res.redirect(
+    return redirect(
       qbo.authorizeUri({
         scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
         state: generateAntiForgery(),

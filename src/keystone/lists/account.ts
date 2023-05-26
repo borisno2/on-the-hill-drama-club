@@ -10,11 +10,12 @@ import {
 } from '@keystone-6/core/fields'
 import { inngest } from '../../lib/inngest/client'
 import { accountFilter, isAdmin, isLoggedIn } from '../helpers'
+import { Session } from 'next-auth'
 
-const Account: Lists.Account = list({
+const Account: Lists.Account<Session> = list({
   access: {
     operation: {
-      ...allOperations(isLoggedIn),
+      ...allOperations<Lists.Account.TypeInfo<Session>>(isLoggedIn),
       create: isAdmin,
       delete: isAdmin,
     },
@@ -32,11 +33,13 @@ const Account: Lists.Account = list({
       context,
     }) => {
       if (
-        (operation === 'create' &&
+        ((operation === 'create' &&
           resolvedData.secondContactName !== 'PLEASE_UPDATE') ||
-        (operation === 'update' &&
-          resolvedData.secondContactName !== originalItem.secondContactName &&
-          originalItem.secondContactName === 'PLEASE_UPDATE')
+          (operation === 'update' &&
+            resolvedData.secondContactName !== originalItem.secondContactName &&
+            originalItem.secondContactName === 'PLEASE_UPDATE')) &&
+        context.session &&
+        item
       ) {
         await inngest.send({
           name: 'app/account.created',

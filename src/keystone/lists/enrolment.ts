@@ -5,11 +5,12 @@ import { relationship, select, timestamp } from '@keystone-6/core/fields'
 import { inngest } from '../../lib/inngest/client'
 import { enrolmentStatusOptions } from '../../types/selectOptions'
 import { enrolmentFilter, isAdmin, isLoggedIn } from '../helpers'
+import { Session } from 'next-auth'
 
-const Enrollment: Lists.Enrolment = list({
+const Enrollment: Lists.Enrolment<Session> = list({
   access: {
     operation: {
-      ...allOperations(isLoggedIn),
+      ...allOperations<Lists.Account.TypeInfo<Session>>(isLoggedIn),
       delete: isAdmin,
     },
     filter: {
@@ -29,7 +30,8 @@ const Enrollment: Lists.Enrolment = list({
         operation === 'update' &&
         resolvedData &&
         resolvedData.status === 'ENROLED' &&
-        originalItem.status === 'PENDING'
+        originalItem.status === 'PENDING' &&
+        context.session
       ) {
         await inngest.send({
           name: 'app/enrolment.enroled',
@@ -42,7 +44,9 @@ const Enrollment: Lists.Enrolment = list({
       if (
         operation === 'create' &&
         resolvedData &&
-        resolvedData.status === 'ENROLED'
+        resolvedData.status === 'ENROLED' &&
+        context.session &&
+        item
       ) {
         await inngest.send({
           name: 'app/enrolment.enroled',
@@ -67,6 +71,7 @@ const Enrollment: Lists.Enrolment = list({
       many: false,
       access: {
         create: async ({ inputData, session, context }) => {
+          if (!session) return false
           if (session.data?.role === 'ADMIN') {
             return true
           }

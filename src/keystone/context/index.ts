@@ -1,10 +1,11 @@
 import { getContext } from '@keystone-6/core/context'
-import config from '../../keystone'
+import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import * as PrismaModule from '@prisma/client'
 import { Context } from '.keystone/types'
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import { Session } from 'next-auth'
 
 // Making sure multiple prisma clients are not created during hot reloading
 export const keystoneContext: Context =
@@ -16,7 +17,7 @@ if (process.env.NODE_ENV !== 'production')
 export async function getSessionContext(props?: {
   req: NextApiRequest
   res: NextApiResponse
-}): Promise<Context> {
+}): Promise<Context<Session>> {
   let session = null
   if (props) {
     const { req, res } = props

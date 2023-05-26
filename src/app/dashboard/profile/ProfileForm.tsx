@@ -1,12 +1,13 @@
 'use client'
 import { gql } from '@ts-gql/tag/no-transform'
-import { Formik, FormikHelpers } from 'formik'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
-import { client } from 'util/request'
 import ErrorPop from 'components/ErrorPop'
 import SuccessPop from 'components/SuccessPop'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { runKeystoneGraphQL } from 'keystone/context/graphql'
 
 type User = {
   id: string
@@ -31,10 +32,54 @@ type Values = {
   secondContactName: string
   secondContactPhone: string
 }
-type Errors = {
-  [key: string]: string | undefined
-}
 
+const updateRegex = /^(?!PLEASE_UPDATE).*$/
+
+const profileSchema = z.object({
+  firstName: z
+    .string()
+    .min(1, { message: 'Please enter your first name' })
+    .regex(updateRegex, {
+      message: 'Please update your first name',
+    }),
+  surname: z
+    .string()
+    .min(1, { message: 'Please enter your surname' })
+    .regex(updateRegex, {
+      message: 'Please update your surname',
+    }),
+  phone: z
+    .string()
+    .length(10, { message: 'Please enter a valid 10 digit phone number' })
+    .regex(/^\d+$/, {
+      message: 'Please enter a valid 10 digit phone number',
+    }),
+  suburb: z
+    .string()
+    .min(1, { message: 'Please enter your Suburb' })
+    .regex(updateRegex, {
+      message: 'Please update your Suburb',
+    }),
+  postcode: z
+    .number()
+    .min(1000, { message: 'Please enter a valid postcode' })
+    .max(9999, { message: 'Please enter a valid postcode' }),
+  streetAddress: z
+    .string()
+    .min(5, { message: 'Please enter your Street Address' })
+    .regex(updateRegex, {
+      message: 'Please update your Street Address',
+    }),
+  secondContactName: z.string().regex(updateRegex, {
+    message: 'Please update your second contact name',
+  }),
+  secondContactPhone: z
+    .string()
+    .length(10, { message: 'Please enter a valid 10 digit phone number' })
+    .regex(/^\d+$/, {
+      message: 'Please enter a valid 10 digit phone number',
+    }),
+})
 const UPDATE_ACCOUNT = gql`
   mutation UPDATE_ACCOUNT($id: ID!, $data: AccountUpdateInput!) {
     updateAccount(where: { id: $id }, data: $data) {
@@ -52,7 +97,13 @@ export default function ProfileForm({
   redirectOnSave: boolean
 }) {
   const router = useRouter()
-  const initialValues = {
+  
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
+  const [isPending, startTransition] = useTransition()
+  const [isSubmitting, setSubmitting] = useState(false)
+
+  const defaultValues = {
     firstName: user.firstName || '',
     surname: user.surname || '',
     phone: user.phone || '',
@@ -62,20 +113,23 @@ export default function ProfileForm({
     secondContactName: user.secondContactName || '',
     secondContactPhone: user.secondContactPhone || '',
   }
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState(false)
-  const [isPending, startTransition] = useTransition()
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm<Values>({ defaultValues, resolver: zodResolver(profileSchema) })
 
   const onSubmit = async (
     values: Values,
-    { setSubmitting }: FormikHelpers<Values>
   ) => {
     setSubmitting(true)
     try {
-      await client.request(UPDATE_ACCOUNT, {
+      await runKeystoneGraphQL({query: UPDATE_ACCOUNT, variables: {
         id: user.id,
         data: values,
-      })
+      }})
       setSuccess(true)
       setSubmitting(false)
       startTransition(() => {
@@ -90,84 +144,12 @@ export default function ProfileForm({
       throw error
     }
   }
-  const validate = (values: Values) => {
-    const errors: Errors = {}
-    // regex to ensure the string is not 'PLEASE_CHANGE'
-    const updateRegex = /^(?!PLEASE_UPDATE).*$/
-    const registerSchema = z.object({
-      firstName: z
-        .string()
-        .min(1, { message: 'Please enter your first name' })
-        .regex(updateRegex, {
-          message: 'Please update your first name',
-        }),
-      surname: z
-        .string()
-        .min(1, { message: 'Please enter your surname' })
-        .regex(updateRegex, {
-          message: 'Please update your surname',
-        }),
-      phone: z
-        .string()
-        .length(10, { message: 'Please enter a valid 10 digit phone number' })
-        .regex(/^\d+$/, {
-          message: 'Please enter a valid 10 digit phone number',
-        }),
-      suburb: z
-        .string()
-        .min(1, { message: 'Please enter your Suburb' })
-        .regex(updateRegex, {
-          message: 'Please update your Suburb',
-        }),
-      postcode: z
-        .number()
-        .min(1000, { message: 'Please enter a valid postcode' })
-        .max(9999, { message: 'Please enter a valid postcode' }),
-      streetAddress: z
-        .string()
-        .min(5, { message: 'Please enter your Street Address' })
-        .regex(updateRegex, {
-          message: 'Please update your Street Address',
-        }),
-      secondContactName: z.string().regex(updateRegex, {
-        message: 'Please update your second contact name',
-      }),
-      secondContactPhone: z
-        .string()
-        .length(10, { message: 'Please enter a valid 10 digit phone number' })
-        .regex(/^\d+$/, {
-          message: 'Please enter a valid 10 digit phone number',
-        }),
-    })
-    const result = registerSchema.safeParse(values)
-    if (!result.success) {
-      result.error.issues.forEach((issue) => {
-        errors[issue.path[0]] = issue.message
-      })
-    }
-    return errors
-  }
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validate={validate}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        isValid,
-      }) => (
         <>
           <form
             className="space-y-8 divide-y divide-gray-200"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
               <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
@@ -210,19 +192,15 @@ export default function ProfileForm({
                     </label>
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
-                        value={values.firstName}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                      {...register('firstName')}
                         title="First Name"
-                        type="text"
-                        name="firstName"
-                        id="firstName"
                         autoComplete="given-name"
+                        type='text'
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                       />
-                      {touched.firstName && errors.firstName && (
+                      {errors.firstName && (
                         <div className="block text-sm font-medium text-red-700">
-                          {errors.firstName}
+                          {errors.firstName.message}
                         </div>
                       )}
                     </div>
@@ -238,18 +216,14 @@ export default function ProfileForm({
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
                         title="Last Name"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.surname}
-                        type="text"
-                        name="surname"
-                        id="surname"
+                        {...register('surname')}
                         autoComplete="family-name"
+                        type='text'
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                       />
-                      {touched.surname && errors.surname && (
+                      {errors.surname && (
                         <div className="block text-sm font-medium text-red-700">
-                          {errors.surname}
+                          {errors.surname.message}
                         </div>
                       )}
                     </div>
@@ -264,19 +238,15 @@ export default function ProfileForm({
                     </label>
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
-                        value={values.phone}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        type="text"
-                        name="phone"
-                        id="phone"
+                        {...register('phone')}
                         title="phone"
+                        type='text'
                         autoComplete="tel"
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                       />
-                      {touched.phone && errors.phone && (
+                      {errors.phone && (
                         <div className="block text-sm font-medium text-red-700">
-                          {errors.phone}
+                          {errors.phone.message}
                         </div>
                       )}
                     </div>
@@ -291,19 +261,15 @@ export default function ProfileForm({
                     </label>
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
-                        value={values.secondContactName}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        {...register('secondContactName')}
                         title="Second Contact Name"
                         type="text"
-                        name="secondContactName"
-                        id="secondContactName"
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                       />
-                      {touched.secondContactName &&
+                      {
                         errors.secondContactName && (
                           <div className="block text-sm font-medium text-red-700">
-                            {errors.secondContactName}
+                            {errors.secondContactName.message}
                           </div>
                         )}
                     </div>
@@ -318,19 +284,15 @@ export default function ProfileForm({
                     </label>
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
-                        value={values.secondContactPhone}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        type="text"
-                        name="secondContactPhone"
-                        id="secondContactPhone"
+                        {...register('secondContactPhone')}
+                        type='text'
                         title="secondContactPhone"
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                       />
-                      {touched.secondContactPhone &&
+                      {
                         errors.secondContactPhone && (
                           <div className="block text-sm font-medium text-red-700">
-                            {errors.secondContactPhone}
+                            {errors.secondContactPhone.message}
                           </div>
                         )}
                     </div>
@@ -345,19 +307,15 @@ export default function ProfileForm({
                     </label>
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
-                        value={values.streetAddress}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        {...register('streetAddress')}
                         title="Street Address"
-                        type="text"
-                        name="streetAddress"
-                        id="streetAddress"
+                        type='text'
                         autoComplete="street-address"
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       />
-                      {touched.streetAddress && errors.streetAddress && (
+                      {errors.streetAddress && (
                         <div className="block text-sm font-medium text-red-700">
-                          {errors.streetAddress}
+                          {errors.streetAddress.message}
                         </div>
                       )}
                     </div>
@@ -372,19 +330,15 @@ export default function ProfileForm({
                     </label>
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
-                        value={values.suburb}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        {...register('suburb')}
                         title="Suburb"
-                        type="text"
-                        name="suburb"
-                        id="suburb"
+                        type='text'
                         autoComplete="address-level2"
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                       />
-                      {touched.suburb && errors.suburb && (
+                      {errors.suburb && (
                         <div className="block text-sm font-medium text-red-700">
-                          {errors.suburb}
+                          {errors.suburb.message}
                         </div>
                       )}
                     </div>
@@ -400,18 +354,14 @@ export default function ProfileForm({
                     <div className="mt-1 sm:col-span-2 sm:mt-0">
                       <input
                         title="Post Code"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.postcode}
+                        {...register('postcode', {valueAsNumber: true})}
                         type="number"
-                        name="postcode"
-                        id="postcode"
                         autoComplete="postal-code"
                         className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                       />
-                      {touched.postcode && errors.postcode && (
+                      {errors.postcode && (
                         <div className="block text-sm font-medium text-red-700">
-                          {errors.postcode}
+                          {errors.postcode.message}
                         </div>
                       )}
                     </div>
@@ -441,7 +391,5 @@ export default function ProfileForm({
           <SuccessPop success={success} setSuccess={setSuccess} />
           <ErrorPop error={error} setError={setError} />
         </>
-      )}
-    </Formik>
   )
 }

@@ -5,8 +5,12 @@ const { withTsGql } = require('@ts-gql/next')
 module.exports = withTsGql({
   experimental: {
     scrollRestoration: true,
-    appDir: true,
-    serverComponentsExternalPackages: ['graphql'],
+    serverActions: true,
+    serverComponentsExternalPackages: [
+      'graphql',
+      'intuit-oauth',
+      'node-quickbooks',
+    ],
   },
   async redirects() {
     return [
