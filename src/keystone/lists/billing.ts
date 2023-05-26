@@ -20,11 +20,12 @@ import {
   isAdmin,
   isLoggedIn,
 } from '../helpers'
+import { Session } from 'next-auth'
 
-export const Bill: Lists.Bill = list({
+export const Bill: Lists.Bill<Session> = list({
   access: {
     operation: {
-      ...allOperations(isAdmin),
+      ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
       query: isLoggedIn,
     },
     filter: {
@@ -42,7 +43,8 @@ export const Bill: Lists.Bill = list({
       if (
         operation === 'update' &&
         resolvedData.status === 'APPROVED' &&
-        originalItem.status === 'DRAFT'
+        originalItem.status === 'DRAFT' &&
+        context.session
       ) {
         await inngest.send({
           name: 'app/bill.approved',
@@ -97,10 +99,10 @@ export const Bill: Lists.Bill = list({
   },
 })
 
-export const BillItem: Lists.BillItem = list({
+export const BillItem: Lists.BillItem<Session> = list({
   access: {
     operation: {
-      ...allOperations(isAdmin),
+      ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
       query: isLoggedIn,
     },
     filter: {

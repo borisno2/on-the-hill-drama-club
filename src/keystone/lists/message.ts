@@ -5,11 +5,12 @@ import { relationship, select, text, timestamp } from '@keystone-6/core/fields'
 import { messageStatusOptions } from '../../types/selectOptions'
 import { inngest } from '../../lib/inngest/client'
 import { messageFilter, isAdmin, isLoggedIn } from '../helpers'
+import { Session } from 'next-auth'
 
-const Message: Lists.Message = list({
+const Message: Lists.Message<Session> = list({
   access: {
     operation: {
-      ...allOperations(isAdmin),
+      ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
       query: isLoggedIn,
     },
     filter: {
@@ -28,7 +29,8 @@ const Message: Lists.Message = list({
         operation === 'update' &&
         resolvedData &&
         resolvedData.status === 'QUEUED' &&
-        originalItem.status === 'DRAFT'
+        originalItem.status === 'DRAFT' &&
+        context.session
       ) {
         await inngest.send({
           name: 'app/message.queued',

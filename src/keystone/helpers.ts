@@ -16,15 +16,16 @@ export const GET_BILL_ITEMS_TOTAL = gql`
   }
 ` as import('../../__generated__/ts-gql/GET_BILL_ITEMS_TOTAL').type
 
-export function isAdmin({ session }: { session: Session }) {
-  return session.data.role === 'ADMIN'
+export function isAdmin({ session }: { session?: Session }) {
+  return session?.data.role === 'ADMIN'
 }
 
-export function isLoggedIn({ session }: { session: Session }) {
-  return !!session.userId
+export function isLoggedIn({ session }: { session?: Session }) {
+  return !!session?.userId
 }
 
-export function accountFilter({ session }: { session: Session }) {
+export function accountFilter({ session }: { session?: Session }) {
+  if (!session) return false
   if (session.data.role === 'ADMIN') return true
   return { user: { id: { equals: session.userId } } }
 }
@@ -32,8 +33,9 @@ export function accountFilter({ session }: { session: Session }) {
 export function studentFilter({
   session,
 }: {
-  session: Session
-}): StudentWhereInput | true {
+  session?: Session
+}): StudentWhereInput | boolean {
+  if (!session) return false
   if (session.data.role === 'ADMIN') return true
   return {
     account: {
@@ -44,7 +46,8 @@ export function studentFilter({
   }
 }
 
-export function enrolmentFilter({ session }: { session: Session }) {
+export function enrolmentFilter({ session }: { session?: Session }) {
+  if (!session) return false
   if (session.data.role === 'ADMIN') return true
   return {
     student: {
@@ -59,7 +62,8 @@ export function enrolmentFilter({ session }: { session: Session }) {
   }
 }
 
-export function billFilter({ session }: { session: Session }) {
+export function billFilter({ session }: { session?: Session }) {
+  if (!session) return false
   if (session.data.role === 'ADMIN') return true
   return {
     account: {
@@ -72,7 +76,8 @@ export function billFilter({ session }: { session: Session }) {
   }
 }
 
-export function billItemFilter({ session }: { session: Session }) {
+export function billItemFilter({ session }: { session?: Session }) {
+  if (!session) return false
   if (session.data.role === 'ADMIN') return true
   return {
     bill: {
@@ -86,7 +91,8 @@ export function billItemFilter({ session }: { session: Session }) {
     },
   }
 }
-export function userFilter({ session }: { session: Session }) {
+export function userFilter({ session }: { session?: Session }) {
+  if (!session) return false
   if (session.data.role === 'ADMIN') return true
   return { id: { equals: session.userId } }
 }
@@ -94,8 +100,9 @@ export function userFilter({ session }: { session: Session }) {
 export function messageFilter({
   session,
 }: {
-  session: Session
+  session?: Session
 }): MessageWhereInput | boolean {
+  if (!session) return false
   if (session.data.role === 'ADMIN') return true
   return {
     lessonTerms: {
