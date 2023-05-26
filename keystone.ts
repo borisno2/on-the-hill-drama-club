@@ -19,15 +19,7 @@ export default config({
   },
   ui: {
     isAccessAllowed: ({ session }) => session.allowAdminUI,
-    getAdditionalFiles: [
-      async () => [
-        {
-          mode: 'copy',
-          inputPath: Path.resolve('./keystone-next-config.js'),
-          outputPath: 'next.config.js',
-        },
-      ],
-    ],
+    basePath: '/admin',
   },
   lists,
 })

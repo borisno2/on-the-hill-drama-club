@@ -1,19 +1,17 @@
-import { getSessionContext } from 'keystone/context'
+import { getServerActionContext } from 'keystone/context/nextAuthFix'
 import { getQBClient } from 'lib/intuit'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function GET(request: NextRequest) {
   // Parse the redirect URL for authCode and exchange them for tokens
-  const parseRedirect = req.url
+  const { searchParams } = new URL(request.url)
+  const parseRedirect = request.url
   if (!parseRedirect) {
-    return res.status(403).send('Invalid redirect')
+    return NextResponse.json({ error: 'Invalid redirect' }, { status: 403 })
   }
-  const context = await getSessionContext({ req, res })
+  const context = await getServerActionContext()
   if (!context.session || context.session?.data.role !== 'ADMIN') {
-    return res.status(403).send('Not authorized')
+    return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
   } else {
     const oauthClient = await getQBClient({ context })
 
@@ -29,7 +27,7 @@ export default async function handler(
             const data = {
               accessToken: authResponse.getJson().access_token,
               refreshToken: authResponse.getJson().refresh_token,
-              realmId: req.query.realmId as string,
+              realmId: searchParams.get('realmId') as string,
             }
             if (settings) {
               context.sudo().db.QuickBooksSettings.updateOne({
@@ -46,6 +44,6 @@ export default async function handler(
         console.error('The error message is :' + e.originalMessage)
         console.error(e.intuit_tid)
       })
-    res.redirect('/api/intuit/get-accounts')
+    NextResponse.redirect('/api/intuit/get-accounts')
   }
 }

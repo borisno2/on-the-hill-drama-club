@@ -24,12 +24,13 @@ import { Bill, BillItem } from './lists/billing'
 import Message from './lists/message'
 import Student from './lists/student'
 import { inngest } from '../lib/inngest/client'
+import { Session } from 'next-auth'
 
-export const lists: Lists = {
+export const lists: Lists<Session> = {
   User: list({
     access: {
       operation: {
-        ...allOperations(isAdmin),
+        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
         query: isLoggedIn,
       },
       filter: {
@@ -40,7 +41,8 @@ export const lists: Lists = {
       name: virtual({
         field: graphql.field({
           type: graphql.String,
-          resolve: async (item, args, context: Context) => {
+          resolve: async (item, args, _context) => {
+            const context = _context as Context<Session>
             const user = await context.query.User.findOne({
               where: { id: item.id },
               query: 'id account { firstName surname } provider',
@@ -86,7 +88,7 @@ export const lists: Lists = {
   LessonCategory: list({
     access: {
       operation: {
-        ...allOperations(isAdmin),
+        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
         query: allowAll,
       },
     },
@@ -118,7 +120,7 @@ export const lists: Lists = {
   ImportantDate: list({
     access: {
       operation: {
-        ...allOperations(isAdmin),
+        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
         query: allowAll,
       },
     },
@@ -139,7 +141,7 @@ export const lists: Lists = {
   Term: list({
     access: {
       operation: {
-        ...allOperations(isAdmin),
+        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
         query: allowAll,
       },
     },
@@ -194,7 +196,7 @@ export const lists: Lists = {
   LessonTerm: list({
     access: {
       operation: {
-        ...allOperations(isAdmin),
+        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
         query: allowAll,
       },
     },
@@ -253,7 +255,7 @@ export const lists: Lists = {
   Lesson: list({
     access: {
       operation: {
-        ...allOperations(isAdmin),
+        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
         query: allowAll,
       },
     },
