@@ -29,8 +29,8 @@ dependencies:
     specifier: ^0.2.1
     version: 0.2.1(react-dom@18.2.0)(react@18.2.0)
   '@prisma/client':
-    specifier: 4.14.0
-    version: 4.14.0
+    specifier: 4.14.1
+    version: 4.14.1
   '@sendgrid/mail':
     specifier: ^7.7.0
     version: 7.7.0
@@ -3431,8 +3431,8 @@ packages:
       prisma: 4.13.0
     dev: false
 
-  /@prisma/client@4.14.0:
-    resolution: {integrity: sha512-MK/XaA2sFdfaOa7I9MjNKz6dxeIEdeZlnpNRoF2w3JuRLlFJLkpp6cD3yaqw2nUUhbrn3Iqe3ZpVV+VuGGil7Q==}
+  /@prisma/client@4.14.1:
+    resolution: {integrity: sha512-TZIswkeX1ccsHG/eN2kICzg/csXll0osK3EHu1QKd8VJ3XLcXozbNELKkCNfsCUvKJAwPdDtFCzF+O+raIVldw==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
