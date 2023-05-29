@@ -1,4 +1,4 @@
-import { UserCreateInput } from './../../../../__generated__/ts-gql/@schema.d'
+import { UserCreateInput } from '../../../../../__generated__/ts-gql/@schema'
 import { isCuid } from 'cuid'
 import { gql } from '@ts-gql/tag/no-transform'
 import NextAuth, { AuthOptions } from 'next-auth'
@@ -6,7 +6,7 @@ import Google, { GoogleProfile } from 'next-auth/providers/google'
 import Apple, { AppleProfile } from 'next-auth/providers/apple'
 
 import Credentials from 'next-auth/providers/credentials'
-import { keystoneContext } from '../../../keystone/context'
+import { keystoneContext } from '../../../../keystone/context'
 
 import { assertObjectType } from 'graphql'
 
@@ -26,7 +26,7 @@ const GET_AUTH_SESSION = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_AUTH_SESSION').type
+` as import('../../../../../__generated__/ts-gql/GET_AUTH_SESSION').type
 type SecretFieldImpl = {
   generateHash: (secret: string) => Promise<string>
   compare: (secret: string, hash: string) => Promise<string>
@@ -241,4 +241,6 @@ export const authOptions: AuthOptions = {
   ],
 }
 
-export default NextAuth(authOptions)
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }
