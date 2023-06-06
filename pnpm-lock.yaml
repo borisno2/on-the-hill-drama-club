@@ -98,8 +98,8 @@ dependencies:
     specifier: ^16.6.0
     version: 16.6.0
   inngest:
-    specifier: ^1.9.0
-    version: 1.9.0(encoding@0.1.13)(typescript@5.0.4)
+    specifier: ^2.0.0
+    version: 2.0.0(encoding@0.1.13)(typescript@5.0.4)
   intuit-oauth:
     specifier: ^4.0.0
     version: 4.0.0
@@ -7161,8 +7161,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /inngest@1.9.0(encoding@0.1.13)(typescript@5.0.4):
-    resolution: {integrity: sha512-F1iVUrdx3xi1O/IMnMWJf+s9zUjrruNmT5prLCUFYqZt+oa1PWYEJoJEOu+Tol5eB6QnoWN69R1AnjMJg85zLw==}
+  /inngest@2.0.0(encoding@0.1.13)(typescript@5.0.4):
+    resolution: {integrity: sha512-F4EENcjCABAzNnb/u4MlBdXpPqUd1AW/Wrko+0wNWB6il0qZDQ49b0FP8Xs49YivsU9yPTcwQs8QYmmwAcxY/Q==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
@@ -7174,6 +7174,7 @@ packages:
       cross-fetch: 3.1.6(encoding@0.1.13)
       h3: 1.6.6
       hash.js: 1.1.7
+      json-stringify-safe: 5.0.1
       ms: 2.1.3
       queue-microtask: 1.2.3
       serialize-error-cjs: 0.1.3
