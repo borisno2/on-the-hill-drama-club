@@ -3,7 +3,7 @@
   "lockFileMaintenance": { "enabled": true },
   "separateMinorPatch": false,
   "separateMajorMinor": true,
-  "rangeStrategy": "replace",
+  "rangeStrategy": "bump",
   "timezone": "Australia/Sydney",
   "updateNotScheduled": false,
   "baseBranches": ["dev"],
