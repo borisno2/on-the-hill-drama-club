@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   '@apollo/server':
-    specifier: ^4.7.1
-    version: 4.7.1(encoding@0.1.13)(graphql@16.6.0)
+    specifier: ^4.7.3
+    version: 4.7.3(encoding@0.1.13)(graphql@16.6.0)
   '@as-integrations/next':
     specifier: ^2.0.0
-    version: 2.0.0(@apollo/server@4.7.1)(next@13.4.4)
+    version: 2.0.0(@apollo/server@4.7.3)(next@13.4.4)
   '@aws-sdk/signature-v4-crt':
     specifier: ^3.338.0
     version: 3.338.0
@@ -268,8 +268,8 @@ packages:
       graphql: 16.6.0
     dev: false
 
-  /@apollo/server@4.7.1(encoding@0.1.13)(graphql@16.6.0):
-    resolution: {integrity: sha512-rFxd8jsMlqEYzmhuxATaDAPoRH905R56FKP4TnZWaiDYJtjhHe3hxZOWl24V7s0dB52DIp6S/x+zjQX8fwD37w==}
+  /@apollo/server@4.7.3(encoding@0.1.13)(graphql@16.6.0):
+    resolution: {integrity: sha512-eFCzHHheNHfVALjYJjIghV7kSgO49ZFr8+4g2CKOLShoDmLplQ3blyL5NsONyC0Z5l8kqm62V8yXGoxy2eNGfw==}
     engines: {node: '>=14.16.0'}
     peerDependencies:
       graphql: ^16.6.0
@@ -282,7 +282,7 @@ packages:
       '@apollo/utils.isnodelike': 2.0.1
       '@apollo/utils.keyvaluecache': 2.1.1
       '@apollo/utils.logger': 2.0.1
-      '@apollo/utils.usagereporting': 2.0.1(graphql@16.6.0)
+      '@apollo/utils.usagereporting': 2.1.0(graphql@16.6.0)
       '@apollo/utils.withrequired': 2.0.1
       '@graphql-tools/schema': 9.0.19(graphql@16.6.0)
       '@josephg/resolvable': 1.0.1
@@ -389,8 +389,8 @@ packages:
       graphql: 16.6.0
     dev: false
 
-  /@apollo/utils.usagereporting@2.0.1(graphql@16.6.0):
-    resolution: {integrity: sha512-18smkNfiSfu5yj2mpCIfSzmpDNh90a4PQ6t8kSwGKcPRD3KD83TfK7fF37fSRdnvO93dBkGreWisLXnCpqfWXg==}
+  /@apollo/utils.usagereporting@2.1.0(graphql@16.6.0):
+    resolution: {integrity: sha512-LPSlBrn+S17oBy5eWkrRSGb98sWmnEzo3DPTZgp8IQc8sJe0prDgDuppGq4NeQlpoqEHz0hQeYHAOA0Z3aQsxQ==}
     engines: {node: '>=14'}
     peerDependencies:
       graphql: 14.x || 15.x || 16.x
@@ -438,14 +438,14 @@ packages:
       - supports-color
     dev: false
 
-  /@as-integrations/next@2.0.0(@apollo/server@4.7.1)(next@13.4.4):
+  /@as-integrations/next@2.0.0(@apollo/server@4.7.3)(next@13.4.4):
     resolution: {integrity: sha512-adE/V6C7LpNMmkBq9uC/H4fN3toNluEqJTq0dhkZ9y2Np6a/sdwA8DCA0WZqLUxzbdSln1AKmTKAv3liohqKwA==}
     engines: {node: '>=16'}
     peerDependencies:
       '@apollo/server': ^4.0.0
       next: ^12.0.0 || ^13.0.0
     dependencies:
-      '@apollo/server': 4.7.1(encoding@0.1.13)(graphql@16.6.0)
+      '@apollo/server': 4.7.3(encoding@0.1.13)(graphql@16.6.0)
       next: 13.4.4(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
@@ -2949,7 +2949,7 @@ packages:
     dependencies:
       '@apollo/cache-control-types': 1.0.2(graphql@16.6.0)
       '@apollo/client': 3.7.14(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
-      '@apollo/server': 4.7.1(encoding@0.1.13)(graphql@16.6.0)
+      '@apollo/server': 4.7.3(encoding@0.1.13)(graphql@16.6.0)
       '@aws-sdk/client-s3': 3.338.0(@aws-sdk/signature-v4-crt@3.338.0)(aws-crt@1.15.16)
       '@aws-sdk/lib-storage': 3.338.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/client-s3@3.338.0)
       '@aws-sdk/s3-request-presigner': 3.338.0(@aws-sdk/signature-v4-crt@3.338.0)
