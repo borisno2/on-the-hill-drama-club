@@ -1,5 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "lockFileMaintenance": { "enabled": true },
+  "separateMinorPatch": false,
+  "separateMajorMinor": true,
+  "rangeStrategy": "replace",
+  "timezone": "Australia/Sydney",
+  "updateNotScheduled": false,
   "baseBranches": ["dev"],
   "extends": ["config:base"]
 }
