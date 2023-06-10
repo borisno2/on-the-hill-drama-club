@@ -17,7 +17,6 @@
     "jsx": "preserve",
     "incremental": true,
     "outDir": "dist",
-    "types": ["react/experimental"],
     "plugins": [
       {
         "name": "next"
