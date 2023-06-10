@@ -15,7 +15,7 @@ import { Session } from 'next-auth'
 const Account: Lists.Account<Session> = list({
   access: {
     operation: {
-      ...allOperations<Lists.Account.TypeInfo<Session>>(isLoggedIn),
+      ...allOperations(isLoggedIn),
       create: isAdmin,
       delete: isAdmin,
     },

@@ -25,7 +25,7 @@ import { Session } from 'next-auth'
 export const Bill: Lists.Bill<Session> = list({
   access: {
     operation: {
-      ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+      ...allOperations(isAdmin),
       query: isLoggedIn,
     },
     filter: {
@@ -102,7 +102,7 @@ export const Bill: Lists.Bill<Session> = list({
 export const BillItem: Lists.BillItem<Session> = list({
   access: {
     operation: {
-      ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+      ...allOperations(isAdmin),
       query: isLoggedIn,
     },
     filter: {

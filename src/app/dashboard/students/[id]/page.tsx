@@ -97,8 +97,6 @@ export default async function Students({
           <p className="text-sm text-gray-500">
             Lessons pending confirmation from Emily
           </p>
-
-          {/* @ts-expect-error Server Component */}
           <LessonList
             where={pendingWhere}
             studentId={student.id}
@@ -110,8 +108,6 @@ export default async function Students({
             Confirmed Enroled Lessons
           </h2>
           <p className="text-sm text-gray-500">Lessons confirmed by Emily</p>
-
-          {/* @ts-expect-error Server Component */}
           <LessonList
             where={enroledWhere}
             studentId={student.id}
@@ -125,8 +121,6 @@ export default async function Students({
           <p className="text-sm text-gray-500">
             Lessons that match this students class year
           </p>
-
-          {/* @ts-expect-error Server Component */}
           <LessonList
             where={availableWhere}
             studentId={student.id}

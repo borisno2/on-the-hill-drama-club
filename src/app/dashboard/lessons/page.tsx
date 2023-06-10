@@ -72,8 +72,6 @@ export default async function lessons() {
             This is a list of all lessons that you have one or more student
             enrolled in
           </p>
-
-          {/* @ts-expect-error Server Component */}
           <ClassList where={enroledWhere} enroled={true} />
         </div>
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -85,8 +83,6 @@ export default async function lessons() {
             Students based on their class year level, except those listed above
             where you already have a Student enrolled
           </p>
-
-          {/* @ts-expect-error Server Component */}
           <ClassList where={availableWhere} enroled={false} />
         </div>
 
@@ -96,7 +92,6 @@ export default async function lessons() {
             This is a list of all lessons, except those you have a student
             enrolled in or a suitably aged student for.
           </p>
-          {/* @ts-expect-error Server Component */}
           <ClassList where={allWhere} enroled={false} />
         </div>
       </div>
