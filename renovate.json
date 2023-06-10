@@ -1,8 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "lockFileMaintenance": { "enabled": true },
-  "separateMinorPatch": false,
-  "separateMajorMinor": true,
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "groupSlug": "all-minor-patch",
+      "matchPackagePatterns": ["*"],
+      "groupName": "Patch Dependencies"
+    }
+  ],
   "rangeStrategy": "bump",
   "timezone": "Australia/Sydney",
   "updateNotScheduled": false,
