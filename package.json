@@ -44,7 +44,7 @@
     "cuid": "^2.1.8",
     "dayjs": "^1.11.7",
     "decimal.js": "^10.4.3",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.1.4",
     "dotenv-flow": "^3.2.0",
     "encoding": "^0.1.13",
     "fast-glob": "^3.2.12",
