@@ -47,7 +47,7 @@
     "dotenv": "^16.3.1",
     "dotenv-flow": "^3.2.0",
     "encoding": "^0.1.13",
-    "fast-glob": "^3.2.12",
+    "fast-glob": "^3.3.0",
     "feed": "^4.2.2",
     "focus-visible": "^5.2.0",
     "graphql": "^16.6.0",
