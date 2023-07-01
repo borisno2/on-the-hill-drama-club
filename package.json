@@ -50,7 +50,7 @@
     "fast-glob": "^3.2.12",
     "feed": "^4.2.2",
     "focus-visible": "^5.2.0",
-    "graphql": "^16.6.0",
+    "graphql": "^16.7.1",
     "inngest": "^2.1.0",
     "intuit-oauth": "^4.0.0",
     "next": "^13.4.7",
