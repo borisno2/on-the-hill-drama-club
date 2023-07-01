@@ -30,7 +30,7 @@ export const lists: Lists<Session> = {
   User: list({
     access: {
       operation: {
-        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+        ...allOperations(isAdmin),
         query: isLoggedIn,
       },
       filter: {
@@ -88,7 +88,7 @@ export const lists: Lists<Session> = {
   LessonCategory: list({
     access: {
       operation: {
-        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+        ...allOperations(isAdmin),
         query: allowAll,
       },
     },
@@ -120,7 +120,7 @@ export const lists: Lists<Session> = {
   ImportantDate: list({
     access: {
       operation: {
-        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+        ...allOperations(isAdmin),
         query: allowAll,
       },
     },
@@ -141,7 +141,7 @@ export const lists: Lists<Session> = {
   Term: list({
     access: {
       operation: {
-        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+        ...allOperations(isAdmin),
         query: allowAll,
       },
     },
@@ -196,7 +196,7 @@ export const lists: Lists<Session> = {
   LessonTerm: list({
     access: {
       operation: {
-        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+        ...allOperations(isAdmin),
         query: allowAll,
       },
     },
@@ -255,7 +255,7 @@ export const lists: Lists<Session> = {
   Lesson: list({
     access: {
       operation: {
-        ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+        ...allOperations(isAdmin),
         query: allowAll,
       },
     },
