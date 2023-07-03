@@ -75,8 +75,8 @@ dependencies:
     specifier: ^2.1.8
     version: 2.1.8
   dayjs:
-    specifier: ^1.11.8
-    version: 1.11.8
+    specifier: ^1.11.9
+    version: 1.11.9
   decimal.js:
     specifier: ^10.4.3
     version: 10.4.3
@@ -121,7 +121,7 @@ dependencies:
     version: 7.45.1(react@18.2.0)
   react-tailwindcss-datepicker:
     specifier: ^1.6.3
-    version: 1.6.3(dayjs@1.11.8)(react@18.2.0)
+    version: 1.6.3(dayjs@1.11.9)(react@18.2.0)
   tailwindcss:
     specifier: ^3.3.2
     version: 3.3.2
@@ -5706,8 +5706,8 @@ packages:
       '@babel/runtime': 7.21.5
     dev: false
 
-  /dayjs@1.11.8:
-    resolution: {integrity: sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==}
+  /dayjs@1.11.9:
+    resolution: {integrity: sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==}
     dev: false
 
   /debounce-fn@4.0.0:
@@ -9800,13 +9800,13 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /react-tailwindcss-datepicker@1.6.3(dayjs@1.11.8)(react@18.2.0):
+  /react-tailwindcss-datepicker@1.6.3(dayjs@1.11.9)(react@18.2.0):
     resolution: {integrity: sha512-W7oq+kb+nBTvOwa3EOBXlcuTEyRT5G3AKfRESvTapWgdOlE26mqDGH8j6aLghA1Ez6+JsuSGSQYgC1L2XJ5hhg==}
     peerDependencies:
       dayjs: ^1.11.6
       react: ^17.0.2 || ^18.2.0
     dependencies:
-      dayjs: 1.11.8
+      dayjs: 1.11.9
       react: 18.2.0
     dev: false
 
