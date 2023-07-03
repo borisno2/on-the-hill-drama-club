@@ -34,7 +34,10 @@ export default async function lessons() {
   if (uniqueYearLevels.length > 0) {
     if (studentIds.length > 0) {
       enroledWhere = {
-        enrolments: { some: { student: { id: { in: studentIds } } } },
+        AND: [
+          { status: { in: ['UPCOMING', 'ENROL'] } },
+          { enrolments: { some: { student: { id: { in: studentIds } } } } },
+        ],
       }
     }
     availableWhere = {

@@ -56,7 +56,12 @@ export default async function Students({
       some: {
         AND: [
           {
-            status: { equals: 'ENROLED' },
+            status: { in: ['ENROLED', 'INVOICED'] },
+          },
+          {
+            lessonTerm: {
+              status: { in: ['UPCOMING', 'ENROL'] },
+            },
           },
           {
             student: {
