@@ -53,7 +53,7 @@
     "next": "^13.4.9",
     "next-auth": "^4.22.1",
     "node-quickbooks": "^2.0.43",
-    "postcss-focus-visible": "^8.0.2",
+    "postcss-focus-visible": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
