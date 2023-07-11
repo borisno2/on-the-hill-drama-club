@@ -33,8 +33,8 @@ dependencies:
     specifier: ^0.2.2
     version: 0.2.2(react-dom@18.2.0)(react@18.2.0)
   '@prisma/client':
-    specifier: 4.16.2
-    version: 4.16.2
+    specifier: 5.0.0
+    version: 5.0.0
   '@sendgrid/mail':
     specifier: ^7.7.0
     version: 7.7.0
@@ -3617,9 +3617,9 @@ packages:
       prisma: 4.15.0
     dev: false
 
-  /@prisma/client@4.16.2:
-    resolution: {integrity: sha512-qCoEyxv1ZrQ4bKy39GnylE8Zq31IRmm8bNhNbZx7bF2cU5aiCCnSa93J2imF88MBjn7J9eUQneNxUQVJdl/rPQ==}
-    engines: {node: '>=14.17'}
+  /@prisma/client@5.0.0:
+    resolution: {integrity: sha512-XlO5ELNAQ7rV4cXIDJUNBEgdLwX3pjtt9Q/RHqDpGf43szpNJx2hJnggfFs7TKNx0cOFsl6KJCSfqr5duEU/bQ==}
+    engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
       prisma: '*'
@@ -3627,7 +3627,7 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
+      '@prisma/engines-version': 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
     dev: false
 
   /@prisma/debug@4.15.0:
@@ -3644,8 +3644,8 @@ packages:
     resolution: {integrity: sha512-sVOig4tjGxxlYaFcXgE71f/rtFhzyYrfyfNFUsxCIEJyVKU9rdOWIlIwQ2NQ7PntvGnn+x0XuFo4OC1jvPJKzg==}
     dev: false
 
-  /@prisma/engines-version@4.16.1-1.4bc8b6e1b66cb932731fb1bdbbc550d1e010de81:
-    resolution: {integrity: sha512-q617EUWfRIDTriWADZ4YiWRZXCa/WuhNgLTVd+HqWLffjMSPzyM5uOWoauX91wvQClSKZU4pzI4JJLQ9Kl62Qg==}
+  /@prisma/engines-version@4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584:
+    resolution: {integrity: sha512-HHiUF6NixsldsP3JROq07TYBLEjXFKr6PdH8H4gK/XAoTmIplOJBCgrIUMrsRAnEuGyRoRLXKXWUb943+PFoKQ==}
     dev: false
 
   /@prisma/engines@4.15.0:
