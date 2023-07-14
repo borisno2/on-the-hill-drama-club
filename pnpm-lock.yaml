@@ -12,8 +12,8 @@ dependencies:
     specifier: ^2.0.1
     version: 2.0.1(@apollo/server@4.7.5)(next@13.4.9)
   '@aws-sdk/signature-v4-crt':
-    specifier: ^3.363.0
-    version: 3.363.0
+    specifier: ^3.370.0
+    version: 3.370.0
   '@graphql-typed-document-node/core':
     specifier: ^3.2.0
     version: 3.2.0(graphql@16.7.1)
@@ -28,7 +28,7 @@ dependencies:
     version: 3.1.1(react-hook-form@7.45.1)
   '@keystone-6/core':
     specifier: ^5.3.2
-    version: 5.3.2(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.363.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.15.0)(aws-crt@1.15.20)
+    version: 5.3.2(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.370.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.15.0)(aws-crt@1.15.20)
   '@marsidev/react-turnstile':
     specifier: ^0.2.2
     version: 0.2.2(react-dom@18.2.0)(react@18.2.0)
@@ -578,7 +578,7 @@ packages:
     dev: false
     optional: true
 
-  /@aws-sdk/client-s3@3.338.0(@aws-sdk/signature-v4-crt@3.363.0)(aws-crt@1.15.20):
+  /@aws-sdk/client-s3@3.338.0(@aws-sdk/signature-v4-crt@3.370.0)(aws-crt@1.15.20):
     resolution: {integrity: sha512-qnQlEyUXypg8QlH21JBJcDitXmaZXwde2YO5Ic3mUSu5zMtsOCmV/C5EVSlTz1OPqngmezF7WcqepYrm7ZfEag==}
     engines: {node: '>=14.0.0'}
     dependencies:
@@ -615,7 +615,7 @@ packages:
       '@aws-sdk/middleware-user-agent': 3.338.0
       '@aws-sdk/node-config-provider': 3.338.0
       '@aws-sdk/node-http-handler': 3.338.0
-      '@aws-sdk/signature-v4-multi-region': 3.338.0(@aws-sdk/signature-v4-crt@3.363.0)
+      '@aws-sdk/signature-v4-multi-region': 3.338.0(@aws-sdk/signature-v4-crt@3.370.0)
       '@aws-sdk/smithy-client': 3.338.0
       '@aws-sdk/types': 3.338.0
       '@aws-sdk/url-parser': 3.338.0
@@ -1007,7 +1007,7 @@ packages:
       '@aws-sdk/client-s3': ^3.0.0
     dependencies:
       '@aws-sdk/abort-controller': 3.338.0
-      '@aws-sdk/client-s3': 3.338.0(@aws-sdk/signature-v4-crt@3.363.0)(aws-crt@1.15.20)
+      '@aws-sdk/client-s3': 3.338.0(@aws-sdk/signature-v4-crt@3.370.0)(aws-crt@1.15.20)
       '@aws-sdk/middleware-endpoint': 3.338.0
       '@aws-sdk/smithy-client': 3.338.0
       buffer: 5.6.0
@@ -1242,13 +1242,13 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /@aws-sdk/s3-request-presigner@3.338.0(@aws-sdk/signature-v4-crt@3.363.0):
+  /@aws-sdk/s3-request-presigner@3.338.0(@aws-sdk/signature-v4-crt@3.370.0):
     resolution: {integrity: sha512-g0xB0U/HiuAFSdtFrpwOGS0ttwPT+5E8fEkfmwrSlLbL2/KN8qTmItQVmMzzaIsXGPcWGrorEeJP9t7O6IuVjg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/middleware-endpoint': 3.338.0
       '@aws-sdk/protocol-http': 3.338.0
-      '@aws-sdk/signature-v4-multi-region': 3.338.0(@aws-sdk/signature-v4-crt@3.363.0)
+      '@aws-sdk/signature-v4-multi-region': 3.338.0(@aws-sdk/signature-v4-crt@3.370.0)
       '@aws-sdk/smithy-client': 3.338.0
       '@aws-sdk/types': 3.338.0
       '@aws-sdk/util-format-url': 3.338.0
@@ -1270,8 +1270,8 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /@aws-sdk/signature-v4-crt@3.363.0:
-    resolution: {integrity: sha512-u2IajQm63KHhmgy76JgLM8OPRlxtpCSmd6DVcHCsUacPadyaxUofy0m0QA9ofBJVs6ukM4XVnWuOgtLj7UGsbw==}
+  /@aws-sdk/signature-v4-crt@3.370.0:
+    resolution: {integrity: sha512-hdIztGY/cMALEaftqvxw0gMbqgunLJMqIMGVG6flXt2FxNhERbuoJAUG7HuxPdFwkxdb9gvNeoLD/fQ9jqYmIA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@smithy/querystring-parser': 1.0.1
@@ -1286,7 +1286,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@aws-sdk/signature-v4-multi-region@3.338.0(@aws-sdk/signature-v4-crt@3.363.0):
+  /@aws-sdk/signature-v4-multi-region@3.338.0(@aws-sdk/signature-v4-crt@3.370.0):
     resolution: {integrity: sha512-mo61z1PiJ8GcLXLUcp9s4WqBd+hy+R0ymH2ohrLE4aw8H0FEq44zvTBXmI9GjycXGStdCpeU9+S2FkXxYPuy4w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -1297,7 +1297,7 @@ packages:
     dependencies:
       '@aws-sdk/protocol-http': 3.338.0
       '@aws-sdk/signature-v4': 3.338.0
-      '@aws-sdk/signature-v4-crt': 3.363.0
+      '@aws-sdk/signature-v4-crt': 3.370.0
       '@aws-sdk/types': 3.338.0
       tslib: 2.5.2
     dev: false
@@ -3164,16 +3164,16 @@ packages:
     resolution: {integrity: sha512-7dqNYwG8gCt4hfg5PKgM7xLEcgSBcx/UgC92OMnhMmvAnq11QzDFPrxUkNR/u5kn17WWLZ8beZ4A3Qrz4pZcmQ==}
     dev: false
 
-  /@keystone-6/core@5.3.2(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.363.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.15.0)(aws-crt@1.15.20):
+  /@keystone-6/core@5.3.2(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.370.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.15.0)(aws-crt@1.15.20):
     resolution: {integrity: sha512-eeB1s958t0KQB2UyadU7Twfxc2173CJcoZ3v75IloXq1DFmzAwbwCdjeyGFwaFlx/IZxY2ncDvSnIc0KqdZgBA==}
     hasBin: true
     dependencies:
       '@apollo/cache-control-types': 1.0.2(graphql@16.7.1)
       '@apollo/client': 3.7.14(graphql@16.7.1)(react-dom@18.2.0)(react@18.2.0)
       '@apollo/server': 4.7.5(graphql@16.7.1)
-      '@aws-sdk/client-s3': 3.338.0(@aws-sdk/signature-v4-crt@3.363.0)(aws-crt@1.15.20)
+      '@aws-sdk/client-s3': 3.338.0(@aws-sdk/signature-v4-crt@3.370.0)(aws-crt@1.15.20)
       '@aws-sdk/lib-storage': 3.338.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/client-s3@3.338.0)
-      '@aws-sdk/s3-request-presigner': 3.338.0(@aws-sdk/signature-v4-crt@3.363.0)
+      '@aws-sdk/s3-request-presigner': 3.338.0(@aws-sdk/signature-v4-crt@3.370.0)
       '@babel/runtime': 7.21.5
       '@emotion/hash': 0.9.1
       '@emotion/weak-memoize': 0.3.1
