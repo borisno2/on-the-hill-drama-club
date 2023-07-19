@@ -38,7 +38,7 @@
     "@types/dotenv-flow": "^3.2.0",
     "@vercel/analytics": "^1.0.1",
     "autoprefixer": "^10.4.14",
-    "aws-crt": "^1.15.20",
+    "aws-crt": "^1.15.21",
     "clsx": "^1.2.1",
     "csrf": "^3.1.0",
     "cuid": "^3.0.0",
@@ -51,13 +51,13 @@
     "inngest": "^2.3.0",
     "intuit-oauth": "^4.0.0",
     "next": "^13.4.10",
-    "next-auth": "^4.22.1",
+    "next-auth": "^4.22.3",
     "node-quickbooks": "^2.0.43",
     "postcss-focus-visible": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.1",
-    "react-tailwindcss-datepicker": "^1.6.3",
+    "react-hook-form": "^7.45.2",
+    "react-tailwindcss-datepicker": "^1.6.5",
     "tailwindcss": "^3.3.3",
     "zod": "^3.21.4"
   },
@@ -72,10 +72,10 @@
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "tsx": "^3.12.7",
-    "turbo": "^1.10.7",
+    "turbo": "^1.10.8",
     "typescript": "^5.1.6"
   },
-  "packageManager": "pnpm@8.6.7",
+  "packageManager": "pnpm@8.6.9",
   "ts-gql": {
     "schema": "schema.graphql",
     "mode": "no-transform"
