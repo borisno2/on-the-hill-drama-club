@@ -39,7 +39,7 @@
     "@vercel/analytics": "^1.0.1",
     "autoprefixer": "^10.4.14",
     "aws-crt": "^1.15.21",
-    "clsx": "^1.2.1",
+    "clsx": "^2.0.0",
     "csrf": "^3.1.0",
     "cuid": "^3.0.0",
     "dayjs": "^1.11.9",
