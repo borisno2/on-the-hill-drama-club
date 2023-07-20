@@ -38,7 +38,7 @@
     "@types/dotenv-flow": "^3.2.0",
     "@vercel/analytics": "^1.0.1",
     "autoprefixer": "^10.4.14",
-    "aws-crt": "^1.15.21",
+    "aws-crt": "^1.15.22",
     "clsx": "^2.0.0",
     "csrf": "^3.1.0",
     "cuid": "^3.0.0",
@@ -72,7 +72,7 @@
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "tsx": "^3.12.7",
-    "turbo": "^1.10.8",
+    "turbo": "^1.10.9",
     "typescript": "^5.1.6"
   },
   "packageManager": "pnpm@8.6.9",
