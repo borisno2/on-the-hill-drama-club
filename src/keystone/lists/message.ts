@@ -10,7 +10,7 @@ import { Session } from 'next-auth'
 const Message: Lists.Message<Session> = list({
   access: {
     operation: {
-      ...allOperations<Lists.Account.TypeInfo<Session>>(isAdmin),
+      ...allOperations(isAdmin),
       query: isLoggedIn,
     },
     filter: {

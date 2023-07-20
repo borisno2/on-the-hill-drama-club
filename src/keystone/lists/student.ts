@@ -18,7 +18,7 @@ import { Session } from 'next-auth'
 const Student: Lists.Student<Session> = list({
   access: {
     operation: {
-      ...allOperations<Lists.Account.TypeInfo<Session>>(isLoggedIn),
+      ...allOperations(isLoggedIn),
       delete: isAdmin,
     },
     filter: {

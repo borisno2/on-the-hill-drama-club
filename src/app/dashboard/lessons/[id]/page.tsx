@@ -90,7 +90,6 @@ export default async function LessonPage({
                 {lessonTerm.lesson?.description}
               </div>
             </dl>
-            {/* @ts-expect-error Server Component */}
             <EnrolStudentList lessonTerm={lessonTerm} />
           </div>
         </Suspense>
