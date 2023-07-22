@@ -19,7 +19,7 @@
     "ts-gql:watch": "ts-gql watch"
   },
   "dependencies": {
-    "@apollo/server": "^4.7.5",
+    "@apollo/server": "^4.8.1",
     "@as-integrations/next": "^2.0.1",
     "@aws-sdk/signature-v4-crt": "^3.370.0",
     "@graphql-typed-document-node/core": "^3.2.0",
