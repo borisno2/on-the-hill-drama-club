@@ -27,8 +27,8 @@ dependencies:
     specifier: ^3.1.1
     version: 3.1.1(react-hook-form@7.45.4)
   '@keystone-6/core':
-    specifier: ^5.4.0
-    version: 5.4.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.378.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(aws-crt@1.17.0)
+    specifier: ^5.5.0
+    version: 5.5.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.378.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(aws-crt@1.17.0)
   '@marsidev/react-turnstile':
     specifier: ^0.2.3
     version: 0.2.3(react-dom@18.2.0)(react@18.2.0)
@@ -3163,8 +3163,8 @@ packages:
     resolution: {integrity: sha512-7dqNYwG8gCt4hfg5PKgM7xLEcgSBcx/UgC92OMnhMmvAnq11QzDFPrxUkNR/u5kn17WWLZ8beZ4A3Qrz4pZcmQ==}
     dev: false
 
-  /@keystone-6/core@5.4.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.378.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(aws-crt@1.17.0):
-    resolution: {integrity: sha512-ejoexDSicOVuRTQEHXM7a72VMabXOvji6dy1ZVpyxh4Gp7rR0Vw0oaM8vo+ZtKDXCrTYuQojtZ95kmKpgoHKGQ==}
+  /@keystone-6/core@5.5.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.378.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(aws-crt@1.17.0):
+    resolution: {integrity: sha512-+J2Og9FmLFLb8z8ZRHl76lRj62z+LZxrzWEydx4ZMQk4H6sxiuCYMssKi5sGAlrj8w6qfaPUl3XVDE+lminMUA==}
     hasBin: true
     dependencies:
       '@apollo/cache-control-types': 1.0.3(graphql@16.7.1)
