@@ -62,7 +62,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@ts-gql/eslint-plugin": "^0.8.5",
+    "@ts-gql/eslint-plugin": "^0.9.0",
     "@types/lodash": "^4.14.196",
     "@types/node": "^18.17.3",
     "@types/react": "^18.2.18",
