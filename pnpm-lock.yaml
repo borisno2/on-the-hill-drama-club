@@ -54,8 +54,8 @@ dependencies:
     specifier: ^0.7.0
     version: 0.7.0(graphql@16.8.0)
   '@types/dotenv-flow':
-    specifier: ^3.2.0
-    version: 3.2.0
+    specifier: ^3.3.0
+    version: 3.3.0
   '@vercel/analytics':
     specifier: ^1.0.1
     version: 1.0.1
@@ -84,8 +84,8 @@ dependencies:
     specifier: ^16.3.1
     version: 16.3.1
   dotenv-flow:
-    specifier: ^3.2.0
-    version: 3.2.0
+    specifier: ^3.3.0
+    version: 3.3.0
   focus-visible:
     specifier: ^5.2.0
     version: 5.2.0
@@ -4189,8 +4189,8 @@ packages:
       '@types/ms': 0.7.31
     dev: false
 
-  /@types/dotenv-flow@3.2.0:
-    resolution: {integrity: sha512-A79hbPwocbYkcTwGcDOFbKDuqyVo5mLAz/6Iq465YZ7R7Go5bT1PIM8I2jlPQkaD9u9fbotGVLkUPhX+9XUHfw==}
+  /@types/dotenv-flow@3.3.0:
+    resolution: {integrity: sha512-ao0rfQNkpQyslqdrjyFPEJWvo3uONNDVwtFCxCVIoTXn72qj+BLxiTQgqzFVr7Kz1Ml9OvN80Clf9y5q8SYe8Q==}
     dev: false
 
   /@types/express-serve-static-core@4.17.35:
@@ -5887,8 +5887,8 @@ packages:
       is-obj: 2.0.0
     dev: false
 
-  /dotenv-flow@3.2.0:
-    resolution: {integrity: sha512-GEB6RrR4AbqDJvNSFrYHqZ33IKKbzkvLYiD5eo4+9aFXr4Y4G+QaFrB/fNp0y6McWBmvaPn3ZNjIufnj8irCtg==}
+  /dotenv-flow@3.3.0:
+    resolution: {integrity: sha512-GLSvRqDZ1TGhloS6ZCZ5chdqqv/3XMqZxAnX9rliJiHn6uyJLguKeu+3M2kcagBkoVCnLWYfbR4rfFe1xSU39A==}
     engines: {node: '>= 8.0.0'}
     dependencies:
       dotenv: 8.6.0
