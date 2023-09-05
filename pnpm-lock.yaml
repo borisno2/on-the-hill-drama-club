@@ -25,7 +25,7 @@ dependencies:
     version: 2.0.18(react@18.2.0)
   '@hookform/resolvers':
     specifier: ^3.3.0
-    version: 3.3.0(react-hook-form@7.45.4)
+    version: 3.3.0(react-hook-form@7.46.1)
   '@keystone-6/core':
     specifier: ^5.5.0
     version: 5.5.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.387.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(aws-crt@1.18.0)
@@ -117,8 +117,8 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   react-hook-form:
-    specifier: ^7.45.4
-    version: 7.45.4(react@18.2.0)
+    specifier: ^7.46.1
+    version: 7.46.1(react@18.2.0)
   react-tailwindcss-datepicker:
     specifier: ^1.6.6
     version: 1.6.6(dayjs@1.11.9)(react@18.2.0)
@@ -3083,12 +3083,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@hookform/resolvers@3.3.0(react-hook-form@7.45.4):
+  /@hookform/resolvers@3.3.0(react-hook-form@7.46.1):
     resolution: {integrity: sha512-tgK3nWlfFLlqhqpXZmFMP3RN5E7mlbGfnM2h2ILVsW1TNGuFSod0ePW0grlIY2GAbL4pJdtmOT4HQSZsTwOiKg==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.45.4(react@18.2.0)
+      react-hook-form: 7.46.1(react@18.2.0)
     dev: false
 
   /@httptoolkit/websocket-stream@6.0.1:
@@ -9424,8 +9424,8 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.18)(react@18.2.0)
     dev: false
 
-  /react-hook-form@7.45.4(react@18.2.0):
-    resolution: {integrity: sha512-HGDV1JOOBPZj10LB3+OZgfDBTn+IeEsNOKiq/cxbQAIbKaiJUe/KV8DBUzsx0Gx/7IG/orWqRRm736JwOfUSWQ==}
+  /react-hook-form@7.46.1(react@18.2.0):
+    resolution: {integrity: sha512-0GfI31LRTBd5tqbXMGXT1Rdsv3rnvy0FjEk8Gn9/4tp6+s77T7DPZuGEpBRXOauL+NhyGT5iaXzdIM2R6F/E+w==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
