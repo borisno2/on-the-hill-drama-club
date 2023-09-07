@@ -198,7 +198,7 @@ export const authOptions: AuthOptions = {
         }
         const secretFieldImpl = assertObjectType(
           keystoneContext.sudo().graphql.schema.getType('User')
-        ).getFields()?.['password'].extensions
+        ).getFields()?.password.extensions
           ?.keystoneSecretField as SecretFieldImpl
 
         const item = await keystoneContext.sudo().db.User.findMany({

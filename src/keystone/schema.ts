@@ -152,7 +152,8 @@ export const lists: Lists<Session> = {
           item.copyFromId &&
           item.termStatus === 'ENROL' &&
           (originalItem.termStatus === 'DRAFT' ||
-            originalItem.termStatus === 'UPCOMING')
+            originalItem.termStatus === 'UPCOMING') &&
+            context.session
         ) {
           await inngest.send({
             name: 'app/copyterm.confirmed',
@@ -206,7 +207,8 @@ export const lists: Lists<Session> = {
           operation === 'update' &&
           item.status === 'ENROL' &&
           (originalItem.status === 'DRAFT' ||
-            originalItem.status === 'UPCOMING')
+            originalItem.status === 'UPCOMING') &&
+            context.session
         ) {
           await inngest.send({
             name: 'app/lessonTerm.confirmed',
