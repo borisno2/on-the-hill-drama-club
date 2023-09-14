@@ -21,7 +21,7 @@
   "dependencies": {
     "@apollo/server": "^4.9.3",
     "@as-integrations/next": "^2.0.2",
-    "@aws-sdk/signature-v4-crt": "^3.408.0",
+    "@aws-sdk/signature-v4-crt": "^3.412.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
