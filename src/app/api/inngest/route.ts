@@ -10,6 +10,7 @@ import { createQuickBooksInvoiceFunction } from 'inngestFunctions/bill'
 import {
   copyTermFunction,
   copyEnrolmentsFunction,
+  completeTermFunction,
 } from 'inngestFunctions/lessonTerms'
 
 export const { GET, POST, PUT } = serve(inngest, [
@@ -20,4 +21,5 @@ export const { GET, POST, PUT } = serve(inngest, [
   createBillItemFunction,
   copyTermFunction,
   copyEnrolmentsFunction,
+  completeTermFunction,
 ])
