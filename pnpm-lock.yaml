@@ -27,8 +27,8 @@ dependencies:
     specifier: ^3.3.1
     version: 3.3.1(react-hook-form@7.46.1)
   '@keystone-6/core':
-    specifier: ^5.5.1
-    version: 5.5.1(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.412.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(aws-crt@1.18.0)
+    specifier: ^5.6.0
+    version: 5.6.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.412.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(@types/react@18.2.21)(aws-crt@1.18.0)
   '@marsidev/react-turnstile':
     specifier: ^0.3.1
     version: 0.3.1(react-dom@18.2.0)(react@18.2.0)
@@ -459,7 +459,7 @@ packages:
     resolution: {integrity: sha512-ENNPPManmnVJ4BTXlOjAgD7URidbAznURqD0KvfREyc4o20DPYdEldU1f5cQ7Jbj0CJJSPaMIk/9ZshdB3210w==}
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.338.0
+      '@aws-sdk/types': 3.410.0
       tslib: 1.14.1
     dev: false
 
@@ -475,7 +475,7 @@ packages:
       '@aws-crypto/ie11-detection': 3.0.0
       '@aws-crypto/supports-web-crypto': 3.0.0
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.338.0
+      '@aws-sdk/types': 3.410.0
       '@aws-sdk/util-locate-window': 3.310.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
@@ -488,7 +488,7 @@ packages:
       '@aws-crypto/sha256-js': 3.0.0
       '@aws-crypto/supports-web-crypto': 3.0.0
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.338.0
+      '@aws-sdk/types': 3.410.0
       '@aws-sdk/util-locate-window': 3.310.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
@@ -498,7 +498,7 @@ packages:
     resolution: {integrity: sha512-PnNN7os0+yd1XvXAy23CFOmTbMaDxgxXtTKHybrJ39Y8kGzBATgBFibWJKH6BhytLI/Zyszs87xCOBNyBig6vQ==}
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.338.0
+      '@aws-sdk/types': 3.410.0
       tslib: 1.14.1
     dev: false
 
@@ -3183,8 +3183,8 @@ packages:
     resolution: {integrity: sha512-7dqNYwG8gCt4hfg5PKgM7xLEcgSBcx/UgC92OMnhMmvAnq11QzDFPrxUkNR/u5kn17WWLZ8beZ4A3Qrz4pZcmQ==}
     dev: false
 
-  /@keystone-6/core@5.5.1(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.412.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(aws-crt@1.18.0):
-    resolution: {integrity: sha512-pTWtWmqQyx6bfDr/wZjeby3+bBJUWNINUzlfb55jI3OK3dsHpbY3bQ/1roimwPbMub9Bx4FOBhYYUGXFrE9tRw==}
+  /@keystone-6/core@5.6.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.412.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(@types/react@18.2.21)(aws-crt@1.18.0):
+    resolution: {integrity: sha512-IBZC36CeQK/lSMCjA7UVL2nh2Rx4Axf2GRiocoXulSqTVOPo4ulGCB4MUEQxZvnJ/PszwbEHMOZzbrbUx6B8QQ==}
     hasBin: true
     dependencies:
       '@apollo/cache-control-types': 1.0.3(graphql@16.8.0)
@@ -3217,19 +3217,6 @@ packages:
       '@prisma/client': 4.16.2(prisma@4.16.2)
       '@prisma/internals': 4.16.2
       '@prisma/migrate': 4.16.2(@prisma/generator-helper@4.16.2)(@prisma/internals@4.16.2)(aws-crt@1.18.0)
-      '@sindresorhus/slugify': 1.1.2
-      '@types/apollo-upload-client': 17.0.2(react-dom@18.2.0)(react@18.2.0)
-      '@types/bcryptjs': 2.4.2
-      '@types/body-parser': 1.19.2
-      '@types/cookie': 0.5.1
-      '@types/cors': 2.8.13
-      '@types/express': 4.17.17
-      '@types/fs-extra': 11.0.1
-      '@types/inflection': 1.13.0
-      '@types/pluralize': 0.0.30
-      '@types/prompts': 2.4.4
-      '@types/react': 18.2.21
-      '@types/uuid': 9.0.2
       apollo-upload-client: 17.0.0(@apollo/client@3.7.14)(graphql@16.8.0)
       bcryptjs: 2.4.3
       body-parser: 1.20.2
@@ -3245,15 +3232,12 @@ packages:
       decimal.js: 10.4.3
       dumb-passwords: 0.2.1
       esbuild: 0.19.2
-      execa: 5.1.1
       express: 4.18.2
       fast-deep-equal: 3.1.3
       file-type: 18.4.0
-      filenamify: 4.3.0
-      form-data: 4.0.0
       fs-extra: 11.1.1
       graphql: 16.8.0
-      graphql-upload: 15.0.2(@types/express@4.17.17)(graphql@16.8.0)
+      graphql-upload: 15.0.2(graphql@16.8.0)
       image-size: 1.0.2
       inflection: 1.13.4
       intersection-observer: 0.12.2
@@ -3267,7 +3251,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       resolve: 1.22.2
-      ts-toolbelt: 9.6.0
       uuid: 9.0.0
     transitivePeerDependencies:
       - '@aws-sdk/abort-controller'
@@ -3275,7 +3258,9 @@ packages:
       - '@babel/core'
       - '@opentelemetry/api'
       - '@prisma/generator-helper'
+      - '@types/express'
       - '@types/koa'
+      - '@types/react'
       - aws-crt
       - babel-plugin-macros
       - encoding
@@ -4155,25 +4140,8 @@ packages:
       graphql-tag: 2.12.6(graphql@16.8.0)
     dev: false
 
-  /@types/apollo-upload-client@17.0.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-NphAiBqzZv3iY8Cq+qWyi0QUFFzJ+nVd7QKI/iKV8RfILrpYDL69F/vlhjn4BNxKlmc3LxJHymcf3gFzLBwuZQ==}
-    dependencies:
-      '@apollo/client': 3.7.14(graphql@16.8.0)(react-dom@18.2.0)(react@18.2.0)
-      '@types/extract-files': 8.1.1
-      graphql: 16.8.0
-    transitivePeerDependencies:
-      - graphql-ws
-      - react
-      - react-dom
-      - subscriptions-transport-ws
-    dev: false
-
   /@types/babel__code-frame@7.0.3:
     resolution: {integrity: sha512-2TN6oiwtNjOezilFVl77zwdNPwQWaDBBCCWWxyo1ctiO3vAtd7H/aB/CBJdw9+kqq3+latD0SXoedIuHySSZWw==}
-    dev: false
-
-  /@types/bcryptjs@2.4.2:
-    resolution: {integrity: sha512-LiMQ6EOPob/4yUL66SZzu6Yh77cbzJFYll+ZfaPiPPFswtIlA/Fs1MzdKYA7JApHU49zQTbJGX3PDmCpIdDBRQ==}
     dev: false
 
   /@types/body-parser@1.19.2:
@@ -4197,16 +4165,6 @@ packages:
 
   /@types/connect@3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
-    dependencies:
-      '@types/node': 18.17.15
-    dev: false
-
-  /@types/cookie@0.5.1:
-    resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
-    dev: false
-
-  /@types/cors@2.8.13:
-    resolution: {integrity: sha512-RG8AStHlUiV5ysZQKq97copd2UmVYw3/pRMLefISZ3S1hK104Cwm7iLQ3fTKx+lsUH2CE8FlLaYeEA2LSeqYUA==}
     dependencies:
       '@types/node': 18.17.15
     dev: false
@@ -4245,10 +4203,6 @@ packages:
       '@types/serve-static': 1.15.1
     dev: false
 
-  /@types/extract-files@8.1.1:
-    resolution: {integrity: sha512-dMJJqBqyhsfJKuK7p7HyyNmki7qj1AlwhUKWx6KrU7i1K2T2SPsUsSUTWFmr/sEM1q8rfR8j5IyUmYrDbrhfjQ==}
-    dev: false
-
   /@types/facepaint@1.2.2:
     resolution: {integrity: sha512-Xl9tAINsQL1s0TdXG5IiG75kZrxem5esbnKJF5gQgFel92OdS5zLtFYnbBw6fBruCMPYJQ9mK5pVmSsMl3Puug==}
     dev: false
@@ -4256,13 +4210,6 @@ packages:
   /@types/form-data@0.0.33:
     resolution: {integrity: sha512-8BSvG1kGm83cyJITQMZSulnl6QV8jqAGreJsc5tPu1Jq0vTSOiY/k24Wx82JRpWwZSqrala6sd5rWi6aNXvqcw==}
     dependencies:
-      '@types/node': 18.17.15
-    dev: false
-
-  /@types/fs-extra@11.0.1:
-    resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
-    dependencies:
-      '@types/jsonfile': 6.1.1
       '@types/node': 18.17.15
     dev: false
 
@@ -4276,10 +4223,6 @@ packages:
       '@types/node': 18.17.15
     dev: false
 
-  /@types/inflection@1.13.0:
-    resolution: {integrity: sha512-kZSETqAVS74XC/K3mPX/tbMEi/Zy1KP0Wc59dB1i5P72AHz4eSW+UIpzWxmQnDxipoKSX5eRgUXy+wUr+bY73g==}
-    dev: false
-
   /@types/invariant@2.2.35:
     resolution: {integrity: sha512-DxX1V9P8zdJPYQat1gHyY0xj3efl8gnMVjiM9iCY6y27lj+PoQWkgjt8jDqmovPqULkKVpKRg8J36iQiA+EtEg==}
     dev: false
@@ -4291,12 +4234,6 @@ packages:
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
-
-  /@types/jsonfile@6.1.1:
-    resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
-    dependencies:
-      '@types/node': 18.17.15
-    dev: false
 
   /@types/lodash@4.14.198:
     resolution: {integrity: sha512-trNJ/vtMZYMLhfN45uLq4ShQSw0/S7xCTLLVM+WM1rmFpba/VS42jVUgaO3w/NOLiWR/09lnYk0yMaA/atdIsg==}
@@ -4350,17 +4287,6 @@ packages:
 
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
-
-  /@types/pluralize@0.0.30:
-    resolution: {integrity: sha512-kVww6xZrW/db5BR9OqiT71J9huRdQ+z/r+LbDuT7/EK50mCmj5FoaIARnVv0rvjUS/YpDox0cDU9lpQT011VBA==}
-    dev: false
-
-  /@types/prompts@2.4.4:
-    resolution: {integrity: sha512-p5N9uoTH76lLvSAaYSZtBCdEXzpOOufsRjnhjVSrZGXikVGHX9+cc9ERtHRV4hvBKHyZb1bg4K+56Bd2TqUn4A==}
-    dependencies:
-      '@types/node': 18.17.15
-      kleur: 3.0.3
-    dev: false
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -4423,10 +4349,6 @@ packages:
 
   /@types/triple-beam@1.3.2:
     resolution: {integrity: sha512-txGIh+0eDFzKGC25zORnswy+br1Ha7hj5cMVwKIU7+s0U2AxxJru/jZSMU6OC9MJWP6+pc/hc6ZjyZShpsyY2g==}
-    dev: false
-
-  /@types/uuid@9.0.2:
-    resolution: {integrity: sha512-kNnC1GFBLuhImSnV7w4njQkUiJi0ZXUycu1rUaouPqiKlXkh77JKgdRnTAp1x5eBwcIwbtI+3otwzuIDEuDoxQ==}
     dev: false
 
   /@types/webidl-conversions@7.0.0:
@@ -6662,20 +6584,6 @@ packages:
       token-types: 5.0.1
     dev: false
 
-  /filename-reserved-regex@2.0.0:
-    resolution: {integrity: sha512-lc1bnsSr4L4Bdif8Xb/qrtokGbq5zlsms/CYH8PP+WtCkGNF65DPiQY8vG3SakEdRn8Dlnm+gW/qWKKjS5sZzQ==}
-    engines: {node: '>=4'}
-    dev: false
-
-  /filenamify@4.3.0:
-    resolution: {integrity: sha512-hcFKyUG57yWGAzu1CMt/dPzYZuv+jAJUT85bL8mrXvNe6hWj6yEHEc4EdcgiA6Z3oi1/9wXJdZPXF2dZNgwgOg==}
-    engines: {node: '>=8'}
-    dependencies:
-      filename-reserved-regex: 2.0.0
-      strip-outer: 1.0.1
-      trim-repeated: 1.0.0
-    dev: false
-
   /fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
     engines: {node: '>=8'}
@@ -7075,7 +6983,7 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /graphql-upload@15.0.2(@types/express@4.17.17)(graphql@16.8.0):
+  /graphql-upload@15.0.2(graphql@16.8.0):
     resolution: {integrity: sha512-ufJAkZJBKWRDD/4wJR3VZMy9QWTwqIYIciPtCEF5fCNgWF+V1p7uIgz+bP2YYLiS4OJBhCKR8rnqE/Wg3XPUiw==}
     engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
     peerDependencies:
@@ -7089,7 +6997,6 @@ packages:
         optional: true
     dependencies:
       '@types/busboy': 1.5.0
-      '@types/express': 4.17.17
       '@types/node': 18.17.15
       '@types/object-path': 0.11.1
       busboy: 1.6.0
@@ -10266,13 +10173,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /strip-outer@1.0.1:
-    resolution: {integrity: sha512-k55yxKHwaXnpYGsOzg4Vl8+tDrWylxDEpknGjhTiZB8dFRU5rTo9CAzeycivxV3s+zlTKwrs6WxMxR95n26kwg==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      escape-string-regexp: 1.0.5
-    dev: false
-
   /strnum@1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
     dev: false
@@ -10577,13 +10477,6 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /trim-repeated@1.0.0:
-    resolution: {integrity: sha512-pkonvlKk8/ZuR0D5tLW8ljt5I8kmxp2XKymhepUeOdCEfKpZaktSArkLHZt76OB1ZvO9bssUsDty4SWhLvZpLg==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      escape-string-regexp: 1.0.5
-    dev: false
-
   /triple-beam@1.3.0:
     resolution: {integrity: sha512-XrHUvV5HpdLmIj4uVMxHggLbFSZYIn7HEWsqePZcI50pco+MPqJ50wMGY794X7AOOhxOBAjbkqfAbEe/QMp2Lw==}
     dev: false
@@ -10610,10 +10503,6 @@ packages:
 
   /ts-pattern@4.3.0:
     resolution: {integrity: sha512-pefrkcd4lmIVR0LA49Imjf9DYLK8vtWhqBPA3Ya1ir8xCW0O2yjL9dsCVvI7pCodLC5q7smNpEtDR2yVulQxOg==}
-    dev: false
-
-  /ts-toolbelt@9.6.0:
-    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
     dev: false
 
   /tsconfig-paths@3.14.2:
