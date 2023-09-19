@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "build:keystone": "tsx build-admin-ui.ts && next build .keystone/admin",
+    "build:keystone": "keystone build",
     "deploy": "pnpm build && pnpm migrate",
     "dev": "turbo dev:watch dev:keystone dev:next",
     "dev:next-ssl": "node server.js",
