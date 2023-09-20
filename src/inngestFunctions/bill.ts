@@ -6,6 +6,7 @@ import { getQBO } from 'lib/intuit'
 
 import { gql } from '@ts-gql/tag/no-transform'
 import Decimal from 'decimal.js'
+import { createCustomer } from 'lib/intuit/customer'
 
 const UPDATE_BILL_QBO_ID = gql`
   mutation UPDATE_BILL_QBO_ID($id: ID!, $qboId: Int!) {
@@ -50,6 +51,9 @@ const GET_BILL_BY_ID = gql`
       account {
         id
         qboId
+        name
+        firstName
+        surname
         user {
           id
           email
@@ -75,9 +79,41 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
     if (!qbo) throw new Error('Could not get QBO client')
     if (!bill) throw new Error('Could not get bill')
     if (!bill.account) throw new Error('Could not get bill account')
-    if (!bill.account.qboId) throw new Error('Account does not have a QBO id')
-    // TODO: create the Account if it doesn't exist
-    if (!bill.account.user?.email) throw new Error('Could not get bill email')
+    if (!bill.account.user) throw new Error('Could not get user')
+    if (!bill.account.user.email) throw new Error('Could not get bill email')
+    let { qboId } = bill.account
+    if (!qboId) {
+      try {
+        const customer = await createCustomer(
+          {
+            DisplayName: bill.account.name!,
+            GivenName: bill.account.firstName!,
+            FamilyName: bill.account.surname!,
+            PrimaryEmailAddr: {
+              Address: bill.account.user.email,
+            },
+          },
+          qbo
+        )
+
+        if (customer === null) {
+          throw new Error('Error creating customer', {
+            cause: 'Create customer returned null',
+          })
+        }
+
+        await context.db.Account.updateOne({
+          where: { id: bill.account.id },
+          data: {
+            qboId: parseInt(customer.Id),
+            qboSyncToken: parseInt(customer.SyncToken),
+          },
+        })
+        qboId = parseInt(customer.Id)
+      } catch (error) {
+        throw new Error('Error creating customer', { cause: error })
+      }
+    }
     if (!bill.items || bill.items.length === 0) {
       throw new Error('Bill has no items')
     }
@@ -88,7 +124,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
       const invoice = await createInvoice(
         {
           CustomerRef: {
-            value: bill.account.qboId.toString(),
+            value: qboId.toString(),
           },
           Line: bill.items.map((billItem) => ({
             Amount: new Decimal(billItem.amount!)
@@ -96,7 +132,9 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
               .mul(billItem.quantity!)
               .toDecimalPlaces(2),
             DetailType: 'SalesItemLineDetail',
-            Description: `${billItem.enrolment?.student?.name} - ${billItem.enrolment?.lessonTerm?.name}`,
+            Description:
+              billItem.name ??
+              `${billItem.enrolment?.student?.name} - ${billItem.enrolment?.lessonTerm?.name}`,
             SalesItemLineDetail: {
               Qty: new Decimal(billItem.quantity!),
               UnitPrice: new Decimal(billItem.amount!)

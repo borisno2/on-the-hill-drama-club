@@ -100,6 +100,7 @@ export const GET_ENROLMENT_BY_ID = gql`
       createdAt
       student {
         id
+        name
         firstName
         surname
         account {
