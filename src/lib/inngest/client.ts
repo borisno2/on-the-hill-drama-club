@@ -44,6 +44,13 @@ export type LessonTermConfirmedEvent = {
   }
 }
 
+export type TermCompletedEvent = {
+  data: {
+    item: Lists.Term.TypeInfo['item']
+    session: Session
+  }
+}
+
 export type Events = {
   'app/lessonTerm.confirmed': LessonTermConfirmedEvent
   'app/copyterm.confirmed': CopyTermConfirmedEvent
@@ -51,6 +58,7 @@ export type Events = {
   'app/enrolment.enroled': EnrolmentConfirmedEvent
   'app/account.created': CreateQuickBooksCustomerEvent
   'app/bill.approved': BillApprovedEvent
+  'app/term.completed': TermCompletedEvent
 }
 
 export const inngest = new Inngest({

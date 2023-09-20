@@ -153,10 +153,24 @@ export const lists: Lists<Session> = {
           item.termStatus === 'ENROL' &&
           (originalItem.termStatus === 'DRAFT' ||
             originalItem.termStatus === 'UPCOMING') &&
-            context.session
+          context.session
         ) {
           await inngest.send({
             name: 'app/copyterm.confirmed',
+            data: {
+              item,
+              session: context.session,
+            },
+          })
+        }
+        if (
+          operation === 'update' &&
+          item.termStatus === 'PREVIOUS' &&
+          originalItem.termStatus === 'ENROL' &&
+          context.session
+        ) {
+          await inngest.send({
+            name: 'app/term.completed',
             data: {
               item,
               session: context.session,
@@ -208,7 +222,7 @@ export const lists: Lists<Session> = {
           item.status === 'ENROL' &&
           (originalItem.status === 'DRAFT' ||
             originalItem.status === 'UPCOMING') &&
-            context.session
+          context.session
         ) {
           await inngest.send({
             name: 'app/lessonTerm.confirmed',
