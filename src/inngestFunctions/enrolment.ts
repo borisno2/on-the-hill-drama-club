@@ -50,7 +50,7 @@ export const createBillItemFunction = inngest.createFunction(
       })
       // if there is, add the enrolment to the bill
       const billItemData = {
-        name: `${enrolment.lessonTerm.name} - ${enrolment.lessonTerm.term.name}`,
+        name: `${enrolment.student.firstName} ${enrolment.student.surname} - ${enrolment.lessonTerm.name}`,
         enrolment: { connect: { id: enrolment.id } },
         amount: enrolment.lessonTerm.lesson.cost,
         quantity: enrolment.lessonTerm.numberOfLessons,
