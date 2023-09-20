@@ -44,6 +44,6 @@ export async function GET(request: NextRequest) {
         console.error('The error message is :' + e.originalMessage)
         console.error(e.intuit_tid)
       })
-    NextResponse.redirect('/api/intuit/get-accounts')
+    return NextResponse.redirect('/api/intuit/get-accounts')
   }
 }
