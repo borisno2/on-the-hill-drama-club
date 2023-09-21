@@ -48,7 +48,7 @@
     "dotenv-flow": "^3.3.0",
     "focus-visible": "^5.2.0",
     "graphql": "^16.8.1",
-    "inngest": "^2.6.1",
+    "inngest": "^2.7.0",
     "intuit-oauth": "^4.0.0",
     "next": "^13.5.1",
     "next-auth": "^4.23.1",
