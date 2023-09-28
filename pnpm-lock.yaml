@@ -27,8 +27,8 @@ dependencies:
     specifier: ^3.3.1
     version: 3.3.1(react-hook-form@7.46.2)
   '@keystone-6/core':
-    specifier: ^5.6.0
-    version: 5.6.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.418.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(@types/react@18.2.22)(aws-crt@1.18.0)
+    specifier: ^5.7.0
+    version: 5.7.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.418.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(@types/react@18.2.22)(aws-crt@1.18.0)
   '@marsidev/react-turnstile':
     specifier: ^0.3.1
     version: 0.3.1(react-dom@18.2.0)(react@18.2.0)
@@ -459,7 +459,7 @@ packages:
     resolution: {integrity: sha512-ENNPPManmnVJ4BTXlOjAgD7URidbAznURqD0KvfREyc4o20DPYdEldU1f5cQ7Jbj0CJJSPaMIk/9ZshdB3210w==}
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.413.0
+      '@aws-sdk/types': 3.418.0
       tslib: 1.14.1
     dev: false
 
@@ -475,7 +475,7 @@ packages:
       '@aws-crypto/ie11-detection': 3.0.0
       '@aws-crypto/supports-web-crypto': 3.0.0
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.413.0
+      '@aws-sdk/types': 3.418.0
       '@aws-sdk/util-locate-window': 3.310.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
@@ -488,7 +488,7 @@ packages:
       '@aws-crypto/sha256-js': 3.0.0
       '@aws-crypto/supports-web-crypto': 3.0.0
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.413.0
+      '@aws-sdk/types': 3.418.0
       '@aws-sdk/util-locate-window': 3.310.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
@@ -498,7 +498,7 @@ packages:
     resolution: {integrity: sha512-PnNN7os0+yd1XvXAy23CFOmTbMaDxgxXtTKHybrJ39Y8kGzBATgBFibWJKH6BhytLI/Zyszs87xCOBNyBig6vQ==}
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.413.0
+      '@aws-sdk/types': 3.418.0
       tslib: 1.14.1
     dev: false
 
@@ -3195,8 +3195,8 @@ packages:
     resolution: {integrity: sha512-7dqNYwG8gCt4hfg5PKgM7xLEcgSBcx/UgC92OMnhMmvAnq11QzDFPrxUkNR/u5kn17WWLZ8beZ4A3Qrz4pZcmQ==}
     dev: false
 
-  /@keystone-6/core@5.6.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.418.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(@types/react@18.2.22)(aws-crt@1.18.0):
-    resolution: {integrity: sha512-IBZC36CeQK/lSMCjA7UVL2nh2Rx4Axf2GRiocoXulSqTVOPo4ulGCB4MUEQxZvnJ/PszwbEHMOZzbrbUx6B8QQ==}
+  /@keystone-6/core@5.7.0(@aws-sdk/abort-controller@3.338.0)(@aws-sdk/signature-v4-crt@3.418.0)(@babel/core@7.21.8)(@prisma/generator-helper@4.16.2)(@types/react@18.2.22)(aws-crt@1.18.0):
+    resolution: {integrity: sha512-2QU5peee89Iw9RWmERse1KOYR5Lta6CnaNgOxD3f/m6tduv+B3igDSS/R55mjcmqIWdN17t/d2xa/ZS+T0XYtw==}
     hasBin: true
     dependencies:
       '@apollo/cache-control-types': 1.0.3(graphql@16.8.1)
@@ -3251,11 +3251,11 @@ packages:
       graphql: 16.8.1
       graphql-upload: 15.0.2(graphql@16.8.1)
       image-size: 1.0.2
-      inflection: 1.13.4
+      inflection: 3.0.0
       intersection-observer: 0.12.2
       meow: 9.0.0
       next: 13.5.2(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
-      node-fetch: 2.6.11
+      node-fetch: 2.7.0
       p-limit: 2.3.0
       pluralize: 8.0.0
       prisma: 4.16.2
@@ -7334,9 +7334,9 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /inflection@1.13.4:
-    resolution: {integrity: sha512-6I/HUDeYFfuNCVS3td055BaXBwKYuzw7K3ExVMStBowKo9oOAMJIXIHvdyR3iboTCp1b+1i5DSkIZTcwIktuDw==}
-    engines: {'0': node >= 0.4.0}
+  /inflection@3.0.0:
+    resolution: {integrity: sha512-1zEJU1l19SgJlmwqsEyFTbScw/tkMHFenUo//Y0i+XEP83gDFdMvPizAD/WGcE+l1ku12PcTVHQhO6g5E0UCMw==}
+    engines: {node: '>=18.0.0'}
     dev: false
 
   /inflight@1.0.6:
