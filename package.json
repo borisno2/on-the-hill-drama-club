@@ -45,7 +45,7 @@
     "dayjs": "^1.11.10",
     "decimal.js": "^10.4.3",
     "dotenv": "^16.3.1",
-    "dotenv-flow": "^3.3.0",
+    "dotenv-flow": "^4.0.0",
     "focus-visible": "^5.2.0",
     "graphql": "^16.8.1",
     "inngest": "^2.7.0",
