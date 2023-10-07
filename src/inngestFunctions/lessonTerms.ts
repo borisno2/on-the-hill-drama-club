@@ -1,4 +1,5 @@
 import { gql } from '@ts-gql/tag/no-transform'
+import { slugify } from 'inngest'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
 
@@ -43,8 +44,8 @@ const GET_ENROLMENTS_TO_COPY = gql`
 ` as import('../../__generated__/ts-gql/GET_ENROLMENTS_TO_COPY').type
 
 export const copyTermFunction = inngest.createFunction(
-  'Start a new term from an existing term',
-  'app/copyterm.confirmed',
+  {id: slugify('Start a new term from an existing term'), name: 'Start a new term from an existing term'},
+  {event: 'app/copyterm.confirmed'},
   async ({ event }) => {
     try {
       const { item, session } = event.data
@@ -130,8 +131,8 @@ const GET_COPY_FROM_LESSON_TERM = gql`
 ` as import('../../__generated__/ts-gql/GET_COPY_FROM_LESSON_TERM').type
 
 export const copyEnrolmentsFunction = inngest.createFunction(
-  'Copy enrolments from one term to another',
-  'app/lessonTerm.confirmed',
+  {id: slugify('Copy enrolments from one term to another'), name: 'Copy enrolments from one term to another'},
+  {event: 'app/lessonTerm.confirmed'},
   async ({ event }) => {
     try {
       const { item, session } = event.data
@@ -209,8 +210,8 @@ export const copyEnrolmentsFunction = inngest.createFunction(
 )
 
 export const completeTermFunction = inngest.createFunction(
-  'Complete a term',
-  'app/term.completed',
+  {id: slugify('Complete a term'), name: 'Complete a term'},
+  {event: 'app/term.completed'},
   async ({ event }) => {
     try {
       const { item, session } = event.data

@@ -6,10 +6,11 @@ import labelHelper from 'lib/labelHelper'
 import { dayOptions } from 'types/selectOptions'
 import { inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
+import { slugify } from 'inngest'
 
 export const createBillItemFunction = inngest.createFunction(
-  'Create Bill Hook',
-  'app/enrolment.enroled',
+  {id: slugify('Create Bill Hook'), name: 'Create Bill Hook'},
+  {event: 'app/enrolment.enroled'},
   async ({ event }) => {
     try {
       const { item, session } = event.data
@@ -99,8 +100,8 @@ export const createBillItemFunction = inngest.createFunction(
 )
 
 export const sendEnrolmentConfirmationFunction = inngest.createFunction(
-  'Enrolment Confirmation Hook',
-  'app/enrolment.enroled',
+  {id: slugify('Enrolment Confirmation Hook'), name: 'Enrolment Confirmation Hook'},
+  {event: 'app/enrolment.enroled'},
   async ({ event }) => {
     const { item, session } = event.data
     try {
