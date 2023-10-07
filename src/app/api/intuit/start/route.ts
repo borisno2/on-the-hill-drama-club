@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
       qbo.authorizeUri({
         scope: [OAuthClient.scopes.Accounting, OAuthClient.scopes.OpenId],
         state: generateAntiForgery(),
-      })
+      }),
     )
   }
 }

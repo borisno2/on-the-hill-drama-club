@@ -40,39 +40,60 @@ import TheatreMakingImage5 from 'images/photos/theatre_making_image-5.jpg'
 
 import Photos from 'components/Photos'
 
-
 export default function Images({ slug }: { slug?: string }) {
   let images: StaticImageData[]
   switch (slug) {
     case 'private-music-tuition':
-      images = [
-        MusicImage1,
-        MusicImage2,
-        MusicImage3,
-        MusicImage4,
-        MusicImage5,
-      ]
+      images = [MusicImage1, MusicImage2, MusicImage3, MusicImage4, MusicImage5]
       break
     case 'about':
       images = [AboutUsImage1]
       break
     case 'theatre-making-workshops':
-      images = [TheatreMakingImage1, TheatreMakingImage2, TheatreMakingImage3, TheatreMakingImage4, TheatreMakingImage5]
+      images = [
+        TheatreMakingImage1,
+        TheatreMakingImage2,
+        TheatreMakingImage3,
+        TheatreMakingImage4,
+        TheatreMakingImage5,
+      ]
       break
     case 'home':
-      images = [HomePageImage1, HomePageImage2, HomePageImage3, HomePageImage4, HomePageImage5]
+      images = [
+        HomePageImage1,
+        HomePageImage2,
+        HomePageImage3,
+        HomePageImage4,
+        HomePageImage5,
+      ]
       break
     case 'drama-club':
-      images = [DramaClubImage1, DramaClubImage2, DramaClubImage3, DramaClubImage4, DramaClubImage5]
+      images = [
+        DramaClubImage1,
+        DramaClubImage2,
+        DramaClubImage3,
+        DramaClubImage4,
+        DramaClubImage5,
+      ]
       break
     case 'only-strings-orchestra':
       images = [OrchestraImage1, OrchestraImage2, OrchestraImage3]
       break
     case 'musical-munchkins':
-      images = [MusicalMunchkinsImage1, MusicalMunchkinsImage2, MusicalMunchkinsImage3]
+      images = [
+        MusicalMunchkinsImage1,
+        MusicalMunchkinsImage2,
+        MusicalMunchkinsImage3,
+      ]
       break
     case 'drama-teens':
-      images = [DramaTeensImage1, DramaTeensImage2, DramaTeensImage3, DramaTeensImage4, DramaTeensImage5]
+      images = [
+        DramaTeensImage1,
+        DramaTeensImage2,
+        DramaTeensImage3,
+        DramaTeensImage4,
+        DramaTeensImage5,
+      ]
       break
     case 'music-theory':
       images = [MusicTheoryImage1]
@@ -81,8 +102,5 @@ export default function Images({ slug }: { slug?: string }) {
       images = [image1, image2, image3, image4, image5]
   }
 
-  return (
-    <Photos images={images} />
-
-  )
+  return <Photos images={images} />
 }

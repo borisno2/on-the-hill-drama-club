@@ -77,7 +77,7 @@ export const Bill: Lists.Bill<Session> = list({
           if (billItems && billItems.length) {
             val = billItems.reduce(
               (acc, billItem) => acc.add(billItem.total),
-              new Decimal(0)
+              new Decimal(0),
             )
           }
           val.scaleToPrint = 2

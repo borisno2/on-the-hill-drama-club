@@ -18,7 +18,7 @@ export default function RootLayout({ children }: AppProps) {
           {children}
           <footer className="relative bottom-0 flex w-full flex-1 flex-col bg-white py-2 md:fixed md:pl-64">
             <Container.Outer>
-              <div className="border-t border-zinc-100 pt-4 pb-6 dark:border-zinc-700/40">
+              <div className="border-t border-zinc-100 pb-6 pt-4 dark:border-zinc-700/40">
                 <Container.Inner>
                   <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
                     <p className="text-sm text-zinc-400 dark:text-zinc-500">

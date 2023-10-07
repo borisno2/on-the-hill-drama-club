@@ -197,7 +197,7 @@ export const lists: Lists<Session> = {
           extendPrismaSchema: (schema) =>
             schema.replace(
               '[id])',
-              '[id], onDelete: NoAction, onUpdate: NoAction)'
+              '[id], onDelete: NoAction, onUpdate: NoAction)',
             ),
         },
         ui: {

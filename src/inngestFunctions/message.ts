@@ -6,8 +6,8 @@ import { inngest } from 'lib/inngest/client'
 import { slugify } from 'inngest'
 
 export const sendMessageFunction = inngest.createFunction(
-  {id: slugify('Message Saved Hook'), name: 'Message Saved Hook'},
-  {event: 'app/message.queued'},
+  { id: slugify('Message Saved Hook'), name: 'Message Saved Hook' },
+  { event: 'app/message.queued' },
   async ({ event }) => {
     try {
       const { item, session } = event.data
@@ -88,5 +88,5 @@ export const sendMessageFunction = inngest.createFunction(
     } catch (error) {
       throw new Error('Error sending email', { cause: error })
     }
-  }
+  },
 )
