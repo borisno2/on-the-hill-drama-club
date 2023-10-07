@@ -3,7 +3,7 @@ import { CreateQBCustomer, ReturnQBCustomer } from 'types/qbo'
 
 export async function createCustomer(
   customer: CreateQBCustomer,
-  qbo: QuickBooks
+  qbo: QuickBooks,
 ): Promise<ReturnQBCustomer> {
   return new Promise((resolve, reject) => {
     qbo?.createCustomer(customer, (err, customer) => {

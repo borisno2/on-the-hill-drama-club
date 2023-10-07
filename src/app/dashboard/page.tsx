@@ -52,7 +52,7 @@ export default async function Portal() {
     redirect('/api/auth/signout')
   }
   const profileComplete = Object.values(accounts[0]).every(
-    (value) => value !== 'PLEASE_UPDATE'
+    (value) => value !== 'PLEASE_UPDATE',
   )
   if (!profileComplete) {
     // redirect to profile page if profile is not complete
@@ -78,7 +78,7 @@ export default async function Portal() {
         ? students.reduce(
             (acc, student) =>
               acc + (student.enrolments ? student.enrolments.length : 0),
-            0
+            0,
           )
         : 0,
     },

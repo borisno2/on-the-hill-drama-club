@@ -65,8 +65,11 @@ const GET_BILL_BY_ID = gql`
 ` as import('../../__generated__/ts-gql/GET_BILL_BY_ID').type
 
 export const createQuickBooksInvoiceFunction = inngest.createFunction(
-  {id: slugify('Create QuickBooks Invoice Hook'), name: 'Create QuickBooks Invoice Hook'},
-  {event: 'app/bill.approved'},
+  {
+    id: slugify('Create QuickBooks Invoice Hook'),
+    name: 'Create QuickBooks Invoice Hook',
+  },
+  { event: 'app/bill.approved' },
   async ({ event }) => {
     const { item, session } = event.data
     const context: Context = keystoneContext.withSession(session)
@@ -94,7 +97,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
               Address: bill.account.user.email,
             },
           },
-          qbo
+          qbo,
         )
 
         if (customer === null) {
@@ -149,7 +152,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
             },
           })),
         },
-        qbo
+        qbo,
       )
 
       if (invoice === null) {
@@ -160,7 +163,7 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
         const sentInvoice = await sendInvoicePdf(
           invoice.Id,
           bill.account.user?.email!,
-          qbo
+          qbo,
         )
 
         if (sentInvoice === null || !sentInvoice.Id) {
@@ -175,5 +178,5 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
         return `Bill ${bill.name} created in QBO with id ${invoice.Id}`
       }
     }
-  }
+  },
 )

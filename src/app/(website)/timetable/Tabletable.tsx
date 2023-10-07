@@ -140,12 +140,12 @@ function DayLink({
   return (
     <Link
       href={`/timetable?daySelected=${day}`}
-      className="flex flex-col items-center pt-2 pb-2"
+      className="flex flex-col items-center pb-2 pt-2"
     >
       <span
         className={classNames(
           daySelected === day ? selected : notSelected,
-          'mt-1 flex h-8 w-8 items-center justify-center rounded-full font-semibold'
+          'mt-1 flex h-8 w-8 items-center justify-center rounded-full font-semibold',
         )}
       >
         {day.slice(0, 1)}
@@ -215,85 +215,85 @@ export default async function Timetable({
                 <div className="row-end-1 h-7"></div>
 
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     9AM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     10AM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     11AM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     12PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     1PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     2PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     3PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     4PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     5PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     6PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     7PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     8PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     9PM
                   </div>
                 </div>
                 <div />
                 <div>
-                  <div className="sticky left-0 z-20 -mt-2.5 -ml-14 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
+                  <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-400">
                     10PM
                   </div>
                 </div>
@@ -321,49 +321,51 @@ export default async function Timetable({
               >
                 {lessons
                   ? lessons.map((lesson) => (
-                    <li
-                      key={lesson.id}
-                      className={classNames(
-                        'relative mt-px',
-                        lesson.day !== daySelected
-                          ? 'hidden sm:flex'
-                          : 'flex',
-                        getColumn(lesson.day),
-                        getRowStart(lesson.time, lesson.lengthMin) === '0' ? 'hidden sm:hidden' : '',
-                      )}
-                      style={{
-                        gridRow: getRowStart(lesson.time, lesson.lengthMin),
-                      }}
-                    >
-                      <Link
-                        href={`/lessons/${lesson.lessonCategory?.slug}`}
+                      <li
+                        key={lesson.id}
                         className={classNames(
-                          'group absolute inset-1 flex flex-col overflow-y-auto rounded-lg p-2 text-xs leading-5',
-                          getBGColour(
-                            lesson.lessonCategory?.slug)
+                          'relative mt-px',
+                          lesson.day !== daySelected
+                            ? 'hidden sm:flex'
+                            : 'flex',
+                          getColumn(lesson.day),
+                          getRowStart(lesson.time, lesson.lengthMin) === '0'
+                            ? 'hidden sm:hidden'
+                            : '',
                         )}
+                        style={{
+                          gridRow: getRowStart(lesson.time, lesson.lengthMin),
+                        }}
                       >
-                        <p
+                        <Link
+                          href={`/lessons/${lesson.lessonCategory?.slug}`}
                           className={classNames(
-                            'order-1 font-semibold',
-                            getNameColour(
-                              lesson.lessonCategory?.slug)
+                            'group absolute inset-1 flex flex-col overflow-y-auto rounded-lg p-2 text-xs leading-5',
+                            getBGColour(lesson.lessonCategory?.slug),
                           )}
                         >
-                          {lesson.name}
-                        </p>
-                        <p
-                          className={getTimeColour(lesson.lessonCategory?.slug)}
-                        >
-                          <time
-                            dateTime={lesson.time ? lesson.time : undefined}
+                          <p
+                            className={classNames(
+                              'order-1 font-semibold',
+                              getNameColour(lesson.lessonCategory?.slug),
+                            )}
                           >
-                            {lesson.time}
-                          </time>
-                        </p>
-                      </Link>
-                    </li>
-                  ))
+                            {lesson.name}
+                          </p>
+                          <p
+                            className={getTimeColour(
+                              lesson.lessonCategory?.slug,
+                            )}
+                          >
+                            <time
+                              dateTime={lesson.time ? lesson.time : undefined}
+                            >
+                              {lesson.time}
+                            </time>
+                          </p>
+                        </Link>
+                      </li>
+                    ))
                   : null}
               </ol>
             </div>

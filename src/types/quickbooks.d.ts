@@ -49,34 +49,34 @@ declare module 'node-quickbooks' {
       debug: boolean,
       minorVersion?: number,
       oauthVersion?: string,
-      refreshToken?: string
+      refreshToken?: string,
     )
     public findAccounts(
       query: Record<string, any>,
       callback: (
         error: Error,
-        accounts: { QueryResponse: { Account: any[] } }
-      ) => void
+        accounts: { QueryResponse: { Account: any[] } },
+      ) => void,
     ): void
     public createCustomer(
       customer: CreateQBCustomer,
-      callback: (error: Error, customer: ReturnQBCustomer) => void
+      callback: (error: Error, customer: ReturnQBCustomer) => void,
     ): void
     public createInvoice(
       invoice: CreateQBInvoice,
-      callback: (error: Error, invoice: ReturnQBInvoice) => void
+      callback: (error: Error, invoice: ReturnQBInvoice) => void,
     ): void
     public sendInvoicePdf(
       invoiceId: string,
       sendTo?: string,
-      callback: (error: Error, invoice: ReturnQBInvoice) => void
+      callback: (error: Error, invoice: ReturnQBInvoice) => void,
     ): void
     public findCustomers(
       query: Record<string, any>,
       callback: (
         error: Error,
-        customers: { QueryResponse: { Customer: ReturnQBCustomer[] } }
-      ) => void
+        customers: { QueryResponse: { Customer: ReturnQBCustomer[] } },
+      ) => void,
     ): void
   }
 }
