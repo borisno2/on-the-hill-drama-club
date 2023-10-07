@@ -1,4 +1,4 @@
-import { EventSchemas, Inngest } from 'inngest'
+import { EventSchemas, Inngest, slugify } from 'inngest'
 import { Lists } from '.keystone/types'
 import { Session } from 'next-auth'
 
@@ -62,6 +62,6 @@ export type Events = {
 }
 
 export const inngest = new Inngest({
-  name: 'Emily Calder ARTS',
+  id: slugify('Emily Calder ARTS'),
   schemas: new EventSchemas().fromRecord<Events>(),
 })

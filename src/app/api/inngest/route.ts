@@ -13,7 +13,7 @@ import {
   completeTermFunction,
 } from 'inngestFunctions/lessonTerms'
 
-export const { GET, POST, PUT } = serve(inngest, [
+export const { GET, POST, PUT } = serve({client: inngest, functions: [
   sendMessageFunction,
   sendEnrolmentConfirmationFunction,
   createQuickBooksCustomerFunction,
@@ -22,4 +22,4 @@ export const { GET, POST, PUT } = serve(inngest, [
   copyTermFunction,
   copyEnrolmentsFunction,
   completeTermFunction,
-])
+]})

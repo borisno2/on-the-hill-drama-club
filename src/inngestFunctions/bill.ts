@@ -7,6 +7,7 @@ import { getQBO } from 'lib/intuit'
 import { gql } from '@ts-gql/tag/no-transform'
 import Decimal from 'decimal.js'
 import { createCustomer } from 'lib/intuit/customer'
+import { slugify } from 'inngest'
 
 const UPDATE_BILL_QBO_ID = gql`
   mutation UPDATE_BILL_QBO_ID($id: ID!, $qboId: Int!) {
@@ -64,8 +65,8 @@ const GET_BILL_BY_ID = gql`
 ` as import('../../__generated__/ts-gql/GET_BILL_BY_ID').type
 
 export const createQuickBooksInvoiceFunction = inngest.createFunction(
-  'Create QuickBooks Invoice Hook',
-  'app/bill.approved',
+  {id: slugify('Create QuickBooks Invoice Hook'), name: 'Create QuickBooks Invoice Hook'},
+  {event: 'app/bill.approved'},
   async ({ event }) => {
     const { item, session } = event.data
     const context: Context = keystoneContext.withSession(session)
