@@ -11,20 +11,20 @@ import type { Session } from 'next-auth'
 import type { Context } from '.keystone/types'
 
 
-class PlanetScalePrismaClient {
+class PlanetScalePrismaClient extends PrismaModule.PrismaClient {
   constructor(ksConfig: any) {
-  
-  const config = {
-    host: process.env.DATABASE_HOST,
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD
-  }
-  
+
+    const config = {
+      host: process.env.DATABASE_HOST,
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD
+    }
+
     // Initialize Prisma Client with the PlanetScale serverless database driver
     const connection = connect(config);
     const adapter = new PrismaPlanetScale(connection);
-    
-    return new PrismaModule.PrismaClient({ ...ksConfig, adapter });
+
+    super({ ...ksConfig, adapter });
   }
 }
 
