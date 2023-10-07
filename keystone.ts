@@ -1,5 +1,4 @@
 import dotenv from 'dotenv-flow'
-import * as Path from 'path'
 
 import { config } from '@keystone-6/core'
 
@@ -16,6 +15,8 @@ export default config({
     additionalPrismaDatasourceProperties: {
       relationMode: 'prisma',
     },
+    prismaPreviewFeatures: ['driverAdapters'],
+
   },
   ui: {
     isAccessAllowed: ({ session }) => session.allowAdminUI,

@@ -28,6 +28,8 @@
     "@hookform/resolvers": "^3.3.1",
     "@keystone-6/core": "^5.7.0",
     "@marsidev/react-turnstile": "^0.3.1",
+    "@planetscale/database": "^1.11.0",
+    "@prisma/adapter-planetscale": "^5.4.1",
     "@prisma/client": "5.4.1",
     "@sendgrid/mail": "^7.7.0",
     "@tailwindcss/forms": "^0.5.6",
@@ -71,9 +73,18 @@
     "eslint-config-next": "13.5.4",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.5",
+    "prisma": "5.4.1",
     "tsx": "^3.13.0",
     "turbo": "^1.10.15",
     "typescript": "^5.2.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "prisma": "5.4.1",
+      "@prisma/client": "5.4.1",
+      "@prisma/internals": "5.4.1",
+      "@prisma/migrate": "5.4.1"
+    }
   },
   "packageManager": "pnpm@8.8.0",
   "ts-gql": {
