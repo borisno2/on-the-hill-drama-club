@@ -2,13 +2,13 @@ import { getContext } from '@keystone-6/core/context'
 import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
-import { Context } from '.keystone/types'
-import { NextApiRequest, NextApiResponse } from 'next/types'
-import { Session } from 'next-auth'
-// Import required dependencies
+import * as PrismaModule from '@prisma/client';
 import { connect } from '@planetscale/database';
 import { PrismaPlanetScale } from '@prisma/adapter-planetscale';
-import * as PrismaModule from '@prisma/client';
+
+import type { NextApiRequest, NextApiResponse } from 'next/types'
+import type { Session } from 'next-auth'
+import type { Context } from '.keystone/types'
 
 
 class PlanetScalePrismaClient {
