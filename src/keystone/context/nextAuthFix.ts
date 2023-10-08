@@ -10,7 +10,7 @@ export async function getServerActionContext() {
     cookies: Object.fromEntries(
       cookies()
         .getAll()
-        .map((c) => [c.name, c.value])
+        .map((c) => [c.name, c.value]),
     ),
   }
   const res = { getHeader() {}, setCookie() {}, setHeader() {} }

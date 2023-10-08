@@ -135,7 +135,7 @@ export default function Student({
                   <input
                     title="First Name"
                     {...register('firstName')}
-                    type='text'
+                    type="text"
                     autoComplete="given-name"
                     className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                   />
@@ -158,7 +158,7 @@ export default function Student({
                   <input
                     title="Surname"
                     {...register('surname')}
-                    type='text'
+                    type="text"
                     autoComplete="family-name"
                     className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                   />
@@ -187,7 +187,7 @@ export default function Student({
                       if (!dates || !dates.startDate) return
                       dayjs.extend(customParseFormat)
                       const value = dayjs(dates.startDate, 'YYYY-M-D').format(
-                        'YYYY-MM-DD'
+                        'YYYY-MM-DD',
                       )
                       setDob(value)
                       setValue('dateOfBirth', value)
@@ -215,8 +215,8 @@ export default function Student({
                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                   <input
                     title="Year Level"
-                    {...register('yearLevel', {valueAsNumber: true})}
-                    type='number'
+                    {...register('yearLevel', { valueAsNumber: true })}
+                    type="number"
                     className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
                   />
                   {errors.yearLevel && (
@@ -230,9 +230,7 @@ export default function Student({
               <Controller
                 control={control}
                 name="school"
-                render={({
-                  field: { onChange, value, name }
-                }) => (
+                render={({ field: { onChange, value, name } }) => (
                   <DropDown
                     label="Education Type"
                     options={[
@@ -244,7 +242,8 @@ export default function Student({
                     handleChange={onChange}
                     name={name}
                   />
-                )} />
+                )}
+              />
 
               <div>
                 <label
@@ -298,8 +297,8 @@ export default function Student({
               {isSubmitting || isDone
                 ? 'Loading...'
                 : !student
-                  ? 'Add'
-                  : 'Save'}
+                ? 'Add'
+                : 'Save'}
             </button>
           </div>
         </div>

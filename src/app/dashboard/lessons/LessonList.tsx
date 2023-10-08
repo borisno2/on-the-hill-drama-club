@@ -30,24 +30,25 @@ export default async function ClassList({
         <ul role="list" className="divide-y divide-gray-200">
           {lessonTerms.map((lesson) => (
             <li key={lesson.id}>
-
               <div className="px-4 py-4 sm:px-6">
-                <div className="flex items-center justify-between"><Link
-                  href={`/dashboard/lessons/${lesson.id}${studentId !== undefined ? `?studentId=${studentId}` : ''
+                <div className="flex items-center justify-between">
+                  <Link
+                    href={`/dashboard/lessons/${lesson.id}${
+                      studentId !== undefined ? `?studentId=${studentId}` : ''
                     }`}
-                  className="block hover:bg-gray-50"
-                >
-                  <p className="truncate text-sm font-medium text-indigo-600">
-                    {lesson.name}
-                  </p>
-                </Link>
+                    className="block hover:bg-gray-50"
+                  >
+                    <p className="truncate text-sm font-medium text-indigo-600">
+                      {lesson.name}
+                    </p>
+                  </Link>
                   <div className="ml-2 flex flex-shrink-0">
                     <p className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
                       {lesson.lesson?.lessonCategory?.type
                         ? labelHelper(
-                          lessonTypeOptions,
-                          lesson.lesson?.lessonCategory?.type
-                        )
+                            lessonTypeOptions,
+                            lesson.lesson?.lessonCategory?.type,
+                          )
                         : 'Other'}
                     </p>
                   </div>
@@ -64,7 +65,7 @@ export default async function ClassList({
                         : 'Upcoming'}{' '}
                       {enroled && `- Enroled`} - Click to view lesson details
                     </p>
-                    <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                    <p className="mt-2 flex items-center text-sm text-gray-500 sm:ml-6 sm:mt-0">
                       <MapPinIcon
                         className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                         aria-hidden="true"
@@ -83,7 +84,7 @@ export default async function ClassList({
                       Starts on{' '}
                       <time
                         dateTime={new Date(
-                          lesson.term?.startDate
+                          lesson.term?.startDate,
                         ).toUTCString()}
                       >
                         {formatDate(lesson.term?.startDate)}
@@ -91,7 +92,10 @@ export default async function ClassList({
                     </p>
                     <div className="float-right">
                       {studentId && !enroled ? (
-                        <EnrolButton studentId={studentId} lessonId={lesson.id} />
+                        <EnrolButton
+                          studentId={studentId}
+                          lessonId={lesson.id}
+                        />
                       ) : null}
                     </div>
                   </div>

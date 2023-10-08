@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 const OuterContainer = forwardRef(function OuterContainer(
   { className, children, ...props }: any,
-  ref
+  ref,
 ) {
   return (
     <div ref={ref} className={clsx('sm:px-8', className)} {...props}>
@@ -14,7 +14,7 @@ const OuterContainer = forwardRef(function OuterContainer(
 
 const InnerContainer = forwardRef(function InnerContainer(
   { className, children, ...props }: any,
-  ref
+  ref,
 ) {
   return (
     <div
@@ -29,7 +29,7 @@ const InnerContainer = forwardRef(function InnerContainer(
 
 export const Container: any = forwardRef(function Container(
   { children, ...props }: any,
-  ref
+  ref,
 ) {
   return (
     <OuterContainer ref={ref} {...props}>

@@ -5,6 +5,7 @@ import { keystoneContext } from 'keystone/context'
 import { createCustomer } from 'lib/intuit/customer'
 import { getQBO } from 'lib/intuit'
 import { gql } from '@ts-gql/tag/no-transform'
+import { slugify } from 'inngest'
 
 const GET_ACCOUNT_BY_ID = gql`
   query GET_ACCOUNT_BY_ID($id: ID!) {
@@ -23,8 +24,11 @@ const GET_ACCOUNT_BY_ID = gql`
 ` as import('../../__generated__/ts-gql/GET_ACCOUNT_BY_ID').type
 
 export const createQuickBooksCustomerFunction = inngest.createFunction(
-  'Create QuickBooks Customer Hook',
-  'app/account.created',
+  {
+    id: slugify('Create QuickBooks Customer Hook'),
+    name: 'Create QuickBooks Customer Hook',
+  },
+  { event: 'app/account.created' },
   async ({ event }) => {
     const { item } = event.data
     const context: Context = keystoneContext.sudo()
@@ -56,7 +60,7 @@ export const createQuickBooksCustomerFunction = inngest.createFunction(
               Address: account.user.email!,
             },
           },
-          qbo
+          qbo,
         )
 
         if (customer === null) {
@@ -77,5 +81,5 @@ export const createQuickBooksCustomerFunction = inngest.createFunction(
         throw new Error('Errpr creating customer', { cause: error })
       }
     }
-  }
+  },
 )

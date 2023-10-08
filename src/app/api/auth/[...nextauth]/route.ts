@@ -62,7 +62,7 @@ export const authOptions: AuthOptions = {
       if (keyUser) {
         if (keyUser.provider !== account?.provider) {
           console.log(
-            `User provider mismatch for ${user.email} - ${account?.provider}`
+            `User provider mismatch for ${user.email} - ${account?.provider}`,
           )
           return '/auth/signin?error=UserProviderMismatch'
         }
@@ -197,7 +197,7 @@ export const authOptions: AuthOptions = {
           return { failMessage: 'TurnstileFailed' }
         }
         const secretFieldImpl = assertObjectType(
-          keystoneContext.sudo().graphql.schema.getType('User')
+          keystoneContext.sudo().graphql.schema.getType('User'),
         ).getFields()?.password.extensions
           ?.keystoneSecretField as SecretFieldImpl
 
@@ -219,7 +219,7 @@ export const authOptions: AuthOptions = {
           !item[0].password
         ) {
           await secretFieldImpl.generateHash(
-            'simulated-password-to-counter-timing-attack'
+            'simulated-password-to-counter-timing-attack',
           )
           return { failMessage: 'InvalidCredentials' }
         } else if (await secretFieldImpl.compare(password, item[0].password)) {

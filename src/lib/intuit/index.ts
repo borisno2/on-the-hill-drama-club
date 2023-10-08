@@ -114,7 +114,7 @@ export async function getQBO({ context }: { context: Context }) {
     false /* turn debugging on */,
     4 /* minor version */,
     '2.0' /* oauth version */,
-    qboAuth.refreshToken /* refresh token */
+    qboAuth.refreshToken /* refresh token */,
   )
   return qbo
 }

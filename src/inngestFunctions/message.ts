@@ -3,10 +3,11 @@ import sendEmail from 'lib/sendEmail'
 import { GET_MESSAGE_TO_SEND } from 'app/dashboard/notifications/queries'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
+import { slugify } from 'inngest'
 
 export const sendMessageFunction = inngest.createFunction(
-  'Message Saved Hook',
-  'app/message.queued',
+  { id: slugify('Message Saved Hook'), name: 'Message Saved Hook' },
+  { event: 'app/message.queued' },
   async ({ event }) => {
     try {
       const { item, session } = event.data
@@ -87,5 +88,5 @@ export const sendMessageFunction = inngest.createFunction(
     } catch (error) {
       throw new Error('Error sending email', { cause: error })
     }
-  }
+  },
 )
