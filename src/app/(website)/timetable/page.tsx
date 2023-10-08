@@ -1,18 +1,21 @@
 import { Container } from 'components/Container'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import Timetable, { DayOfTheWeek } from './Tabletable'
+import Timetable, { DayOfTheWeek, GET_LESSON_TIMETABLE } from './Tabletable'
 import { getMetadata } from 'app/metadata'
+import { getSessionContext } from 'keystone/context'
 
 export const metadata: Metadata = {
   ...getMetadata('Timetable'),
 }
 
-export default function TimetablePage({
+export default async function TimetablePage({
   searchParams,
 }: {
   searchParams: { daySelected: string }
 }) {
+  const context = await getSessionContext()
+  const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE })
   let daySelected: DayOfTheWeek = 'MONDAY'
   if (searchParams.daySelected && searchParams.daySelected !== '') {
     if (
@@ -40,7 +43,7 @@ export default function TimetablePage({
               2023 Timetable
             </h3>
           </div>
-          <Timetable daySelected={daySelected} />
+          <Timetable daySelected={daySelected} lessons={lessons} />
         </section>
       </Container>
     </div>
