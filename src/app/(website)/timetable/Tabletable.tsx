@@ -1,17 +1,7 @@
-import { gql } from '@ts-gql/tag/no-transform'
-import { getSessionContext } from 'keystone/context'
 import Link from 'next/link'
+import { OperationData, gql } from '@ts-gql/tag/no-transform'
 
-export type DayOfTheWeek =
-  | 'MONDAY'
-  | 'TUESDAY'
-  | 'WEDNESDAY'
-  | 'THURSDAY'
-  | 'FRIDAY'
-  | 'SATURDAY'
-  | 'SUNDAY'
-
-const GET_LESSON_TIMETABLE = gql`
+export const GET_LESSON_TIMETABLE = gql`
   query GET_LESSON_TIMETABLE {
     lessons {
       id
@@ -27,6 +17,15 @@ const GET_LESSON_TIMETABLE = gql`
     }
   }
 ` as import('../../../../__generated__/ts-gql/GET_LESSON_TIMETABLE').type
+
+export type DayOfTheWeek =
+  | 'MONDAY'
+  | 'TUESDAY'
+  | 'WEDNESDAY'
+  | 'THURSDAY'
+  | 'FRIDAY'
+  | 'SATURDAY'
+  | 'SUNDAY'
 
 const getColumn = (day: string | null) => {
   switch (day) {
@@ -154,13 +153,13 @@ function DayLink({
   )
 }
 
-export default async function Timetable({
+export default function Timetable({
   daySelected,
+  lessons,
 }: {
   daySelected: DayOfTheWeek
+  lessons: OperationData<typeof GET_LESSON_TIMETABLE>['lessons']
 }) {
-  const context = await getSessionContext()
-  const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE })
   return (
     <div className="flex h-full flex-col">
       <div className="isolate flex flex-auto flex-col overflow-auto bg-white">

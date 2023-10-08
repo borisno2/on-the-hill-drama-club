@@ -66,36 +66,28 @@ export default async function Fees() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      <Suspense
-                        fallback={
-                          <tr>
-                            <td>Loading...</td>
+                      {lessonCategories ? (
+                        lessonCategories.map((lesson) => (
+                          <tr key={lesson.id}>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                              <Link href={`/lessons/${lesson.slug}`}>
+                                {' '}
+                                {lesson.name}{' '}
+                              </Link>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              {lesson.length}
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              {lesson.cost}
+                            </td>
                           </tr>
-                        }
-                      >
-                        {lessonCategories ? (
-                          lessonCategories.map((lesson) => (
-                            <tr key={lesson.id}>
-                              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                <Link href={`/lessons/${lesson.slug}`}>
-                                  {' '}
-                                  {lesson.name}{' '}
-                                </Link>
-                              </td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                {lesson.length}
-                              </td>
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                {lesson.cost}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td>No Lessons Found</td>
-                          </tr>
-                        )}
-                      </Suspense>
+                        ))
+                      ) : (
+                        <tr>
+                          <td>No Lessons Found</td>
+                        </tr>
+                      )}{' '}
                     </tbody>
                   </table>
                 </div>
