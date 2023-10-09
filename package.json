@@ -86,7 +86,7 @@
       "@prisma/migrate": "5.4.1"
     }
   },
-  "packageManager": "pnpm@8.8.0",
+  "packageManager": "pnpm@8.9.0",
   "ts-gql": {
     "schema": "schema.graphql",
     "mode": "no-transform"
