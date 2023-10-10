@@ -50,7 +50,7 @@
     "dotenv-flow": "^4.0.0",
     "focus-visible": "^5.2.0",
     "graphql": "^16.8.1",
-    "inngest": "^3.0.2",
+    "inngest": "^3.1.1",
     "intuit-oauth": "^4.0.0",
     "next": "^13.5.4",
     "next-auth": "^4.23.2",
