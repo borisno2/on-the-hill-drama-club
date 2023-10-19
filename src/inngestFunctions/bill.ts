@@ -1,12 +1,12 @@
-import { createInvoice, sendInvoicePdf } from 'lib/intuit/invoice'
+import { createInvoice, sendInvoicePdf } from 'lib/xero/invoice'
 import { Context } from '.keystone/types'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
-import { getQBO } from 'lib/intuit'
+import { getQBO } from 'lib/xero'
 
 import { gql } from '@ts-gql/tag/no-transform'
 import Decimal from 'decimal.js'
-import { createCustomer } from 'lib/intuit/customer'
+import { createCustomer } from 'lib/xero/customer'
 import { slugify } from 'inngest'
 
 const UPDATE_BILL_QBO_ID = gql`

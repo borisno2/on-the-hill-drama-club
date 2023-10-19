@@ -2,8 +2,7 @@ import { Context } from '.keystone/types'
 import sendEmail from 'lib/sendEmail'
 import { inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
-import { createCustomer } from 'lib/intuit/customer'
-import { getQBO } from 'lib/intuit'
+import { getXeroClient } from 'lib/xero'
 import { gql } from '@ts-gql/tag/no-transform'
 import { slugify } from 'inngest'
 
@@ -32,7 +31,7 @@ export const createQuickBooksCustomerFunction = inngest.createFunction(
   async ({ event }) => {
     const { item } = event.data
     const context: Context = keystoneContext.sudo()
-    const qbo = await getQBO({ context }).catch((error) => {
+    const xeroClient = await getXeroClient({ context }).catch((error) => {
       throw new Error('Error getting QBO', { cause: error })
     })
     const { account } = await context.graphql
@@ -43,7 +42,7 @@ export const createQuickBooksCustomerFunction = inngest.createFunction(
       .catch((error) => {
         throw new Error('Error getting account', { cause: error })
       })
-    if (!qbo) throw new Error('Could not get QBO client')
+    if (!xeroClient) throw new Error('Could not get Xero client')
     if (!account) throw new Error('Could not get account')
     if (!account.user?.email) throw new Error('Could not get account email')
     if (account.qboId !== null) {
@@ -51,7 +50,7 @@ export const createQuickBooksCustomerFunction = inngest.createFunction(
     } else {
       // create the customer in QBO and update the account
       try {
-        const customer = await createCustomer(
+        const customer = await xeroClient.accountingApi.createCustomer(
           {
             DisplayName: account.name!,
             GivenName: account.firstName!,

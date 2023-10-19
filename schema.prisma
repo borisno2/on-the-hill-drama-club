@@ -148,6 +148,11 @@ model QuickBooksSettings {
   refreshToken String  @default("")
 }
 
+model XeroSettings {
+  id       Int   @id
+  tokenSet Json?
+}
+
 model Enrolment {
   id           String      @id @default(cuid())
   lessonTerm   LessonTerm? @relation("Enrolment_lessonTerm", fields: [lessonTermId], references: [id])

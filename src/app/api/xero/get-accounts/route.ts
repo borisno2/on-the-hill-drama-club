@@ -1,6 +1,6 @@
 import { getServerActionContext } from 'keystone/context/nextAuthFix'
-import { getQBO } from 'lib/intuit'
-import { getAccounts } from 'lib/intuit/accounts'
+import { getQBO } from 'lib/xero'
+import { getAccounts } from 'lib/xero/accounts'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {

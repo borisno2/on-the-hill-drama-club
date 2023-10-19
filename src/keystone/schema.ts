@@ -16,6 +16,7 @@ import {
   integer,
   virtual,
   checkbox,
+  json,
 } from '@keystone-6/core/fields'
 import type { Lists, Context } from '.keystone/types'
 import { isAdmin, isLoggedIn, userFilter } from './helpers'
@@ -346,6 +347,17 @@ export const lists: Lists<Session> = {
         validation: { isRequired: true },
       }),
       refreshToken: text({ validation: { isRequired: true } }),
+    },
+  }),
+
+  XeroSettings: list({
+    access: isAdmin,
+    isSingleton: true,
+    graphql: {
+      plural: 'ManyXeroSettings',
+    },
+    fields: {
+      tokenSet: json(),
     },
   }),
   Enrolment,
