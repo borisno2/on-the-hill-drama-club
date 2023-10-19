@@ -18,8 +18,8 @@ dependencies:
     specifier: ^2.0.2
     version: 2.0.2(@apollo/server@4.9.4)(next@13.5.4)
   '@aws-sdk/signature-v4-crt':
-    specifier: ^3.428.0
-    version: 3.428.0
+    specifier: ^3.431.0
+    version: 3.431.0
   '@graphql-typed-document-node/core':
     specifier: ^3.2.0
     version: 3.2.0(graphql@16.8.1)
@@ -466,7 +466,7 @@ packages:
     resolution: {integrity: sha512-IzSgsrxUcsrejQbPVilIKy16kAT52EwB6zSaI+M3xxIhKh5+aldEyvI+z6erM7TCLB2BJsFrtHjp6/4/sr+3dA==}
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.425.0
+      '@aws-sdk/types': 3.428.0
       tslib: 1.14.1
     dev: false
 
@@ -474,7 +474,7 @@ packages:
     resolution: {integrity: sha512-ENNPPManmnVJ4BTXlOjAgD7URidbAznURqD0KvfREyc4o20DPYdEldU1f5cQ7Jbj0CJJSPaMIk/9ZshdB3210w==}
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.425.0
+      '@aws-sdk/types': 3.428.0
       tslib: 1.14.1
     dev: false
 
@@ -490,7 +490,7 @@ packages:
       '@aws-crypto/ie11-detection': 3.0.0
       '@aws-crypto/supports-web-crypto': 3.0.0
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.425.0
+      '@aws-sdk/types': 3.428.0
       '@aws-sdk/util-locate-window': 3.310.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
@@ -503,7 +503,7 @@ packages:
       '@aws-crypto/sha256-js': 3.0.0
       '@aws-crypto/supports-web-crypto': 3.0.0
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.425.0
+      '@aws-sdk/types': 3.428.0
       '@aws-sdk/util-locate-window': 3.310.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
@@ -513,7 +513,7 @@ packages:
     resolution: {integrity: sha512-PnNN7os0+yd1XvXAy23CFOmTbMaDxgxXtTKHybrJ39Y8kGzBATgBFibWJKH6BhytLI/Zyszs87xCOBNyBig6vQ==}
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.425.0
+      '@aws-sdk/types': 3.428.0
       tslib: 1.14.1
     dev: false
 
@@ -526,7 +526,7 @@ packages:
   /@aws-crypto/util@3.0.0:
     resolution: {integrity: sha512-2OJlpeJpCR48CC8r+uKVChzs9Iungj9wkZrl8Z041DWEWvyIHILYKCPNzJghKsivj+S3mLo6BVc7mBNzdxA46w==}
     dependencies:
-      '@aws-sdk/types': 3.425.0
+      '@aws-sdk/types': 3.428.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
     dev: false
@@ -936,8 +936,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/signature-v4-crt@3.428.0:
-    resolution: {integrity: sha512-TP6hSSfUH/3RXwJUKcYj2e96/arCzAEYfbk1sBod5JwqqHxfTsssNFoWw6E+a1RtJrwiFjrYiArUuFGcdMZAWg==}
+  /@aws-sdk/signature-v4-crt@3.431.0:
+    resolution: {integrity: sha512-sQk+7yIAOUK48dz+TzYa5od3TqIcEyhv0J6+ajsGheNT+PSjjOhEdXKzWkUfUXauwsOY8S93K2opNH3/Tn9+Yw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/signature-v4-multi-region': 3.428.0
@@ -945,7 +945,7 @@ packages:
       '@smithy/signature-v4': 2.0.11
       '@smithy/types': 2.3.5
       '@smithy/util-middleware': 2.0.4
-      aws-crt: 1.18.0
+      aws-crt: 1.18.1
       tslib: 2.6.2
     transitivePeerDependencies:
       - bufferutil
@@ -4672,6 +4672,24 @@ packages:
 
   /aws-crt@1.18.0:
     resolution: {integrity: sha512-H5Vrb/GMzq72+Of2zrW69i/BTQ4gQd3MQvdZ3X3okfppzHdEjSPkdJN6ia8V2/1J1FmFvEtoxaY4nwraHUGQvg==}
+    requiresBuild: true
+    dependencies:
+      '@aws-sdk/util-utf8-browser': 3.259.0
+      '@httptoolkit/websocket-stream': 6.0.1
+      axios: 0.24.0
+      buffer: 6.0.3
+      crypto-js: 4.1.1
+      mqtt: 4.3.7
+      process: 0.11.10
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /aws-crt@1.18.1:
+    resolution: {integrity: sha512-VUUmO4wi5EUb86kNNvu7GLHvCRwQzD5uV/pYuLuQvIhdN75/IjI5ManejKZjhxmFKkuJAfk5BmxR4oFIFlKDxg==}
     requiresBuild: true
     dependencies:
       '@aws-sdk/util-utf8-browser': 3.259.0
