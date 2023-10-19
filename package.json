@@ -53,7 +53,7 @@
     "inngest": "^3.2.1",
     "intuit-oauth": "^4.0.0",
     "next": "^13.5.6",
-    "next-auth": "^4.23.2",
+    "next-auth": "^4.24.3",
     "node-quickbooks": "^2.0.43",
     "postcss-focus-visible": "^9.0.0",
     "react": "^18.2.0",
