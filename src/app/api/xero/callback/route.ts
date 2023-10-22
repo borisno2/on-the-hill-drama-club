@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
   } else {
     try {
-      const xeroClient = await getXeroClient({ context })
+      const { xeroClient } = await getXeroClient({ context })
       const tokenSet = await xeroClient.apiCallback(parseRedirect)
       await context
         .sudo()

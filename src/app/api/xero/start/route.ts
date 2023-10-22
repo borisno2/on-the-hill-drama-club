@@ -15,7 +15,7 @@ export async function GET() {
   if (!context.session || context.session?.data.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
   } else {
-    const xeroClient = await getXeroClient({
+    const { xeroClient } = await getXeroClient({
       context,
       state: generateAntiForgery(),
     })

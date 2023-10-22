@@ -41,8 +41,7 @@ model Account {
   streetAddress      String    @default("PLEASE_UPDATE")
   suburb             String    @default("PLEASE_UPDATE")
   postcode           Int       @default(3550)
-  qboSyncToken       Int?
-  qboId              Int?
+  xeroId             String?   @unique
   createdAt          DateTime? @default(now())
 }
 
@@ -63,15 +62,15 @@ model Student {
 }
 
 model LessonCategory {
-  id          String   @id @default(cuid())
-  name        String   @default("")
-  slug        String   @unique @default("")
-  cost        String   @default("")
-  type        String
-  length      String   @default("")
-  description String?  @mysql.Text
-  qboItemId   Int?
-  lessons     Lesson[] @relation("Lesson_lessonCategory")
+  id              String   @id @default(cuid())
+  name            String   @default("")
+  slug            String   @unique @default("")
+  cost            String   @default("")
+  type            String
+  length          String   @default("")
+  description     String?  @mysql.Text
+  xeroAccountCode String?  @unique
+  lessons         Lesson[] @relation("Lesson_lessonCategory")
 }
 
 model ImportantDate {
@@ -141,16 +140,10 @@ model EmailSettings {
   lessonTermMessageTemplate     String @default("")
 }
 
-model QuickBooksSettings {
-  id           Int     @id
-  realmId      String  @default("")
-  accessToken  String? @mysql.Text
-  refreshToken String  @default("")
-}
-
 model XeroSettings {
-  id       Int   @id
+  id       Int    @id
   tokenSet Json?
+  tenantId String @default("")
 }
 
 model Enrolment {
@@ -178,36 +171,34 @@ model Message {
 }
 
 model Bill {
-  id           String     @id @default(cuid())
-  name         String     @default("")
-  account      Account?   @relation("Bill_account", fields: [accountId], references: [id])
-  accountId    String?    @map("account")
-  date         DateTime?  @mysql.Date
-  dueDate      DateTime?  @mysql.Date
-  status       String
-  term         Term?      @relation("Bill_term", fields: [termId], references: [id])
-  termId       String?    @map("term")
-  items        BillItem[] @relation("BillItem_bill")
-  qboSyncToken Int?
-  qboId        Int?
-  createdAt    DateTime?  @default(now())
+  id        String     @id @default(cuid())
+  name      String     @default("")
+  account   Account?   @relation("Bill_account", fields: [accountId], references: [id])
+  accountId String?    @map("account")
+  date      DateTime?  @mysql.Date
+  dueDate   DateTime?  @mysql.Date
+  status    String
+  term      Term?      @relation("Bill_term", fields: [termId], references: [id])
+  termId    String?    @map("term")
+  items     BillItem[] @relation("BillItem_bill")
+  xeroId    String?    @unique
+  createdAt DateTime?  @default(now())
 
   @@index([accountId])
   @@index([termId])
 }
 
 model BillItem {
-  id           String     @id @default(cuid())
-  name         String     @default("")
-  bill         Bill?      @relation("BillItem_bill", fields: [billId], references: [id])
-  billId       String?    @map("bill")
-  quantity     Int        @default(1)
-  amount       Int
-  enrolment    Enrolment? @relation("BillItem_enrolment", fields: [enrolmentId], references: [id])
-  enrolmentId  String?    @unique @map("enrolment")
-  qboSyncToken Int?
-  qboId        Int?
-  createdAt    DateTime?  @default(now())
+  id          String     @id @default(cuid())
+  name        String     @default("")
+  bill        Bill?      @relation("BillItem_bill", fields: [billId], references: [id])
+  billId      String?    @map("bill")
+  quantity    Int        @default(1)
+  amount      Int
+  enrolment   Enrolment? @relation("BillItem_enrolment", fields: [enrolmentId], references: [id])
+  enrolmentId String?    @unique @map("enrolment")
+  xeroId      String?    @unique
+  createdAt   DateTime?  @default(now())
 
   @@index([billId])
 }

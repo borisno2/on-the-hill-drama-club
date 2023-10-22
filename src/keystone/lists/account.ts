@@ -113,8 +113,7 @@ const Account: Lists.Account<Session> = list({
       validation: { isRequired: true },
       defaultValue: 3550,
     }),
-    qboSyncToken: integer(),
-    qboId: integer(),
+    xeroId: text({ isIndexed: 'unique', db: { isNullable: true } }),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),

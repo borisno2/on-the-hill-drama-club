@@ -4,7 +4,6 @@
   "scripts": {
     "build": "next build",
     "build:keystone": "keystone build",
-    "deploy": "pnpm build && pnpm migrate",
     "dev": "turbo dev:watch dev:keystone dev:next",
     "dev:keystone": "next dev .keystone/admin --port 4000",
     "dev:next": "next dev --port 3000",
@@ -12,8 +11,6 @@
     "dev:watch": "keystone dev --no-server",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone build --no-ui --frozen && ts-gql build",
-    "migrate": "keystone prisma migrate deploy",
-    "migrate:gen": "keystone build --no-ui && keystone prisma migrate dev",
     "seed-data": "tsx seed-data.ts",
     "ts-gql:build": "ts-gql build",
     "ts-gql:watch": "ts-gql watch"

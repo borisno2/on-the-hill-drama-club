@@ -178,13 +178,13 @@ type Account {
   streetAddress: String
   suburb: String
   postcode: Int
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
 input AccountWhereUniqueInput {
   id: ID
+  xeroId: String
 }
 
 input AccountWhereInput {
@@ -203,8 +203,7 @@ input AccountWhereInput {
   streetAddress: StringFilter
   suburb: StringFilter
   postcode: IntFilter
-  qboSyncToken: IntNullableFilter
-  qboId: IntNullableFilter
+  xeroId: StringNullableFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -231,15 +230,18 @@ input IntFilter {
   not: IntFilter
 }
 
-input IntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: IntNullableFilter
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: StringNullableFilter
 }
 
 input AccountOrderByInput {
@@ -252,8 +254,7 @@ input AccountOrderByInput {
   streetAddress: OrderDirection
   suburb: OrderDirection
   postcode: OrderDirection
-  qboSyncToken: OrderDirection
-  qboId: OrderDirection
+  xeroId: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -269,8 +270,7 @@ input AccountUpdateInput {
   streetAddress: String
   suburb: String
   postcode: Int
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
@@ -311,8 +311,7 @@ input AccountCreateInput {
   streetAddress: String
   suburb: String
   postcode: Int
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
@@ -377,20 +376,6 @@ input CalendarDayFilter {
   gt: CalendarDay
   gte: CalendarDay
   not: CalendarDayFilter
-}
-
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: StringNullableFilter
 }
 
 input EnrolmentManyRelationFilter {
@@ -459,7 +444,7 @@ type LessonCategory {
   type: String
   length: String
   description: String
-  qboItemId: Int
+  xeroAccountCode: String
   lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonWhereUniqueInput): [Lesson!]
   lessonsCount(where: LessonWhereInput! = {}): Int
 }
@@ -467,6 +452,7 @@ type LessonCategory {
 input LessonCategoryWhereUniqueInput {
   id: ID
   slug: String
+  xeroAccountCode: String
 }
 
 input LessonCategoryWhereInput {
@@ -480,7 +466,7 @@ input LessonCategoryWhereInput {
   type: StringFilter
   length: StringFilter
   description: StringNullableFilter
-  qboItemId: IntNullableFilter
+  xeroAccountCode: StringNullableFilter
   lessons: LessonManyRelationFilter
 }
 
@@ -498,7 +484,7 @@ input LessonCategoryOrderByInput {
   type: OrderDirection
   length: OrderDirection
   description: OrderDirection
-  qboItemId: OrderDirection
+  xeroAccountCode: OrderDirection
 }
 
 input LessonCategoryUpdateInput {
@@ -508,7 +494,7 @@ input LessonCategoryUpdateInput {
   type: String
   length: String
   description: String
-  qboItemId: Int
+  xeroAccountCode: String
   lessons: LessonRelateToManyForUpdateInput
 }
 
@@ -531,7 +517,7 @@ input LessonCategoryCreateInput {
   type: String
   length: String
   description: String
-  qboItemId: Int
+  xeroAccountCode: String
   lessons: LessonRelateToManyForCreateInput
 }
 
@@ -926,54 +912,10 @@ input EmailSettingsCreateInput {
   lessonTermMessageTemplate: String
 }
 
-type QuickBooksSettings {
-  id: ID!
-  realmId: String
-  accessToken: String
-  refreshToken: String
-}
-
-input QuickBooksSettingsWhereUniqueInput {
-  id: ID
-}
-
-input QuickBooksSettingsWhereInput {
-  AND: [QuickBooksSettingsWhereInput!]
-  OR: [QuickBooksSettingsWhereInput!]
-  NOT: [QuickBooksSettingsWhereInput!]
-  id: IDFilter
-  realmId: StringFilter
-  accessToken: StringNullableFilter
-  refreshToken: StringFilter
-}
-
-input QuickBooksSettingsOrderByInput {
-  id: OrderDirection
-  realmId: OrderDirection
-  accessToken: OrderDirection
-  refreshToken: OrderDirection
-}
-
-input QuickBooksSettingsUpdateInput {
-  realmId: String
-  accessToken: String
-  refreshToken: String
-}
-
-input QuickBooksSettingsUpdateArgs {
-  where: QuickBooksSettingsWhereUniqueInput! = {id: 1}
-  data: QuickBooksSettingsUpdateInput!
-}
-
-input QuickBooksSettingsCreateInput {
-  realmId: String
-  accessToken: String
-  refreshToken: String
-}
-
 type XeroSettings {
   id: ID!
   tokenSet: JSON
+  tenantId: String
 }
 
 input XeroSettingsWhereUniqueInput {
@@ -985,14 +927,17 @@ input XeroSettingsWhereInput {
   OR: [XeroSettingsWhereInput!]
   NOT: [XeroSettingsWhereInput!]
   id: IDFilter
+  tenantId: StringFilter
 }
 
 input XeroSettingsOrderByInput {
   id: OrderDirection
+  tenantId: OrderDirection
 }
 
 input XeroSettingsUpdateInput {
   tokenSet: JSON
+  tenantId: String
 }
 
 input XeroSettingsUpdateArgs {
@@ -1002,6 +947,7 @@ input XeroSettingsUpdateArgs {
 
 input XeroSettingsCreateInput {
   tokenSet: JSON
+  tenantId: String
 }
 
 type Enrolment {
@@ -1160,8 +1106,7 @@ type Bill {
   term: Term
   items(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillItemWhereUniqueInput): [BillItem!]
   itemsCount(where: BillItemWhereInput! = {}): Int
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
@@ -1169,6 +1114,7 @@ scalar Decimal
 
 input BillWhereUniqueInput {
   id: ID
+  xeroId: String
 }
 
 input BillWhereInput {
@@ -1183,8 +1129,7 @@ input BillWhereInput {
   status: StringFilter
   term: TermWhereInput
   items: BillItemManyRelationFilter
-  qboSyncToken: IntNullableFilter
-  qboId: IntNullableFilter
+  xeroId: StringNullableFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -1211,8 +1156,7 @@ input BillOrderByInput {
   date: OrderDirection
   dueDate: OrderDirection
   status: OrderDirection
-  qboSyncToken: OrderDirection
-  qboId: OrderDirection
+  xeroId: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -1224,8 +1168,7 @@ input BillUpdateInput {
   status: String
   term: TermRelateToOneForUpdateInput
   items: BillItemRelateToManyForUpdateInput
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
@@ -1249,8 +1192,7 @@ input BillCreateInput {
   status: String
   term: TermRelateToOneForCreateInput
   items: BillItemRelateToManyForCreateInput
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
@@ -1267,13 +1209,13 @@ type BillItem {
   amount: Int
   total: Decimal!
   enrolment: Enrolment
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
 input BillItemWhereUniqueInput {
   id: ID
+  xeroId: String
 }
 
 input BillItemWhereInput {
@@ -1286,8 +1228,7 @@ input BillItemWhereInput {
   quantity: IntFilter
   amount: IntFilter
   enrolment: EnrolmentWhereInput
-  qboSyncToken: IntNullableFilter
-  qboId: IntNullableFilter
+  xeroId: StringNullableFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -1296,8 +1237,7 @@ input BillItemOrderByInput {
   name: OrderDirection
   quantity: OrderDirection
   amount: OrderDirection
-  qboSyncToken: OrderDirection
-  qboId: OrderDirection
+  xeroId: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -1307,8 +1247,7 @@ input BillItemUpdateInput {
   quantity: Int
   amount: Int
   enrolment: EnrolmentRelateToOneForUpdateInput
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
@@ -1335,8 +1274,7 @@ input BillItemCreateInput {
   quantity: Int
   amount: Int
   enrolment: EnrolmentRelateToOneForCreateInput
-  qboSyncToken: Int
-  qboId: Int
+  xeroId: String
   createdAt: DateTime
 }
 
@@ -1410,12 +1348,6 @@ type Mutation {
   updateManyEmailSettings(data: [EmailSettingsUpdateArgs!]!): [EmailSettings]
   deleteEmailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}): EmailSettings
   deleteManyEmailSettings(where: [EmailSettingsWhereUniqueInput!]!): [EmailSettings]
-  createQuickBooksSettings(data: QuickBooksSettingsCreateInput!): QuickBooksSettings
-  createManyQuickBooksSettings(data: [QuickBooksSettingsCreateInput!]!): [QuickBooksSettings]
-  updateQuickBooksSettings(where: QuickBooksSettingsWhereUniqueInput! = {id: 1}, data: QuickBooksSettingsUpdateInput!): QuickBooksSettings
-  updateManyQuickBooksSettings(data: [QuickBooksSettingsUpdateArgs!]!): [QuickBooksSettings]
-  deleteQuickBooksSettings(where: QuickBooksSettingsWhereUniqueInput! = {id: 1}): QuickBooksSettings
-  deleteManyQuickBooksSettings(where: [QuickBooksSettingsWhereUniqueInput!]!): [QuickBooksSettings]
   createXeroSettings(data: XeroSettingsCreateInput!): XeroSettings
   createManyXeroSettings(data: [XeroSettingsCreateInput!]!): [XeroSettings]
   updateXeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}, data: XeroSettingsUpdateInput!): XeroSettings
@@ -1476,9 +1408,6 @@ type Query {
   manyEmailSettings(where: EmailSettingsWhereInput! = {id: {equals: 1}}, orderBy: [EmailSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EmailSettingsWhereUniqueInput): [EmailSettings!]
   emailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}): EmailSettings
   manyEmailSettingsCount(where: EmailSettingsWhereInput! = {id: {equals: 1}}): Int
-  manyQuickBooksSettings(where: QuickBooksSettingsWhereInput! = {id: {equals: 1}}, orderBy: [QuickBooksSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: QuickBooksSettingsWhereUniqueInput): [QuickBooksSettings!]
-  quickBooksSettings(where: QuickBooksSettingsWhereUniqueInput! = {id: 1}): QuickBooksSettings
-  manyQuickBooksSettingsCount(where: QuickBooksSettingsWhereInput! = {id: {equals: 1}}): Int
   manyXeroSettings(where: XeroSettingsWhereInput! = {id: {equals: 1}}, orderBy: [XeroSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: XeroSettingsWhereUniqueInput): [XeroSettings!]
   xeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}): XeroSettings
   manyXeroSettingsCount(where: XeroSettingsWhereInput! = {id: {equals: 1}}): Int

@@ -56,5 +56,5 @@ export async function getXeroClient({
       })
     }
   }
-  return xeroClient
+  return { xeroClient, xeroTenantId: settings?.tenantId }
 }

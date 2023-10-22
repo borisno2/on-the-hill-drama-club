@@ -1,33 +1,35 @@
-import { createInvoice, sendInvoicePdf } from 'lib/xero/invoice'
 import { Context } from '.keystone/types'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
-import { getQBO } from 'lib/xero'
+import { getXeroClient } from 'lib/xero'
 
 import { gql } from '@ts-gql/tag/no-transform'
 import Decimal from 'decimal.js'
-import { createCustomer } from 'lib/xero/customer'
 import { slugify } from 'inngest'
+import { Invoice, LineAmountTypes, RequestEmpty } from 'xero-node'
 
-const UPDATE_BILL_QBO_ID = gql`
-  mutation UPDATE_BILL_QBO_ID($id: ID!, $qboId: Int!) {
-    updateBill(where: { id: $id }, data: { qboId: $qboId, status: "PENDING" }) {
+const UPDATE_BILL_XERO_ID = gql`
+  mutation UPDATE_BILL_XERO_ID($id: ID!, $xeroId: String!) {
+    updateBill(
+      where: { id: $id }
+      data: { xeroId: $xeroId, status: "PENDING" }
+    ) {
       id
-      qboId
+      xeroId
     }
   }
-` as import('../../__generated__/ts-gql/UPDATE_BILL_QBO_ID').type
+` as import('../../__generated__/ts-gql/UPDATE_BILL_XERO_ID').type
 
 const GET_BILL_BY_ID = gql`
   query GET_BILL_BY_ID($id: ID!) {
     bill(where: { id: $id }) {
       id
       name
-      qboId
+      xeroId
       items {
         id
         name
-        qboId
+        xeroId
         amount
         quantity
         enrolment {
@@ -39,7 +41,7 @@ const GET_BILL_BY_ID = gql`
               id
               lessonCategory {
                 id
-                qboItemId
+                xeroAccountCode
               }
             }
           }
@@ -51,7 +53,7 @@ const GET_BILL_BY_ID = gql`
       }
       account {
         id
-        qboId
+        xeroId
         name
         firstName
         surname
@@ -64,42 +66,50 @@ const GET_BILL_BY_ID = gql`
   }
 ` as import('../../__generated__/ts-gql/GET_BILL_BY_ID').type
 
-export const createQuickBooksInvoiceFunction = inngest.createFunction(
+export const createXeroInvoiceFunction = inngest.createFunction(
   {
-    id: slugify('Create QuickBooks Invoice Hook'),
-    name: 'Create QuickBooks Invoice Hook',
+    id: slugify('Create Xero Invoice Hook'),
+    name: 'Create Xero Invoice Hook',
   },
   { event: 'app/bill.approved' },
   async ({ event }) => {
     const { item, session } = event.data
     const context: Context = keystoneContext.withSession(session)
-    const qbo = await getQBO({ context })
+    const { xeroClient, xeroTenantId } = await getXeroClient({ context })
 
     const { bill } = await context.graphql.run({
       query: GET_BILL_BY_ID,
       variables: { id: item.id },
     })
 
-    if (!qbo) throw new Error('Could not get QBO client')
+    if (!xeroClient || !xeroTenantId)
+      throw new Error('Could not get Xero client')
     if (!bill) throw new Error('Could not get bill')
     if (!bill.account) throw new Error('Could not get bill account')
     if (!bill.account.user) throw new Error('Could not get user')
     if (!bill.account.user.email) throw new Error('Could not get bill email')
-    let { qboId } = bill.account
-    if (!qboId) {
+    let { xeroId } = bill.account
+    if (!xeroId) {
       try {
-        const customer = await createCustomer(
+        const { body } = await xeroClient.accountingApi.createContacts(
+          xeroTenantId,
           {
-            DisplayName: bill.account.name!,
-            GivenName: bill.account.firstName!,
-            FamilyName: bill.account.surname!,
-            PrimaryEmailAddr: {
-              Address: bill.account.user.email,
-            },
+            contacts: [
+              {
+                name: bill.account.name!,
+                firstName: bill.account.firstName!,
+                lastName: bill.account.surname!,
+                emailAddress: bill.account.user.email,
+              },
+            ],
           },
-          qbo,
         )
-
+        if (!body.contacts || body.contacts.length === 0) {
+          throw new Error('Error creating customer', {
+            cause: 'Create customer returned null',
+          })
+        }
+        const customer = body.contacts[0]
         if (customer === null) {
           throw new Error('Error creating customer', {
             cause: 'Create customer returned null',
@@ -109,11 +119,10 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
         await context.db.Account.updateOne({
           where: { id: bill.account.id },
           data: {
-            qboId: parseInt(customer.Id),
-            qboSyncToken: parseInt(customer.SyncToken),
+            xeroId: customer.contactID,
           },
         })
-        qboId = parseInt(customer.Id)
+        xeroId = customer.contactID!
       } catch (error) {
         throw new Error('Error creating customer', { cause: error })
       }
@@ -121,61 +130,68 @@ export const createQuickBooksInvoiceFunction = inngest.createFunction(
     if (!bill.items || bill.items.length === 0) {
       throw new Error('Bill has no items')
     }
-    if (bill.qboId !== null) {
-      return `Bill ${bill.name} already has a QB invoice with id ${bill.qboId}`
+    if (bill.xeroId !== null) {
+      return `Bill ${bill.name} already has a Xero invoice with id ${bill.xeroId}`
     } else {
-      // create the invoice in QBO and update the bill
-      const invoice = await createInvoice(
+      // create the invoice in Xero and update the bill
+      const { body } = await xeroClient.accountingApi.createInvoices(
+        xeroTenantId,
         {
-          CustomerRef: {
-            value: qboId.toString(),
-          },
-          Line: bill.items.map((billItem) => ({
-            Amount: new Decimal(billItem.amount!)
-              .dividedBy(100)
-              .mul(billItem.quantity!)
-              .toDecimalPlaces(2),
-            DetailType: 'SalesItemLineDetail',
-            Description:
-              billItem.name ??
-              `${billItem.enrolment?.student?.name} - ${billItem.enrolment?.lessonTerm?.name}`,
-            SalesItemLineDetail: {
-              Qty: new Decimal(billItem.quantity!),
-              UnitPrice: new Decimal(billItem.amount!)
-                .dividedBy(100)
-                .toDecimalPlaces(2),
-              ItemRef: {
-                value:
-                  billItem.enrolment?.lessonTerm?.lesson?.lessonCategory?.qboItemId?.toString() ||
-                  '1',
+          invoices: [
+            {
+              contact: {
+                contactID: xeroId.toString(),
               },
+              type: Invoice.TypeEnum.ACCREC,
+              lineAmountTypes: LineAmountTypes.Inclusive,
+              lineItems: bill.items.map((billItem) => ({
+                unitAmount: new Decimal(billItem.amount!)
+                  .dividedBy(100)
+                  .toDecimalPlaces(2)
+                  .toNumber(),
+                quantity: billItem.quantity || 1,
+                accountCode:
+                  billItem.enrolment?.lessonTerm?.lesson?.lessonCategory
+                    ?.xeroAccountCode || '200',
+                description:
+                  billItem.name ??
+                  `${billItem.enrolment?.student?.name} - ${billItem.enrolment?.lessonTerm?.name}`,
+              })),
             },
-          })),
+          ],
         },
-        qbo,
       )
 
-      if (invoice === null) {
-        throw new Error(`Bill ${bill.name} could not be created in QBO`, {
-          cause: invoice,
+      if (body.invoices === undefined || body.invoices.length === 0) {
+        throw new Error(`Bill ${bill.name} could not be created in Xero`, {
+          cause: body,
         })
       } else {
-        const sentInvoice = await sendInvoicePdf(
-          invoice.Id,
-          bill.account.user?.email!,
-          qbo,
-        )
+        const invoice = body.invoices[0]
+        if (invoice === null || !invoice.invoiceID) {
+          throw new Error(`Bill ${bill.name} could not be created in Xero`, {
+            cause: body,
+          })
+        }
 
-        if (sentInvoice === null || !sentInvoice.Id) {
-          throw new Error(`Bill ${bill.name} could not be created in QBO`, {
+        const requestEmpty: RequestEmpty = {}
+        const { body: sentInvoice } =
+          await xeroClient.accountingApi.emailInvoice(
+            xeroTenantId,
+            invoice.invoiceID!,
+            requestEmpty,
+          )
+
+        if (!sentInvoice) {
+          throw new Error(`Bill ${bill.name} could not be created in Xero`, {
             cause: sentInvoice,
           })
         }
         await context.graphql.run({
-          query: UPDATE_BILL_QBO_ID,
-          variables: { id: bill.id, qboId: parseInt(invoice.Id) },
+          query: UPDATE_BILL_XERO_ID,
+          variables: { id: bill.id, xeroId: invoice.invoiceID },
         })
-        return `Bill ${bill.name} created in QBO with id ${invoice.Id}`
+        return `Bill ${bill.name} created in Xero with id ${invoice.invoiceID}`
       }
     }
   },

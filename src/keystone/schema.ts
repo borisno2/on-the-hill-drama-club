@@ -113,7 +113,7 @@ export const lists: Lists<Session> = {
           isNullable: true,
         },
       }),
-      qboItemId: integer(),
+      xeroAccountCode: text({ isIndexed: 'unique', db: { isNullable: true } }),
       lessons: relationship({ ref: 'Lesson.lessonCategory', many: true }),
     },
   }),
@@ -330,26 +330,6 @@ export const lists: Lists<Session> = {
     },
   }),
 
-  QuickBooksSettings: list({
-    access: isAdmin,
-    isSingleton: true,
-    graphql: {
-      plural: 'ManyQuickBooksSettings',
-    },
-    fields: {
-      realmId: text({ validation: { isRequired: true } }),
-      accessToken: text({
-        ui: { displayMode: 'textarea' },
-        db: {
-          nativeType: 'Text',
-          isNullable: true,
-        },
-        validation: { isRequired: true },
-      }),
-      refreshToken: text({ validation: { isRequired: true } }),
-    },
-  }),
-
   XeroSettings: list({
     access: isAdmin,
     isSingleton: true,
@@ -358,6 +338,7 @@ export const lists: Lists<Session> = {
     },
     fields: {
       tokenSet: json(),
+      tenantId: text(),
     },
   }),
   Enrolment,
