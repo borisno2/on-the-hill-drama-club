@@ -91,38 +91,55 @@ export const createXeroInvoiceFunction = inngest.createFunction(
     let { xeroId } = bill.account
     if (!xeroId) {
       try {
-        const { body } = await xeroClient.accountingApi.createContacts(
+        const { body: contacts } = await xeroClient.accountingApi.getContacts(
           xeroTenantId,
-          {
-            contacts: [
-              {
-                name: bill.account.name!,
-                firstName: bill.account.firstName!,
-                lastName: bill.account.surname!,
-                emailAddress: bill.account.user.email,
-              },
-            ],
-          },
+          undefined,
+          'Name="' + bill.account.name + '"',
         )
-        if (!body.contacts || body.contacts.length === 0) {
-          throw new Error('Error creating customer', {
-            cause: 'Create customer returned null',
+        if (contacts && contacts.contacts && contacts.contacts.length > 0) {
+          xeroId = contacts.contacts[0].contactID!
+          await context.db.Account.updateOne({
+            where: { id: bill.account.id },
+            data: {
+              xeroId: contacts.contacts[0].contactID!,
+            },
           })
-        }
-        const customer = body.contacts[0]
-        if (customer === null) {
-          throw new Error('Error creating customer', {
-            cause: 'Create customer returned null',
-          })
-        }
+        } else {
+          const { body } = await xeroClient.accountingApi.createContacts(
+            xeroTenantId,
+            {
+              contacts: [
+                {
+                  name: bill.account.name!,
+                  firstName: bill.account.firstName!,
+                  lastName: bill.account.surname!,
+                  emailAddress: bill.account.user.email,
+                },
+              ],
+            },
+          )
+          if (!body.contacts || body.contacts.length === 0) {
+            throw new Error('Error creating customer', {
+              cause: 'Create customer returned null',
+            })
+          }
 
-        await context.db.Account.updateOne({
-          where: { id: bill.account.id },
-          data: {
-            xeroId: customer.contactID,
-          },
-        })
-        xeroId = customer.contactID!
+          const customer = body.contacts[0]
+          if (customer === null) {
+            throw new Error('Error creating customer', {
+              cause: 'Create customer returned null',
+            })
+          }
+
+          await context.db.Account.updateOne({
+            where: { id: bill.account.id },
+            data: {
+              xeroId: customer.contactID,
+            },
+          })
+
+          xeroId = customer.contactID!
+        }
       } catch (error) {
         throw new Error('Error creating customer', { cause: error })
       }
@@ -134,6 +151,9 @@ export const createXeroInvoiceFunction = inngest.createFunction(
       return `Bill ${bill.name} already has a Xero invoice with id ${bill.xeroId}`
     } else {
       // create the invoice in Xero and update the bill
+      const dueDate = new Date()
+      dueDate.setDate(dueDate.getDate() + 14)
+      const dueDateString = dueDate.toISOString().split('T')[0]
       const { body } = await xeroClient.accountingApi.createInvoices(
         xeroTenantId,
         {
@@ -142,6 +162,8 @@ export const createXeroInvoiceFunction = inngest.createFunction(
               contact: {
                 contactID: xeroId.toString(),
               },
+              status: Invoice.StatusEnum.AUTHORISED,
+              dueDate: dueDateString,
               type: Invoice.TypeEnum.ACCREC,
               lineAmountTypes: LineAmountTypes.Inclusive,
               lineItems: bill.items.map((billItem) => ({
@@ -175,15 +197,17 @@ export const createXeroInvoiceFunction = inngest.createFunction(
         }
 
         const requestEmpty: RequestEmpty = {}
-        const { body: sentInvoice } =
-          await xeroClient.accountingApi.emailInvoice(
-            xeroTenantId,
-            invoice.invoiceID!,
-            requestEmpty,
-          )
+        const sentInvoice = await xeroClient.accountingApi.emailInvoice(
+          xeroTenantId,
+          invoice.invoiceID!,
+          requestEmpty,
+        )
 
-        if (!sentInvoice) {
-          throw new Error(`Bill ${bill.name} could not be created in Xero`, {
+        if (
+          !sentInvoice.response?.statusCode ||
+          sentInvoice.response?.statusCode > 299
+        ) {
+          throw new Error(`Bill ${bill.name} could not be emailed in Xero`, {
             cause: sentInvoice,
           })
         }
