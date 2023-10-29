@@ -16,7 +16,6 @@ export default config({
       relationMode: 'prisma',
     },
     prismaPreviewFeatures: ['driverAdapters'],
-
   },
   ui: {
     isAccessAllowed: ({ session }) => session.allowAdminUI,

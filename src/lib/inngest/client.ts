@@ -23,7 +23,7 @@ export type EnrolmentConfirmedEvent = {
   }
 }
 
-export type CreateQuickBooksCustomerEvent = {
+export type CreateXeroCustomerEvent = {
   data: {
     item: Lists.Account.TypeInfo['item']
     session: Session
@@ -56,7 +56,7 @@ export type Events = {
   'app/copyterm.confirmed': CopyTermConfirmedEvent
   'app/message.queued': SendMessageEvent
   'app/enrolment.enroled': EnrolmentConfirmedEvent
-  'app/account.created': CreateQuickBooksCustomerEvent
+  'app/account.created': CreateXeroCustomerEvent
   'app/bill.approved': BillApprovedEvent
   'app/term.completed': TermCompletedEvent
 }

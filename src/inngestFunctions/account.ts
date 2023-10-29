@@ -2,8 +2,7 @@ import { Context } from '.keystone/types'
 import sendEmail from 'lib/sendEmail'
 import { inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
-import { createCustomer } from 'lib/intuit/customer'
-import { getQBO } from 'lib/intuit'
+import { getXeroClient } from 'lib/xero'
 import { gql } from '@ts-gql/tag/no-transform'
 import { slugify } from 'inngest'
 
@@ -14,7 +13,7 @@ const GET_ACCOUNT_BY_ID = gql`
       name
       firstName
       surname
-      qboId
+      xeroId
       user {
         id
         email
@@ -23,18 +22,20 @@ const GET_ACCOUNT_BY_ID = gql`
   }
 ` as import('../../__generated__/ts-gql/GET_ACCOUNT_BY_ID').type
 
-export const createQuickBooksCustomerFunction = inngest.createFunction(
+export const createXeroCustomerFunction = inngest.createFunction(
   {
-    id: slugify('Create QuickBooks Customer Hook'),
-    name: 'Create QuickBooks Customer Hook',
+    id: slugify('Create Xero Customer Hook'),
+    name: 'Create Xero Customer Hook',
   },
   { event: 'app/account.created' },
   async ({ event }) => {
     const { item } = event.data
     const context: Context = keystoneContext.sudo()
-    const qbo = await getQBO({ context }).catch((error) => {
-      throw new Error('Error getting QBO', { cause: error })
-    })
+    const { xeroClient, xeroTenantId } = await getXeroClient({ context }).catch(
+      (error) => {
+        throw new Error('Error getting Xero Client', { cause: error })
+      },
+    )
     const { account } = await context.graphql
       .run({
         query: GET_ACCOUNT_BY_ID,
@@ -43,40 +44,51 @@ export const createQuickBooksCustomerFunction = inngest.createFunction(
       .catch((error) => {
         throw new Error('Error getting account', { cause: error })
       })
-    if (!qbo) throw new Error('Could not get QBO client')
+    if (!xeroClient || !xeroTenantId)
+      throw new Error('Could not get Xero client')
     if (!account) throw new Error('Could not get account')
     if (!account.user?.email) throw new Error('Could not get account email')
-    if (account.qboId !== null) {
-      return `Account ${account.name} already has a QB customer with id ${account.qboId}`
+    if (account.xeroId !== null) {
+      return `Account ${account.name} already has a QB customer with id ${account.xeroId}`
     } else {
-      // create the customer in QBO and update the account
+      // create the customer in Xero and update the account
       try {
-        const customer = await createCustomer(
-          {
-            DisplayName: account.name!,
-            GivenName: account.firstName!,
-            FamilyName: account.surname!,
-            PrimaryEmailAddr: {
-              Address: account.user.email!,
+        const {
+          body: { contacts },
+        } = await xeroClient.accountingApi.createContacts(xeroTenantId, {
+          contacts: [
+            {
+              name: account.name!,
+              emailAddress: account.user.email!,
+              firstName: account.firstName!,
+              lastName: account.surname!,
             },
-          },
-          qbo,
-        )
+          ],
+        })
 
-        if (customer === null) {
+        if (contacts === undefined) {
           throw new Error('Error creating customer', {
             cause: 'Create customer returned null',
           })
         }
-
+        if (contacts.length === 0) {
+          throw new Error('Error creating customer', {
+            cause: 'Create customer returned empty array',
+          })
+        }
+        if (contacts.length > 1) {
+          throw new Error('Error creating customer', {
+            cause: 'Create customer returned multiple customers',
+          })
+        }
+        const customer = contacts[0]
         await context.db.Account.updateOne({
           where: { id: account.id },
           data: {
-            qboId: parseInt(customer.Id),
-            qboSyncToken: parseInt(customer.SyncToken),
+            xeroId: customer.contactID,
           },
         })
-        return `Created QB customer ${account.name} with id ${customer.Id}`
+        return `Created Xero customer ${account.name} with id ${customer.contactID}`
       } catch (error) {
         throw new Error('Errpr creating customer', { cause: error })
       }
