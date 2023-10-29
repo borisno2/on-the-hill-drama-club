@@ -80,10 +80,11 @@
   },
   "pnpm": {
     "overrides": {
-      "prisma": "5.4.1",
-      "@prisma/client": "5.4.1",
-      "@prisma/internals": "5.4.1",
-      "@prisma/migrate": "5.4.1"
+      "prisma": "5.5.2",
+      "@prisma/client": "5.5.2",
+      "@prisma/internals": "5.5.2",
+      "@prisma/migrate": "5.5.2",
+      "next": "^14.0.0"
     }
   },
   "packageManager": "pnpm@8.9.2",
