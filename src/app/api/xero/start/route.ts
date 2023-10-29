@@ -3,6 +3,7 @@ import { getXeroClient } from 'lib/xero'
 import Tokens from 'csrf'
 import { NextRequest, NextResponse } from 'next/server'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
 const csrf = new Tokens()
 function generateAntiForgery() {
@@ -15,9 +16,11 @@ export async function GET() {
   if (!context.session || context.session?.data.role !== 'ADMIN') {
     return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
   } else {
+    const state = generateAntiForgery()
+    cookies().set('emaily_calder_xero_csrf_state', state)
     const { xeroClient } = await getXeroClient({
       context,
-      state: generateAntiForgery(),
+      state,
     })
     const consentUrl = await xeroClient.buildConsentUrl()
 

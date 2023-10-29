@@ -1,4 +1,5 @@
 import { Context } from '.keystone/types'
+import { JSONValue } from '@keystone-6/core/types'
 import { TokenSet, TokenSetParameters, XeroClient } from 'xero-node'
 
 function getCallbackURL() {
@@ -31,6 +32,10 @@ export async function getXeroClient({
     clientId: clientKey,
     clientSecret: clientSecret,
     state,
+    scopes:
+      'openid profile email accounting.settings.read accounting.transactions accounting.contacts offline_access'.split(
+        ' ',
+      ),
     redirectUris: getCallbackURL(),
   })
 
@@ -42,17 +47,17 @@ export async function getXeroClient({
     typeof settings.tokenSet !== 'number' &&
     typeof settings.tokenSet !== 'boolean'
   ) {
+    await xeroClient.initialize()
     const tokenSet = new TokenSet(
       typeof settings.tokenSet === 'string'
-        ? JSON.parse(settings.tokenSet)
+        ? { ...JSON.parse(settings.tokenSet) }
         : (settings.tokenSet as TokenSetParameters),
     )
-    xeroClient.setTokenSet(settings)
-
+    xeroClient.setTokenSet(tokenSet)
     if (tokenSet.expired()) {
       const newTokenSet = await xeroClient.refreshToken()
       context.sudo().db.XeroSettings.updateOne({
-        data: { tokenSet: JSON.stringify(newTokenSet) },
+        data: { tokenSet: newTokenSet as JSONValue },
       })
     }
   }
