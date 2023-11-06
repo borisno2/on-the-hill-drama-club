@@ -16,8 +16,8 @@ dependencies:
     specifier: ^4.9.5
     version: 4.9.5(graphql@16.8.1)
   '@as-integrations/next':
-    specifier: ^2.0.2
-    version: 2.0.2(@apollo/server@4.9.5)(next@14.0.0)
+    specifier: ^3.0.0
+    version: 3.0.0(@apollo/server@4.9.5)(next@14.0.0)
   '@aws-sdk/signature-v4-crt':
     specifier: ^3.438.0
     version: 3.438.0
@@ -452,9 +452,9 @@ packages:
       - supports-color
     dev: false
 
-  /@as-integrations/next@2.0.2(@apollo/server@4.9.5)(next@14.0.0):
-    resolution: {integrity: sha512-nznFAbWpgB60aF44vLfy9AieYY0t9yv4QqYX0DfPQ24Qa9qny/6uUdKoDpDC0MLWSBLC64XVfzaNylJUpiXVUA==}
-    engines: {node: '>=16'}
+  /@as-integrations/next@3.0.0(@apollo/server@4.9.5)(next@14.0.0):
+    resolution: {integrity: sha512-FmqJjoH5XamyBZQVTnnG9ssE3ywf/TPIanFGwYjp3YFsX92F1lY7FDcrQJa/gCJQnb8gSZAdqAIgrWo4K325sA==}
+    engines: {node: '>=18'}
     peerDependencies:
       '@apollo/server': ^4.0.0
       next: ^14.0.0
