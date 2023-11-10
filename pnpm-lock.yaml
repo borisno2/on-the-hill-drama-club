@@ -106,8 +106,8 @@ dependencies:
     specifier: ^16.8.1
     version: 16.8.1
   inngest:
-    specifier: ^3.4.1
-    version: 3.4.1(typescript@5.2.2)
+    specifier: ^3.6.0
+    version: 3.6.0(typescript@5.2.2)
   intuit-oauth:
     specifier: ^4.0.0
     version: 4.0.0
@@ -7203,8 +7203,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /inngest@3.4.1(typescript@5.2.2):
-    resolution: {integrity: sha512-O7eJ4qcOH0ljxZDeVLyOVP6E3IJplhCG88j1ujTXtuWsku3d1WMncB76nFkALWo6oQnAXuxV+n3YS/hix+v5Ow==}
+  /inngest@3.6.0(typescript@5.2.2):
+    resolution: {integrity: sha512-l6Vrs1mnj0U64iUpFwNn2CdcieMlNJZyv8ks6NbpQe+xnPJ9P2yoUB4n9NJ891Me2383ozm+PDWc4LcVTu0EAg==}
     engines: {node: '>=14'}
     peerDependencies:
       typescript: '>=4.7.2'
