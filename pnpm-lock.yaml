@@ -174,8 +174,8 @@ devDependencies:
     specifier: 5.5.2
     version: 5.5.2
   tsx:
-    specifier: ^3.14.0
-    version: 3.14.0
+    specifier: ^4.1.0
+    version: 4.1.0
   turbo:
     specifier: ^1.10.16
     version: 1.10.16
@@ -10511,8 +10511,9 @@ packages:
     engines: {node: '>=0.6.x'}
     dev: false
 
-  /tsx@3.14.0:
-    resolution: {integrity: sha512-xHtFaKtHxM9LOklMmJdI3BEnQq/D5F73Of2E1GDrITi9sgoVkvIsrQUTY1G8FlmGtA+awCI4EBlTRRYxkL2sRg==}
+  /tsx@4.1.0:
+    resolution: {integrity: sha512-u4l17Yd63Wsk2fzNn1wZCmcS9kwJ/2ysl7wuoVggv2hd3NjLA5JQPpyJMXoWSXOwOvoQUzNcu/sf/35HEsnXsg==}
+    engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       esbuild: 0.18.20
