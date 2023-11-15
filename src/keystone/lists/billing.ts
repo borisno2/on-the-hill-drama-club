@@ -91,8 +91,7 @@ export const Bill: Lists.Bill<Session> = list({
     }),
     term: relationship({ ref: 'Term', many: false }),
     items: relationship({ ref: 'BillItem.bill', many: true }),
-    qboSyncToken: integer(),
-    qboId: integer(),
+    xeroId: text({ isIndexed: 'unique', db: { isNullable: true } }),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),
@@ -133,8 +132,7 @@ export const BillItem: Lists.BillItem<Session> = list({
       }),
     }),
     enrolment: relationship({ ref: 'Enrolment.billItem', many: false }),
-    qboSyncToken: integer(),
-    qboId: integer(),
+    xeroId: text({ isIndexed: 'unique', db: { isNullable: true } }),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),

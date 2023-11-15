@@ -2,35 +2,34 @@ import { getContext } from '@keystone-6/core/context'
 import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
-import * as PrismaModule from '@prisma/client';
-import { connect } from '@planetscale/database';
-import { PrismaPlanetScale } from '@prisma/adapter-planetscale';
+import * as PrismaModule from '@prisma/client'
+import { connect } from '@planetscale/database'
+import { PrismaPlanetScale } from '@prisma/adapter-planetscale'
 
 import type { NextApiRequest, NextApiResponse } from 'next/types'
 import type { Session } from 'next-auth'
 import type { Context } from '.keystone/types'
 
-
 class PlanetScalePrismaClient extends PrismaModule.PrismaClient {
   constructor(ksConfig: any) {
-
     const config = {
       host: process.env.DATABASE_HOST,
       username: process.env.DATABASE_USERNAME,
-      password: process.env.DATABASE_PASSWORD
+      password: process.env.DATABASE_PASSWORD,
     }
 
     // Initialize Prisma Client with the PlanetScale serverless database driver
-    const connection = connect(config);
-    const adapter = new PrismaPlanetScale(connection);
+    const connection = connect(config)
+    const adapter = new PrismaPlanetScale(connection)
 
-    super({ ...ksConfig, adapter });
+    super({ ...ksConfig, adapter })
   }
 }
 
 // Making sure multiple prisma clients are not created during hot reloading
 export const keystoneContext: Context =
-  (globalThis as any).keystoneContext || getContext(config, { ...PrismaModule, PrismaClient: PlanetScalePrismaClient })
+  (globalThis as any).keystoneContext ||
+  getContext(config, { ...PrismaModule, PrismaClient: PlanetScalePrismaClient })
 
 if (process.env.NODE_ENV !== 'production')
   (globalThis as any).keystoneContext = keystoneContext

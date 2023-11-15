@@ -5,8 +5,8 @@ import {
   createBillItemFunction,
   sendEnrolmentConfirmationFunction,
 } from 'inngestFunctions/enrolment'
-import { createQuickBooksCustomerFunction } from 'inngestFunctions/account'
-import { createQuickBooksInvoiceFunction } from 'inngestFunctions/bill'
+import { createXeroCustomerFunction } from 'inngestFunctions/account'
+import { createXeroInvoiceFunction } from 'inngestFunctions/bill'
 import {
   copyTermFunction,
   copyEnrolmentsFunction,
@@ -18,8 +18,8 @@ export const { GET, POST, PUT } = serve({
   functions: [
     sendMessageFunction,
     sendEnrolmentConfirmationFunction,
-    createQuickBooksCustomerFunction,
-    createQuickBooksInvoiceFunction,
+    createXeroCustomerFunction,
+    createXeroInvoiceFunction,
     createBillItemFunction,
     copyTermFunction,
     copyEnrolmentsFunction,

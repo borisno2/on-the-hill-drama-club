@@ -6,7 +6,7 @@ Emily is a String and Theatre teacher in Bendigo, Victoria, Australia. Her Drama
 
 The project allows students and their parents/guardians to view the timetable, check fees, see class availability and enrol through the Student Portal/Dashboard. Once enroled they click enrol in their dashboard, the enrolment is set to `Pending`, then Emily can confirm thier enrolment by setting its status to `Enroled`. Once the status is set to `Enroled` a confirmation email is sent to the account owner with the time and start date pulled from the `Lesson` and `Term`.
 
-We use Inutit's Quickbooks for book keeping, we can generate invoices for the Term which creates them in Quickbooks ready to send.
+We use Xero for book keeping, we can generate invoices for the Term which creates them in Xero ready to send.
 
 ## Tech Stack
 
