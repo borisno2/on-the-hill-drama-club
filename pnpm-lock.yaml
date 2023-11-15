@@ -58,11 +58,11 @@ dependencies:
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.5)
   '@ts-gql/compiler':
-    specifier: ^0.16.3
-    version: 0.16.3(graphql@16.8.1)
+    specifier: ^0.16.4
+    version: 0.16.4(graphql@16.8.1)
   '@ts-gql/next':
     specifier: ^17.0.0
-    version: 17.0.0(@ts-gql/compiler@0.16.3)(graphql@16.8.1)
+    version: 17.0.0(@ts-gql/compiler@0.16.4)(graphql@16.8.1)
   '@ts-gql/tag':
     specifier: ^0.7.0
     version: 0.7.0(graphql@16.8.1)
@@ -174,8 +174,8 @@ devDependencies:
     specifier: 5.5.2
     version: 5.5.2
   tsx:
-    specifier: ^4.1.1
-    version: 4.1.1
+    specifier: ^4.1.2
+    version: 4.1.2
   turbo:
     specifier: ^1.10.16
     version: 1.10.16
@@ -3984,8 +3984,8 @@ packages:
     engines: {node: '>= 10'}
     dev: false
 
-  /@ts-gql/compiler@0.16.3(graphql@16.8.1):
-    resolution: {integrity: sha512-xnYPwHzLNUKLg4ySBZC95P7gWH4Bw9/SAgmYDbNqDS3z6FR69ZpHfj0uQLkRc2+276cIlpuAZLYYun3LuVK/9w==}
+  /@ts-gql/compiler@0.16.4(graphql@16.8.1):
+    resolution: {integrity: sha512-kc+NWBrZXKa5RzitLtaPGGBOmmCQT+0Z3mdrEqGwswBNsBbGd8D1/yAHT5TSXr418XtYwPIHQYoiflnYJo9yjw==}
     hasBin: true
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || 14 || 15 || 16
@@ -4044,14 +4044,14 @@ packages:
       - typescript
     dev: true
 
-  /@ts-gql/next@17.0.0(@ts-gql/compiler@0.16.3)(graphql@16.8.1):
+  /@ts-gql/next@17.0.0(@ts-gql/compiler@0.16.4)(graphql@16.8.1):
     resolution: {integrity: sha512-QXsldrWzzo8EtXrOBZfse+okQPCWDdd7l11s/S5OkkMXdWJR7fUnYXnYQxhuOOEs2WQScvO+vBIUT0l5E4d3YA==}
     peerDependencies:
       '@ts-gql/compiler': '*'
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || 14 || 15 || 16
     dependencies:
       '@babel/runtime': 7.23.2
-      '@ts-gql/compiler': 0.16.3(graphql@16.8.1)
+      '@ts-gql/compiler': 0.16.4(graphql@16.8.1)
       graphql: 16.8.1
     dev: false
 
@@ -10548,8 +10548,8 @@ packages:
     engines: {node: '>=0.6.x'}
     dev: false
 
-  /tsx@4.1.1:
-    resolution: {integrity: sha512-zyPn5BFMB0TB5kMLbYPNx4x/oL/oSlaecdKCv6WeJ0TeSEfx8RTJWjuB5TZ2dSewktgfBsBO/HNA9mrMWqLXMA==}
+  /tsx@4.1.2:
+    resolution: {integrity: sha512-1spM1bFV6MP2s4tO4tDC7g52fsaFdtEWdO4GfGdqi20qUgPbnAJqixOyIAvCSx1DDj3YIUB4CD06owTWUsOAuQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
