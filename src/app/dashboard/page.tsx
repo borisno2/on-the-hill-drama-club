@@ -17,27 +17,6 @@ export const metadata: Metadata = {
   ...getMetadata('Student Portal'),
 }
 
-const GET_STUDENT_ENROLMENTS = gql`
-  query GET_STUDENT_ENROLMENTS {
-    students {
-      id
-      firstName
-      surname
-      enrolments {
-        id
-        lessonTerm {
-          id
-          name
-          lesson {
-            id
-            name
-          }
-        }
-      }
-    }
-  }
-` as import('../../../__generated__/ts-gql/GET_STUDENT_ENROLMENTS').type
-
 export default async function Portal() {
   const context = await getSessionContext()
   const { session } = context
@@ -59,28 +38,22 @@ export default async function Portal() {
     redirect('/dashboard/profile?incomplete=true')
   }
 
-  const { students } = await context.graphql.run({
-    query: GET_STUDENT_ENROLMENTS,
-  })
+  const students = await context.db.Student.findMany()
+  const enrolments = await context.db.Enrolment.findMany()
+
   const cards = [
     //{ name: 'Account balance', href: '/dashboard/account', icon: ScaleIcon, amount: '$30,659.45' },
     {
       name: 'Students',
       href: '/dashboard/students',
       icon: UsersIcon,
-      amount: students ? students.length : 0,
+      amount: students.length,
     },
     {
       name: 'Lessons',
       href: '/dashboard/lessons',
       icon: BuildingOfficeIcon,
-      amount: students
-        ? students.reduce(
-            (acc, student) =>
-              acc + (student.enrolments ? student.enrolments.length : 0),
-            0,
-          )
-        : 0,
+      amount: enrolments.length
     },
     // More items...
   ]
