@@ -6,12 +6,15 @@ import 'focus-visible'
 import { Header } from 'components/Header'
 import { Footer } from 'components/Footer'
 import { AnalyticsWrapper } from 'components/Analytics'
+import type { Viewport } from 'next'
 
 type AppProps = {
   children: React.ReactNode
 }
 
 const font = Libre_Bodoni({ subsets: ['latin'] })
+
+export const viewport: Viewport = { width: "device-width", initialScale: 1 }
 
 export default function RootLayout({ children }: AppProps) {
   return (

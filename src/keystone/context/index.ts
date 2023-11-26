@@ -3,7 +3,7 @@ import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import * as PrismaModule from '@prisma/client'
-import { connect } from '@planetscale/database'
+import { Client } from '@planetscale/database'
 import { PrismaPlanetScale } from '@prisma/adapter-planetscale'
 
 import type { NextApiRequest, NextApiResponse } from 'next/types'
@@ -19,8 +19,8 @@ class PlanetScalePrismaClient extends PrismaModule.PrismaClient {
     }
 
     // Initialize Prisma Client with the PlanetScale serverless database driver
-    const connection = connect(config)
-    const adapter = new PrismaPlanetScale(connection)
+    const client = new Client(config)
+    const adapter = new PrismaPlanetScale(client)
 
     super({ ...ksConfig, adapter })
   }
