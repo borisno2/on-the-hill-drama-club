@@ -12,5 +12,6 @@ export async function runKeystoneGraphQL<
   TVariables extends Record<string, any>,
 >(args: GraphQLExecutionArguments<TData, TVariables>): Promise<TData> {
   const context = await getServerActionContext()
-  return await context.graphql.run(args)
+  const result = await context.graphql.run(args)
+  return JSON.parse(JSON.stringify(result))
 }

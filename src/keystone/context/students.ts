@@ -33,7 +33,8 @@ const ADD_STUDENT = gql`
 
 export async function createStudent({ data }: { data: StudentCreateInput }) {
   const context = await getServerActionContext()
-  return await context.graphql.run({ query: ADD_STUDENT, variables: { data } })
+ const student = await context.graphql.run({ query: ADD_STUDENT, variables: { data } })
+  return JSON.parse(JSON.stringify(student))
 }
 
 export async function updateStudent({
@@ -44,8 +45,9 @@ export async function updateStudent({
   data: StudentCreateInput
 }) {
   const context = await getServerActionContext()
-  return await context.graphql.run({
+  const student = await context.graphql.run({
     query: UPDATE_STUDENT,
     variables: { id, data },
   })
+  return JSON.parse(JSON.stringify(student))
 }
