@@ -139,8 +139,8 @@ dependencies:
     specifier: ^3.3.5
     version: 3.3.5
   xero-node:
-    specifier: ^4.36.0
-    version: 4.36.0
+    specifier: ^4.37.0
+    version: 4.37.0
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -11234,7 +11234,7 @@ packages:
     dev: false
 
   /verror@1.10.0:
-    resolution: {integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=}
+    resolution: {integrity: sha512-ZZKSmDAEFOijERBLkmYfJ+vmk3w+7hOLYDNkRCuRuMJGEmqYNCNLyBBFwWKVMhfwaEF3WOd0Zlw86U/WC/+nYw==}
     engines: {'0': node >=0.6.0}
     dependencies:
       assert-plus: 1.0.0
@@ -11412,8 +11412,8 @@ packages:
         optional: true
     dev: false
 
-  /xero-node@4.36.0:
-    resolution: {integrity: sha512-dqgcq/9IU+veqfb/SaojiVkQL5DxPNH8YMurHNQghRyluJUbg++4MKhDdjkDm9SPHgXZhPpjN5IEjVK7aVXBIg==}
+  /xero-node@4.37.0:
+    resolution: {integrity: sha512-cV8uvYPJg4nhbeNexuwFAMTSaV2MgaObrjItg8pOVuEjxVlJiflv1y93SjtxPKiOJ0fDvMyTvSRjbepEpD1vLQ==}
     dependencies:
       openid-client: 4.9.1
       request: 2.88.0
