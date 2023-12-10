@@ -26,8 +26,8 @@
     "@keystone-6/core": "^5.7.0",
     "@marsidev/react-turnstile": "^0.4.0",
     "@planetscale/database": "^1.11.0",
-    "@prisma/adapter-planetscale": "^5.6.0",
-    "@prisma/client": "5.6.0",
+    "@prisma/adapter-planetscale": "^5.7.0",
+    "@prisma/client": "5.7.0",
     "@sendgrid/mail": "^8.1.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
@@ -71,7 +71,7 @@
     "eslint-config-next": "14.0.3",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
-    "prisma": "5.6.0",
+    "prisma": "5.7.0",
     "tsx": "^4.6.1",
     "turbo": "^1.11.1",
     "typescript": "^5.3.2"
@@ -79,10 +79,10 @@
   "packageManager": "pnpm@8.12.0",
   "pnpm": {
     "overrides": {
-      "prisma": "5.5.2",
-      "@prisma/client": "5.5.2",
-      "@prisma/internals": "5.5.2",
-      "@prisma/migrate": "5.5.2",
+      "prisma": "5.7.0",
+      "@prisma/client": "5.7.0",
+      "@prisma/internals": "5.7.0",
+      "@prisma/migrate": "5.7.0",
       "next": "^14.0.0"
     }
   },
