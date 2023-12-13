@@ -48,8 +48,7 @@ export default function Page() {
               had the opportunity to direct 17 theatre productions, notable
               Charlie and the Chocolate factory with Bendigo theatre company
               (2022), A Midsummer Night’s Dream with Uncertain Curtain (2021)
-              and coming up in February 2023 Twelfth night with Uncertain
-              Curtain.
+              and in February 2023 Twelfth night with Uncertain Curtain.
             </p>
           </div>
         </section>
