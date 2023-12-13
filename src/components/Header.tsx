@@ -31,7 +31,7 @@ const lessons = [
     icon: MusicalNoteIcon,
   },
   {
-    name: 'The Old Church on The Hill - Drama Club',
+    name: 'On the Hill Drama Club',
     description: '',
     href: '/lessons/drama-club',
     icon: StarIcon,
