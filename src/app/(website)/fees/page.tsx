@@ -34,7 +34,7 @@ export default async function Fees() {
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
               <h1 className="text-xl font-semibold text-gray-900">
-                2023 Lesson Fees
+                2024 Lesson Fees
               </h1>
             </div>
           </div>
@@ -101,10 +101,10 @@ export default async function Fees() {
               </h1>
 
               <p className="mt-4 text-lg leading-7 text-gray-500">
-                In 2023 we will be returning to a termly invoice structure for
-                all group and individual lessons, an invoice for the term will
-                be emailed to you at the beginning of term and is to be paid no
-                later than week 3.
+                In 2023 we returned to a termly invoice structure for all group
+                and individual lessons, an invoice for the term will be emailed
+                to you at the beginning of term and is to be paid no later than
+                week 3.
               </p>
               <p className="mt-4 text-lg leading-7 text-gray-500">
                 Missed lessons that have been paid in advance, will be credited
