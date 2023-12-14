@@ -2,6 +2,7 @@ import AuthContext from 'app/AuthContext'
 
 import { Libre_Bodoni } from 'next/font/google'
 import 'styles/tailwind.css'
+import 'styles/globals.css'
 import 'focus-visible'
 import { Header } from 'components/Header'
 import { Footer } from 'components/Footer'
@@ -14,7 +15,7 @@ type AppProps = {
 
 const font = Libre_Bodoni({ subsets: ['latin'] })
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1 }
+export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
 
 export default function RootLayout({ children }: AppProps) {
   return (
