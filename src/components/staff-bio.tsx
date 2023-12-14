@@ -14,7 +14,7 @@ export function StaffBio() {
       description: `Olivia is a passionate and dedicated violinist and performer, completing extensive AMEB 
       examinations, performing with the State School Spectacular orchestra, Bendigo Theatre company’s pit 
       orchestra and the Bendigo Symphonie Orchestra, Olivia has a wealth on ensemble and soloistic performance experience to endue.`,
-      photo: '/placeholder.svg?height=200&width=200',
+      photo: '/staff-photos/staff_photo_olivia.png',
       fallback: 'OS',
     },
     {
