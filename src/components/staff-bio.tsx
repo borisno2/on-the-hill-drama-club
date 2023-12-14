@@ -93,7 +93,7 @@ export function StaffBio() {
           <HoverCard key={fallback}>
             <HoverCardTrigger asChild>
               <div className="flex flex-row items-center gap-4 md:gap-8">
-                <Avatar className="h-36 w-24 md:h-40 md:w-32">
+                <Avatar className="h-32 w-24 md:h-40 md:w-32">
                   <AvatarImage alt={name} src={photo} />
                   <AvatarFallback>{fallback}</AvatarFallback>
                 </Avatar>
