@@ -39,7 +39,7 @@
     "@types/dotenv-flow": "^3.3.3",
     "@vercel/analytics": "^1.1.1",
     "autoprefixer": "^10.4.16",
-    "aws-crt": "^1.19.0",
+    "aws-crt": "^1.20.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "csrf": "^3.1.0",
