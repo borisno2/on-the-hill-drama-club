@@ -19,8 +19,8 @@ dependencies:
     specifier: ^3.0.0
     version: 3.0.0(@apollo/server@4.9.5)(next@14.0.0)
   '@aws-sdk/signature-v4-crt':
-    specifier: ^3.470.0
-    version: 3.470.0
+    specifier: ^3.474.0
+    version: 3.474.0
   '@graphql-typed-document-node/core':
     specifier: ^3.2.0
     version: 3.2.0(graphql@16.8.1)
@@ -885,8 +885,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/middleware-sdk-s3@3.470.0:
-    resolution: {integrity: sha512-yhavP2ju+upF50ccDFQNhVPxPOPgUUPs2JqPoq7NzTKZWIyRY65F3UC7CBmrSNiaL0S76r4kDdOkVcGUdI6ZiQ==}
+  /@aws-sdk/middleware-sdk-s3@3.474.0:
+    resolution: {integrity: sha512-62aAo/8u5daIabeJ+gseYeHeShe9eYH6mH+kfWmLsHybXCCv1EaD/ZkdXWNhL0HZ3bUI1z1SF1p8jjTAWALnwA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/types': 3.468.0
@@ -968,11 +968,11 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/signature-v4-crt@3.470.0:
-    resolution: {integrity: sha512-aHQC2jtf8zJwe6tcPxlvIVYp719UsOjpuF70i9UwNvfo3Uycm4lViJJC66wbY8jxwF8xBimJuSsbUwW0eQbvyg==}
+  /@aws-sdk/signature-v4-crt@3.474.0:
+    resolution: {integrity: sha512-PYgq7MKDk79tEM3nRUE7iup4Xmld8KzUwtjNgeC5ESt8PIOdwOjorMScXJpdamb43JZ92WMixXWxPbnYKhNpoQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@aws-sdk/signature-v4-multi-region': 3.470.0
+      '@aws-sdk/signature-v4-multi-region': 3.474.0
       '@aws-sdk/types': 3.468.0
       '@aws-sdk/util-user-agent-node': 3.470.0(aws-crt@1.20.0)
       '@smithy/querystring-parser': 2.0.11
@@ -999,11 +999,11 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/signature-v4-multi-region@3.470.0:
-    resolution: {integrity: sha512-pbgQW5Fbu7tLOQFXTnb9Mp8GL+b4DnkGwXHZjE9AmwDisW/jlGwf+EFKr2xnuoNiaqvj0zHY+vvN6dewzik7Og==}
+  /@aws-sdk/signature-v4-multi-region@3.474.0:
+    resolution: {integrity: sha512-93OWRQgTJZASXLrlUNX7mmXknNkYxFYldRLARmYQccONmnIqgYQW0lQj8BFwqkHJTzSMik3/UsU0SHKwZ9ynYA==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@aws-sdk/middleware-sdk-s3': 3.470.0
+      '@aws-sdk/middleware-sdk-s3': 3.474.0
       '@aws-sdk/types': 3.468.0
       '@smithy/protocol-http': 3.0.11
       '@smithy/signature-v4': 2.0.11
