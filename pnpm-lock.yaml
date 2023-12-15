@@ -32,7 +32,7 @@ dependencies:
     version: 2.0.18(react@18.2.0)
   '@hookform/resolvers':
     specifier: ^3.3.2
-    version: 3.3.2(react-hook-form@7.49.1)
+    version: 3.3.2(react-hook-form@7.49.2)
   '@keystone-6/core':
     specifier: ^5.7.1
     version: 5.7.1(@babel/core@7.23.2)(@prisma/generator-helper@5.7.0)(@types/react@18.2.45)(aws-crt@1.19.0)
@@ -115,8 +115,8 @@ dependencies:
     specifier: ^16.8.1
     version: 16.8.1
   inngest:
-    specifier: ^3.7.1
-    version: 3.7.1(typescript@5.3.3)
+    specifier: ^3.7.2
+    version: 3.7.2(typescript@5.3.3)
   intuit-oauth:
     specifier: ^4.0.0
     version: 4.0.0
@@ -139,8 +139,8 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   react-hook-form:
-    specifier: ^7.49.1
-    version: 7.49.1(react@18.2.0)
+    specifier: ^7.49.2
+    version: 7.49.2(react@18.2.0)
   react-tailwindcss-datepicker:
     specifier: ^1.6.6
     version: 1.6.6(dayjs@1.11.10)(react@18.2.0)
@@ -2531,12 +2531,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@hookform/resolvers@3.3.2(react-hook-form@7.49.1):
+  /@hookform/resolvers@3.3.2(react-hook-form@7.49.2):
     resolution: {integrity: sha512-Tw+GGPnBp+5DOsSg4ek3LCPgkBOuOgS5DsDV7qsWNH9LZc433kgsWICjlsh2J9p04H2K66hsXPPb9qn9ILdUtA==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.49.1(react@18.2.0)
+      react-hook-form: 7.49.2(react@18.2.0)
     dev: false
 
   /@httptoolkit/websocket-stream@6.0.1:
@@ -7084,8 +7084,8 @@ packages:
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  /inngest@3.7.1(typescript@5.3.3):
-    resolution: {integrity: sha512-VUswBjtPGkKkl36izF5jhU8ezDSYUHFrGRML14nQZiblKvWe4VmDgs1HTgKNhjZEDDQzfLyVLDI9uguOb9Hdxw==}
+  /inngest@3.7.2(typescript@5.3.3):
+    resolution: {integrity: sha512-6OR5Ym7gqqZWVJXSa9ASIRdTjeUoX163Oes3Chlcz4oqoK54L29gl78h/nS2l5iypjvn8V39dz5/qE2XlfjFuA==}
     engines: {node: '>=14'}
     peerDependencies:
       typescript: '>=4.7.2'
@@ -8818,8 +8818,8 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.45)(react@18.2.0)
     dev: false
 
-  /react-hook-form@7.49.1(react@18.2.0):
-    resolution: {integrity: sha512-MId71bfWmpyvwuWjVTe2b4DRc0jIYOb/B9tlrotEHTuHlQGeX1x2QXfjNe9UtMi6TqhO0bsSdSWgjcUFh2fSww==}
+  /react-hook-form@7.49.2(react@18.2.0):
+    resolution: {integrity: sha512-TZcnSc17+LPPVpMRIDNVITY6w20deMdNi6iehTFLV1x8SqThXGwu93HjlUVU09pzFgZH7qZOvLMM7UYf2ShAHA==}
     engines: {node: '>=18', pnpm: '8'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
