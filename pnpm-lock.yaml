@@ -40,11 +40,11 @@ dependencies:
     specifier: ^0.4.0
     version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
   '@planetscale/database':
-    specifier: ^1.11.0
-    version: 1.11.0
+    specifier: ^1.13.0
+    version: 1.13.0
   '@prisma/adapter-planetscale':
     specifier: ^5.7.0
-    version: 5.7.0(@planetscale/database@1.11.0)
+    version: 5.7.0(@planetscale/database@1.13.0)
   '@prisma/client':
     specifier: 5.7.0
     version: 5.7.0(prisma@5.7.0)
@@ -3214,8 +3214,8 @@ packages:
     resolution: {integrity: sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==}
     dev: false
 
-  /@planetscale/database@1.11.0:
-    resolution: {integrity: sha512-aWbU+D/IRHoDE9975y+Q4c+EwwAWxCPwFId+N1AhQVFXzbeJMkj6KN2iQtoi03elcLMRdfT+V3i9Z4WRw+/oIA==}
+  /@planetscale/database@1.13.0:
+    resolution: {integrity: sha512-sb9tUoF+Po55o+3PRHZVeH8XzUIABKBKcnq6oBUa+p/2uau/E2EXhnUPXmkC/x7oB6ILBqmqTL6dPP5Dn6d6iA==}
     engines: {node: '>=16'}
     dev: false
 
@@ -3223,12 +3223,12 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@prisma/adapter-planetscale@5.7.0(@planetscale/database@1.11.0):
+  /@prisma/adapter-planetscale@5.7.0(@planetscale/database@1.13.0):
     resolution: {integrity: sha512-9oGkGK1sgyk/kDliZSHmoVRhQ2N6mvaUQljZ3PpVMdpudXl/p3k5QFtd/VYNFfUGJ+8r4V3j0GedKJBMuxWASQ==}
     peerDependencies:
       '@planetscale/database': ^1.11.0
     dependencies:
-      '@planetscale/database': 1.11.0
+      '@planetscale/database': 1.13.0
       '@prisma/driver-adapter-utils': 5.7.0
     transitivePeerDependencies:
       - supports-color
