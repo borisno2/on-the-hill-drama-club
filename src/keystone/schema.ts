@@ -360,6 +360,7 @@ export const lists: Lists<Session> = {
           isNullable: true,
         },
       }),
+      position: text({ validation: { isRequired: true } }),
       image: image({}),
       lessons: relationship({
         ref: 'Lesson.teachers',

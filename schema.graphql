@@ -977,6 +977,7 @@ type Teacher {
   id: ID!
   name: String
   bio: String
+  position: String
   image: ImageFieldOutput
   lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonWhereUniqueInput): [Lesson!]
   lessonsCount(where: LessonWhereInput! = {}): Int
@@ -1002,6 +1003,7 @@ input TeacherWhereInput {
   id: IDFilter
   name: StringFilter
   bio: StringNullableFilter
+  position: StringFilter
   lessons: LessonManyRelationFilter
 }
 
@@ -1009,11 +1011,13 @@ input TeacherOrderByInput {
   id: OrderDirection
   name: OrderDirection
   bio: OrderDirection
+  position: OrderDirection
 }
 
 input TeacherUpdateInput {
   name: String
   bio: String
+  position: String
   image: ImageFieldInput
   lessons: LessonRelateToManyForUpdateInput
 }
@@ -1033,6 +1037,7 @@ input TeacherUpdateArgs {
 input TeacherCreateInput {
   name: String
   bio: String
+  position: String
   image: ImageFieldInput
   lessons: LessonRelateToManyForCreateInput
 }
