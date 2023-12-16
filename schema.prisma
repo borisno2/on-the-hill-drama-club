@@ -129,6 +129,7 @@ model Lesson {
   location         String          @default("")
   createdAt        DateTime?       @default(now())
   lessonTerms      LessonTerm[]    @relation("LessonTerm_lesson")
+  teachers         Teacher[]       @relation("Lesson_teachers")
 
   @@index([lessonCategoryId])
 }
@@ -144,6 +145,20 @@ model XeroSettings {
   id       Int    @id
   tokenSet Json?
   tenantId String @default("")
+}
+
+model Teacher {
+  id                       String   @id @default(cuid())
+  name                     String   @default("")
+  bio                      String?  @mysql.Text
+  image_filesize           Int?
+  image_pathname           String?
+  image_width              Int?
+  image_height             Int?
+  image_contentType        String?
+  image_contentDisposition String?
+  image_url                String?
+  lessons                  Lesson[] @relation("Lesson_teachers")
 }
 
 model Enrolment {

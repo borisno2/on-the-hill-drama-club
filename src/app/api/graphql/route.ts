@@ -1,21 +1,30 @@
 import { keystoneContext } from 'keystone/context'
-import { ApolloServer } from '@apollo/server'
-import { startServerAndCreateNextHandler } from '@as-integrations/next'
-import { NextRequest } from 'next/server'
 import { getServerActionContext } from 'keystone/context/nextAuthFix'
 
-const apolloServer = new ApolloServer({
+import { createYoga } from 'graphql-yoga'
+import { createFetch } from '@whatwg-node/fetch'
+
+const { handleRequest } = createYoga({
   schema: keystoneContext.graphql.schema,
-})
-
-const handler = startServerAndCreateNextHandler<NextRequest>(apolloServer, {
   context: async () => getServerActionContext(),
+
+  graphqlEndpoint: '/api/graphql',
+
+  fetchAPI: {
+    ...createFetch({
+      formDataLimits: {
+        // Maximum allowed file size (in bytes)
+        fileSize: 4500,
+        // Maximum allowed number of files
+        files: 10,
+        // Maximum allowed size of content (operations, variables etc...)
+        fieldSize: 1000000,
+        // Maximum allowed header size for form data
+        headerSize: 1000000,
+      },
+    }),
+    Response,
+  },
 })
 
-export async function GET(request: NextRequest) {
-  return handler(request)
-}
-
-export async function POST(request: NextRequest) {
-  return handler(request)
-}
+export { handleRequest as GET, handleRequest as POST, handleRequest as OPTIONS }
