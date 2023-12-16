@@ -26,6 +26,7 @@ import Message from './lists/message'
 import Student from './lists/student'
 import { inngest } from '../lib/inngest/client'
 import { Session } from 'next-auth'
+import { image } from '../components/keystone/image'
 
 export const lists: Lists<Session> = {
   User: list({
@@ -313,6 +314,7 @@ export const lists: Lists<Session> = {
         defaultValue: { kind: 'now' },
       }),
       lessonTerms: relationship({ ref: 'LessonTerm.lesson', many: true }),
+      teachers: relationship({ ref: 'Teacher.lessons', many: true }),
     },
   }),
   EmailSettings: list({
@@ -339,6 +341,31 @@ export const lists: Lists<Session> = {
     fields: {
       tokenSet: json(),
       tenantId: text(),
+    },
+  }),
+
+  Teacher: list({
+    access: {
+      operation: {
+        ...allOperations(isAdmin),
+        query: allowAll,
+      },
+    },
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      bio: text({
+        ui: { displayMode: 'textarea' },
+        db: {
+          nativeType: 'Text',
+          isNullable: true,
+        },
+      }),
+      position: text({ validation: { isRequired: true } }),
+      image: image({}),
+      lessons: relationship({
+        ref: 'Lesson.teachers',
+        many: true,
+      }),
     },
   }),
   Enrolment,

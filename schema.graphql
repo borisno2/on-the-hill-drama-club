@@ -782,6 +782,8 @@ type Lesson {
   createdAt: DateTime
   lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonTermWhereUniqueInput): [LessonTerm!]
   lessonTermsCount(where: LessonTermWhereInput! = {}): Int
+  teachers(where: TeacherWhereInput! = {}, orderBy: [TeacherOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TeacherWhereUniqueInput): [Teacher!]
+  teachersCount(where: TeacherWhereInput! = {}): Int
 }
 
 input LessonWhereUniqueInput {
@@ -805,6 +807,13 @@ input LessonWhereInput {
   location: StringFilter
   createdAt: DateTimeNullableFilter
   lessonTerms: LessonTermManyRelationFilter
+  teachers: TeacherManyRelationFilter
+}
+
+input TeacherManyRelationFilter {
+  every: TeacherWhereInput
+  some: TeacherWhereInput
+  none: TeacherWhereInput
 }
 
 input LessonOrderByInput {
@@ -834,12 +843,20 @@ input LessonUpdateInput {
   location: String
   createdAt: DateTime
   lessonTerms: LessonTermRelateToManyForUpdateInput
+  teachers: TeacherRelateToManyForUpdateInput
 }
 
 input LessonCategoryRelateToOneForUpdateInput {
   create: LessonCategoryCreateInput
   connect: LessonCategoryWhereUniqueInput
   disconnect: Boolean
+}
+
+input TeacherRelateToManyForUpdateInput {
+  disconnect: [TeacherWhereUniqueInput!]
+  set: [TeacherWhereUniqueInput!]
+  create: [TeacherCreateInput!]
+  connect: [TeacherWhereUniqueInput!]
 }
 
 input LessonUpdateArgs {
@@ -860,11 +877,17 @@ input LessonCreateInput {
   location: String
   createdAt: DateTime
   lessonTerms: LessonTermRelateToManyForCreateInput
+  teachers: TeacherRelateToManyForCreateInput
 }
 
 input LessonCategoryRelateToOneForCreateInput {
   create: LessonCategoryCreateInput
   connect: LessonCategoryWhereUniqueInput
+}
+
+input TeacherRelateToManyForCreateInput {
+  create: [TeacherCreateInput!]
+  connect: [TeacherWhereUniqueInput!]
 }
 
 type EmailSettings {
@@ -948,6 +971,75 @@ input XeroSettingsUpdateArgs {
 input XeroSettingsCreateInput {
   tokenSet: JSON
   tenantId: String
+}
+
+type Teacher {
+  id: ID!
+  name: String
+  bio: String
+  position: String
+  image: ImageFieldOutput
+  lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonWhereUniqueInput): [Lesson!]
+  lessonsCount(where: LessonWhereInput! = {}): Int
+}
+
+type ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: String!
+  url: String!
+}
+
+input TeacherWhereUniqueInput {
+  id: ID
+}
+
+input TeacherWhereInput {
+  AND: [TeacherWhereInput!]
+  OR: [TeacherWhereInput!]
+  NOT: [TeacherWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  bio: StringNullableFilter
+  position: StringFilter
+  lessons: LessonManyRelationFilter
+}
+
+input TeacherOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  bio: OrderDirection
+  position: OrderDirection
+}
+
+input TeacherUpdateInput {
+  name: String
+  bio: String
+  position: String
+  image: ImageFieldInput
+  lessons: LessonRelateToManyForUpdateInput
+}
+
+input ImageFieldInput {
+  upload: File!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar File
+
+input TeacherUpdateArgs {
+  where: TeacherWhereUniqueInput!
+  data: TeacherUpdateInput!
+}
+
+input TeacherCreateInput {
+  name: String
+  bio: String
+  position: String
+  image: ImageFieldInput
+  lessons: LessonRelateToManyForCreateInput
 }
 
 type Enrolment {
@@ -1354,6 +1446,12 @@ type Mutation {
   updateManyXeroSettings(data: [XeroSettingsUpdateArgs!]!): [XeroSettings]
   deleteXeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}): XeroSettings
   deleteManyXeroSettings(where: [XeroSettingsWhereUniqueInput!]!): [XeroSettings]
+  createTeacher(data: TeacherCreateInput!): Teacher
+  createTeachers(data: [TeacherCreateInput!]!): [Teacher]
+  updateTeacher(where: TeacherWhereUniqueInput!, data: TeacherUpdateInput!): Teacher
+  updateTeachers(data: [TeacherUpdateArgs!]!): [Teacher]
+  deleteTeacher(where: TeacherWhereUniqueInput!): Teacher
+  deleteTeachers(where: [TeacherWhereUniqueInput!]!): [Teacher]
   createEnrolment(data: EnrolmentCreateInput!): Enrolment
   createEnrolments(data: [EnrolmentCreateInput!]!): [Enrolment]
   updateEnrolment(where: EnrolmentWhereUniqueInput!, data: EnrolmentUpdateInput!): Enrolment
@@ -1411,6 +1509,9 @@ type Query {
   manyXeroSettings(where: XeroSettingsWhereInput! = {id: {equals: 1}}, orderBy: [XeroSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: XeroSettingsWhereUniqueInput): [XeroSettings!]
   xeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}): XeroSettings
   manyXeroSettingsCount(where: XeroSettingsWhereInput! = {id: {equals: 1}}): Int
+  teachers(where: TeacherWhereInput! = {}, orderBy: [TeacherOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TeacherWhereUniqueInput): [Teacher!]
+  teacher(where: TeacherWhereUniqueInput!): Teacher
+  teachersCount(where: TeacherWhereInput! = {}): Int
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EnrolmentWhereUniqueInput): [Enrolment!]
   enrolment(where: EnrolmentWhereUniqueInput!): Enrolment
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int

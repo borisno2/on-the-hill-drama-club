@@ -9,6 +9,8 @@ import { dayOptions } from 'types/selectOptions'
 import Images from '../../Images'
 import { cache } from 'react'
 import { getMetadata } from 'app/metadata'
+import Link from 'next/link'
+import { teacherNameHelper } from 'lib/utils'
 
 const GET_LESSON_CATEGORY_BY_SLUG = gql`
   query GET_LESSON_CATEGORY_BY_SLUG($slug: String!) {
@@ -29,6 +31,10 @@ const GET_LESSON_CATEGORY_BY_SLUG = gql`
         minYear
         maxYear
         location
+        teachers {
+          id
+          name
+        }
       }
     }
   }
@@ -125,6 +131,12 @@ export default async function Page({
                   >
                     Class Length
                   </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-zinc-100"
+                  >
+                    Teachers
+                  </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span className="sr-only">Enrol</span>
                   </th>
@@ -155,6 +167,12 @@ export default async function Page({
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-zinc-400">
                       {' '}
                       {lesson.lengthMin} minutes
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-zinc-400">
+                      {' '}
+                      <Link href="/about">
+                        {teacherNameHelper(lesson.teachers)}
+                      </Link>
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                       {lesson.time === 'TBD' ? (
