@@ -19,6 +19,10 @@ export const GET_LESSONS = gql`
         day
         time
         location
+        teachers {
+          id
+          name
+        }
         lessonCategory {
           id
           cost
@@ -45,6 +49,10 @@ export const GET_LESSON_BY_ID = gql`
         day
         time
         location
+        teachers {
+          id
+          name
+        }
         lessonCategory {
           id
           type

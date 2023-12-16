@@ -1,5 +1,10 @@
 import Link from 'next/link'
-import { CalendarIcon, MapPinIcon, UsersIcon } from '@heroicons/react/20/solid'
+import {
+  CalendarIcon,
+  MapPinIcon,
+  StarIcon,
+  UsersIcon,
+} from '@heroicons/react/20/solid'
 import { getSessionContext } from 'keystone/context'
 import { LessonTermWhereInput } from '../../../../__generated__/ts-gql/@schema'
 import { GET_LESSONS } from './queries'
@@ -7,6 +12,7 @@ import labelHelper from 'lib/labelHelper'
 import { formatDate } from 'lib/formatDate'
 import { lessonTypeOptions, lessonStatusOptions } from 'types/selectOptions'
 import EnrolButton from './EnrolButton'
+import { teacherNameHelper } from 'lib/utils'
 
 export default async function ClassList({
   where,
@@ -64,6 +70,13 @@ export default async function ClassList({
                         ? labelHelper(lessonStatusOptions, lesson.status)
                         : 'Upcoming'}{' '}
                       {enroled && `- Enroled`} - Click to view lesson details
+                    </p>
+                    <p className="flex items-center text-sm text-gray-500">
+                      <StarIcon
+                        className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Taught by {teacherNameHelper(lesson.lesson?.teachers)}
                     </p>
                     <p className="mt-2 flex items-center text-sm text-gray-500 sm:ml-6 sm:mt-0">
                       <MapPinIcon
