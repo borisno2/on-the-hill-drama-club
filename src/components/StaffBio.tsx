@@ -35,32 +35,34 @@ export async function StaffBio() {
         </p>
       </div>
       <div className="flex flex-col items-center justify-center gap-8 md:gap-12">
-        {teachers?.map(({ id, name, position, bio, image }) => (
-          <HoverCard key={id}>
-            <HoverCardTrigger asChild>
-              <div className="flex flex-row items-center gap-4 md:gap-8">
-                <Avatar className="h-32 w-24 md:h-40 md:w-32">
-                  <AvatarImage
-                    alt={`Image of Teacher ${name}`}
-                    src={image?.url}
-                  />
-                  <AvatarFallback>{`${name?.[0]}${
-                    name?.split(' ')?.[1]?.[0] || ''
-                  }`}</AvatarFallback>
-                </Avatar>
-                <div className="space-y-1">
-                  <h4 className="text-lg font-semibold">{name}</h4>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {position}
-                  </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {bio}
-                  </p>
+        {teachers?.map(({ id, name, position, bio, image }) =>
+          !bio && !position && !image?.url ? null : (
+            <HoverCard key={id}>
+              <HoverCardTrigger asChild>
+                <div className="flex flex-row items-center gap-4 md:gap-8">
+                  <Avatar className="h-32 w-24 md:h-40 md:w-32">
+                    <AvatarImage
+                      alt={`Image of Teacher ${name}`}
+                      src={image?.url}
+                    />
+                    <AvatarFallback>{`${name?.[0]}${
+                      name?.split(' ')?.[1]?.[0] || ''
+                    }`}</AvatarFallback>
+                  </Avatar>
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-semibold">{name}</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {position}
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {bio}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </HoverCardTrigger>
-          </HoverCard>
-        ))}
+              </HoverCardTrigger>
+            </HoverCard>
+          ),
+        )}
       </div>
     </section>
   )
