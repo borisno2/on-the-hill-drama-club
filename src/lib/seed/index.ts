@@ -1,5 +1,6 @@
 import { keystoneContext } from 'keystone/context'
 import { lessonCategories } from 'lib/seed/lessonCategories'
+import { teachersSeed } from './teachers'
 
 export async function seedDatabase() {
   const context = keystoneContext.sudo()
@@ -27,6 +28,13 @@ export async function seedDatabase() {
     const lessonsExist = await context.db.Lesson.count()
     if (lessonsExist === 0) {
       // Create lessons
+    }
+    const teachersExist = await context.db.Teacher.count()
+    if (teachersExist === 0) {
+      const teachers = await context.db.Teacher.createMany({
+        data: teachersSeed,
+      })
+      seed += teachers.length
     }
     return seed
   } catch (e) {
