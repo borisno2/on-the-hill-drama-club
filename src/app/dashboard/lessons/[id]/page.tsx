@@ -9,6 +9,7 @@ import { Suspense } from 'react'
 import EnrolStudentList from './EnrolStudentList'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
+import { teacherNameHelper } from 'lib/utils'
 
 export const metadata: Metadata = {
   ...getMetadata('Lessons - Student Portal'),
@@ -62,6 +63,13 @@ export default async function LessonPage({
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900">
                   {lessonTerm.lesson?.time}
+                </dd>
+              </div>
+
+              <div className="sm:col-span-1">
+                <dt className="text-sm font-medium text-gray-500">Taught By</dt>
+                <dd className="mt-1 text-sm text-gray-900">
+                  {teacherNameHelper(lessonTerm.lesson?.teachers)}
                 </dd>
               </div>
 
