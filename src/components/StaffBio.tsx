@@ -36,7 +36,7 @@ export async function StaffBio() {
       </div>
       <div className="flex flex-col items-center justify-center gap-8 md:gap-12">
         {teachers?.map(({ id, name, position, bio, image }) =>
-          !bio && !position && !image?.url ? null : (
+          !bio && !image?.url ? null : (
             <HoverCard key={id}>
               <HoverCardTrigger asChild>
                 <div className="flex flex-row items-center gap-4 md:gap-8">
