@@ -1,7 +1,7 @@
 import { Container } from 'components/Container'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import Timetable, { DayOfTheWeek, GET_LESSON_TIMETABLE } from './Tabletable'
+import Timetable, { DayOfTheWeek, GET_LESSON_TIMETABLE } from './Timetable'
 import { getMetadata } from 'app/metadata'
 import { getSessionContext } from 'keystone/context'
 

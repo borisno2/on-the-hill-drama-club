@@ -6,7 +6,7 @@ export const teachersSeed: TeacherCreateInput[] = [
     position: 'Violin',
     bio: `Olivia is a passionate and dedicated violinist and performer, completing extensive AMEB
       examinations, performing with the State School Spectacular orchestra, Bendigo Theatre company’s pit
-      orchestra and the Bendigo Symphonie Orchestra, Olivia has a wealth on ensemble and soloistic performance experience to endue.`,
+      orchestra and the Bendigo Symphony Orchestra, Olivia has a wealth on ensemble and soloistic performance experience to endue.`,
   },
   {
     name: 'Breanna Henderson',
@@ -17,7 +17,7 @@ export const teachersSeed: TeacherCreateInput[] = [
       choirs across Victoria.`,
   },
   {
-    name: 'Jasmine Brambly',
+    name: 'Jasmine Bramley',
     position: 'Drama',
     bio: `Jasmine has been part of the Drama club’s teacher training internship program for the past
       12 months and her most recent achievements include assistant director for the Drama clubs
