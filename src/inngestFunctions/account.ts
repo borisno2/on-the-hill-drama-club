@@ -90,7 +90,7 @@ export const createXeroCustomerFunction = inngest.createFunction(
         })
         return `Created Xero customer ${account.name} with id ${customer.contactID}`
       } catch (error) {
-        throw new Error('Errpr creating customer', { cause: error })
+        throw new Error('Error creating customer', { cause: error })
       }
     }
   },

@@ -13,7 +13,8 @@
     "postinstall": "keystone build --no-ui --frozen && ts-gql build",
     "seed-data": "tsx seed-data.ts",
     "ts-gql:build": "ts-gql build",
-    "ts-gql:watch": "ts-gql watch"
+    "ts-gql:watch": "ts-gql watch",
+    "lint": "eslint --ext .ts,.tsx . && cspell '**' && tsc --noEmit"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
@@ -79,6 +80,7 @@
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
+    "cspell": "^8.2.3",
     "eslint": "8.56.0",
     "eslint-config-next": "14.0.4",
     "prettier": "^3.1.1",

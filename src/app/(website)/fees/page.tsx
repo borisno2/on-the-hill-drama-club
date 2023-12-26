@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   ...getMetadata('Fees'),
 }
 
-const GET_LESSON_CATEFORY_FEES = gql`
-  query GET_LESSON_CATEFORY_FEES {
+const GET_LESSON_CATEGORY_FEES = gql`
+  query GET_LESSON_CATEGORY_FEES {
     lessonCategories {
       id
       name
@@ -20,12 +20,12 @@ const GET_LESSON_CATEFORY_FEES = gql`
       length
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_LESSON_CATEFORY_FEES').type
+` as import('../../../../__generated__/ts-gql/GET_LESSON_CATEGORY_FEES').type
 
 export default async function Fees() {
   const context = await getSessionContext()
   const { lessonCategories } = await context.graphql.run({
-    query: GET_LESSON_CATEFORY_FEES,
+    query: GET_LESSON_CATEGORY_FEES,
   })
   return (
     <div>
@@ -97,18 +97,16 @@ export default async function Fees() {
           <div className="pt-10 sm:flex sm:items-center">
             <div className="sm:flex-auto">
               <h1 className="text-lg font-semibold text-gray-900">
-                Invoices and Lesson Cancelations
+                Invoices and Lesson Cancellations
               </h1>
 
               <p className="mt-4 text-lg leading-7 text-gray-500">
-                In 2023 we returned to a termly invoice structure for all group
-                and individual lessons, an invoice for the term will be emailed
-                to you at the beginning of term and is to be paid no later than
-                week 3.
+                An invoice for the term will be emailed to you at the beginning
+                of term for all lessons and is to be paid no later than week 3.
               </p>
               <p className="mt-4 text-lg leading-7 text-gray-500">
                 Missed lessons that have been paid in advance, will be credited
-                to the next terms invoice if 24hr notice of the absents is
+                to the next terms invoice if 24hr notice of the absence is
                 given.
               </p>
             </div>
