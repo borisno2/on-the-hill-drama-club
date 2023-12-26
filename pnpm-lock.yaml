@@ -115,8 +115,8 @@ dependencies:
     specifier: ^16.3.1
     version: 16.3.1
   dotenv-flow:
-    specifier: ^4.0.1
-    version: 4.0.1
+    specifier: ^4.1.0
+    version: 4.1.0
   file-type:
     specifier: ^18.7.0
     version: 18.7.0
@@ -6524,8 +6524,8 @@ packages:
     dependencies:
       is-obj: 2.0.0
 
-  /dotenv-flow@4.0.1:
-    resolution: {integrity: sha512-HuCQ487bSA43mtlxdWpyk5jt5Lljy+v1I8y/2l96gtjSve9p3OvJZCCOhQnz2hY4VhLogFfXpY20zBygMwaydA==}
+  /dotenv-flow@4.1.0:
+    resolution: {integrity: sha512-0cwP9jpQBQfyHwvE0cRhraZMkdV45TQedA8AAUZMsFzvmLcQyc1HPv+oX0OOYwLFjIlvgVepQ+WuQHbqDaHJZg==}
     engines: {node: '>= 12.0.0'}
     dependencies:
       dotenv: 16.3.1
