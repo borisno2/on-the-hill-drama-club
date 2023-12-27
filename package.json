@@ -51,7 +51,7 @@
     "dayjs": "^1.11.10",
     "decimal.js": "^10.4.3",
     "dotenv": "^16.3.1",
-    "dotenv-flow": "^4.0.1",
+    "dotenv-flow": "^4.1.0",
     "file-type": "^18.7.0",
     "focus-visible": "^5.2.0",
     "graphql": "^16.8.1",
