@@ -130,8 +130,8 @@ dependencies:
     specifier: ^5.1.0
     version: 5.1.0(graphql@16.8.1)
   image-size:
-    specifier: ^1.0.2
-    version: 1.0.2
+    specifier: ^1.1.0
+    version: 1.1.0
   inngest:
     specifier: ^3.7.4
     version: 3.7.4(typescript@5.3.3)
@@ -3307,7 +3307,7 @@ packages:
       fs-extra: 11.2.0
       graphql: 16.8.1
       graphql-upload: 15.0.2(graphql@16.8.1)
-      image-size: 1.0.2
+      image-size: 1.1.0
       inflection: 3.0.0
       intersection-observer: 0.12.2
       meow: 9.0.0
@@ -7899,9 +7899,9 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /image-size@1.0.2:
-    resolution: {integrity: sha512-xfOoWjceHntRb3qFCrh5ZFORYH8XCdYpASltMhZ/Q0KZiOwjdE/Yl2QCiWdwD+lygV5bMCvauzgu5PxBX/Yerg==}
-    engines: {node: '>=14.0.0'}
+  /image-size@1.1.0:
+    resolution: {integrity: sha512-asnTHw2K8OlqT5kVnQwX+AGKQqpvLo95LbNzQ/C0ln3yzentZmAdd0ygoD004VC4Kkd4PV7J2iaPQkqwp9yuTw==}
+    engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       queue: 6.0.2
