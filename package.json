@@ -59,7 +59,7 @@
     "image-size": "^1.1.0",
     "inngest": "^3.7.4",
     "intuit-oauth": "^4.0.0",
-    "lucide-react": "^0.303.0",
+    "lucide-react": "^0.311.0",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
     "postcss-focus-visible": "^9.0.1",
