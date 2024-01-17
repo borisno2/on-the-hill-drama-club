@@ -14,6 +14,13 @@ export function Footer() {
                 &copy; {new Date().getFullYear()} Josh and Emily Calder. All
                 rights reserved.
               </p>
+              <Link
+                className="text-sm text-zinc-400 dark:text-zinc-500"
+                href="/contact"
+              >
+                Contact and Location
+              </Link>
+
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
                 Website by <Link href="https://www.opensaas.au">OpenSaas</Link>
               </p>
