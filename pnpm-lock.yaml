@@ -38,7 +38,7 @@ dependencies:
     version: 3.3.3(react-hook-form@7.49.2)
   '@keystone-6/core':
     specifier: ^5.7.1
-    version: 5.7.1(@babel/core@7.23.6)(@prisma/generator-helper@5.7.0)(@types/react@18.2.46)(aws-crt@1.20.0)
+    version: 5.7.1(@babel/core@7.23.6)(@prisma/generator-helper@5.8.1)(@types/react@18.2.46)(aws-crt@1.20.0)
   '@marsidev/react-turnstile':
     specifier: ^0.4.0
     version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -82,8 +82,8 @@ dependencies:
     specifier: ^1.1.1
     version: 1.1.1
   '@vercel/blob':
-    specifier: ^0.16.1
-    version: 0.16.1
+    specifier: ^0.18.0
+    version: 0.18.0
   '@whatwg-node/fetch':
     specifier: ^0.9.14
     version: 0.9.14
@@ -3252,7 +3252,7 @@ packages:
     resolution: {integrity: sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==}
     dev: false
 
-  /@keystone-6/core@5.7.1(@babel/core@7.23.6)(@prisma/generator-helper@5.7.0)(@types/react@18.2.46)(aws-crt@1.20.0):
+  /@keystone-6/core@5.7.1(@babel/core@7.23.6)(@prisma/generator-helper@5.8.1)(@types/react@18.2.46)(aws-crt@1.20.0):
     resolution: {integrity: sha512-UeOZc65Xrvg/ejGNC4rkBKKIrKJFUYBRRCAptWQiqAPUdHNBACetMaB9LYjXExNjDHp72dmuDsaeOMuoXJdAsA==}
     hasBin: true
     dependencies:
@@ -3285,7 +3285,7 @@ packages:
       '@nodelib/fs.walk': 2.0.0
       '@prisma/client': 5.8.1(prisma@5.8.1)
       '@prisma/internals': 5.8.1
-      '@prisma/migrate': 5.8.1(@prisma/generator-helper@5.7.0)(@prisma/internals@5.8.1)
+      '@prisma/migrate': 5.8.1(@prisma/generator-helper@5.8.1)(@prisma/internals@5.8.1)
       apollo-upload-client: 17.0.0(@apollo/client@3.8.8)(graphql@16.8.1)
       bcryptjs: 2.4.3
       body-parser: 1.20.2
@@ -3714,10 +3714,6 @@ packages:
       prisma: 5.8.1
     dev: false
 
-  /@prisma/debug@5.7.0:
-    resolution: {integrity: sha512-tZ+MOjWlVvz1kOEhNYMa4QUGURY+kgOUBqLHYIV8jmCsMuvA1tWcn7qtIMLzYWCbDcQT4ZS8xDgK0R2gl6/0wA==}
-    dev: false
-
   /@prisma/debug@5.8.1:
     resolution: {integrity: sha512-tjuw7eA0Us3T42jx9AmAgL58rzwzpFGYc3R7Y4Ip75EBYrKMBA1YihuWMcBC92ILmjlQ/u3p8VxcIE0hr+fZfg==}
 
@@ -3748,12 +3744,6 @@ packages:
       '@prisma/engines-version': 5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2
       '@prisma/get-platform': 5.8.1
 
-  /@prisma/generator-helper@5.7.0:
-    resolution: {integrity: sha512-Fn4hJHKGJ49+E8sxpfslRauB3Goa3RAENJ/W25NMR754B9KxvmbCJyE3MT/lIZxML2nGgIdXYUtoDHZHnRaKDw==}
-    dependencies:
-      '@prisma/debug': 5.7.0
-    dev: false
-
   /@prisma/generator-helper@5.8.1:
     resolution: {integrity: sha512-2EDd0o+GHfbX1dtw5BnfOz3hQB7AtYrwe4YNiKfo2UDBvB/ne/ChZa3b/vBm/GKpjW2Xaymct8D9oIHev3juzQ==}
     dependencies:
@@ -3778,7 +3768,7 @@ packages:
       prompts: 2.4.2
     dev: false
 
-  /@prisma/migrate@5.8.1(@prisma/generator-helper@5.7.0)(@prisma/internals@5.8.1):
+  /@prisma/migrate@5.8.1(@prisma/generator-helper@5.8.1)(@prisma/internals@5.8.1):
     resolution: {integrity: sha512-NIj3BguUxA/R4B2Qec7sv7i+vwPNNfgD6jSAXXDoDKGZ/Ocq+ppluxuJFbqmWknxVqSYVMJeiOtx5gaaQ+V8iA==}
     peerDependencies:
       '@prisma/generator-helper': '*'
@@ -3786,7 +3776,7 @@ packages:
     dependencies:
       '@prisma/debug': 5.8.1
       '@prisma/engines-version': 5.8.1-1.78caf6feeaed953168c64e15a249c3e9a033ebe2
-      '@prisma/generator-helper': 5.7.0
+      '@prisma/generator-helper': 5.8.1
       '@prisma/get-platform': 5.8.1
       '@prisma/internals': 5.8.1
       prompts: 2.4.2
@@ -5120,10 +5110,12 @@ packages:
       server-only: 0.0.1
     dev: false
 
-  /@vercel/blob@0.16.1:
-    resolution: {integrity: sha512-GKslL5l/Jx8OBHRunBYsiWmbMxjvy7LRtOcN7czw7vV4c1Z4vGy8NYTd6RdJt08OKC2wHC28LDssdfVNLrzp+w==}
+  /@vercel/blob@0.18.0:
+    resolution: {integrity: sha512-DKjzhGfvBIzYjAI8RLsoEWB8NYUkMXL3TQLeKO5V1qLglgckuetwtfnYPF0OeTLezklE9m//vMpBS0qkxP4RRA==}
     engines: {node: '>=16.14'}
     dependencies:
+      async-retry: 1.3.3
+      bytes: 3.1.2
       undici: 5.28.2
     dev: false
 
