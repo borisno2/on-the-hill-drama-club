@@ -250,7 +250,7 @@ export default function Student({
                   htmlFor="medical"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Any relivate medical information including action required in
+                  Any relevant medical information including action required in
                   an emergency
                 </label>
                 <div className="mt-1">

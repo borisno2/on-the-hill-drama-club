@@ -38,7 +38,7 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile }) {
-      // if account type is cretentials then authorise the user
+      // if account type is credentials then authorise the user
       if (account?.provider === 'credentials') {
         if (user.failMessage) {
           if (user.failMessage === 'InvalidCredentials') {
