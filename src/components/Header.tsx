@@ -79,6 +79,12 @@ const callsToAction = [
 ]
 const resources = [
   {
+    name: 'Contact',
+    description: 'Contact Information and Location',
+    href: '/contact',
+    icon: PhoneIcon,
+  },
+  {
     name: 'Term Dates',
     description: 'See upcoming Important Dates',
     href: '/calendar',
