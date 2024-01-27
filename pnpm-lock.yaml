@@ -37,11 +37,11 @@ dependencies:
     specifier: ^0.4.0
     version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
   '@planetscale/database':
-    specifier: ^1.13.0
-    version: 1.13.0
+    specifier: ^1.14.0
+    version: 1.14.0
   '@prisma/adapter-planetscale':
     specifier: ^5.8.1
-    version: 5.8.1(@planetscale/database@1.13.0)
+    version: 5.8.1(@planetscale/database@1.14.0)
   '@prisma/client':
     specifier: 5.8.1
     version: 5.8.1(prisma@5.8.1)
@@ -3703,8 +3703,8 @@ packages:
     dev: true
     optional: true
 
-  /@planetscale/database@1.13.0:
-    resolution: {integrity: sha512-sb9tUoF+Po55o+3PRHZVeH8XzUIABKBKcnq6oBUa+p/2uau/E2EXhnUPXmkC/x7oB6ILBqmqTL6dPP5Dn6d6iA==}
+  /@planetscale/database@1.14.0:
+    resolution: {integrity: sha512-7BB+iH6EH4YJuDeVeEbxpo60BFz3wIXJNXCmBGl40eC4HStRMGZ1COxKfiuPcINWwwrJhAhI9AEI97AOZYT7JQ==}
     engines: {node: '>=16'}
     dev: false
 
@@ -3712,12 +3712,12 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@prisma/adapter-planetscale@5.8.1(@planetscale/database@1.13.0):
+  /@prisma/adapter-planetscale@5.8.1(@planetscale/database@1.14.0):
     resolution: {integrity: sha512-sS0Go8geoxaatXV5fV/EHRwfsRcxsBdy7VeO1u7zZ76CrGCCyhDQNb1RC4SsJ9yWL80+dAkgBz7t4mT5Ci45cA==}
     peerDependencies:
       '@planetscale/database': ^1.11.0
     dependencies:
-      '@planetscale/database': 1.13.0
+      '@planetscale/database': 1.14.0
       '@prisma/driver-adapter-utils': 5.8.1
     transitivePeerDependencies:
       - supports-color
