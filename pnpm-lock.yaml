@@ -34,8 +34,8 @@ dependencies:
     specifier: ^5.7.1
     version: 5.7.1(@babel/core@7.23.6)(@prisma/generator-helper@5.8.1)(@types/react@18.2.46)(aws-crt@1.21.0)
   '@marsidev/react-turnstile':
-    specifier: ^0.4.0
-    version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.5.1
+    version: 0.5.1(react-dom@18.2.0)(react@18.2.0)
   '@planetscale/database':
     specifier: ^1.14.0
     version: 1.14.0
@@ -3547,8 +3547,8 @@ packages:
       - '@types/react'
     dev: false
 
-  /@marsidev/react-turnstile@0.4.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-U0lwTWQhP04AnIdWEbLpF/phpqtblNbrnE4yJMdvGyeOZOTmuHW3wB+V8X+BO55pTXZitp2GgJsrGkbUjwJIeQ==}
+  /@marsidev/react-turnstile@0.5.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/Uu6lYpt9ebUOU8bUfJg7qp2ufJg3Mqf1G/TT1iXg9NN/3zH+3bOCWL9Lsm9JhVY4Ts66ftZw7EwFB3tKpw5rA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
