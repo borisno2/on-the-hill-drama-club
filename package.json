@@ -35,7 +35,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@ts-gql/compiler": "^0.16.5",
     "@ts-gql/next": "^17.0.1",
-    "@ts-gql/tag": "^0.7.2",
+    "@ts-gql/tag": "0.7.0",
     "@types/dotenv-flow": "^3.3.3",
     "@vercel/analytics": "^1.1.2",
     "@vercel/blob": "^0.20.0",

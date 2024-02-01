@@ -67,8 +67,8 @@ dependencies:
     specifier: ^17.0.1
     version: 17.0.1(@ts-gql/compiler@0.16.5)(graphql@16.8.1)
   '@ts-gql/tag':
-    specifier: ^0.7.2
-    version: 0.7.2(graphql@16.8.1)
+    specifier: 0.7.0
+    version: 0.7.0(graphql@16.8.1)
   '@types/dotenv-flow':
     specifier: ^3.3.3
     version: 3.3.3
@@ -4922,8 +4922,8 @@ packages:
       graphql: 16.8.1
     dev: false
 
-  /@ts-gql/tag@0.7.2(graphql@16.8.1):
-    resolution: {integrity: sha512-CwPfFJwRGC6RdxL99is9XUKbHUf6h2N285CrTrQL249b1PntLM08aHr5v7otH73coBpuwN4UobYLY41wiRD2rQ==}
+  /@ts-gql/tag@0.7.0(graphql@16.8.1):
+    resolution: {integrity: sha512-DofrBf01J9ZX6L8KhpTL1JrFGOuVkwFfACDNzdqrH855KYCANOGcvQTZn5LK0rY22DWISnuQrOF8ytBTVIahrw==}
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || 14 || 15 || 16
     dependencies:
