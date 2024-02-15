@@ -17,7 +17,7 @@
     "lint": "eslint --ext .ts,.tsx . && cspell '**' && tsc --noEmit"
   },
   "dependencies": {
-    "@aws-sdk/signature-v4-crt": "^3.502.0",
+    "@aws-sdk/signature-v4-crt": "^3.515.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@graphql-yoga/apollo-link": "^3.1.1",
     "@headlessui/react": "^1.7.18",
