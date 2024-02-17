@@ -24,7 +24,7 @@
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.4",
     "@keystone-6/core": "^5.7.2",
-    "@marsidev/react-turnstile": "^0.5.1",
+    "@marsidev/react-turnstile": "^0.5.2",
     "@planetscale/database": "^1.16.0",
     "@prisma/adapter-planetscale": "^5.9.1",
     "@prisma/client": "5.9.1",
@@ -75,8 +75,8 @@
   "devDependencies": {
     "@ts-gql/eslint-plugin": "^0.9.1",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^20.11.17",
-    "@types/react": "^18.2.55",
+    "@types/node": "^20.11.19",
+    "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "cspell": "^8.3.2",
     "eslint": "8.56.0",
@@ -88,7 +88,7 @@
     "turbo": "^1.12.4",
     "typescript": "^5.3.3"
   },
-  "packageManager": "pnpm@8.15.2",
+  "packageManager": "pnpm@8.15.3",
   "pnpm": {
     "overrides": {
       "prisma": "5.9.0",
