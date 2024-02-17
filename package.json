@@ -38,7 +38,7 @@
     "@ts-gql/tag": "0.7.3",
     "@types/dotenv-flow": "^3.3.3",
     "@vercel/analytics": "^1.2.0",
-    "@vercel/blob": "^0.20.0",
+    "@vercel/blob": "^0.22.0",
     "@whatwg-node/fetch": "^0.9.16",
     "autoprefixer": "^10.4.17",
     "aws-crt": "^1.21.1",
