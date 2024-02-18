@@ -23,6 +23,12 @@ import {
 import { Session } from 'next-auth'
 
 export const Bill: Lists.Bill<Session> = list({
+  ui: {
+    listView: {
+      initialColumns: ['id', 'account', 'term', 'total', 'status'],
+      initialSort: { field: 'status', direction: 'DESC' },
+    },
+  },
   access: {
     operation: {
       ...allOperations(isAdmin),

@@ -5,22 +5,21 @@ import 'focus-visible'
 import { Container } from 'components/Container'
 import Link from 'next/link'
 import { AnalyticsWrapper } from 'components/Analytics'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Viewport } from 'next'
 
 type AppProps = {
   children: React.ReactNode
 }
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1 }
+export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
 
 export default function RootLayout({ children }: AppProps) {
   return (
     <html className="h-full antialiased" lang="en">
       <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
         <AuthContext>
-          <div className="flex-grow">
-            {children}
-          </div>
+          <div className="flex-grow">{children}</div>
           <footer>
             <Container.Outer>
               <div className="border-t border-zinc-100 pb-6 pt-4 dark:border-zinc-700/40">
@@ -40,6 +39,7 @@ export default function RootLayout({ children }: AppProps) {
             </Container.Outer>
           </footer>
         </AuthContext>
+        <SpeedInsights />
         <AnalyticsWrapper />
       </body>
     </html>

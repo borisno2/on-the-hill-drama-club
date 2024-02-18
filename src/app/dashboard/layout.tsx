@@ -5,6 +5,7 @@ import 'focus-visible'
 import { Container } from 'components/Container'
 import Link from 'next/link'
 import { AnalyticsWrapper } from 'components/Analytics'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 type AppProps = {
   children: React.ReactNode
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: AppProps) {
           </footer>
         </AuthContext>
         <AnalyticsWrapper />
+        <SpeedInsights />
       </body>
     </html>
   )

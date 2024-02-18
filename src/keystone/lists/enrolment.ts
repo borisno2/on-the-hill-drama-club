@@ -8,6 +8,12 @@ import { enrolmentFilter, isAdmin, isLoggedIn } from '../helpers'
 import { Session } from 'next-auth'
 
 const Enrollment: Lists.Enrolment<Session> = list({
+  ui: {
+    listView: {
+      initialColumns: ['id', 'lessonTerm', 'student', 'status'],
+      initialSort: { field: 'status', direction: 'DESC' },
+    },
+  },
   access: {
     operation: {
       ...allOperations(isLoggedIn),

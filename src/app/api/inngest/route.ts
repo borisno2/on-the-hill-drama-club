@@ -5,7 +5,10 @@ import {
   createBillItemFunction,
   sendEnrolmentConfirmationFunction,
 } from 'inngestFunctions/enrolment'
-import { createXeroCustomerFunction } from 'inngestFunctions/account'
+import {
+  createXeroCustomerFunction,
+  upsertXeroCustomerFunction,
+} from 'inngestFunctions/account'
 import { createXeroInvoiceFunction } from 'inngestFunctions/bill'
 import {
   copyTermFunction,
@@ -24,5 +27,6 @@ export const { GET, POST, PUT } = serve({
     copyTermFunction,
     copyEnrolmentsFunction,
     completeTermFunction,
+    upsertXeroCustomerFunction,
   ],
 })

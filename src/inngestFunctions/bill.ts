@@ -7,6 +7,7 @@ import { gql } from '@ts-gql/tag/no-transform'
 import Decimal from 'decimal.js'
 import { slugify } from 'inngest'
 import { Invoice, LineAmountTypes, RequestEmpty } from 'xero-node'
+import { upsertXeroCustomerFunction } from './account'
 
 const UPDATE_BILL_XERO_ID = gql`
   mutation UPDATE_BILL_XERO_ID($id: ID!, $xeroId: String!) {
@@ -72,7 +73,7 @@ export const createXeroInvoiceFunction = inngest.createFunction(
     name: 'Create Xero Invoice Hook',
   },
   { event: 'app/bill.approved' },
-  async ({ event }) => {
+  async ({ event, step }) => {
     const { item, session } = event.data
     const context: Context = keystoneContext.withSession(session)
     const { xeroClient, xeroTenantId } = await getXeroClient({ context })
@@ -88,114 +89,71 @@ export const createXeroInvoiceFunction = inngest.createFunction(
     if (!bill.account) throw new Error('Could not get bill account')
     if (!bill.account.user) throw new Error('Could not get user')
     if (!bill.account.user.email) throw new Error('Could not get bill email')
-    let { xeroId } = bill.account
-    if (!xeroId) {
-      try {
-        const { body: contacts } = await xeroClient.accountingApi.getContacts(
-          xeroTenantId,
-          undefined,
-          'Name="' + bill.account.name + '"',
-        )
-        if (contacts && contacts.contacts && contacts.contacts.length > 0) {
-          xeroId = contacts.contacts[0].contactID!
-          await context.db.Account.updateOne({
-            where: { id: bill.account.id },
-            data: {
-              xeroId: contacts.contacts[0].contactID!,
-            },
-          })
-        } else {
-          const { body } = await xeroClient.accountingApi.createContacts(
-            xeroTenantId,
-            {
-              contacts: [
-                {
-                  name: bill.account.name!,
-                  firstName: bill.account.firstName!,
-                  lastName: bill.account.surname!,
-                  emailAddress: bill.account.user.email,
-                },
-              ],
-            },
-          )
-          if (!body.contacts || body.contacts.length === 0) {
-            throw new Error('Error creating customer', {
-              cause: 'Create customer returned null',
-            })
-          }
 
-          const customer = body.contacts[0]
-          if (customer === null) {
-            throw new Error('Error creating customer', {
-              cause: 'Create customer returned null',
-            })
-          }
+    const accountItem = await context.db.Account.findOne({
+      where: { id: bill.account.id },
+    })
+    if (!accountItem) throw new Error('Could not get account item')
 
-          await context.db.Account.updateOne({
-            where: { id: bill.account.id },
-            data: {
-              xeroId: customer.contactID,
-            },
-          })
+    const account = await step.invoke('xero/customer.upsert', {
+      function: upsertXeroCustomerFunction,
+      data: { item: accountItem, session },
+    })
 
-          xeroId = customer.contactID!
-        }
-      } catch (error) {
-        throw new Error('Error creating customer', { cause: error })
-      }
-    }
+    if (!account.xeroId) throw new Error('Could not get account xeroId')
     if (!bill.items || bill.items.length === 0) {
       throw new Error('Bill has no items')
     }
     if (bill.xeroId !== null) {
       return `Bill ${bill.name} already has a Xero invoice with id ${bill.xeroId}`
     } else {
-      // create the invoice in Xero and update the bill
-      const dueDate = new Date()
-      dueDate.setDate(dueDate.getDate() + 14)
-      const dueDateString = dueDate.toISOString().split('T')[0]
-      const { body } = await xeroClient.accountingApi.createInvoices(
-        xeroTenantId,
-        {
-          invoices: [
-            {
-              contact: {
-                contactID: xeroId.toString(),
+      const invoice = await step.run('xero/create-invoice', async () => {
+        const dueDate = new Date()
+        dueDate.setDate(dueDate.getDate() + 14)
+        const dueDateString = dueDate.toISOString().split('T')[0]
+        const { body } = await xeroClient.accountingApi.createInvoices(
+          xeroTenantId,
+          {
+            invoices: [
+              {
+                contact: {
+                  contactID: account.xeroId!.toString(),
+                },
+                status: Invoice.StatusEnum.AUTHORISED,
+                dueDate: dueDateString,
+                type: Invoice.TypeEnum.ACCREC,
+                lineAmountTypes: LineAmountTypes.Inclusive,
+                lineItems: bill.items!.map((billItem) => ({
+                  unitAmount: new Decimal(billItem.amount!)
+                    .dividedBy(100)
+                    .toDecimalPlaces(2)
+                    .toNumber(),
+                  quantity: billItem.quantity || 1,
+                  accountCode:
+                    billItem.enrolment?.lessonTerm?.lesson?.lessonCategory
+                      ?.xeroAccountCode || '200',
+                  description:
+                    billItem.name ??
+                    `${billItem.enrolment?.student?.name} - ${billItem.enrolment?.lessonTerm?.name}`,
+                })),
               },
-              status: Invoice.StatusEnum.AUTHORISED,
-              dueDate: dueDateString,
-              type: Invoice.TypeEnum.ACCREC,
-              lineAmountTypes: LineAmountTypes.Inclusive,
-              lineItems: bill.items.map((billItem) => ({
-                unitAmount: new Decimal(billItem.amount!)
-                  .dividedBy(100)
-                  .toDecimalPlaces(2)
-                  .toNumber(),
-                quantity: billItem.quantity || 1,
-                accountCode:
-                  billItem.enrolment?.lessonTerm?.lesson?.lessonCategory
-                    ?.xeroAccountCode || '200',
-                description:
-                  billItem.name ??
-                  `${billItem.enrolment?.student?.name} - ${billItem.enrolment?.lessonTerm?.name}`,
-              })),
-            },
-          ],
-        },
-      )
-
-      if (body.invoices === undefined || body.invoices.length === 0) {
-        throw new Error(`Bill ${bill.name} could not be created in Xero`, {
-          cause: body,
-        })
-      } else {
-        const invoice = body.invoices[0]
-        if (invoice === null || !invoice.invoiceID) {
+            ],
+          },
+        )
+        if (body.invoices === undefined || body.invoices.length === 0) {
           throw new Error(`Bill ${bill.name} could not be created in Xero`, {
             cause: body,
           })
+        } else {
+          if (body.invoices[0] === null || !body.invoices[0].invoiceID) {
+            throw new Error(`Bill ${bill.name} could not be created in Xero`, {
+              cause: body,
+            })
+          }
+          return body.invoices[0]
         }
-
+      })
+      await step.run('xero/email-invoice', async () => {
         const requestEmpty: RequestEmpty = {}
         const sentInvoice = await xeroClient.accountingApi.emailInvoice(
           xeroTenantId,
@@ -204,19 +162,21 @@ export const createXeroInvoiceFunction = inngest.createFunction(
         )
 
         if (
-          !sentInvoice.response?.statusCode ||
-          sentInvoice.response?.statusCode > 299
+          !sentInvoice.response?.status ||
+          sentInvoice.response?.status > 299
         ) {
           throw new Error(`Bill ${bill.name} could not be emailed in Xero`, {
             cause: sentInvoice,
           })
         }
+      })
+      await step.run('app/bill.update', async () => {
         await context.graphql.run({
           query: UPDATE_BILL_XERO_ID,
-          variables: { id: bill.id, xeroId: invoice.invoiceID },
+          variables: { id: bill.id, xeroId: invoice.invoiceID! },
         })
-        return `Bill ${bill.name} created in Xero with id ${invoice.invoiceID}`
-      }
+      })
+      return `Bill ${bill.name} created in Xero with id ${invoice.invoiceID}`
     }
   },
 )

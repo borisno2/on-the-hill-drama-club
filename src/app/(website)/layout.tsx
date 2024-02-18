@@ -7,6 +7,7 @@ import 'focus-visible'
 import { Header } from 'components/Header'
 import { Footer } from 'components/Footer'
 import { AnalyticsWrapper } from 'components/Analytics'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Viewport } from 'next'
 
 type AppProps = {
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: AppProps) {
           </div>
         </AuthContext>
         <AnalyticsWrapper />
+        <SpeedInsights />
       </body>
     </html>
   )
