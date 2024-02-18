@@ -59,6 +59,7 @@ export type Events = {
   'app/account.created': CreateXeroCustomerEvent
   'app/bill.approved': BillApprovedEvent
   'app/term.completed': TermCompletedEvent
+  'xero/customer.upsert': CreateXeroCustomerEvent
 }
 
 export const inngest = new Inngest({
