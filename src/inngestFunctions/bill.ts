@@ -204,8 +204,8 @@ export const createXeroInvoiceFunction = inngest.createFunction(
         )
 
         if (
-          !sentInvoice.response?.statusCode ||
-          sentInvoice.response?.statusCode > 299
+          !sentInvoice.response?.status ||
+          sentInvoice.response?.status > 299
         ) {
           throw new Error(`Bill ${bill.name} could not be emailed in Xero`, {
             cause: sentInvoice,
