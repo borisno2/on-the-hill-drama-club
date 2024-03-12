@@ -40,8 +40,8 @@ dependencies:
     specifier: ^1.16.0
     version: 1.16.0
   '@prisma/adapter-planetscale':
-    specifier: ^5.10.2
-    version: 5.10.2(@planetscale/database@1.16.0)
+    specifier: ^5.11.0
+    version: 5.11.0(@planetscale/database@1.16.0)
   '@prisma/client':
     specifier: 5.10.2
     version: 5.10.2(prisma@5.10.2)
@@ -3301,13 +3301,13 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@prisma/adapter-planetscale@5.10.2(@planetscale/database@1.16.0):
-    resolution: {integrity: sha512-sxNoNr8Ig9WWy94dvNxvvHG7T49RA3HCTGZEiW7s90Tw4yzc05/mnUTnyFflhNryNXVjILzeFL6DqOkXpZCLeQ==}
+  /@prisma/adapter-planetscale@5.11.0(@planetscale/database@1.16.0):
+    resolution: {integrity: sha512-Z7MoNtisYsDcghw+8UYJW05+3hFV90Qkvh0iuD1hMpqCCTqB9YwrxBvExr3uxL3B97NGeHOqHNfQxCANehd3yg==}
     peerDependencies:
       '@planetscale/database': ^1.15.0
     dependencies:
       '@planetscale/database': 1.16.0
-      '@prisma/driver-adapter-utils': 5.10.2
+      '@prisma/driver-adapter-utils': 5.11.0
     dev: false
 
   /@prisma/client@5.10.2(prisma@5.10.2):
@@ -3326,10 +3326,14 @@ packages:
   /@prisma/debug@5.10.2:
     resolution: {integrity: sha512-bkBOmH9dpEBbMKFJj8V+Zp8IZHIBjy3fSyhLhxj4FmKGb/UBSt9doyfA6k1UeUREsMJft7xgPYBbHSOYBr8XCA==}
 
-  /@prisma/driver-adapter-utils@5.10.2:
-    resolution: {integrity: sha512-Qou/js8VJSmaWiGX5EVXGF83fMZltFnuzkKFOocpDvcI3f5G9WTPf61TKflzs3ZOYe1weRgM9hUk9UR7lgGEwg==}
+  /@prisma/debug@5.11.0:
+    resolution: {integrity: sha512-N6yYr3AbQqaiUg+OgjkdPp3KPW1vMTAgtKX6+BiB/qB2i1TjLYCrweKcUjzOoRM5BriA4idrkTej9A9QqTfl3A==}
+    dev: false
+
+  /@prisma/driver-adapter-utils@5.11.0:
+    resolution: {integrity: sha512-C2Qa/HZXZNwDBZCHJxlV4eibqXakbOBLd+mUeNCxSfaM8yi8Qi8zToN8Kb3M60Kr1ymr+tzzw/wVqYIfIfUiXw==}
     dependencies:
-      '@prisma/debug': 5.10.2
+      '@prisma/debug': 5.11.0
     dev: false
 
   /@prisma/engines-version@5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9:
