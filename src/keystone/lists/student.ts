@@ -16,6 +16,7 @@ import { isAdmin, isLoggedIn, studentFilter } from '../helpers'
 import { Session } from 'next-auth'
 
 const Student: Lists.Student<Session> = list({
+  db: { map: 'student'},
   access: {
     operation: {
       ...allOperations(isLoggedIn),

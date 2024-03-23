@@ -8,6 +8,7 @@ import { messageFilter, isAdmin, isLoggedIn } from '../helpers'
 import { Session } from 'next-auth'
 
 const Message: Lists.Message<Session> = list({
+  db: { map: 'message'},
   access: {
     operation: {
       ...allOperations(isAdmin),
@@ -58,8 +59,10 @@ const Message: Lists.Message<Session> = list({
       },
     }),
     lessonTerms: relationship({ ref: 'LessonTerm.messages', many: true }),
-    sentAt: timestamp(),
+    sentAt: timestamp({
+      db: { map: 'sentat'},}),
     createdAt: timestamp({
+      db: { map: 'crreatedat'},
       defaultValue: { kind: 'now' },
     }),
   },

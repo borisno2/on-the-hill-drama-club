@@ -3,25 +3,23 @@ import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import * as PrismaModule from '@prisma/client'
-import { Client } from '@planetscale/database'
-import { PrismaPlanetScale } from '@prisma/adapter-planetscale'
+import { Pool, neonConfig } from '@neondatabase/serverless'
+import { PrismaNeon } from '@prisma/adapter-neon'
+import ws from 'ws'
 
 import type { NextApiRequest, NextApiResponse } from 'next/types'
 import type { Session } from 'next-auth'
 import type { Context } from '.keystone/types'
 
-class PlanetScalePrismaClient extends PrismaModule.PrismaClient {
+neonConfig.webSocketConstructor = ws
+  
+class NeonPrismaClient extends PrismaModule.PrismaClient {
   constructor(ksConfig: any) {
-    const config = {
-      url: process.env.DATABASE_URL,
-      // host: process.env.DATABASE_HOST,
-      // username: process.env.DATABASE_USERNAME,
-      // password: process.env.DATABASE_PASSWORD,
-    }
+    const connectionString = `${process.env.DATABASE_URL}`
+    console.log(connectionString)
 
-    // Initialize Prisma Client with the PlanetScale serverless database driver
-    const client = new Client(config)
-    const adapter = new PrismaPlanetScale(client)
+    const pool = new Pool({ connectionString })
+    const adapter = new PrismaNeon(pool)
 
     super({ ...ksConfig, adapter })
   }
@@ -30,7 +28,7 @@ class PlanetScalePrismaClient extends PrismaModule.PrismaClient {
 // Making sure multiple prisma clients are not created during hot reloading
 export const keystoneContext: Context =
   (globalThis as any).keystoneContext ||
-  getContext(config, { ...PrismaModule, PrismaClient: PlanetScalePrismaClient })
+  getContext(config, { ...PrismaModule, PrismaClient: NeonPrismaClient })
 
 if (process.env.NODE_ENV !== 'production')
   (globalThis as any).keystoneContext = keystoneContext

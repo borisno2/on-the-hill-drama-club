@@ -23,6 +23,9 @@ import {
 import { Session } from 'next-auth'
 
 export const Bill: Lists.Bill<Session> = list({
+  db: {
+    map: 'bill'
+  },
   ui: {
     listView: {
       initialColumns: ['id', 'account', 'term', 'total', 'status'],
@@ -66,7 +69,7 @@ export const Bill: Lists.Bill<Session> = list({
     name: text(),
     account: relationship({ ref: 'Account.bills', many: false }),
     date: calendarDay(),
-    dueDate: calendarDay(),
+    dueDate: calendarDay({db: {map: 'duedate'}}),
     total: virtual({
       ui: {
         description: 'Total of all bill items in Dollars',
@@ -97,8 +100,9 @@ export const Bill: Lists.Bill<Session> = list({
     }),
     term: relationship({ ref: 'Term', many: false }),
     items: relationship({ ref: 'BillItem.bill', many: true }),
-    xeroId: text({ isIndexed: 'unique', db: { isNullable: true } }),
+    xeroId: text({ isIndexed: 'unique', db: { isNullable: true, map: 'xeroid' } }),
     createdAt: timestamp({
+      db: { map: 'createdat'},
       defaultValue: { kind: 'now' },
     }),
   },

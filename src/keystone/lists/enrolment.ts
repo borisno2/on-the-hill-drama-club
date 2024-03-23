@@ -8,6 +8,7 @@ import { enrolmentFilter, isAdmin, isLoggedIn } from '../helpers'
 import { Session } from 'next-auth'
 
 const Enrollment: Lists.Enrolment<Session> = list({
+  db: { map: 'enrollment'},
   ui: {
     listView: {
       initialColumns: ['id', 'lessonTerm', 'student', 'status'],
@@ -117,6 +118,7 @@ const Enrollment: Lists.Enrolment<Session> = list({
       },
     }),
     createdAt: timestamp({
+      db: { map: 'createdat'},
       defaultValue: { kind: 'now' },
     }),
   },
