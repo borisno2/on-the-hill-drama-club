@@ -97,7 +97,10 @@ export const Bill: Lists.Bill<Session> = list({
     }),
     term: relationship({ ref: 'Term', many: false }),
     items: relationship({ ref: 'BillItem.bill', many: true }),
-    xeroId: text({ isIndexed: 'unique', db: { isNullable: true } }),
+    xeroId: text({
+      isIndexed: 'unique',
+      db: { isNullable: true },
+    }),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),
