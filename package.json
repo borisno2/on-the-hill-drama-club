@@ -11,10 +11,10 @@
     "dev:watch": "keystone dev --no-server",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone build --no-ui --frozen && ts-gql build",
+    "lint": "eslint --ext .ts,.tsx . && cspell '**' && tsc --noEmit",
     "seed-data": "tsx seed-data.ts",
     "ts-gql:build": "ts-gql build",
-    "ts-gql:watch": "ts-gql watch",
-    "lint": "eslint --ext .ts,.tsx . && cspell '**' && tsc --noEmit"
+    "ts-gql:watch": "ts-gql watch"
   },
   "dependencies": {
     "@aws-sdk/signature-v4-crt": "^3.525.0",
@@ -25,9 +25,9 @@
     "@hookform/resolvers": "^3.3.4",
     "@keystone-6/core": "^5.7.2",
     "@marsidev/react-turnstile": "^0.5.3",
-    "@planetscale/database": "^1.16.0",
-    "@prisma/adapter-planetscale": "^5.10.2",
-    "@prisma/client": "5.10.2",
+    "@neondatabase/serverless": "^0.9.0",
+    "@prisma/adapter-neon": "^5.11.0",
+    "@prisma/client": "5.11.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-hover-card": "^1.0.7",
     "@sendgrid/mail": "^8.1.1",
@@ -69,6 +69,7 @@
     "tailwind-merge": "^2.2.2",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
+    "ws": "^8.16.0",
     "xero-node": "^5.1.0",
     "zod": "^3.22.4"
   },
@@ -78,12 +79,13 @@
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
+    "@types/ws": "^8.5.10",
     "cspell": "^8.6.0",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.4",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.12",
-    "prisma": "5.10.2",
+    "prisma": "5.11.0",
     "tsx": "^4.7.1",
     "turbo": "^1.12.5",
     "typescript": "^5.4.3"
@@ -91,11 +93,11 @@
   "packageManager": "pnpm@8.15.5",
   "pnpm": {
     "overrides": {
-      "prisma": "5.10.2",
-      "@prisma/client": "5.10.2",
-      "@prisma/internals": "5.10.2",
-      "@prisma/migrate": "5.10.2",
-      "next": "^14.1.0"
+      "prisma": "5.11.0",
+      "@prisma/client": "5.11.0",
+      "@prisma/internals": "5.11.0",
+      "@prisma/migrate": "5.11.0",
+      "next": "^14.1.4"
     }
   },
   "ts-gql": {

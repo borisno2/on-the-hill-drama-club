@@ -14,8 +14,12 @@ export default async function TimetablePage({
 }: {
   searchParams: { daySelected: string }
 }) {
+
   const context = await getSessionContext()
-  const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE })
+  const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE }).catch((error) => {
+    console.error(error)
+    return { lessons: [] }
+  })
   let daySelected: DayOfTheWeek = 'MONDAY'
   if (searchParams.daySelected && searchParams.daySelected !== '') {
     if (
