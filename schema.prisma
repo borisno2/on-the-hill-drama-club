@@ -30,20 +30,18 @@ model Account {
   id                 String    @id @default(cuid())
   user               User?     @relation("Account_user", fields: [userId], references: [id])
   userId             String?   @unique @map("user")
-  firstName          String    @default("PLEASE_UPDATE") @map("firstname")
-  surname            String    @default("PLEASE_UPDATE") @map("surname")
-  phone              String    @default("PLEASE_UPDATE") @map("phone")
-  secondContactName  String    @default("PLEASE_UPDATE") @map("secondcontactname")
-  secondContactPhone String    @default("PLEASE_UPDATE") @map("secondcontactphone")
+  firstName          String    @default("PLEASE_UPDATE")
+  surname            String    @default("PLEASE_UPDATE")
+  phone              String    @default("PLEASE_UPDATE")
+  secondContactName  String    @default("PLEASE_UPDATE")
+  secondContactPhone String    @default("PLEASE_UPDATE")
   students           Student[] @relation("Student_account")
   bills              Bill[]    @relation("Bill_account")
-  streetAddress      String    @default("PLEASE_UPDATE") @map("streetaddress")
-  suburb             String    @default("PLEASE_UPDATE") @map("suburb")
+  streetAddress      String    @default("PLEASE_UPDATE")
+  suburb             String    @default("PLEASE_UPDATE")
   postcode           Int       @default(3550)
-  xeroId             String?   @unique @map("xeroid")
-  createdAt          DateTime? @default(now()) @map("createdat")
-
-  @@map("account")
+  xeroId             String?   @unique
+  createdAt          DateTime? @default(now())
 }
 
 model Student {
@@ -60,7 +58,6 @@ model Student {
   createdAt   DateTime?   @default(now())
 
   @@index([accountId])
-  @@map("student")
 }
 
 model LessonCategory {
@@ -172,11 +169,10 @@ model Enrolment {
   studentId    String?     @map("student")
   status       String
   billItem     BillItem?   @relation("BillItem_enrolment")
-  createdAt    DateTime?   @default(now()) @map("createdat")
+  createdAt    DateTime?   @default(now())
 
   @@index([lessonTermId])
   @@index([studentId])
-  @@map("enrollment")
 }
 
 model Message {
@@ -185,10 +181,8 @@ model Message {
   status      String       @default("DRAFT")
   content     String?      @postgresql.Text
   lessonTerms LessonTerm[] @relation("LessonTerm_messages")
-  sentAt      DateTime?    @map("sentat")
-  createdAt   DateTime?    @default(now()) @map("crreatedat")
-
-  @@map("message")
+  sentAt      DateTime?
+  createdAt   DateTime?    @default(now())
 }
 
 model Bill {
@@ -197,17 +191,16 @@ model Bill {
   account   Account?   @relation("Bill_account", fields: [accountId], references: [id])
   accountId String?    @map("account")
   date      DateTime?  @postgresql.Date
-  dueDate   DateTime?  @map("duedate") @postgresql.Date
+  dueDate   DateTime?  @postgresql.Date
   status    String
   term      Term?      @relation("Bill_term", fields: [termId], references: [id])
   termId    String?    @map("term")
   items     BillItem[] @relation("BillItem_bill")
-  xeroId    String?    @unique @map("xeroid")
-  createdAt DateTime?  @default(now()) @map("createdat")
+  xeroId    String?    @unique
+  createdAt DateTime?  @default(now())
 
   @@index([accountId])
   @@index([termId])
-  @@map("bill")
 }
 
 model BillItem {

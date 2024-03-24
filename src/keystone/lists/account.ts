@@ -13,9 +13,6 @@ import { accountFilter, isAdmin, isLoggedIn } from '../helpers'
 import { Session } from 'next-auth'
 
 const Account: Lists.Account<Session> = list({
-  db: {
-    map: 'account'
-  },
   access: {
     operation: {
       ...allOperations(isLoggedIn),
@@ -71,27 +68,22 @@ const Account: Lists.Account<Session> = list({
       },
     }),
     firstName: text({
-      db: { map: 'firstname'},
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
     surname: text({
-      db: { map: 'surname'},
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
     phone: text({
-      db: { map: 'phone'},
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
     secondContactName: text({
-      db: { map: 'secondcontactname'},
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
     secondContactPhone: text({
-      db: { map: 'secondcontactphone'},
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
@@ -110,12 +102,10 @@ const Account: Lists.Account<Session> = list({
       },
     }),
     streetAddress: text({
-      db: { map: 'streetaddress'},
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
     suburb: text({
-      db: { map: 'suburb'},
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
     }),
@@ -123,9 +113,11 @@ const Account: Lists.Account<Session> = list({
       validation: { isRequired: true },
       defaultValue: 3550,
     }),
-    xeroId: text({isIndexed: 'unique', db: { isNullable: true,map: 'xeroid' } }),
+    xeroId: text({
+      isIndexed: 'unique',
+      db: { isNullable: true },
+    }),
     createdAt: timestamp({
-      db: { map: 'createdat'},
       defaultValue: { kind: 'now' },
     }),
   },
