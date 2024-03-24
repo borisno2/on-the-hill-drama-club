@@ -11,12 +11,10 @@ import type { NextApiRequest, NextApiResponse } from 'next/types'
 import type { Session } from 'next-auth'
 import type { Context } from '.keystone/types'
 
-neonConfig.webSocketConstructor = ws
-  
 class NeonPrismaClient extends PrismaModule.PrismaClient {
   constructor(ksConfig: any) {
+    neonConfig.webSocketConstructor = ws
     const connectionString = `${process.env.DATABASE_URL}`
-    console.log(connectionString)
 
     const pool = new Pool({ connectionString })
     const adapter = new PrismaNeon(pool)
