@@ -19,8 +19,8 @@ dependencies:
     specifier: ^3.2.0
     version: 3.2.0(graphql@16.8.1)
   '@graphql-yoga/apollo-link':
-    specifier: ^3.1.1
-    version: 3.1.1(@apollo/client@3.9.4)(@types/node@20.11.30)(graphql@16.8.1)
+    specifier: ^3.2.0
+    version: 3.2.0(@apollo/client@3.9.4)(@types/node@20.11.30)(graphql@16.8.1)
   '@headlessui/react':
     specifier: ^1.7.18
     version: 1.7.18(react-dom@18.2.0)(react@18.2.0)
@@ -2523,8 +2523,8 @@ packages:
       graphql: 16.8.1
     dev: false
 
-  /@graphql-yoga/apollo-link@3.1.1(@apollo/client@3.9.4)(@types/node@20.11.30)(graphql@16.8.1):
-    resolution: {integrity: sha512-R+O6ImaCNKzUdItUtHgJT96yvVJimqjHRuj21RPee1rPCO+lbVW3XeB/PFvLro44YivYBKeuBOhGwp0drS7/Zw==}
+  /@graphql-yoga/apollo-link@3.2.0(@apollo/client@3.9.4)(@types/node@20.11.30)(graphql@16.8.1):
+    resolution: {integrity: sha512-SKvIVty5LiZ8xNjfNKTplQaXKVWENfrLfHWY7Jv0V9QWDrD0s2ClZFYDjJ9CtKjXRtQ0HlkjO241s97PkpIZ8Q==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@apollo/client': ^3.5.9
