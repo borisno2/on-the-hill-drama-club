@@ -40,8 +40,8 @@ dependencies:
     specifier: ^0.9.0
     version: 0.9.0
   '@prisma/adapter-neon':
-    specifier: ^5.11.0
-    version: 5.11.0(@neondatabase/serverless@0.9.0)
+    specifier: ^5.12.0
+    version: 5.12.0(@neondatabase/serverless@0.9.0)
   '@prisma/client':
     specifier: 5.11.0
     version: 5.11.0(prisma@5.11.0)
@@ -3325,13 +3325,13 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@prisma/adapter-neon@5.11.0(@neondatabase/serverless@0.9.0):
-    resolution: {integrity: sha512-AcWMpyRrHk5yEqHELui3RrFAz3OtvZlyjxWAvnU6NJ6hfEUsLWoL7jM7rZXKQLLqmTeowXexmo1L6vCqaWSURw==}
+  /@prisma/adapter-neon@5.12.0(@neondatabase/serverless@0.9.0):
+    resolution: {integrity: sha512-kcS/hVp6qvby/ghlhAc3rYYWPZBmEcRpNdq7/XBnoU9VZhZ24pPOOSO3SOscftToZglnUfmUH+tFVN5o+yhdeA==}
     peerDependencies:
       '@neondatabase/serverless': ^0.6.0 || ^0.7.0 || ^0.8.0 || ^0.9.0
     dependencies:
       '@neondatabase/serverless': 0.9.0
-      '@prisma/driver-adapter-utils': 5.11.0
+      '@prisma/driver-adapter-utils': 5.12.0
       postgres-array: 3.0.2
     dev: false
 
@@ -3351,10 +3351,14 @@ packages:
   /@prisma/debug@5.11.0:
     resolution: {integrity: sha512-N6yYr3AbQqaiUg+OgjkdPp3KPW1vMTAgtKX6+BiB/qB2i1TjLYCrweKcUjzOoRM5BriA4idrkTej9A9QqTfl3A==}
 
-  /@prisma/driver-adapter-utils@5.11.0:
-    resolution: {integrity: sha512-C2Qa/HZXZNwDBZCHJxlV4eibqXakbOBLd+mUeNCxSfaM8yi8Qi8zToN8Kb3M60Kr1ymr+tzzw/wVqYIfIfUiXw==}
+  /@prisma/debug@5.12.0:
+    resolution: {integrity: sha512-wK3fQLxPLMqf5riT5ZIhl8NffPSzFUwtzFX5CH7z/oI9Swmo9UhQlUgZABIVgdXSJ5OAlmRcDZtDKaMApIl8sg==}
+    dev: false
+
+  /@prisma/driver-adapter-utils@5.12.0:
+    resolution: {integrity: sha512-B57KUrKmRlax4sE4pc2VKPtG5U9XGm5kjtqSWBUd83NopIZVuvKunH3ETrOShwBCqWZXZolHvdDjDwHyiT2HRQ==}
     dependencies:
-      '@prisma/debug': 5.11.0
+      '@prisma/debug': 5.12.0
     dev: false
 
   /@prisma/engines-version@5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102:
