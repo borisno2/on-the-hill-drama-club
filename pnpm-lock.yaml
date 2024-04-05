@@ -32,7 +32,7 @@ dependencies:
     version: 3.3.4(react-hook-form@7.51.2)
   '@keystone-6/core':
     specifier: ^5.7.2
-    version: 5.7.2(@babel/core@7.23.6)(@prisma/generator-helper@5.11.0)(@types/react@18.2.74)(aws-crt@1.21.1)
+    version: 5.7.2(@babel/core@7.23.6)(@prisma/generator-helper@5.12.0)(@types/react@18.2.74)(aws-crt@1.21.1)
   '@marsidev/react-turnstile':
     specifier: ^0.5.3
     version: 0.5.3(react-dom@18.2.0)(react@18.2.0)
@@ -133,8 +133,8 @@ dependencies:
     specifier: ^3.16.1
     version: 3.16.1(typescript@5.4.3)
   lucide-react:
-    specifier: ^0.364.0
-    version: 0.364.0(react@18.2.0)
+    specifier: ^0.365.0
+    version: 0.365.0(react@18.2.0)
   next:
     specifier: ^14.1.4
     version: 14.1.4(@babel/core@7.23.6)(react-dom@18.2.0)(react@18.2.0)
@@ -2886,7 +2886,7 @@ packages:
     resolution: {integrity: sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==}
     dev: false
 
-  /@keystone-6/core@5.7.2(@babel/core@7.23.6)(@prisma/generator-helper@5.11.0)(@types/react@18.2.74)(aws-crt@1.21.1):
+  /@keystone-6/core@5.7.2(@babel/core@7.23.6)(@prisma/generator-helper@5.12.0)(@types/react@18.2.74)(aws-crt@1.21.1):
     resolution: {integrity: sha512-GfRMWWuTnfcQIEaNJ8CvwKAv08BGet2AZ+yqgGM1M3U8Pk7R0t72qZFjmW8tzd0ALvIpAdMG/CeOb0FZZFSuRw==}
     hasBin: true
     dependencies:
@@ -2919,7 +2919,7 @@ packages:
       '@nodelib/fs.walk': 2.0.0
       '@prisma/client': 5.12.0(prisma@5.12.0)
       '@prisma/internals': 5.12.0
-      '@prisma/migrate': 5.12.0(@prisma/generator-helper@5.11.0)(@prisma/internals@5.12.0)
+      '@prisma/migrate': 5.12.0(@prisma/generator-helper@5.12.0)(@prisma/internals@5.12.0)
       apollo-upload-client: 17.0.0(@apollo/client@3.9.4)(graphql@16.8.1)
       bcryptjs: 2.4.3
       body-parser: 1.20.2
@@ -3348,10 +3348,6 @@ packages:
       prisma: 5.12.0
     dev: false
 
-  /@prisma/debug@5.11.0:
-    resolution: {integrity: sha512-N6yYr3AbQqaiUg+OgjkdPp3KPW1vMTAgtKX6+BiB/qB2i1TjLYCrweKcUjzOoRM5BriA4idrkTej9A9QqTfl3A==}
-    dev: false
-
   /@prisma/debug@5.12.0:
     resolution: {integrity: sha512-wK3fQLxPLMqf5riT5ZIhl8NffPSzFUwtzFX5CH7z/oI9Swmo9UhQlUgZABIVgdXSJ5OAlmRcDZtDKaMApIl8sg==}
 
@@ -3380,12 +3376,6 @@ packages:
       '@prisma/engines-version': 5.12.0-21.473ed3124229e22d881cb7addf559799debae1ab
       '@prisma/get-platform': 5.12.0
 
-  /@prisma/generator-helper@5.11.0:
-    resolution: {integrity: sha512-oK25sTb2q2TPN7OipiU5xkCpDPNvdWvmFgU9UmmPr8uEt2CdwDjxiWonULgwd6YfqnCOLNpLq0wBIONjelaVMg==}
-    dependencies:
-      '@prisma/debug': 5.11.0
-    dev: false
-
   /@prisma/generator-helper@5.12.0:
     resolution: {integrity: sha512-GspOjzdcct2ScxUv5gsU/8GyUzPq3Ei4DJCDjv+DMvrDSm/znkC4CbvG4P0MrUuUBMkctJ3+/9BdbY/p1pmhug==}
     dependencies:
@@ -3410,7 +3400,7 @@ packages:
       prompts: 2.4.2
     dev: false
 
-  /@prisma/migrate@5.12.0(@prisma/generator-helper@5.11.0)(@prisma/internals@5.12.0):
+  /@prisma/migrate@5.12.0(@prisma/generator-helper@5.12.0)(@prisma/internals@5.12.0):
     resolution: {integrity: sha512-9TqcFWr5CTjeYj0Oncj/lwvpJv/pu3tZk1BjT89t1uCVPa2cOm6MLwRRI9HsRn2tFmXr5nYEb7DAiXTBbZ6SGg==}
     peerDependencies:
       '@prisma/generator-helper': '*'
@@ -3418,7 +3408,7 @@ packages:
     dependencies:
       '@prisma/debug': 5.12.0
       '@prisma/engines-version': 5.12.0-21.473ed3124229e22d881cb7addf559799debae1ab
-      '@prisma/generator-helper': 5.11.0
+      '@prisma/generator-helper': 5.12.0
       '@prisma/get-platform': 5.12.0
       '@prisma/internals': 5.12.0
       prompts: 2.4.2
@@ -7987,8 +7977,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /lucide-react@0.364.0(react@18.2.0):
-    resolution: {integrity: sha512-eHfdbJExWtTaZ0tBMGtI7PA/MbqV5wt+o4/yitDce17tadH/75Gq3Tq8jSteb3LhLr0eay/j5YUuN4yXjnI3aw==}
+  /lucide-react@0.365.0(react@18.2.0):
+    resolution: {integrity: sha512-sJYpPyyzGHI4B3pys+XSFnE4qtSWc68rFnDLxbNNKjkLST5XSx9DNn5+1Z3eFgFiw39PphNRiVBSVb+AL3oKwA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
