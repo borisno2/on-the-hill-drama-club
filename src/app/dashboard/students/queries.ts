@@ -1,6 +1,6 @@
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 
-export const GET_STUDENTS = gql`
+export const GET_STUDENTS = graphql(`
   query GET_STUDENTS {
     students {
       id
@@ -11,9 +11,9 @@ export const GET_STUDENTS = gql`
       enrolmentsCount
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_STUDENTS').type
+`)
 
-export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = gql`
+export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = graphql(`
   query GET_STUDENT_BY_ID_WITH_ENROLMENTS($id: ID!) {
     student(where: { id: $id }) {
       id
@@ -51,9 +51,9 @@ export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_STUDENT_BY_ID_WITH_ENROLMENTS').type
+`)
 
-export const GET_STUDENT_BY_ID = gql`
+export const GET_STUDENT_BY_ID = graphql(`
   query GET_STUDENT_BY_ID($id: ID!) {
     student(where: { id: $id }) {
       id
@@ -65,9 +65,9 @@ export const GET_STUDENT_BY_ID = gql`
       medical
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_STUDENT_BY_ID').type
+`)
 
-export const ENROL_STUDENT_IN_LESSON = gql`
+export const ENROL_STUDENT_IN_LESSON = graphql(`
   mutation ENROL_STUDENT_IN_LESSON($studentId: ID!, $lessonId: ID!) {
     updateStudent(
       where: { id: $studentId }
@@ -90,9 +90,9 @@ export const ENROL_STUDENT_IN_LESSON = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/ENROL_STUDENT_IN_LESSON').type
+`)
 
-export const GET_ENROLMENT_BY_ID = gql`
+export const GET_ENROLMENT_BY_ID = graphql(`
   query GET_ENROLMENT_BY_ID($id: ID!) {
     enrolment(where: { id: $id }) {
       id
@@ -135,4 +135,4 @@ export const GET_ENROLMENT_BY_ID = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_ENROLMENT_BY_ID').type
+`)

@@ -1,13 +1,12 @@
-import { gql, OperationData } from '@ts-gql/tag/no-transform'
 import { getSessionContext } from 'keystone/context'
 import EnrolButton from '../EnrolButton'
-import Link from 'next/link'
 import labelHelper from 'lib/labelHelper'
 import { redirect } from 'next/navigation'
 import { type GET_LESSON_BY_ID } from '../queries'
 import { enrolmentStatusOptions } from 'types/selectOptions'
+import { type ResultOf, graphql } from 'gql'
 
-const GET_STUDENTS_ENROLMENTS = gql`
+const GET_STUDENTS_ENROLMENTS = graphql(`
   query GET_STUDENTS_ENROLMENTS($minYear: Int!, $maxYear: Int!) {
     students(
       where: {
@@ -31,12 +30,12 @@ const GET_STUDENTS_ENROLMENTS = gql`
       }
     }
   }
-` as import('../../../../../__generated__/ts-gql/GET_STUDENTS_ENROLMENTS').type
+`)
 
 export default async function StudentList({
   lessonTerm,
 }: {
-  lessonTerm: NonNullable<OperationData<typeof GET_LESSON_BY_ID>['lessonTerm']>
+  lessonTerm: NonNullable<ResultOf<typeof GET_LESSON_BY_ID>['lessonTerm']>
 }) {
   const context = await getSessionContext()
   if (

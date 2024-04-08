@@ -1,9 +1,9 @@
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql.tada'
 import { slugify } from 'inngest'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
 
-const GET_LESSON_TERMS_TO_COPY = gql`
+const GET_LESSON_TERMS_TO_COPY = graphql(`
   query GET_LESSON_TERMS_TO_COPY($id: ID!) {
     term(where: { id: $id }) {
       id
@@ -18,9 +18,9 @@ const GET_LESSON_TERMS_TO_COPY = gql`
       }
     }
   }
-` as import('../../__generated__/ts-gql/GET_LESSON_TERMS_TO_COPY').type
+`)
 
-const GET_ENROLMENTS_TO_COPY = gql`
+const GET_ENROLMENTS_TO_COPY = graphql(`
   query GET_ENROLMENTS_TO_COPY($id: ID!) {
     lessonTerm(where: { id: $id }) {
       id
@@ -41,7 +41,7 @@ const GET_ENROLMENTS_TO_COPY = gql`
       }
     }
   }
-` as import('../../__generated__/ts-gql/GET_ENROLMENTS_TO_COPY').type
+`)
 
 export const copyTermFunction = inngest.createFunction(
   {
@@ -92,7 +92,7 @@ export const copyTermFunction = inngest.createFunction(
   },
 )
 
-const GET_THIS_LESSON_TERM = gql`
+const GET_THIS_LESSON_TERM = graphql(`
   query GET_THIS_LESSON_TERM($id: ID!) {
     lessonTerm(where: { id: $id }) {
       id
@@ -110,9 +110,9 @@ const GET_THIS_LESSON_TERM = gql`
       }
     }
   }
-` as import('../../__generated__/ts-gql/GET_THIS_LESSON_TERM').type
+`)
 
-const GET_COPY_FROM_LESSON_TERM = gql`
+const GET_COPY_FROM_LESSON_TERM = graphql(`
   query GET_COPY_FROM_LESSON_TERM($termId: ID!, $lessonId: ID!) {
     lessonTerms(
       where: {
@@ -131,7 +131,7 @@ const GET_COPY_FROM_LESSON_TERM = gql`
       }
     }
   }
-` as import('../../__generated__/ts-gql/GET_COPY_FROM_LESSON_TERM').type
+`)
 
 export const copyEnrolmentsFunction = inngest.createFunction(
   {

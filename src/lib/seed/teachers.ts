@@ -1,4 +1,4 @@
-import { TeacherCreateInput } from '../../../__generated__/ts-gql/@schema'
+import { TeacherCreateInput } from '.keystone/types'
 
 export const teachersSeed: TeacherCreateInput[] = [
   {

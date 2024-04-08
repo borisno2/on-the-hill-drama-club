@@ -1,4 +1,4 @@
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql.tada'
 import { getSessionContext } from 'keystone/context'
 import ProfileForm from './ProfileForm'
 import { redirect } from 'next/navigation'
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   ...getMetadata('Profile - Student Portal'),
 }
 
-const GET_ACCOUNT = gql`
+const GET_ACCOUNT = graphql(`
   query GET_ACCOUNT($id: ID!) {
     user(where: { id: $id }) {
       id
@@ -29,7 +29,7 @@ const GET_ACCOUNT = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_ACCOUNT').type
+`)
 
 export default async function Profile({
   searchParams,

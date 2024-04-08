@@ -3,13 +3,13 @@ import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
 import { getXeroClient } from 'lib/xero'
 
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql.tada'
 import Decimal from 'decimal.js'
 import { slugify } from 'inngest'
 import { Invoice, LineAmountTypes, RequestEmpty } from 'xero-node'
 import { upsertXeroCustomerFunction } from './account'
 
-const UPDATE_BILL_XERO_ID = gql`
+const UPDATE_BILL_XERO_ID = graphql(`
   mutation UPDATE_BILL_XERO_ID($id: ID!, $xeroId: String!) {
     updateBill(
       where: { id: $id }
@@ -19,9 +19,9 @@ const UPDATE_BILL_XERO_ID = gql`
       xeroId
     }
   }
-` as import('../../__generated__/ts-gql/UPDATE_BILL_XERO_ID').type
+`)
 
-const GET_BILL_BY_ID = gql`
+const GET_BILL_BY_ID = graphql(`
   query GET_BILL_BY_ID($id: ID!) {
     bill(where: { id: $id }) {
       id
@@ -65,7 +65,7 @@ const GET_BILL_BY_ID = gql`
       }
     }
   }
-` as import('../../__generated__/ts-gql/GET_BILL_BY_ID').type
+`)
 
 export const createXeroInvoiceFunction = inngest.createFunction(
   {

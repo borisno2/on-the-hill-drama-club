@@ -2,10 +2,11 @@ import DashboardLayout from '../DashboardLayout'
 import ClassList from './LessonList'
 import { getSessionContext } from 'keystone/context'
 import { GET_STUDENTS } from '../students/queries'
-import { LessonTermWhereInput } from '../../../../__generated__/ts-gql/@schema'
 import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
+
+type LessonTermWhereInput = Parameters<typeof ClassList>[0]['where']
 
 export const metadata: Metadata = {
   ...getMetadata('Lessons - Student Portal'),
@@ -55,7 +56,7 @@ export default async function lessons() {
       },
     }
   }
-  const allWhere = {
+  const allWhere: LessonTermWhereInput = {
     AND: [
       {
         NOT: {

@@ -8,7 +8,6 @@ import {
 import { getSessionContext } from 'keystone/context'
 import DashboardLayout from './DashboardLayout'
 import Link from 'next/link'
-import { gql } from '@ts-gql/tag/no-transform'
 import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
@@ -53,7 +52,7 @@ export default async function Portal() {
       name: 'Lessons',
       href: '/dashboard/lessons',
       icon: BuildingOfficeIcon,
-      amount: enrolments.length
+      amount: enrolments.length,
     },
     // More items...
   ]

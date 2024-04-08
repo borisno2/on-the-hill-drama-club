@@ -1,20 +1,15 @@
-import { ListFilterAccessControl } from '@keystone-6/core/types'
-import { Lists } from '.keystone/types'
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql.tada'
 import { Session } from 'next-auth'
-import {
-  MessageWhereInput,
-  StudentWhereInput,
-} from '../../__generated__/ts-gql/@schema'
+import type { StudentWhereInput, MessageWhereInput } from '.keystone/types'
 
-export const GET_BILL_ITEMS_TOTAL = gql`
+export const GET_BILL_ITEMS_TOTAL = graphql(`
   query GET_BILL_ITEMS_TOTAL($id: ID!) {
     billItems(where: { bill: { id: { equals: $id } } }) {
       id
       total
     }
   }
-` as import('../../__generated__/ts-gql/GET_BILL_ITEMS_TOTAL').type
+`)
 
 export function isAdmin({ session }: { session?: Session }) {
   return session?.data.role === 'ADMIN'
