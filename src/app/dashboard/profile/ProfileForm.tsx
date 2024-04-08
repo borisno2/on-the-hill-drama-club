@@ -1,5 +1,5 @@
 'use client'
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import ErrorPop from 'components/ErrorPop'

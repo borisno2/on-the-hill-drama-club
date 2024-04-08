@@ -1,4 +1,4 @@
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 import { getSessionContext } from 'keystone/context'
 import ProfileForm from './ProfileForm'
 import { redirect } from 'next/navigation'

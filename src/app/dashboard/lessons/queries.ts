@@ -1,4 +1,4 @@
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 
 export const GET_LESSONS = graphql(`
   query GET_LESSONS($where: LessonTermWhereInput) {

@@ -10,7 +10,7 @@ import { cache } from 'react'
 import { getMetadata } from 'app/metadata'
 import Link from 'next/link'
 import { teacherNameHelper } from 'lib/utils'
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 
 const GET_LESSON_CATEGORY_BY_SLUG = graphql(`
   query GET_LESSON_CATEGORY_BY_SLUG($slug: String!) {

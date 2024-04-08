@@ -1,4 +1,4 @@
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 import { Container } from 'components/Container'
 import { getSessionContext } from 'keystone/context'
 import Link from 'next/link'

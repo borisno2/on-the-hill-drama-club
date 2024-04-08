@@ -1,6 +1,6 @@
 import { UserCreateInput } from '.keystone/types'
 import { isCuid } from 'cuid'
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 import NextAuth, { AuthOptions } from 'next-auth'
 import Google, { GoogleProfile } from 'next-auth/providers/google'
 import Apple, { AppleProfile } from 'next-auth/providers/apple'

@@ -5,8 +5,9 @@ import { GET_STUDENTS } from '../students/queries'
 import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
+import { LessonTermWhereInput } from '.keystone/types'
 
-type LessonTermWhereInput = Parameters<typeof ClassList>[0]['where']
+//type LessonTermWhereInput = Parameters<typeof ClassList>[0]['where']
 
 export const metadata: Metadata = {
   ...getMetadata('Lessons - Student Portal'),

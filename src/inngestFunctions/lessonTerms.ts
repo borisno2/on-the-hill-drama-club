@@ -1,4 +1,4 @@
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 import { slugify } from 'inngest'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'

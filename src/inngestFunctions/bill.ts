@@ -3,7 +3,7 @@ import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
 import { getXeroClient } from 'lib/xero'
 
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 import Decimal from 'decimal.js'
 import { slugify } from 'inngest'
 import { Invoice, LineAmountTypes, RequestEmpty } from 'xero-node'

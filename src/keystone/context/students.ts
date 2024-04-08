@@ -1,7 +1,6 @@
 'use server'
-import { StudentCreateInput } from '.keystone/types'
 import { getServerActionContext } from './nextAuthFix'
-import { VariablesOf, graphql } from 'gql.tada'
+import { VariablesOf, graphql } from 'gql'
 
 const UPDATE_STUDENT = graphql(`
   mutation UPDATE_STUDENT($id: ID!, $data: StudentUpdateInput!) {

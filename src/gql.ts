@@ -5,6 +5,11 @@ export const graphql = initGraphQLTada<{
   introspection: introspection
   scalars: {
     CalendarDay: string
+    ID: string
+    Int: number
+    JSON: import('@keystone-6/core/types').JSONValue
+    Decimal: import('@keystone-6/core/types').Decimal
+    DateTime: any
   }
 }>()
 

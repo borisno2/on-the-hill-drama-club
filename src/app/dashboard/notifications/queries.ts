@@ -1,4 +1,4 @@
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 
 export const GET_MESSAGE_TO_SEND = graphql(`
   query GET_MESSAGE_TO_SEND($id: ID!) {

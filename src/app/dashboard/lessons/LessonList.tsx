@@ -12,21 +12,22 @@ import { formatDate } from 'lib/formatDate'
 import { lessonTypeOptions, lessonStatusOptions } from 'types/selectOptions'
 import EnrolButton from './EnrolButton'
 import { teacherNameHelper } from 'lib/utils'
-import { VariablesOf } from 'gql.tada'
+import { VariablesOf } from 'gql'
+import { LessonTermWhereInput } from '.keystone/types'
 
 export default async function ClassList({
   where,
   studentId,
   enroled = false,
 }: {
-  where?: VariablesOf<typeof GET_LESSONS>['where']
+  where?: LessonTermWhereInput
   studentId?: string
   enroled?: boolean
 }) {
   const context = await getSessionContext()
   const { lessonTerms } = await context.graphql.run({
     query: GET_LESSONS,
-    variables: { where },
+    variables: { where: where as VariablesOf<typeof GET_LESSONS>['where'] },
   })
   return (
     <>

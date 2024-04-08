@@ -3,7 +3,7 @@ import sendEmail from 'lib/sendEmail'
 import { inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
 import { getXeroClient } from 'lib/xero'
-import { graphql } from 'gql.tada'
+import { graphql } from 'gql'
 import { NonRetriableError, slugify } from 'inngest'
 
 const GET_ACCOUNT_BY_ID = graphql(`
