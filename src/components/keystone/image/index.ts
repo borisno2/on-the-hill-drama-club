@@ -112,6 +112,7 @@ async function inputResolver(data: graphql.InferValueFromArg<typeof inputArg>) {
   })
   return {
     ...blob,
+    contentType: blob.contentType,
     filesize: data.upload.size,
     width,
     height,
