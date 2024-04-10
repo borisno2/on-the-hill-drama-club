@@ -1,4 +1,4 @@
-import { graphql } from 'gql'
+import { graphql } from '../gql'
 import { Session } from 'next-auth'
 import type { StudentWhereInput, MessageWhereInput } from '.keystone/types'
 
