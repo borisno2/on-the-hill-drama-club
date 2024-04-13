@@ -1,6 +1,6 @@
-import { UserCreateInput } from '../../../../../__generated__/ts-gql/@schema'
+import { UserCreateInput } from '.keystone/types'
 import { isCuid } from 'cuid'
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 import NextAuth, { AuthOptions } from 'next-auth'
 import Google, { GoogleProfile } from 'next-auth/providers/google'
 import Apple, { AppleProfile } from 'next-auth/providers/apple'
@@ -12,7 +12,7 @@ import { assertObjectType } from 'graphql'
 
 const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || 'Turnstile'
 
-const GET_AUTH_SESSION = gql`
+const GET_AUTH_SESSION = graphql(`
   query GET_AUTH_SESSION($where: UserWhereUniqueInput!) {
     user(where: $where) {
       id
@@ -26,7 +26,8 @@ const GET_AUTH_SESSION = gql`
       }
     }
   }
-` as import('../../../../../__generated__/ts-gql/GET_AUTH_SESSION').type
+`)
+
 type SecretFieldImpl = {
   generateHash: (secret: string) => Promise<string>
   compare: (secret: string, hash: string) => Promise<string>

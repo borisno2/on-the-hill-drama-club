@@ -6,13 +6,14 @@ import {
   UsersIcon,
 } from '@heroicons/react/20/solid'
 import { getSessionContext } from 'keystone/context'
-import { LessonTermWhereInput } from '../../../../__generated__/ts-gql/@schema'
 import { GET_LESSONS } from './queries'
 import labelHelper from 'lib/labelHelper'
 import { formatDate } from 'lib/formatDate'
 import { lessonTypeOptions, lessonStatusOptions } from 'types/selectOptions'
 import EnrolButton from './EnrolButton'
 import { teacherNameHelper } from 'lib/utils'
+import { VariablesOf } from 'gql'
+import { LessonTermWhereInput } from '.keystone/types'
 
 export default async function ClassList({
   where,
@@ -26,7 +27,7 @@ export default async function ClassList({
   const context = await getSessionContext()
   const { lessonTerms } = await context.graphql.run({
     query: GET_LESSONS,
-    variables: { where },
+    variables: { where: where as VariablesOf<typeof GET_LESSONS>['where'] },
   })
   return (
     <>
@@ -97,10 +98,10 @@ export default async function ClassList({
                       Starts on{' '}
                       <time
                         dateTime={new Date(
-                          lesson.term?.startDate,
+                          lesson.term?.startDate as string,
                         ).toUTCString()}
                       >
-                        {formatDate(lesson.term?.startDate)}
+                        {formatDate(lesson.term?.startDate as string)}
                       </time>
                     </p>
                     <div className="float-right">

@@ -15,9 +15,13 @@
     "node_modules",
     "/project-words.txt",
     "/pnpm-lock.yaml",
+    "package.json",
+    "tsconfig.json",
     "*.css",
     "/tailwind.config.js",
     "__generated__",
-    "dist"
+    "dist",
+    "gql.ts",
+    "graphql-env.d.ts"
   ]
 }

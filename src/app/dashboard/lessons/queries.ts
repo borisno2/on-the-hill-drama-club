@@ -1,6 +1,6 @@
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 
-export const GET_LESSONS = gql`
+export const GET_LESSONS = graphql(`
   query GET_LESSONS($where: LessonTermWhereInput) {
     lessonTerms(where: $where) {
       id
@@ -32,9 +32,9 @@ export const GET_LESSONS = gql`
       status
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_LESSONS').type
+`)
 
-export const GET_LESSON_BY_ID = gql`
+export const GET_LESSON_BY_ID = graphql(`
   query GET_LESSON_BY_ID($id: ID!) {
     lessonTerm(where: { id: $id }) {
       id
@@ -75,4 +75,4 @@ export const GET_LESSON_BY_ID = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_LESSON_BY_ID').type
+`)

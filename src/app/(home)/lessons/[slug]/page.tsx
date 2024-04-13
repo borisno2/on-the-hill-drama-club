@@ -1,4 +1,3 @@
-import { gql } from '@ts-gql/tag/no-transform'
 import { Button } from 'components/Button'
 import { Container } from 'components/Container'
 import { getSessionContext } from 'keystone/context'
@@ -11,8 +10,9 @@ import { cache } from 'react'
 import { getMetadata } from 'app/metadata'
 import Link from 'next/link'
 import { teacherNameHelper } from 'lib/utils'
+import { graphql } from 'gql'
 
-const GET_LESSON_CATEGORY_BY_SLUG = gql`
+const GET_LESSON_CATEGORY_BY_SLUG = graphql(`
   query GET_LESSON_CATEGORY_BY_SLUG($slug: String!) {
     lessonCategory(where: { slug: $slug }) {
       id
@@ -38,7 +38,7 @@ const GET_LESSON_CATEGORY_BY_SLUG = gql`
       }
     }
   }
-` as import('../../../../../__generated__/ts-gql/GET_LESSON_CATEGORY_BY_SLUG').type
+`)
 
 const getLessonCategory = cache(async (slug: string) => {
   const context = await getSessionContext()

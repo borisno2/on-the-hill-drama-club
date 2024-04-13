@@ -1,5 +1,5 @@
 'use client'
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import ErrorPop from 'components/ErrorPop'
@@ -80,14 +80,14 @@ const profileSchema = z.object({
       message: 'Please enter a valid 10 digit phone number',
     }),
 })
-const UPDATE_ACCOUNT = gql`
+const UPDATE_ACCOUNT = graphql(`
   mutation UPDATE_ACCOUNT($id: ID!, $data: AccountUpdateInput!) {
     updateAccount(where: { id: $id }, data: $data) {
       id
       phone
     }
   }
-` as import('../../../../__generated__/ts-gql/UPDATE_ACCOUNT').type
+`)
 
 export default function ProfileForm({
   user,

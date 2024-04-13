@@ -1,4 +1,4 @@
-import { LessonCategoryCreateInput } from './../../../__generated__/ts-gql/@schema.d'
+import { LessonCategoryCreateInput } from '.keystone/types'
 
 export const lessonCategories: LessonCategoryCreateInput[] = [
   {

@@ -3,10 +3,10 @@ import sendEmail from 'lib/sendEmail'
 import { inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
 import { getXeroClient } from 'lib/xero'
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 import { NonRetriableError, slugify } from 'inngest'
 
-const GET_ACCOUNT_BY_ID = gql`
+const GET_ACCOUNT_BY_ID = graphql(`
   query GET_ACCOUNT_BY_ID($id: ID!) {
     account(where: { id: $id }) {
       id
@@ -20,7 +20,7 @@ const GET_ACCOUNT_BY_ID = gql`
       }
     }
   }
-` as import('../../__generated__/ts-gql/GET_ACCOUNT_BY_ID').type
+`)
 
 export const upsertXeroCustomerFunction = inngest.createFunction(
   {
