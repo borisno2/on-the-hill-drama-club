@@ -48,7 +48,7 @@
     "dotenv-flow": "^4.1.0",
     "file-type": "^19.0.0",
     "focus-visible": "^5.2.0",
-    "gql.tada": "^1.4.3",
+    "gql.tada": "^1.5.1",
     "graphql": "^16.8.1",
     "graphql-yoga": "^5.3.0",
     "image-size": "^1.1.1",
