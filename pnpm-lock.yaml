@@ -2143,7 +2143,7 @@ packages:
     peerDependencies:
       typescript: ^5.0.0
     dependencies:
-      '@0no-co/graphqlsp': 1.10.0(typescript@5.4.5)
+      '@0no-co/graphqlsp': 1.10.1(typescript@5.4.5)
       '@gql.tada/internal': 0.2.0(graphql@16.8.1)(typescript@5.4.5)
       graphql: 16.8.1
       ts-morph: 22.0.0
