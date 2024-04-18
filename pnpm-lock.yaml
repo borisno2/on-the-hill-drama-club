@@ -124,8 +124,8 @@ dependencies:
     specifier: ^1.1.1
     version: 1.1.1
   inngest:
-    specifier: ^3.16.1
-    version: 3.16.1(typescript@5.4.5)
+    specifier: ^3.17.0
+    version: 3.17.0(typescript@5.4.5)
   lucide-react:
     specifier: ^0.368.0
     version: 0.368.0(react@18.2.0)
@@ -6988,8 +6988,8 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
 
-  /inngest@3.16.1(typescript@5.4.5):
-    resolution: {integrity: sha512-5jhrVtVzMthyscaI8La73y0rAKEoTtdFg4LpV2ksaET58MmwBBkjH1qPAdIfFMhJrWS+ITQ7HNdzj3nWk+aDBg==}
+  /inngest@3.17.0(typescript@5.4.5):
+    resolution: {integrity: sha512-tmqV7oOiPTxsIgxi2IehKjK/gvbLuULFqqw7T82R3Ih+2M8mwhdZn8d/GHw789FVSfYV8VWrqlUYPWUjYGc0/w==}
     engines: {node: '>=14'}
     peerDependencies:
       typescript: '>=4.7.2'
