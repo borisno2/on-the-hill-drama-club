@@ -235,22 +235,11 @@ export const authOptions: AuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID || 'GoogleClientID',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'GoogleClientSecret',
     }),
-    Apple({
-      clientId: process.env.APPLE_CLIENT_ID || 'AppleClientID',
-      clientSecret: process.env.APPLE_CLIENT_SECRET || 'AppleClientSecret',
-    }),
+    // Apple({
+    //   clientId: process.env.APPLE_CLIENT_ID || 'AppleClientID',
+    //   clientSecret: process.env.APPLE_CLIENT_SECRET || 'AppleClientSecret',
+    // }),
   ],
-  cookies: {
-    pkceCodeVerifier: {
-      name: 'next-auth.pkce.code_verifier',
-      options: {
-        httpOnly: true,
-        sameSite: 'none',
-        path: '/',
-        secure: true,
-      },
-    },
-  },
 }
 
 const handler = NextAuth(authOptions)
