@@ -240,6 +240,17 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.APPLE_CLIENT_SECRET || 'AppleClientSecret',
     }),
   ],
+  cookies: {
+    pkceCodeVerifier: {
+      name: 'next-auth.pkce.code_verifier',
+      options: {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: true,
+      },
+    },
+  },
 }
 
 const handler = NextAuth(authOptions)
