@@ -1,6 +1,4 @@
 'use client'
-
-import { OperationData } from '@ts-gql/tag/no-transform'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import ErrorPop from 'components/ErrorPop'
@@ -15,6 +13,7 @@ import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { createStudent, updateStudent } from 'keystone/context/students'
+import { ResultOf } from 'gql'
 
 type Values = {
   firstName: string
@@ -51,7 +50,7 @@ export default function Student({
   student,
   accountId,
 }: {
-  student?: OperationData<typeof GET_STUDENT_BY_ID>['student']
+  student?: ResultOf<typeof GET_STUDENT_BY_ID>['student']
   accountId: string
 }) {
   const router = useRouter()
@@ -297,8 +296,8 @@ export default function Student({
               {isSubmitting || isDone
                 ? 'Loading...'
                 : !student
-                ? 'Add'
-                : 'Save'}
+                  ? 'Add'
+                  : 'Save'}
             </button>
           </div>
         </div>

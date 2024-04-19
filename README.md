@@ -26,14 +26,14 @@ As I said I was keen on trying something new, the app directory/server side reac
 
 This provides a quick way of getting Auth working especially when one of the requirements was social auth.
 
-### PlanetScale
+### Neon DB
 
-PlanetScale offers a pretty generous free tier and their schema branching was something I really wanted to give a go.
+I was using PlanetScale as their schema branching was something I really wanted to give a go, but since they have dropped their free tier I have moved to Neon.
 
 ### Others to note
 
 - Tailwind both some UI components and CSS
-- Inngest - starting to play around with backgrounding tasks, especially for generating invoices based on events (not completely implemented yet).
+- Inngest - for backgrounding tasks, especially for generating invoices based on events.
 
 # Give it a Go.
 

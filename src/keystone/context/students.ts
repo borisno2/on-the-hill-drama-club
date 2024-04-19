@@ -1,9 +1,8 @@
 'use server'
-import { gql } from '@ts-gql/tag/no-transform'
-import { StudentCreateInput } from '.keystone/types'
 import { getServerActionContext } from './nextAuthFix'
+import { VariablesOf, graphql } from 'gql'
 
-const UPDATE_STUDENT = gql`
+const UPDATE_STUDENT = graphql(`
   mutation UPDATE_STUDENT($id: ID!, $data: StudentUpdateInput!) {
     updateStudent(where: { id: $id }, data: $data) {
       id
@@ -15,9 +14,9 @@ const UPDATE_STUDENT = gql`
       medical
     }
   }
-` as import('../../../__generated__/ts-gql/UPDATE_STUDENT').type
+`)
 
-const ADD_STUDENT = gql`
+const ADD_STUDENT = graphql(`
   mutation ADD_STUDENT($data: StudentCreateInput!) {
     createStudent(data: $data) {
       id
@@ -29,11 +28,18 @@ const ADD_STUDENT = gql`
       medical
     }
   }
-` as import('../../../__generated__/ts-gql/ADD_STUDENT').type
+`)
 
-export async function createStudent({ data }: { data: StudentCreateInput }) {
+export async function createStudent({
+  data,
+}: {
+  data: VariablesOf<typeof ADD_STUDENT>['data']
+}) {
   const context = await getServerActionContext()
- const student = await context.graphql.run({ query: ADD_STUDENT, variables: { data } })
+  const student = await context.graphql.run({
+    query: ADD_STUDENT,
+    variables: { data },
+  })
   return JSON.parse(JSON.stringify(student))
 }
 
@@ -42,7 +48,7 @@ export async function updateStudent({
   data,
 }: {
   id: string
-  data: StudentCreateInput
+  data: VariablesOf<typeof UPDATE_STUDENT>['data']
 }) {
   const context = await getServerActionContext()
   const student = await context.graphql.run({

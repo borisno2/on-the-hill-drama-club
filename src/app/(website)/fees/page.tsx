@@ -1,4 +1,4 @@
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 import { Container } from 'components/Container'
 import { getSessionContext } from 'keystone/context'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   ...getMetadata('Fees'),
 }
 
-const GET_LESSON_CATEGORY_FEES = gql`
+const GET_LESSON_CATEGORY_FEES = graphql(`
   query GET_LESSON_CATEGORY_FEES {
     lessonCategories {
       id
@@ -20,7 +20,7 @@ const GET_LESSON_CATEGORY_FEES = gql`
       length
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_LESSON_CATEGORY_FEES').type
+`)
 
 export default async function Fees() {
   const context = await getSessionContext()

@@ -1,6 +1,6 @@
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 
-export const GET_MESSAGE_TO_SEND = gql`
+export const GET_MESSAGE_TO_SEND = graphql(`
   query GET_MESSAGE_TO_SEND($id: ID!) {
     message(where: { id: $id }) {
       id
@@ -28,4 +28,4 @@ export const GET_MESSAGE_TO_SEND = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_MESSAGE_TO_SEND').type
+`)

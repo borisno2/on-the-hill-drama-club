@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth'
 import { JWT } from 'next-auth/jwt'
-import { type } from '../../__generated__/ts-gql/GET_AUTH_SESSION'
 
 declare module 'next-auth' {
   /**

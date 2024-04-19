@@ -1,7 +1,7 @@
+import { ResultOf, graphql } from 'gql'
 import Link from 'next/link'
-import { OperationData, gql } from '@ts-gql/tag/no-transform'
 
-export const GET_LESSON_TIMETABLE = gql`
+export const GET_LESSON_TIMETABLE = graphql(`
   query GET_LESSON_TIMETABLE {
     lessons {
       id
@@ -16,7 +16,7 @@ export const GET_LESSON_TIMETABLE = gql`
       }
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_LESSON_TIMETABLE').type
+`)
 
 export type DayOfTheWeek =
   | 'MONDAY'
@@ -158,7 +158,7 @@ export default function Timetable({
   lessons,
 }: {
   daySelected: DayOfTheWeek
-  lessons: OperationData<typeof GET_LESSON_TIMETABLE>['lessons']
+  lessons: ResultOf<typeof GET_LESSON_TIMETABLE>['lessons']
 }) {
   return (
     <div className="flex h-full flex-col">

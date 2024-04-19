@@ -1,8 +1,7 @@
 const KEYSTONE_URL = process.env.KEYSTONE_URL || 'http://localhost:4000'
-const { withTsGql } = require('@ts-gql/next')
 
 /** @type {import('next').NextConfig} */
-module.exports = withTsGql({
+module.exports = {
   experimental: {
     scrollRestoration: true,
     serverComponentsExternalPackages: ['graphql', 'ws'],
@@ -35,4 +34,4 @@ module.exports = withTsGql({
       ],
     }
   },
-})
+}

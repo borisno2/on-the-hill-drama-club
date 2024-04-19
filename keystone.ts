@@ -9,9 +9,13 @@ dotenv.config()
 export default config({
   db: {
     provider: 'postgresql',
-    url:
-      process.env.DATABASE_URL!,
-    prismaPreviewFeatures: ['driverAdapters'],
+    url: process.env.DATABASE_URL!,
+    extendPrismaSchema: (schema) => {
+      return schema.replace(
+        /(generator [^}]+)}/g,
+        ['$1', 'previewFeatures = ["driverAdapters"]\n', '}'].join(''),
+      )
+    },
   },
   ui: {
     isAccessAllowed: ({ session }) => session.allowAdminUI,

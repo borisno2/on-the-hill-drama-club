@@ -1,4 +1,4 @@
-import { gql } from '@ts-gql/tag/no-transform'
+import { graphql } from 'gql'
 import { Container } from 'components/Container'
 import { getSessionContext } from 'keystone/context'
 import { formatDate } from 'lib/formatDate'
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   ...getMetadata('Important Dates'),
 }
 
-const GET_IMPORTANT_DATES = gql`
+const GET_IMPORTANT_DATES = graphql(`
   query GET_IMPORTANT_DATES($filterDay: CalendarDay!) {
     importantDates(
       where: { date: { gte: $filterDay } }
@@ -24,7 +24,7 @@ const GET_IMPORTANT_DATES = gql`
       description
     }
   }
-` as import('../../../../__generated__/ts-gql/GET_IMPORTANT_DATES').type
+`)
 
 export default async function Page() {
   const context = await getSessionContext()
@@ -51,6 +51,7 @@ export default async function Page() {
           >
             {importantDates.length !== 0 &&
               importantDates.map((date) => {
+                if (!date.date) return null
                 return (
                   <li
                     key={date.id}
