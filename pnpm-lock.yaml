@@ -172,8 +172,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       zod:
-        specifier: ^3.22.4
-        version: 3.22.4
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@0no-co/graphqlsp':
         specifier: ^1.10.1
@@ -5327,6 +5327,9 @@ packages:
 
   zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -11248,3 +11251,5 @@ snapshots:
   zen-observable@0.8.15: {}
 
   zod@3.22.4: {}
+
+  zod@3.23.8: {}
