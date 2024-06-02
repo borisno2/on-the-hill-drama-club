@@ -1,5 +1,6 @@
 import { useId } from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function Section({ title, children }: any) {
   let id = useId()
 

@@ -9,6 +9,7 @@ export const graphql = initGraphQLTada<{
     Int: number
     JSON: import('@keystone-6/core/types').JSONValue
     Decimal: import('@keystone-6/core/types').Decimal
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     DateTime: any
   }
 }>()

@@ -12,7 +12,7 @@ import type { Session } from 'next-auth'
 import type { Context } from '.keystone/types'
 
 class NeonPrismaClient extends PrismaModule.PrismaClient {
-  constructor(ksConfig: any) {
+  constructor(ksConfig: PrismaModule.Prisma.PrismaClientOptions) {
     neonConfig.webSocketConstructor = ws
     const connectionString = `${process.env.DATABASE_URL}`
 
@@ -25,10 +25,12 @@ class NeonPrismaClient extends PrismaModule.PrismaClient {
 
 // Making sure multiple prisma clients are not created during hot reloading
 export const keystoneContext: Context =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).keystoneContext ||
   getContext(config, { ...PrismaModule, PrismaClient: NeonPrismaClient })
 
 if (process.env.NODE_ENV !== 'production')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).keystoneContext = keystoneContext
 
 export async function getSessionContext(props?: {

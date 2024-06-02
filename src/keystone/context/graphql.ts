@@ -9,6 +9,7 @@ type GraphQLExecutionArguments<TData, TVariables> = {
 
 export async function runKeystoneGraphQL<
   TData,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TVariables extends Record<string, any>,
 >(args: GraphQLExecutionArguments<TData, TVariables>): Promise<TData> {
   const context = await getServerActionContext()
