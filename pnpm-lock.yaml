@@ -169,8 +169,8 @@ importers:
         specifier: ^8.17.0
         version: 8.17.0
       xero-node:
-        specifier: ^5.1.0
-        version: 5.1.0
+        specifier: ^6.0.0
+        version: 6.0.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -2931,9 +2931,6 @@ packages:
     resolution: {integrity: sha512-M0JtH+hlOL5pLQwHOLNYZaXuhqmvS8oExsqB1SBYgA4Dk7u/xx+YdGHXaK5pyUfed5mYXdlYiphWq3G8cRi5JQ==}
     engines: {node: '>=4'}
 
-  axios@1.6.7:
-    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
-
   axios@1.6.8:
     resolution: {integrity: sha512-v/ZHtJDU39mDpyBoFVkETcd/uNdxrWRrg3bKpOKzXFA6Bvqopts6ALSMU3y6ijYxbw2B+wPrIv46egTzJXCLGQ==}
 
@@ -3957,15 +3954,6 @@ packages:
 
   focus-visible@5.2.0:
     resolution: {integrity: sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==}
-
-  follow-redirects@1.15.5:
-    resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
 
   follow-redirects@1.15.6:
     resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
@@ -6333,8 +6321,8 @@ packages:
     resolution: {integrity: sha512-GCPAHLvrIH13+c0SuacwvRYj2SxJXQ4kaVTT5xgL3kPrz56XxkF21IGhjSE1+W0aw7gpBWRGXLCPnPby6lSpmQ==}
     engines: {node: '>=12'}
 
-  xero-node@5.1.0:
-    resolution: {integrity: sha512-5Eld/e1GyKClkugLtOAd4ieRrLYgCxdifUqmI5/nhQngnhsne3mW/WE1acgtTyKcE5eG7SYhWRyoFBxiEyya1Q==}
+  xero-node@6.0.0:
+    resolution: {integrity: sha512-k4BOWWPc9GdEG/K6gdaNnQMekev/chNkYlDhbCsgXZVhfZk6NYIhIbgfRbC6O/YPlzDXXJj5Erd2tbkonZXWcA==}
 
   xml2js@0.6.2:
     resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
@@ -9713,14 +9701,6 @@ snapshots:
 
   axe-core@4.7.0: {}
 
-  axios@1.6.7:
-    dependencies:
-      follow-redirects: 1.15.5
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
   axios@1.6.8:
     dependencies:
       follow-redirects: 1.15.6
@@ -11010,8 +10990,6 @@ snapshots:
       tabbable: 6.2.0
 
   focus-visible@5.2.0: {}
-
-  follow-redirects@1.15.5: {}
 
   follow-redirects@1.15.6: {}
 
@@ -13370,9 +13348,9 @@ snapshots:
 
   xdg-basedir@5.1.0: {}
 
-  xero-node@5.1.0:
+  xero-node@6.0.0:
     dependencies:
-      axios: 1.6.7
+      axios: 1.6.8
       openid-client: 4.9.1
     transitivePeerDependencies:
       - debug
