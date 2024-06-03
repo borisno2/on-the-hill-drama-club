@@ -17,7 +17,7 @@ export function Button({
   variant?: 'primary' | 'secondary'
   className?: string
   href?: string
-  [key: string]: any
+  [key: string]: unknown
 }) {
   className = clsx(
     'inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none',

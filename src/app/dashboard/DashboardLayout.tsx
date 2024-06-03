@@ -3,19 +3,19 @@
 import React, { Fragment, useState } from 'react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 
 import {
   Bars3Icon,
-  CalendarIcon,
-  ChartBarIcon,
+  // CalendarIcon,
+  // ChartBarIcon,
   FolderIcon,
   HomeIcon,
-  InboxIcon,
+  // InboxIcon,
   UsersIcon,
   XMarkIcon,
   IdentificationIcon,
-  ScaleIcon,
+  // ScaleIcon,
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import ProfileDropdown from 'components/ProfileDropdown'

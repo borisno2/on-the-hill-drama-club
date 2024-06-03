@@ -7,7 +7,7 @@ type emailData = {
     name?: string
   }
   templateId: string
-  dynamicTemplateData: Record<string, string>
+  dynamicTemplateData: Record<string, string | undefined | null>
 }
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '')

@@ -1,12 +1,11 @@
-import { Fragment } from 'react'
 import {
-  ChevronDownIcon,
+  // ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ClockIcon,
-  EllipsisHorizontalIcon,
-  Menu,
-  Transition,
+  // EllipsisHorizontalIcon,
+  // Menu,
+  // Transition,
 } from './ClientComponents'
 
 const days = [
@@ -130,7 +129,7 @@ const days = [
 ]
 const selectedDay = days.find((day) => day.isSelected)
 
-function classNames(...classes: any) {
+function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(' ')
 }
 
