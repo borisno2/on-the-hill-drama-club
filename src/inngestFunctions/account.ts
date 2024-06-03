@@ -1,5 +1,5 @@
 import { Context } from '.keystone/types'
-import sendEmail from 'lib/sendEmail'
+// import sendEmail from 'lib/sendEmail'
 import { inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
 import { getXeroClient } from 'lib/xero'
@@ -33,7 +33,7 @@ export const upsertXeroCustomerFunction = inngest.createFunction(
     const { item } = event.data
     // Get the account from the event
     const { account } = await step.run('app/account.get', async () => {
-      return await context.graphql
+      return context.graphql
         .run({
           query: GET_ACCOUNT_BY_ID,
           variables: { id: item.id },
@@ -78,7 +78,7 @@ export const upsertXeroCustomerFunction = inngest.createFunction(
         contacts: [
           {
             name: account.name!,
-            emailAddress: account.user?.email!,
+            emailAddress: account.user!.email!,
             firstName: account.firstName!,
             lastName: account.surname!,
           },

@@ -47,8 +47,8 @@ export default async function StudentList({
   const { students } = await context.graphql.run({
     query: GET_STUDENTS_ENROLMENTS,
     variables: {
-      minYear: lessonTerm.lesson?.minYear!,
-      maxYear: lessonTerm.lesson?.maxYear!,
+      minYear: lessonTerm.lesson!.minYear!,
+      maxYear: lessonTerm.lesson!.maxYear!,
     },
   })
   return (

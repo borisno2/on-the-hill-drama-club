@@ -11,7 +11,7 @@
     "dev:watch": "keystone dev --no-server",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone build --no-ui --frozen",
-    "lint": "eslint --ext .ts,.tsx . && cspell '**' && tsc --noEmit",
+    "lint": "eslint . && cspell '**' && tsc --noEmit",
     "seed-data": "tsx seed-data.ts"
   },
   "dependencies": {
@@ -71,13 +71,17 @@
   },
   "devDependencies": {
     "@0no-co/graphqlsp": "^1.10.1",
+    "@eslint/compat": "^1.0.3",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.1.1",
     "@types/lodash": "^4.17.4",
     "@types/node": "^20.13.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/ws": "^8.5.10",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
     "cspell": "^8.8.3",
-    "eslint": "8.57.0",
+    "eslint": "9.4.0",
     "eslint-config-next": "14.2.3",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",

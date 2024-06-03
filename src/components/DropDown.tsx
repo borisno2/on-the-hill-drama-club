@@ -7,6 +7,7 @@ type DropDownProps = {
   name: string
   options: { id: number; label: string; value: string }[]
   value: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleChange: (e: string | ChangeEvent<any>) => void
 }
 function classNames(...classes: string[]) {
@@ -14,7 +15,6 @@ function classNames(...classes: string[]) {
 }
 
 export default function DropDown({
-  name,
   label,
   options,
   value,

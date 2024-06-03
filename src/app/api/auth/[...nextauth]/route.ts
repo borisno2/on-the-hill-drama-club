@@ -3,7 +3,7 @@ import { isCuid } from 'cuid'
 import { graphql } from 'gql'
 import NextAuth, { AuthOptions } from 'next-auth'
 import Google, { GoogleProfile } from 'next-auth/providers/google'
-import Apple, { AppleProfile } from 'next-auth/providers/apple'
+import { AppleProfile } from 'next-auth/providers/apple'
 
 import Credentials from 'next-auth/providers/credentials'
 import { keystoneContext } from '../../../../keystone/context'
