@@ -86,7 +86,7 @@
     "prettier": "^3.3.1",
     "prettier-plugin-tailwindcss": "^0.6.2",
     "prisma": "5.12.1",
-    "tsx": "^4.11.2",
+    "tsx": "^4.14.1",
     "turbo": "^1.13.4",
     "typescript": "^5.4.5"
   },

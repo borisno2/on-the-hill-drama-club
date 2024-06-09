@@ -224,8 +224,8 @@ importers:
         specifier: 5.12.1
         version: 5.12.1
       tsx:
-        specifier: ^4.11.2
-        version: 4.11.2
+        specifier: ^4.14.1
+        version: 4.14.1
       turbo:
         specifier: ^1.13.4
         version: 1.13.4
@@ -5945,8 +5945,8 @@ packages:
     resolution: {integrity: sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==}
     engines: {node: '>=0.6.x'}
 
-  tsx@4.11.2:
-    resolution: {integrity: sha512-V5DL5v1BuItjsQ2FN9+4OjR7n5cr8hSgN+VGmm/fd2/0cgQdBIWHcQ3bFYm/5ZTmyxkTDBUIaRuW2divgfPe0A==}
+  tsx@4.14.1:
+    resolution: {integrity: sha512-GU8pPJq8DdxcJDSK6Bc64c2jW8zBK2hb0jzwHZDfjapbwu6AqvFnAElnzZ17Xb9TH5a/j6/sicTCVYF+eO/cmA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -13074,7 +13074,7 @@ snapshots:
 
   tsscmp@1.0.6: {}
 
-  tsx@4.11.2:
+  tsx@4.14.1:
     dependencies:
       esbuild: 0.20.2
       get-tsconfig: 4.7.5
