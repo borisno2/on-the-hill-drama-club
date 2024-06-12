@@ -1,4 +1,4 @@
-import dotenv from 'dotenv-flow'
+import dotenv from 'dotenv'
 
 import { config } from '@keystone-6/core'
 
