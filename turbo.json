@@ -2,7 +2,11 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build": {
-      "outputs": [".next/**", ".keystone/admin/.next/**"]
+      "outputs": [".next/**", ".keystone/admin/.next/**"],
+      "env": ["DATABASE_URL"]
+    },
+    "seed-data": {
+      "env": ["DATABASE_URL"]
     },
     "lint": {}
   }
