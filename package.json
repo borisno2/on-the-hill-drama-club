@@ -89,7 +89,7 @@
     "turbo": "^2.0.4",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@9.3.0",
+  "packageManager": "pnpm@9.4.0",
   "pnpm": {
     "overrides": {
       "prisma": "5.12.1",
