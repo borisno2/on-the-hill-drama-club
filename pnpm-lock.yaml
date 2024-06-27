@@ -118,8 +118,8 @@ importers:
         specifier: ^16.8.2
         version: 16.8.2
       graphql-yoga:
-        specifier: ^5.3.1
-        version: 5.3.1(graphql@16.8.2)
+        specifier: ^5.4.0
+        version: 5.4.0(graphql@16.8.2)
       image-size:
         specifier: ^1.1.1
         version: 1.1.1
@@ -1320,8 +1320,8 @@ packages:
     resolution: {integrity: sha512-Mg8psdkAp+YTG1OGmvU+xa6xpsAmSir0hhr3yFYPyLNwzUj95DdIwsMpKadDj9xDpYgJcH3Hp/4JMal9DhQimA==}
     engines: {node: '>=18.0.0'}
 
-  '@graphql-yoga/subscription@5.0.0':
-    resolution: {integrity: sha512-Ri7sK8hmxd/kwaEa0YT8uqQUb2wOLsmBMxI90QDyf96lzOMJRgBuNYoEkU1pSgsgmW2glceZ96sRYfaXqwVxUw==}
+  '@graphql-yoga/subscription@5.0.1':
+    resolution: {integrity: sha512-1wCB1DfAnaLzS+IdoOzELGGnx1ODEg9nzQXFh4u2j02vAnne6d+v4A7HIH9EqzVdPLoAaMKXCZUUdKs+j3z1fg==}
     engines: {node: '>=18.0.0'}
 
   '@graphql-yoga/typed-event-target@3.0.0':
@@ -4057,8 +4057,8 @@ packages:
       '@types/koa':
         optional: true
 
-  graphql-yoga@5.3.1:
-    resolution: {integrity: sha512-n918QV6TF7xTjb9ASnozgsr4ydMc08c+x4eRAWKxxWVwSnzdP2xeN2zw1ljIzRD0ccSCNoBajGDKwcZkJDitPA==}
+  graphql-yoga@5.4.0:
+    resolution: {integrity: sha512-o91DJjjAMwhb7PFJFA9yb/K55oCbT+0oFKqbwg5RHWAiy7YMgKMVgmbQFmtGPgkKdfbnJCVdYkX5OF30FTq46g==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       graphql: ^15.2.0 || ^16.0.0
@@ -7669,7 +7669,7 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  '@graphql-yoga/subscription@5.0.0':
+  '@graphql-yoga/subscription@5.0.1':
     dependencies:
       '@graphql-yoga/typed-event-target': 3.0.0
       '@repeaterjs/repeater': 3.0.5
@@ -11135,14 +11135,14 @@ snapshots:
     optionalDependencies:
       '@types/express': 4.17.21
 
-  graphql-yoga@5.3.1(graphql@16.8.2):
+  graphql-yoga@5.4.0(graphql@16.8.2):
     dependencies:
       '@envelop/core': 5.0.0
       '@graphql-tools/executor': 1.2.5(graphql@16.8.2)
       '@graphql-tools/schema': 10.0.2(graphql@16.8.2)
       '@graphql-tools/utils': 10.1.2(graphql@16.8.2)
       '@graphql-yoga/logger': 2.0.0
-      '@graphql-yoga/subscription': 5.0.0
+      '@graphql-yoga/subscription': 5.0.1
       '@whatwg-node/fetch': 0.9.18
       '@whatwg-node/server': 0.9.34
       dset: 3.1.3
