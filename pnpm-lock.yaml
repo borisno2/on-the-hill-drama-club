@@ -22,8 +22,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.8.2)
       '@graphql-yoga/apollo-link':
-        specifier: ^3.3.1
-        version: 3.3.1(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.8.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.14.9)(graphql@16.8.2)
+        specifier: ^3.6.0
+        version: 3.6.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.8.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.14.9)(graphql@16.8.2)
       '@headlessui/react':
         specifier: ^2.0.4
         version: 2.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1309,8 +1309,8 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-yoga/apollo-link@3.3.1':
-    resolution: {integrity: sha512-CU/NtskYPjLN6WZN43ICqLNB/vvotI138LfQs2ZfiwiQkut7tUFQHQB5Qu82+cH8SPY6hVDsYZ7+KSUv7WpwCg==}
+  '@graphql-yoga/apollo-link@3.6.0':
+    resolution: {integrity: sha512-kwihfEqtMC5pBwvGV9ufWRqpytKOMQ1yFqLHQxUNtwdG6szvebdamI8xfDSfVuK1ufhYggdDcSKYkxiWVS/pPQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@apollo/client': ^3.5.9
@@ -7655,7 +7655,7 @@ snapshots:
     dependencies:
       graphql: 16.8.2
 
-  '@graphql-yoga/apollo-link@3.3.1(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.8.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.14.9)(graphql@16.8.2)':
+  '@graphql-yoga/apollo-link@3.6.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.8.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.14.9)(graphql@16.8.2)':
     dependencies:
       '@apollo/client': 3.9.4(@types/react@18.3.3)(graphql@16.8.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@graphql-tools/executor-apollo-link': 1.0.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.8.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.8.2)

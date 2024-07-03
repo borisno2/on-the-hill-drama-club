@@ -17,7 +17,7 @@
   "dependencies": {
     "@aws-sdk/signature-v4-crt": "^3.587.0",
     "@graphql-typed-document-node/core": "^3.2.0",
-    "@graphql-yoga/apollo-link": "^3.3.1",
+    "@graphql-yoga/apollo-link": "^3.6.0",
     "@headlessui/react": "^2.0.4",
     "@heroicons/react": "^2.1.4",
     "@hookform/resolvers": "^3.6.0",
