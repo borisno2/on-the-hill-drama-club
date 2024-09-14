@@ -37,7 +37,7 @@
     "@vercel/speed-insights": "^1.0.12",
     "@whatwg-node/fetch": "^0.9.18",
     "autoprefixer": "^10.4.19",
-    "aws-crt": "^1.21.3",
+    "aws-crt": "^1.22.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "csrf": "^3.1.0",
