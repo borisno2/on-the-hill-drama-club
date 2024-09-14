@@ -23,7 +23,7 @@ importers:
         version: 3.2.0(graphql@16.9.0)
       '@graphql-yoga/apollo-link':
         specifier: ^3.6.0
-        version: 3.6.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.14.9)(graphql@16.9.0)
+        version: 3.6.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.16.5)(graphql@16.9.0)
       '@headlessui/react':
         specifier: ^2.1.8
         version: 2.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -59,10 +59,10 @@ importers:
         version: 8.1.3
       '@tailwindcss/forms':
         specifier: ^0.5.7
-        version: 0.5.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3)))
+        version: 0.5.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3)))
       '@tailwindcss/typography':
         specifier: ^0.5.13
-        version: 0.5.13(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3)))
+        version: 0.5.13(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3)))
       '@types/dotenv-flow':
         specifier: ^3.3.3
         version: 3.3.3
@@ -158,10 +158,10 @@ importers:
         version: 2.3.0
       tailwindcss:
         specifier: ^3.4.4
-        version: 3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3))
+        version: 3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3))
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3)))
+        version: 1.0.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3)))
       ws:
         specifier: ^8.17.1
         version: 8.17.1
@@ -188,8 +188,8 @@ importers:
         specifier: ^4.17.5
         version: 4.17.5
       '@types/node':
-        specifier: ^20.14.9
-        version: 20.14.9
+        specifier: ^20.16.5
+        version: 20.16.5
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -2458,8 +2458,8 @@ packages:
   '@types/node@14.18.33':
     resolution: {integrity: sha512-qelS/Ra6sacc4loe/3MSjXNL1dNQ/GjxNHVzuChwMfmk7HuycRLVQN2qNY3XahK+fZc5E2szqQSKUyAF0E+2bg==}
 
-  '@types/node@20.14.9':
-    resolution: {integrity: sha512-06OCtnTXtWOZBJlRApleWndH4JsRVs1pDCc8dLSQp+7PpUpX3ePdHyeNSFTeSe7FtKyQkrlPvHwJOW3SLd8Oyg==}
+  '@types/node@20.16.5':
+    resolution: {integrity: sha512-VwYCweNo3ERajwy0IUlqqcyZ8/A7Zwa9ZP3MnENWcB11AejO+tLy3pu850goUW2FC/IJMdZUfKpX/yxL1gymCA==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -6054,8 +6054,8 @@ packages:
   uncrypto@0.1.3:
     resolution: {integrity: sha512-Ql87qFHB3s/De2ClA9e0gsnS6zXG27SkTiSJwjCc9MebbfapQfuPzumMIUMi38ezPZVNFcHI9sUIepeQfw8J8Q==}
 
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+  undici-types@6.19.8:
+    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
 
   undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
@@ -7598,14 +7598,14 @@ snapshots:
       graphql: 16.9.0
       tslib: 2.6.2
 
-  '@graphql-tools/executor-http@1.0.5(@types/node@20.14.9)(graphql@16.9.0)':
+  '@graphql-tools/executor-http@1.0.5(@types/node@20.16.5)(graphql@16.9.0)':
     dependencies:
       '@graphql-tools/utils': 10.1.2(graphql@16.9.0)
       '@repeaterjs/repeater': 3.0.5
       '@whatwg-node/fetch': 0.9.18
       extract-files: 11.0.0
       graphql: 16.9.0
-      meros: 1.3.0(@types/node@20.14.9)
+      meros: 1.3.0(@types/node@20.16.5)
       tslib: 2.6.2
       value-or-promise: 1.0.12
     transitivePeerDependencies:
@@ -7677,11 +7677,11 @@ snapshots:
     dependencies:
       graphql: 16.9.0
 
-  '@graphql-yoga/apollo-link@3.6.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.14.9)(graphql@16.9.0)':
+  '@graphql-yoga/apollo-link@3.6.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/node@20.16.5)(graphql@16.9.0)':
     dependencies:
       '@apollo/client': 3.9.4(@types/react@18.3.3)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@graphql-tools/executor-apollo-link': 1.0.0(@apollo/client@3.9.4(@types/react@18.3.3)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(graphql@16.9.0)
-      '@graphql-tools/executor-http': 1.0.5(@types/node@20.14.9)(graphql@16.9.0)
+      '@graphql-tools/executor-http': 1.0.5(@types/node@20.16.5)(graphql@16.9.0)
       graphql: 16.9.0
       tslib: 2.6.2
     transitivePeerDependencies:
@@ -9033,18 +9033,18 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@tailwindcss/forms@0.5.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3)))':
+  '@tailwindcss/forms@0.5.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3)))':
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3))
+      tailwindcss: 3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3))
 
-  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3)))':
+  '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3))
+      tailwindcss: 3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3))
 
   '@tanstack/react-virtual@3.10.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -9079,22 +9079,22 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@types/busboy@1.5.3':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@types/cacheable-request@6.0.3':
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
       '@types/responselike': 1.0.3
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@types/cookie@0.5.4':
     optional: true
@@ -9109,7 +9109,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.17.41':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
       '@types/qs': 6.9.10
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -9134,7 +9134,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@types/lodash@4.17.5': {}
 
@@ -9150,21 +9150,21 @@ snapshots:
 
   '@types/node-fetch@2.6.3':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
       form-data: 3.0.1
     optional: true
 
   '@types/node-fetch@2.6.9':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
       form-data: 4.0.0
 
   '@types/node@14.18.33':
     optional: true
 
-  '@types/node@20.14.9':
+  '@types/node@20.16.5':
     dependencies:
-      undici-types: 5.26.5
+      undici-types: 6.19.8
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -9174,7 +9174,7 @@ snapshots:
 
   '@types/pg@8.11.6':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
       pg-protocol: 1.6.0
       pg-types: 4.0.2
 
@@ -9199,22 +9199,22 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@types/serve-static@1.15.5':
     dependencies:
       '@types/http-errors': 2.0.4
       '@types/mime': 3.0.4
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@types/ws@8.5.10':
     dependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   '@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@6.14.0(eslint@9.5.0)(typescript@5.5.3))(eslint@9.5.0)(typescript@5.5.3)':
     dependencies:
@@ -11162,7 +11162,7 @@ snapshots:
   graphql-upload@15.0.2(@types/express@4.17.21)(graphql@16.9.0):
     dependencies:
       '@types/busboy': 1.5.3
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
       '@types/object-path': 0.11.4
       busboy: 1.6.0
       fs-capacitor: 6.2.0
@@ -11737,9 +11737,9 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  meros@1.3.0(@types/node@20.14.9):
+  meros@1.3.0(@types/node@20.16.5):
     optionalDependencies:
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
 
   methods@1.1.2: {}
 
@@ -12204,13 +12204,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.32
 
-  postcss-load-config@4.0.2(postcss@8.4.32)(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3)):
+  postcss-load-config@4.0.2(postcss@8.4.32)(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3)):
     dependencies:
       lilconfig: 3.0.0
       yaml: 2.4.3
     optionalDependencies:
       postcss: 8.4.32
-      ts-node: 10.9.1(@types/node@20.14.9)(typescript@5.5.3)
+      ts-node: 10.9.1(@types/node@20.16.5)(typescript@5.5.3)
 
   postcss-nested@6.0.1(postcss@8.4.32):
     dependencies:
@@ -12949,11 +12949,11 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.1
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3))):
     dependencies:
-      tailwindcss: 3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3))
+      tailwindcss: 3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3))
 
-  tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3)):
+  tailwindcss@3.4.4(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -12972,7 +12972,7 @@ snapshots:
       postcss: 8.4.32
       postcss-import: 15.1.0(postcss@8.4.32)
       postcss-js: 4.0.1(postcss@8.4.32)
-      postcss-load-config: 4.0.2(postcss@8.4.32)(ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3))
+      postcss-load-config: 4.0.2(postcss@8.4.32)(ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3))
       postcss-nested: 6.0.1(postcss@8.4.32)
       postcss-selector-parser: 6.0.13
       resolve: 1.22.8
@@ -13066,14 +13066,14 @@ snapshots:
       yn: 3.1.1
     optional: true
 
-  ts-node@10.9.1(@types/node@20.14.9)(typescript@5.5.3):
+  ts-node@10.9.1(@types/node@20.16.5)(typescript@5.5.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.14.9
+      '@types/node': 20.16.5
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
@@ -13201,7 +13201,7 @@ snapshots:
   uncrypto@0.1.3:
     optional: true
 
-  undici-types@5.26.5: {}
+  undici-types@6.19.8: {}
 
   undici@5.28.4:
     dependencies:
