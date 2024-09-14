@@ -45,7 +45,7 @@
     "dayjs": "^1.11.11",
     "decimal.js": "^10.4.3",
     "dotenv": "^16.4.5",
-    "file-type": "^19.0.0",
+    "file-type": "^19.5.0",
     "focus-visible": "^5.2.0",
     "gql.tada": "^1.7.6",
     "graphql": "^16.9.0",
