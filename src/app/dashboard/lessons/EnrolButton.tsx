@@ -39,7 +39,7 @@ export default function EnrolButton({
         }
         router.refresh()
       })
-    } catch (e) {
+    } catch {
       startTransition(() => {
         setIsSubmitting(false)
         setSuccess(false)

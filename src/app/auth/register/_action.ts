@@ -56,9 +56,10 @@ const registerSchema = z
   })
 
 export async function registerAccount(data: z.infer<typeof registerSchema>) {
+  const validationResult = registerSchema.parse(data)
   const form = new URLSearchParams()
   form.append('secret', SECRET_KEY)
-  form.append('response', data.turnstileRes)
+  form.append('response', validationResult.turnstileRes)
   const headersList = headers()
   form.append('remoteip', headersList.get('x-forwarded-for') as string)
 
@@ -75,7 +76,7 @@ export async function registerAccount(data: z.infer<typeof registerSchema>) {
     return { error: 'Verification failed' }
   }
   const existingUser = await keystoneContext.sudo().db.User.count({
-    where: { email: { equals: data.email } },
+    where: { email: { equals: validationResult.email } },
   })
   if (existingUser > 0) {
     return { error: 'Error creating user' }
@@ -83,25 +84,25 @@ export async function registerAccount(data: z.infer<typeof registerSchema>) {
   try {
     const user = await keystoneContext.sudo().db.User.createOne({
       data: {
-        email: data.email,
-        password: data.password,
+        email: validationResult.email,
+        password: validationResult.password,
         subjectId: cuid(),
         provider: 'credentials',
         account: {
           create: {
-            firstName: data.firstName,
-            surname: data.surname,
-            phone: data.phone,
-            suburb: data.suburb,
-            postcode: data.postcode,
-            streetAddress: data.streetAddress,
-            secondContactName: data.secondContactName,
-            secondContactPhone: data.secondContactPhone,
+            firstName: validationResult.firstName,
+            surname: validationResult.surname,
+            phone: validationResult.phone,
+            suburb: validationResult.suburb,
+            postcode: validationResult.postcode,
+            streetAddress: validationResult.streetAddress,
+            secondContactName: validationResult.secondContactName,
+            secondContactPhone: validationResult.secondContactPhone,
           },
         },
       },
     })
-    if (!user || !user.id || user.email !== data.email) {
+    if (!user || !user.id || user.email !== validationResult.email) {
       return { error: 'Error Creating User' }
     }
     return { success: true }
