@@ -148,8 +148,8 @@ importers:
         specifier: ^7.53.0
         version: 7.53.0(react@18.3.1)
       react-tailwindcss-datepicker:
-        specifier: ^1.6.6
-        version: 1.6.6(dayjs@1.11.13)(react@18.3.1)
+        specifier: ^1.7.2
+        version: 1.7.2(dayjs@1.11.13)(react@18.3.1)
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -5656,10 +5656,10 @@ packages:
       '@types/react':
         optional: true
 
-  react-tailwindcss-datepicker@1.6.6:
-    resolution: {integrity: sha512-kHSUonRO86PoYQQWPqpaSw2JeEn9OafdLsLBG85zO5Sfs23Ku8Ixt/YO+Is3TCBcFeOKnZgzhGLmP3NAXVlFkA==}
+  react-tailwindcss-datepicker@1.7.2:
+    resolution: {integrity: sha512-/NIRLB1evT69pt3Syol3cZpsAnLZlGvFWav98/Rr77Gey382C1fjKW2Emgu+SC4NtiRt6CBFwx/0Wbkn4iI+nA==}
     peerDependencies:
-      dayjs: ^1.11.6
+      dayjs: ^1.11.12
       react: ^17.0.2 || ^18.2.0
 
   react-transition-group@4.4.5:
@@ -12976,7 +12976,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.5
 
-  react-tailwindcss-datepicker@1.6.6(dayjs@1.11.13)(react@18.3.1):
+  react-tailwindcss-datepicker@1.7.2(dayjs@1.11.13)(react@18.3.1):
     dependencies:
       dayjs: 1.11.13
       react: 18.3.1
