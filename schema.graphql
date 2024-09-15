@@ -1486,50 +1486,50 @@ type Mutation {
 }
 
 type Query {
-  users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput! = {}, orderBy: [UserOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: UserWhereUniqueInput): [User!]
   usersCount(where: UserWhereInput! = {}): Int
-  accounts(where: AccountWhereInput! = {}, orderBy: [AccountOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AccountWhereUniqueInput): [Account!]
   account(where: AccountWhereUniqueInput!): Account
+  accounts(where: AccountWhereInput! = {}, orderBy: [AccountOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AccountWhereUniqueInput): [Account!]
   accountsCount(where: AccountWhereInput! = {}): Int
-  students(where: StudentWhereInput! = {}, orderBy: [StudentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StudentWhereUniqueInput): [Student!]
   student(where: StudentWhereUniqueInput!): Student
+  students(where: StudentWhereInput! = {}, orderBy: [StudentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StudentWhereUniqueInput): [Student!]
   studentsCount(where: StudentWhereInput! = {}): Int
-  lessonCategories(where: LessonCategoryWhereInput! = {}, orderBy: [LessonCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonCategoryWhereUniqueInput): [LessonCategory!]
   lessonCategory(where: LessonCategoryWhereUniqueInput!): LessonCategory
+  lessonCategories(where: LessonCategoryWhereInput! = {}, orderBy: [LessonCategoryOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonCategoryWhereUniqueInput): [LessonCategory!]
   lessonCategoriesCount(where: LessonCategoryWhereInput! = {}): Int
-  importantDates(where: ImportantDateWhereInput! = {}, orderBy: [ImportantDateOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ImportantDateWhereUniqueInput): [ImportantDate!]
   importantDate(where: ImportantDateWhereUniqueInput!): ImportantDate
+  importantDates(where: ImportantDateWhereInput! = {}, orderBy: [ImportantDateOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ImportantDateWhereUniqueInput): [ImportantDate!]
   importantDatesCount(where: ImportantDateWhereInput! = {}): Int
-  terms(where: TermWhereInput! = {}, orderBy: [TermOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TermWhereUniqueInput): [Term!]
   term(where: TermWhereUniqueInput!): Term
+  terms(where: TermWhereInput! = {}, orderBy: [TermOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TermWhereUniqueInput): [Term!]
   termsCount(where: TermWhereInput! = {}): Int
-  lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonTermWhereUniqueInput): [LessonTerm!]
   lessonTerm(where: LessonTermWhereUniqueInput!): LessonTerm
+  lessonTerms(where: LessonTermWhereInput! = {}, orderBy: [LessonTermOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonTermWhereUniqueInput): [LessonTerm!]
   lessonTermsCount(where: LessonTermWhereInput! = {}): Int
-  lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonWhereUniqueInput): [Lesson!]
   lesson(where: LessonWhereUniqueInput!): Lesson
+  lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonWhereUniqueInput): [Lesson!]
   lessonsCount(where: LessonWhereInput! = {}): Int
-  manyEmailSettings(where: EmailSettingsWhereInput! = {id: {equals: 1}}, orderBy: [EmailSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EmailSettingsWhereUniqueInput): [EmailSettings!]
   emailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}): EmailSettings
+  manyEmailSettings(where: EmailSettingsWhereInput! = {id: {equals: 1}}, orderBy: [EmailSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EmailSettingsWhereUniqueInput): [EmailSettings!]
   manyEmailSettingsCount(where: EmailSettingsWhereInput! = {id: {equals: 1}}): Int
-  manyXeroSettings(where: XeroSettingsWhereInput! = {id: {equals: 1}}, orderBy: [XeroSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: XeroSettingsWhereUniqueInput): [XeroSettings!]
   xeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}): XeroSettings
+  manyXeroSettings(where: XeroSettingsWhereInput! = {id: {equals: 1}}, orderBy: [XeroSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: XeroSettingsWhereUniqueInput): [XeroSettings!]
   manyXeroSettingsCount(where: XeroSettingsWhereInput! = {id: {equals: 1}}): Int
-  teachers(where: TeacherWhereInput! = {}, orderBy: [TeacherOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TeacherWhereUniqueInput): [Teacher!]
   teacher(where: TeacherWhereUniqueInput!): Teacher
+  teachers(where: TeacherWhereInput! = {}, orderBy: [TeacherOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TeacherWhereUniqueInput): [Teacher!]
   teachersCount(where: TeacherWhereInput! = {}): Int
-  enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EnrolmentWhereUniqueInput): [Enrolment!]
   enrolment(where: EnrolmentWhereUniqueInput!): Enrolment
+  enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EnrolmentWhereUniqueInput): [Enrolment!]
   enrolmentsCount(where: EnrolmentWhereInput! = {}): Int
-  messages(where: MessageWhereInput! = {}, orderBy: [MessageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: MessageWhereUniqueInput): [Message!]
   message(where: MessageWhereUniqueInput!): Message
+  messages(where: MessageWhereInput! = {}, orderBy: [MessageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: MessageWhereUniqueInput): [Message!]
   messagesCount(where: MessageWhereInput! = {}): Int
-  bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillWhereUniqueInput): [Bill!]
   bill(where: BillWhereUniqueInput!): Bill
+  bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillWhereUniqueInput): [Bill!]
   billsCount(where: BillWhereInput! = {}): Int
-  billItems(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillItemWhereUniqueInput): [BillItem!]
   billItem(where: BillItemWhereUniqueInput!): BillItem
+  billItems(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillItemWhereUniqueInput): [BillItem!]
   billItemsCount(where: BillItemWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
@@ -1559,6 +1559,7 @@ type KeystoneAdminUIListMeta {
   labelField: String!
   fields: [KeystoneAdminUIFieldMeta!]!
   groups: [KeystoneAdminUIFieldGroupMeta!]!
+  graphql: KeystoneAdminUIGraphQL!
   initialSort: KeystoneAdminUISort
   isHidden: Boolean!
   isSingleton: Boolean!
@@ -1624,6 +1625,33 @@ type KeystoneAdminUIFieldGroupMeta {
   label: String!
   description: String
   fields: [KeystoneAdminUIFieldMeta!]!
+}
+
+type KeystoneAdminUIGraphQL {
+  names: KeystoneAdminUIGraphQLNames!
+}
+
+type KeystoneAdminUIGraphQLNames {
+  outputTypeName: String!
+  whereInputName: String!
+  whereUniqueInputName: String!
+  createInputName: String!
+  createMutationName: String!
+  createManyMutationName: String!
+  relateToOneForCreateInputName: String!
+  relateToManyForCreateInputName: String!
+  itemQueryName: String!
+  listOrderName: String!
+  listQueryCountName: String!
+  listQueryName: String!
+  updateInputName: String!
+  updateMutationName: String!
+  updateManyInputName: String!
+  updateManyMutationName: String!
+  relateToOneForUpdateInputName: String!
+  relateToManyForUpdateInputName: String!
+  deleteMutationName: String!
+  deleteManyMutationName: String!
 }
 
 type KeystoneAdminUISort {

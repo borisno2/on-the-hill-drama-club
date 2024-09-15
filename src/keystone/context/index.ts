@@ -19,7 +19,7 @@ class NeonPrismaClient extends PrismaModule.PrismaClient {
     const pool = new Pool({ connectionString })
     const adapter = new PrismaNeon(pool)
 
-    super({ ...ksConfig, adapter })
+    super({ ...ksConfig, adapter, datasourceUrl: undefined })
   }
 }
 
