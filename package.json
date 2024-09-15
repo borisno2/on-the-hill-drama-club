@@ -22,7 +22,7 @@
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "@keystone-6/core": "^6.3.0",
-    "@marsidev/react-turnstile": "^0.7.2",
+    "@marsidev/react-turnstile": "^1.0.2",
     "@neondatabase/serverless": "^0.9.5",
     "@prisma/adapter-neon": "^5.19.1",
     "@prisma/client": "5.19.1",
