@@ -48,6 +48,6 @@ export default [
     },
   },
   {
-    ignores: ['**/.next/'],
+    ignores: ['**/.next/','node_modules','__generated__'],
   },
 ]
