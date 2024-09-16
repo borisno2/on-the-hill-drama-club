@@ -65,7 +65,7 @@
     "tailwindcss": "^3.4.11",
     "tailwindcss-animate": "^1.0.7",
     "ws": "^8.18.0",
-    "xero-node": "^9.2.0",
+    "xero-node": "^9.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
