@@ -124,8 +124,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       inngest:
-        specifier: ^3.22.12
-        version: 3.22.12(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@20.16.5)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@14.2.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.6.2)
+        specifier: ^3.22.13
+        version: 3.22.13(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@20.16.5)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@14.2.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.6.2)
       lucide-react:
         specifier: ^0.441.0
         version: 0.441.0(react@18.3.1)
@@ -4244,8 +4244,8 @@ packages:
     resolution: {integrity: sha512-QQnnxNyfvmHFIsj7gkPcYymR8Jdw/o7mp5ZFihxn6h8Ci6fh3Dx4E1gPjpQEpIuPo9XVNY/ZUwh4BPMjGyL01g==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  inngest@3.22.12:
-    resolution: {integrity: sha512-4OquNAvHvqoAKiZzC3bOJjOToOtDQACaLAAaNvpzMlHQxqYxuTCtrnrYulmSoWo7ueYXXHlE0cA/E9pHpv0vLg==}
+  inngest@3.22.13:
+    resolution: {integrity: sha512-IBF0wgw3hfYyl59RX6xilKYQFbI+8kOLi78jIoi1zRheVoUAW4MMZEPOFpQVn3at1XtZehwSffctqZ4TjijtCQ==}
     engines: {node: '>=14'}
     peerDependencies:
       '@sveltejs/kit': '>=1.27.3'
@@ -11390,7 +11390,7 @@ snapshots:
 
   ini@4.1.1: {}
 
-  inngest@3.22.12(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@20.16.5)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@14.2.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.6.2):
+  inngest@3.22.13(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@20.16.5)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@14.2.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.6.2):
     dependencies:
       '@types/debug': 4.1.12
       canonicalize: 1.0.8
