@@ -103,3 +103,5 @@ pkce
 vars
 imprt
 fixup
+nextauth
+NEXTAUTH
