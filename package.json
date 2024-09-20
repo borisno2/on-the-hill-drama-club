@@ -47,13 +47,13 @@
     "dotenv": "^16.4.5",
     "file-type": "^19.5.0",
     "focus-visible": "^5.2.1",
-    "gql.tada": "^1.8.7",
+    "gql.tada": "^1.8.8",
     "graphql": "^16.9.0",
     "graphql-yoga": "^5.7.0",
     "image-size": "^1.1.1",
     "inngest": "^3.22.13",
     "lucide-react": "^0.441.0",
-    "next": "^14.2.12",
+    "next": "^14.2.13",
     "next-auth": "^4.24.7",
     "postcss-focus-visible": "^10.0.0",
     "react": "^18.3.1",
@@ -75,13 +75,13 @@
     "@eslint/js": "^9.10.0",
     "@types/lodash": "^4.17.7",
     "@types/node": "^20.16.5",
-    "@types/react": "^18.3.7",
+    "@types/react": "^18.3.8",
     "@types/react-dom": "^18.3.0",
     "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "cspell": "^8.14.4",
     "eslint": "9.10.0",
-    "eslint-config-next": "14.2.12",
+    "eslint-config-next": "14.2.13",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "prisma": "5.19.1",
@@ -96,7 +96,7 @@
       "@prisma/client": "5.19.1",
       "@prisma/internals": "5.19.1",
       "@prisma/migrate": "5.19.1",
-      "next": "^14.2.12"
+      "next": "^14.2.13"
     }
   }
 }
