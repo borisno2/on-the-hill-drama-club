@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "outputs": [".next/**", ".keystone/admin/.next/**"],
-      "env": ["DATABASE_URL"]
+      "env": ["DATABASE_URL", "KEYSTONE_URL"]
     },
     "seed-data": {
       "env": ["DATABASE_URL"]
