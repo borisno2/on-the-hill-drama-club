@@ -185,9 +185,8 @@ export default function Student({
                     onChange={(dates) => {
                       if (!dates || !dates.startDate) return
                       dayjs.extend(customParseFormat)
-                      const value = dayjs(dates.startDate, 'YYYY-M-D').format(
-                        'YYYY-MM-DD',
-                      )
+                      const value = dayjs(dates.startDate).format('YYYY-MM-DD')
+
                       setDob(dates.startDate)
                       setValue('dateOfBirth', value)
                     }}
