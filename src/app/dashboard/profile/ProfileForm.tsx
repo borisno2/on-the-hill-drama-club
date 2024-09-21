@@ -116,8 +116,6 @@ export default function ProfileForm({
   const {
     register,
     handleSubmit,
-    setValue,
-    control,
     formState: { errors },
   } = useForm<Values>({ defaultValues, resolver: zodResolver(profileSchema) })
 

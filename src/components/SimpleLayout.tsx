@@ -1,5 +1,6 @@
 import { Container } from 'components/Container'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function SimpleLayout({ title, intro, children }: any) {
   return (
     <Container className="mt-16 sm:mt-32">

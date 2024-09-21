@@ -1,12 +1,13 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "pipeline": {
-        "build": {
-            "outputs": [
-                ".next/**",
-                ".keystone/admin/.next/**"
-            ]
-        },
-        "lint": {}
-    }
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "outputs": [".next/**", ".keystone/admin/.next/**"],
+      "env": ["DATABASE_URL", "KEYSTONE_URL"]
+    },
+    "seed-data": {
+      "env": ["DATABASE_URL"]
+    },
+    "lint": {}
+  }
 }

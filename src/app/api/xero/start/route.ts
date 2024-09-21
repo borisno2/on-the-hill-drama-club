@@ -1,7 +1,7 @@
 import { getServerActionContext } from 'keystone/context/nextAuthFix'
 import { getXeroClient } from 'lib/xero'
 import Tokens from 'csrf'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 

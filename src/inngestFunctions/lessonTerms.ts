@@ -20,28 +20,28 @@ const GET_LESSON_TERMS_TO_COPY = graphql(`
   }
 `)
 
-const GET_ENROLMENTS_TO_COPY = graphql(`
-  query GET_ENROLMENTS_TO_COPY($id: ID!) {
-    lessonTerm(where: { id: $id }) {
-      id
-      term {
-        id
-        copyFrom {
-          id
-          lessonTerms(where: {}) {
-            id
-            enrolments {
-              id
-              student {
-                id
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`)
+// const GET_ENROLMENTS_TO_COPY = graphql(`
+//   query GET_ENROLMENTS_TO_COPY($id: ID!) {
+//     lessonTerm(where: { id: $id }) {
+//       id
+//       term {
+//         id
+//         copyFrom {
+//           id
+//           lessonTerms(where: {}) {
+//             id
+//             enrolments {
+//               id
+//               student {
+//                 id
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `)
 
 export const copyTermFunction = inngest.createFunction(
   {

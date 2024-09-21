@@ -76,7 +76,6 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm<Values>({ resolver: zodResolver(registerSchema) })
@@ -372,7 +371,7 @@ export default function RegisterForm() {
               process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY ||
               '1x00000000000000000000AA'
             }
-            onSuccess={(token: any) => setValue('turnstileRes', token)}
+            onSuccess={(token: string) => setValue('turnstileRes', token)}
           />
 
           <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">

@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import ErrorPop from 'components/ErrorPop'
 import SuccessPop from 'components/SuccessPop'
-import Datepicker from 'react-tailwindcss-datepicker'
+import Datepicker, { DateType } from 'react-tailwindcss-datepicker'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -65,7 +65,7 @@ export default function Student({
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
   const [isDone, setDone] = useState<boolean>(false)
-  const [dob, setDob] = useState<string>('2020-01-01')
+  const [dob, setDob] = useState<DateType>(new Date(defaultValues.dateOfBirth))
   const [isSubmitting, setSubmitting] = useState(false)
   const {
     register,
@@ -185,10 +185,9 @@ export default function Student({
                     onChange={(dates) => {
                       if (!dates || !dates.startDate) return
                       dayjs.extend(customParseFormat)
-                      const value = dayjs(dates.startDate, 'YYYY-M-D').format(
-                        'YYYY-MM-DD',
-                      )
-                      setDob(value)
+                      const value = dayjs(dates.startDate).format('YYYY-MM-DD')
+
+                      setDob(dates.startDate)
                       setValue('dateOfBirth', value)
                     }}
                     asSingle={true}

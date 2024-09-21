@@ -17,6 +17,7 @@ import {
   Squares2X2Icon,
   StarIcon,
   XMarkIcon,
+  ShoppingCartIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
@@ -113,6 +114,12 @@ const resources = [
     description: 'Manage your Lessons and Account',
     href: '/dashboard',
     icon: Bars3Icon,
+  },
+  {
+    name: 'Merch Store',
+    description: 'Purchase Uniforms and Merchandise',
+    href: 'https://merch.emilycalder.com.au',
+    icon: ShoppingCartIcon,
   },
 ]
 

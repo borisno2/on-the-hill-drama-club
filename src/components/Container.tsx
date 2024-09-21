@@ -1,4 +1,5 @@
-import { forwardRef, ReactElement } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { forwardRef } from 'react'
 import clsx from 'clsx'
 
 const OuterContainer = forwardRef(function OuterContainer(

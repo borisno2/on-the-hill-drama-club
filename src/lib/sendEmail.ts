@@ -7,7 +7,7 @@ type emailData = {
     name?: string
   }
   templateId: string
-  dynamicTemplateData: {}
+  dynamicTemplateData: Record<string, string | undefined | null>
 }
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '')
@@ -24,7 +24,7 @@ export default async function sendEmail(data: emailData) {
   const msg = { ...email }
   try {
     return await sgMail.send(msg)
-  } catch (error: any) {
-    throw new Error(error)
+  } catch (error: unknown) {
+    throw new Error(error as string)
   }
 }
