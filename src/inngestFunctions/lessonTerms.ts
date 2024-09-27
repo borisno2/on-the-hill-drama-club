@@ -1,5 +1,5 @@
 import { graphql } from 'gql'
-import { slugify } from 'inngest'
+import { NonRetriableError, slugify } from 'inngest'
 import { keystoneContext } from 'keystone/context'
 import { inngest } from 'lib/inngest/client'
 
@@ -227,7 +227,7 @@ export const completeTermFunction = inngest.createFunction(
         where: { term: { id: { equals: item.id } } },
       })
       if (!lessonTerms || lessonTerms.length === 0)
-        throw new Error('No lessonTerms found', { cause: item })
+        throw new NonRetriableError('No lessonTerms found', { cause: item })
       const lessonTermsData = lessonTerms.map((lessonTerm) => ({
         where: { id: lessonTerm.id },
         data: { status: 'PREVIOUS' },
@@ -236,10 +236,12 @@ export const completeTermFunction = inngest.createFunction(
         data: lessonTermsData,
       })
       if (!updatedLessonTerms)
-        throw new Error('Could not update lessonTerms', { cause: item })
+        throw new NonRetriableError('Could not update lessonTerms', {
+          cause: item,
+        })
       return updatedLessonTerms
     } catch (error) {
-      throw new Error('Error completing term', { cause: error })
+      throw new NonRetriableError('Error completing term', { cause: error })
     }
   },
 )

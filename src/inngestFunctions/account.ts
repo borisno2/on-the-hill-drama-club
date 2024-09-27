@@ -85,17 +85,17 @@ export const upsertXeroCustomerFunction = inngest.createFunction(
         ],
       })
       if (contacts === undefined) {
-        throw new Error('Error creating customer', {
+        throw new NonRetriableError('Error creating customer', {
           cause: 'Create customer returned null',
         })
       }
       if (contacts.length === 0) {
-        throw new Error('Error creating customer', {
+        throw new NonRetriableError('Error creating customer', {
           cause: 'Create customer returned empty array',
         })
       }
       if (contacts.length > 1) {
-        throw new Error('Error creating customer', {
+        throw new NonRetriableError('Error creating customer', {
           cause: 'Create customer returned multiple customers',
         })
       }

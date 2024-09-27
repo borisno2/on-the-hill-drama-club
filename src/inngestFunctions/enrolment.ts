@@ -6,7 +6,7 @@ import labelHelper from 'lib/labelHelper'
 import { dayOptions } from 'types/selectOptions'
 import { inngest } from 'lib/inngest/client'
 import { keystoneContext } from 'keystone/context'
-import { slugify } from 'inngest'
+import { NonRetriableError, slugify } from 'inngest'
 
 export const createBillItemFunction = inngest.createFunction(
   { id: slugify('Create Bill Hook'), name: 'Create Bill Hook' },
@@ -126,7 +126,7 @@ export const sendEnrolmentConfirmationFunction = inngest.createFunction(
         !enrolment.student.account.user.email ||
         !process.env.SENDGRID_API_KEY
       ) {
-        throw new Error('Missing Data', { cause: enrolment })
+        throw new NonRetriableError('Missing Data', { cause: enrolment })
       }
       const emailSettings = await context.sudo().db.EmailSettings.findOne({})
 
@@ -135,7 +135,9 @@ export const sendEnrolmentConfirmationFunction = inngest.createFunction(
         !emailSettings.enrolmentConfirmationTemplate ||
         !emailSettings.fromEmail
       ) {
-        throw new Error('Missing Email Settings', { cause: emailSettings })
+        throw new NonRetriableError('Missing Email Settings', {
+          cause: emailSettings,
+        })
       }
       const dynamicData = {
         firstName: enrolment.student.account.firstName,
@@ -157,11 +159,13 @@ export const sendEnrolmentConfirmationFunction = inngest.createFunction(
       console.log('Sending Email')
       const [emailReturn] = await sendEmail(emailData)
       if (emailReturn.statusCode > 399) {
-        throw new Error('Email Failed to Send', { cause: emailReturn })
+        throw new NonRetriableError('Email Failed to Send', {
+          cause: emailReturn,
+        })
       }
       return emailReturn
     } catch (error) {
-      throw new Error('Error sending email', { cause: error })
+      throw new NonRetriableError('Error sending email', { cause: error })
     }
   },
 )
