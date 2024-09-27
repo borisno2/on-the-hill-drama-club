@@ -8,6 +8,7 @@ type emailData = {
   }
   templateId: string
   dynamicTemplateData: Record<string, string | undefined | null>
+  isMultiple?: boolean
 }
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '')

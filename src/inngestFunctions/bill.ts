@@ -5,7 +5,7 @@ import { getXeroClient } from 'lib/xero'
 
 import { graphql } from 'gql'
 import Decimal from 'decimal.js'
-import { slugify } from 'inngest'
+import { NonRetriableError, slugify } from 'inngest'
 import { Invoice, LineAmountTypes, RequestEmpty } from 'xero-node'
 import { upsertXeroCustomerFunction } from './account'
 
@@ -84,25 +84,27 @@ export const createXeroInvoiceFunction = inngest.createFunction(
     })
 
     if (!xeroClient || !xeroTenantId)
-      throw new Error('Could not get Xero client')
-    if (!bill) throw new Error('Could not get bill')
-    if (!bill.account) throw new Error('Could not get bill account')
-    if (!bill.account.user) throw new Error('Could not get user')
-    if (!bill.account.user.email) throw new Error('Could not get bill email')
+      throw new NonRetriableError('Could not get Xero client')
+    if (!bill) throw new NonRetriableError('Could not get bill')
+    if (!bill.account) throw new NonRetriableError('Could not get bill account')
+    if (!bill.account.user) throw new NonRetriableError('Could not get user')
+    if (!bill.account.user.email)
+      throw new NonRetriableError('Could not get bill email')
 
     const accountItem = await context.db.Account.findOne({
       where: { id: bill.account.id },
     })
-    if (!accountItem) throw new Error('Could not get account item')
+    if (!accountItem) throw new NonRetriableError('Could not get account item')
 
     const account = await step.invoke('xero/customer.upsert', {
       function: upsertXeroCustomerFunction,
       data: { item: accountItem, session },
     })
 
-    if (!account.xeroId) throw new Error('Could not get account xeroId')
+    if (!account.xeroId)
+      throw new NonRetriableError('Could not get account xeroId')
     if (!bill.items || bill.items.length === 0) {
-      throw new Error('Bill has no items')
+      throw new NonRetriableError('Bill has no items')
     }
     if (bill.xeroId !== null) {
       return `Bill ${bill.name} already has a Xero invoice with id ${bill.xeroId}`
