@@ -70,7 +70,7 @@
   },
   "devDependencies": {
     "@0no-co/graphqlsp": "^1.12.14",
-    "@eslint/compat": "^1.1.1",
+    "@eslint/compat": "^1.2.1",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.11.1",
     "@types/lodash": "^4.17.9",
