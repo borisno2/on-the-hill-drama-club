@@ -23,7 +23,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@keystone-6/core": "^6.3.0",
     "@marsidev/react-turnstile": "^1.0.2",
-    "@neondatabase/serverless": "^0.9.5",
+    "@neondatabase/serverless": "^0.10.1",
     "@prisma/adapter-neon": "^5.20.0",
     "@prisma/client": "5.20.0",
     "@radix-ui/react-avatar": "^1.1.0",
