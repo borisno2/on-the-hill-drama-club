@@ -6,7 +6,7 @@
     "build:keystone": "keystone build",
     "dev": "turbo dev:watch dev:keystone dev:next",
     "dev:keystone": "next start .keystone/admin --port 4000",
-    "dev:next": "next dev --port 3000",
+    "dev:next": "next dev --port 3000 --turbopack",
     "dev:next-ssl": "node server.js",
     "dev:watch": "keystone dev --no-server",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -53,11 +53,11 @@
     "image-size": "^1.1.1",
     "inngest": "^3.23.1",
     "lucide-react": "^0.453.0",
-    "next": "^15.0.1",
+    "next": "15.0.1",
     "next-auth": "^4.24.10",
     "postcss-focus-visible": "^10.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "19.0.0-rc-69d4b800-20241021",
+    "react-dom": "19.0.0-rc-69d4b800-20241021",
     "react-hook-form": "^7.53.1",
     "react-tailwindcss-datepicker": "^1.7.2",
     "sharp": "^0.33.5",
@@ -75,8 +75,8 @@
     "@eslint/js": "^9.13.0",
     "@types/lodash": "^4.17.12",
     "@types/node": "^20.17.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "cspell": "^8.15.4",
@@ -96,7 +96,9 @@
       "@prisma/client": "5.21.1",
       "@prisma/internals": "5.21.1",
       "@prisma/migrate": "5.21.1",
-      "next": "^15.0.1"
+      "next": "^15.0.1",
+      "@types/react": "npm:types-react@19.0.0-rc.1",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
     }
   }
 }

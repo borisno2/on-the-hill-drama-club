@@ -9,11 +9,12 @@ export const metadata: Metadata = {
   ...getMetadata('Timetable'),
 }
 
-export default async function TimetablePage({
-  searchParams,
-}: {
-  searchParams: { daySelected: string }
-}) {
+export default async function TimetablePage(
+  props: {
+    searchParams: Promise<{ daySelected: string }>
+  }
+) {
+  const searchParams = await props.searchParams;
 
   const context = await getSessionContext()
   const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE }).catch((error) => {

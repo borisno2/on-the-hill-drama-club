@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
   } else {
     try {
-      const stateCookie = cookies().get('emily_calder_xero_csrf_state')
+      const stateCookie = (await cookies()).get('emily_calder_xero_csrf_state')
       if (!stateCookie) {
         return NextResponse.json({ error: 'Invalid state' }, { status: 403 })
       }
