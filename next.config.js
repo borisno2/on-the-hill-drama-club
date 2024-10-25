@@ -2,9 +2,9 @@ const KEYSTONE_URL = process.env.KEYSTONE_URL || 'http://localhost:4000'
 
 /** @type {import('next').NextConfig} */
 module.exports = {
+  serverExternalPackages: ['graphql', 'ws'],
   experimental: {
     scrollRestoration: true,
-    serverComponentsExternalPackages: ['graphql', 'ws'],
   },
   async redirects() {
     return [
