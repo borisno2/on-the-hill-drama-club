@@ -97,8 +97,12 @@
       "@prisma/internals": "5.21.1",
       "@prisma/migrate": "5.21.1",
       "next": "^15.0.1",
+      "react": "19.0.0-rc-69d4b800-20241021",
+      "react-dom": "19.0.0-rc-69d4b800-20241021",
       "@types/react": "npm:types-react@19.0.0-rc.1",
-      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+      "@apollo/client": "^3.11.8",
+      "react-day-picker": "^9.2.0"
     }
   }
 }
