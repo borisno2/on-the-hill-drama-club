@@ -26,5 +26,15 @@ const { handleRequest } = createYoga({
     Response,
   },
 })
-
-export { handleRequest as GET, handleRequest as POST, handleRequest as OPTIONS }
+export async function GET(request: Request) {
+  const ctx = { waitUntil: () => new Promise(() => {}) }
+  return handleRequest(request, ctx)
+}
+export async function POST(request: Request) {
+  const ctx = { waitUntil: () => new Promise(() => {}) }
+  return handleRequest(request, ctx)
+}
+export async function OPTIONS(request: Request) {
+  const ctx = { waitUntil: () => new Promise(() => {}) }
+  return handleRequest(request, ctx)
+}
