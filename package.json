@@ -18,7 +18,7 @@
     "@aws-sdk/signature-v4-crt": "^3.654.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@graphql-yoga/apollo-link": "^3.7.0",
-    "@headlessui/react": "^2.1.10",
+    "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",
     "@keystone-6/core": "^6.3.0",
