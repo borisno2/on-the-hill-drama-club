@@ -1,7 +1,8 @@
+import type { NextConfig } from 'next'
+
 const KEYSTONE_URL = process.env.KEYSTONE_URL || 'http://localhost:4000'
 
-/** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig: NextConfig = {
   serverExternalPackages: ['graphql', 'ws'],
   experimental: {
     scrollRestoration: true,
@@ -22,6 +23,7 @@ module.exports = {
   },
   async rewrites() {
     return {
+      beforeFiles: [],
       afterFiles: [
         {
           source: '/admin',
@@ -32,6 +34,9 @@ module.exports = {
           destination: `${KEYSTONE_URL}/admin/:admin*`,
         },
       ],
+      fallback: [],
     }
   },
 }
+
+export default nextConfig

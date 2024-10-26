@@ -40,7 +40,7 @@ export default async function StudentList({
   const context = await getSessionContext()
   if (
     lessonTerm.lesson?.maxYear === null ||
-    !lessonTerm.lesson?.minYear === null
+    !(lessonTerm.lesson?.minYear === null)
   ) {
     redirect('/dashboard/lessons')
   }

@@ -11,7 +11,7 @@
     "dev:watch": "keystone dev --no-server",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone build --no-ui --frozen",
-    "lint": "eslint . && cspell '**' && tsc --noEmit",
+    "lint": "next lint && eslint . && cspell '**' && tsc --noEmit",
     "seed-data": "tsx seed-data.ts"
   },
   "dependencies": {
@@ -76,6 +76,8 @@
     "@eslint/compat": "^1.2.1",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.13.0",
+    "@next/eslint-plugin-next": "^15.0.1",
+    "@types/eslint__js": "^8.42.3",
     "@types/lodash": "^4.17.12",
     "@types/node": "^22.8.1",
     "@types/react": "npm:types-react@19.0.0-rc.1",
@@ -90,7 +92,8 @@
     "prisma": "5.21.1",
     "tsx": "^4.19.1",
     "turbo": "^2.2.3",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.11.0"
   },
   "packageManager": "pnpm@9.12.2",
   "pnpm": {
