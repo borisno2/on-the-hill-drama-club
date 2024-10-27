@@ -60,7 +60,7 @@
     "next-auth": "^4.24.10",
     "postcss-focus-visible": "^10.0.1",
     "react": "19.0.0-rc-fb9a90fa48-20240614",
-    "react-day-picker": "^9.2.0",
+    "react-day-picker": "^9.2.1",
     "react-dom": "19.0.0-rc-fb9a90fa48-20240614",
     "react-hook-form": "^7.53.1",
     "sharp": "^0.33.5",
@@ -108,7 +108,7 @@
       "@types/react": "npm:types-react@19.0.0-rc.1",
       "@types/react-dom": "npm:types-react-dom@19.0.0",
       "@apollo/client": "^3.11.8",
-      "react-day-picker": "^9.2.0"
+      "react-day-picker": "^9.2.1"
     }
   }
 }
