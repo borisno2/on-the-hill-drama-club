@@ -14,7 +14,7 @@ type emailData = {
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || '')
 
 export default async function sendEmail(data: emailData) {
-  let email = { ...data }
+  const email = { ...data }
   if (email.to.includes('@test.com')) {
     email.to = process.env.TEST_EMAIL || 'no-reply@openaas.com.au'
   }

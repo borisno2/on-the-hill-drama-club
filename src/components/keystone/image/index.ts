@@ -12,7 +12,7 @@ import imageSize from 'image-size'
 export async function streamToBuffer(stream: ReadableStream): Promise<Buffer> {
   const chunks = []
 
-  for await (let chunk of stream) {
+  for await (const chunk of stream) {
     chunks.push(chunk)
   }
 

@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import ErrorPop from 'components/ErrorPop'
 import SuccessPop from 'components/SuccessPop'
-import Datepicker, { DateType } from 'react-tailwindcss-datepicker'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -14,6 +13,12 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { createStudent, updateStudent } from 'keystone/context/students'
 import { ResultOf } from 'gql'
+import { Popover, PopoverContent, PopoverTrigger } from 'components/ui/popover'
+import { Button } from 'components/ui/button'
+import CalendarIcon from '@heroicons/react/20/solid/CalendarIcon'
+import { Calendar } from 'components/ui/calendar'
+import { cn } from 'lib/utils'
+import { format, isValid, parse } from 'date-fns'
 
 type Values = {
   firstName: string
@@ -65,7 +70,12 @@ export default function Student({
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
   const [isDone, setDone] = useState<boolean>(false)
-  const [dob, setDob] = useState<DateType>(new Date(defaultValues.dateOfBirth))
+  const [dob, setDob] = useState<Date>(new Date(defaultValues.dateOfBirth))
+
+  const [dobInput, setDobInput] = useState(dob ? format(dob, 'dd/MM/yyyy') : '')
+  const [currentMonth, setCurrentMonth] = useState<Date>(
+    new Date(defaultValues.dateOfBirth),
+  )
   const [isSubmitting, setSubmitting] = useState(false)
   const {
     register,
@@ -177,24 +187,70 @@ export default function Student({
                   Date of Birth
                 </label>
                 <div className="mt-1 sm:col-span-2 sm:mt-0">
-                  <Datepicker
-                    value={{
-                      startDate: dob,
-                      endDate: dob,
-                    }}
-                    onChange={(dates) => {
-                      if (!dates || !dates.startDate) return
-                      dayjs.extend(customParseFormat)
-                      const value = dayjs(dates.startDate).format('YYYY-MM-DD')
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={'outline'}
+                        className={cn(
+                          'w-full max-w-lg rounded-md border-gray-300 pl-3 text-left font-normal shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm',
+                          !dob && 'text-muted-foreground',
+                        )}
+                      >
+                        {dob ? format(dob, 'PPP') : <span>Pick a date</span>}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="w-full max-w-lg bg-white p-0 sm:max-w-xs"
+                      align="start"
+                    >
+                      <div className="w-full p-4 pb-0">
+                        <input
+                          type="text"
+                          placeholder="dd/mm/yyyy"
+                          value={dobInput}
+                          onChange={(event) => {
+                            const value = event.target.value
+                            setDobInput(value)
 
-                      setDob(dates.startDate)
-                      setValue('dateOfBirth', value)
-                    }}
-                    asSingle={true}
-                    useRange={false}
-                    displayFormat={'DD/MM/YYYY'}
-                    containerClassName="relative w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
-                  />
+                            const parsedDate = parse(
+                              value,
+                              'dd/MM/yyyy',
+                              new Date(),
+                            )
+                            if (isValid(parsedDate)) {
+                              dayjs.extend(customParseFormat)
+                              const value =
+                                dayjs(parsedDate).format('YYYY-MM-DD')
+
+                              setValue('dateOfBirth', value)
+                              setDob(parsedDate)
+                              setCurrentMonth(parsedDate)
+                            }
+                          }}
+                          className="mb-2 w-72 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        />
+                      </div>
+                      <Calendar
+                        mode="single"
+                        selected={dob}
+                        onSelect={(date) => {
+                          if (!date) return
+                          setDob(date)
+                          setDobInput(format(date, 'dd/MM/yyyy'))
+                          dayjs.extend(customParseFormat)
+                          const value = dayjs(date).format('YYYY-MM-DD')
+
+                          setValue('dateOfBirth', value)
+                        }}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date('1900-01-01')
+                        }
+                        month={currentMonth}
+                        onMonthChange={setCurrentMonth}
+                      />
+                    </PopoverContent>
+                  </Popover>
                   {errors.dateOfBirth && (
                     <div className="block text-sm font-medium text-red-700">
                       {errors.dateOfBirth.message}

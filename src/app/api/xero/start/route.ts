@@ -17,7 +17,8 @@ export async function GET() {
     return NextResponse.json({ error: 'Not authorized' }, { status: 403 })
   } else {
     const state = generateAntiForgery()
-    cookies().set('emily_calder_xero_csrf_state', state)
+    const { set } = await cookies()
+    set('emily_calder_xero_csrf_state', state)
     const { xeroClient } = await getXeroClient({
       context,
       state,

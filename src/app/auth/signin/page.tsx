@@ -9,11 +9,12 @@ export const metadata: Metadata = {
   ...getMetadata('Sign In'),
 }
 
-export default async function SignInPage({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined }
-}) {
+export default async function SignInPage(
+  props: {
+    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+  }
+) {
+  const searchParams = await props.searchParams;
   const callbackUrl =
     typeof searchParams?.callbackUrl === 'string'
       ? searchParams?.callbackUrl

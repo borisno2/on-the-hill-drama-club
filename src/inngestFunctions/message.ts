@@ -48,27 +48,16 @@ export const sendMessageFunction = inngest.createFunction(
         content: message.content,
       }
       // Get all the email addresses for the users
-      const emailAddresses: string[] = message.lessonTerms
-        .map((term) => {
-          if (!term.enrolments) {
-            return []
-          }
-          return term.enrolments.map((enrolment) => {
-            if (
-              !enrolment.student ||
-              !enrolment.student.account ||
-              !enrolment.student.account.user ||
-              !enrolment.student.account.user.email
-            ) {
-              return ''
-            }
-            return enrolment.student.account.user.email
+      const emailAddressesSet = new Set<string>()
+      message.lessonTerms.forEach((lessonTerm) => {
+        if (lessonTerm.enrolments) {
+          lessonTerm.enrolments.forEach((enrolment) => {
+            if (enrolment.student?.account?.user?.email)
+              emailAddressesSet.add(enrolment.student.account.user.email)
           })
-        })
-        .flat()
-        .filter((email) => email !== '')
-        // Remove duplicates
-        .filter((email, index, self) => self.indexOf(email) === index)
+        }
+      })
+      const emailAddresses = Array.from(emailAddressesSet)
       // Send the email
       const emailData = {
         to: emailAddresses,

@@ -49,11 +49,17 @@ const getLessonCategory = cache(async (slug: string) => {
   return lessonCategory
 })
 
-export async function generateMetadata({
-  params: { slug },
-}: {
-  params: { slug: string }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>
+  }
+): Promise<Metadata> {
+  const params = await props.params;
+
+  const {
+    slug
+  } = params;
+
   const lessonCategory = await getLessonCategory(slug)
   if (lessonCategory && lessonCategory.name) {
     return getMetadata(lessonCategory.name)
@@ -61,11 +67,17 @@ export async function generateMetadata({
   return getMetadata('Lessons')
 }
 
-export default async function Page({
-  params: { slug },
-}: {
-  params: { slug: string }
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ slug: string }>
+  }
+) {
+  const params = await props.params;
+
+  const {
+    slug
+  } = params;
+
   const lessonCategory = await getLessonCategory(slug)
   if (!lessonCategory) {
     redirect('/')

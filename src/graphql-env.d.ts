@@ -1,20 +1,7 @@
 /* eslint-disable */
 /* prettier-ignore */
 
-/** An IntrospectionQuery representation of your schema.
- *
- * @remarks
- * This is an introspection of your schema saved as a file by GraphQLSP.
- * It will automatically be used by `gql.tada` to infer the types of your GraphQL documents.
- * If you need to reuse this data or update your `scalars`, update `tadaOutputLocation` to
- * instead save to a .ts instead of a .d.ts file.
- */
-export type introspection = {
-  name: never;
-  query: 'Query';
-  mutation: 'Mutation';
-  subscription: never;
-  types: {
+export type introspection_types = {
     'Account': { kind: 'OBJECT'; name: 'Account'; fields: { 'bills': { name: 'bills'; type: { kind: 'LIST'; name: never; ofType: { kind: 'NON_NULL'; name: never; ofType: { kind: 'OBJECT'; name: 'Bill'; ofType: null; }; }; } }; 'billsCount': { name: 'billsCount'; type: { kind: 'SCALAR'; name: 'Int'; ofType: null; } }; 'createdAt': { name: 'createdAt'; type: { kind: 'SCALAR'; name: 'DateTime'; ofType: null; } }; 'firstName': { name: 'firstName'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'id': { name: 'id'; type: { kind: 'NON_NULL'; name: never; ofType: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; } }; 'name': { name: 'name'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'phone': { name: 'phone'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'postcode': { name: 'postcode'; type: { kind: 'SCALAR'; name: 'Int'; ofType: null; } }; 'secondContactName': { name: 'secondContactName'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'secondContactPhone': { name: 'secondContactPhone'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'streetAddress': { name: 'streetAddress'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'students': { name: 'students'; type: { kind: 'LIST'; name: never; ofType: { kind: 'NON_NULL'; name: never; ofType: { kind: 'OBJECT'; name: 'Student'; ofType: null; }; }; } }; 'studentsCount': { name: 'studentsCount'; type: { kind: 'SCALAR'; name: 'Int'; ofType: null; } }; 'suburb': { name: 'suburb'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'surname': { name: 'surname'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; 'user': { name: 'user'; type: { kind: 'OBJECT'; name: 'User'; ofType: null; } }; 'xeroId': { name: 'xeroId'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; } }; }; };
     'AccountCreateInput': { kind: 'INPUT_OBJECT'; name: 'AccountCreateInput'; isOneOf: false; inputFields: [{ name: 'user'; type: { kind: 'INPUT_OBJECT'; name: 'UserRelateToOneForCreateInput'; ofType: null; }; defaultValue: null }, { name: 'firstName'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'surname'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'phone'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'secondContactName'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'secondContactPhone'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'students'; type: { kind: 'INPUT_OBJECT'; name: 'StudentRelateToManyForCreateInput'; ofType: null; }; defaultValue: null }, { name: 'bills'; type: { kind: 'INPUT_OBJECT'; name: 'BillRelateToManyForCreateInput'; ofType: null; }; defaultValue: null }, { name: 'streetAddress'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'suburb'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'postcode'; type: { kind: 'SCALAR'; name: 'Int'; ofType: null; }; defaultValue: null }, { name: 'xeroId'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }, { name: 'createdAt'; type: { kind: 'SCALAR'; name: 'DateTime'; ofType: null; }; defaultValue: null }]; };
     'AccountOrderByInput': { kind: 'INPUT_OBJECT'; name: 'AccountOrderByInput'; isOneOf: false; inputFields: [{ name: 'id'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'firstName'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'surname'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'phone'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'secondContactName'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'secondContactPhone'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'streetAddress'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'suburb'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'postcode'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'xeroId'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }, { name: 'createdAt'; type: { kind: 'ENUM'; name: 'OrderDirection'; ofType: null; }; defaultValue: null }]; };
@@ -207,7 +194,22 @@ export type introspection = {
     'XeroSettingsUpdateInput': { kind: 'INPUT_OBJECT'; name: 'XeroSettingsUpdateInput'; isOneOf: false; inputFields: [{ name: 'tokenSet'; type: { kind: 'SCALAR'; name: 'JSON'; ofType: null; }; defaultValue: null }, { name: 'tenantId'; type: { kind: 'SCALAR'; name: 'String'; ofType: null; }; defaultValue: null }]; };
     'XeroSettingsWhereInput': { kind: 'INPUT_OBJECT'; name: 'XeroSettingsWhereInput'; isOneOf: false; inputFields: [{ name: 'AND'; type: { kind: 'LIST'; name: never; ofType: { kind: 'NON_NULL'; name: never; ofType: { kind: 'INPUT_OBJECT'; name: 'XeroSettingsWhereInput'; ofType: null; }; }; }; defaultValue: null }, { name: 'OR'; type: { kind: 'LIST'; name: never; ofType: { kind: 'NON_NULL'; name: never; ofType: { kind: 'INPUT_OBJECT'; name: 'XeroSettingsWhereInput'; ofType: null; }; }; }; defaultValue: null }, { name: 'NOT'; type: { kind: 'LIST'; name: never; ofType: { kind: 'NON_NULL'; name: never; ofType: { kind: 'INPUT_OBJECT'; name: 'XeroSettingsWhereInput'; ofType: null; }; }; }; defaultValue: null }, { name: 'id'; type: { kind: 'INPUT_OBJECT'; name: 'IDFilter'; ofType: null; }; defaultValue: null }, { name: 'tenantId'; type: { kind: 'INPUT_OBJECT'; name: 'StringFilter'; ofType: null; }; defaultValue: null }]; };
     'XeroSettingsWhereUniqueInput': { kind: 'INPUT_OBJECT'; name: 'XeroSettingsWhereUniqueInput'; isOneOf: false; inputFields: [{ name: 'id'; type: { kind: 'SCALAR'; name: 'ID'; ofType: null; }; defaultValue: null }]; };
-  };
+};
+
+/** An IntrospectionQuery representation of your schema.
+ *
+ * @remarks
+ * This is an introspection of your schema saved as a file by GraphQLSP.
+ * It will automatically be used by `gql.tada` to infer the types of your GraphQL documents.
+ * If you need to reuse this data or update your `scalars`, update `tadaOutputLocation` to
+ * instead save to a .ts instead of a .d.ts file.
+ */
+export type introspection = {
+  name: never;
+  query: 'Query';
+  mutation: 'Mutation';
+  subscription: never;
+  types: introspection_types;
 };
 
 import * as gqlTada from 'gql.tada';

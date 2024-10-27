@@ -57,10 +57,10 @@ export default function EnrolButton({
       {isSubmitting || isPending
         ? 'Loading...'
         : success
-        ? 'Enroled'
-        : error
-        ? 'ERROR'
-        : 'Enrol'}
+          ? 'Enroled'
+          : error
+            ? 'ERROR'
+            : 'Enrol'}
     </button>
   )
 }

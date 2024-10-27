@@ -25,7 +25,6 @@ const GET_STUDENTS_ENROLMENTS = graphql(`
         status
         lessonTerm {
           id
-          name
         }
       }
     }
@@ -40,15 +39,17 @@ export default async function StudentList({
   const context = await getSessionContext()
   if (
     lessonTerm.lesson?.maxYear === null ||
-    !lessonTerm.lesson?.minYear === null
+    lessonTerm.lesson?.minYear === null ||
+    lessonTerm.lesson?.maxYear === undefined ||
+    lessonTerm.lesson?.minYear === undefined
   ) {
     redirect('/dashboard/lessons')
   }
   const { students } = await context.graphql.run({
     query: GET_STUDENTS_ENROLMENTS,
     variables: {
-      minYear: lessonTerm.lesson!.minYear!,
-      maxYear: lessonTerm.lesson!.maxYear!,
+      minYear: lessonTerm.lesson.minYear,
+      maxYear: lessonTerm.lesson.maxYear,
     },
   })
   return (

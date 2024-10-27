@@ -11,11 +11,12 @@ export const metadata: Metadata = {
   ...getMetadata('Register'),
 }
 
-export default async function RegisterPage({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined }
-}) {
+export default async function RegisterPage(
+  props: {
+    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+  }
+) {
+  const searchParams = await props.searchParams;
   const context = await getSessionContext()
   if (context.session) {
     redirect('/dashboard')

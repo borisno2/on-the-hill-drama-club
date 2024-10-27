@@ -1,53 +1,33 @@
-// import nextPlugin from '@next/eslint-plugin-next'
-import reactPlugin from 'eslint-plugin-react'
-import hooksPlugin from 'eslint-plugin-react-hooks'
-import ts from '@typescript-eslint/eslint-plugin'
-import tsParser from '@typescript-eslint/parser'
-import imprt from 'eslint-plugin-import' // 'import' is ambiguous & prettier has trouble
-import { fixupConfigRules } from '@eslint/compat'
+// @ts-check
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import eslint from '@eslint/js'
+import tseslint from 'typescript-eslint'
 import { FlatCompat } from '@eslint/eslintrc'
+import { fixupConfigRules } from '@eslint/compat'
 
-const compat = new FlatCompat()
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-export default [
-  ...fixupConfigRules(compat.extends('plugin:@next/next/core-web-vitals')),
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+})
+
+const patchedConfig = fixupConfigRules([
+  ...compat.extends('next/core-web-vitals'),
+])
+
+export default tseslint.config(
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...patchedConfig,
   {
-    files: ['**/*.ts', '**/*.tsx'],
-    plugins: {
-      react: reactPlugin,
-      'react-hooks': hooksPlugin,
-      // '@next/next': nextPlugin,
-    },
-    rules: {
-      ...reactPlugin.configs['jsx-runtime'].rules,
-      // ...hooksPlugin.configs.recommended.rules,
-      // ...nextPlugin.configs.recommended.rules,
-      // ...nextPlugin.configs['core-web-vitals'].rules,
-      // '@next/next/no-img-element': 'error',
-    },
+    ignores: [
+      '**/.next/',
+      'node_modules',
+      '__generated__',
+      '**/.keystone',
+      '*.js',
+    ],
   },
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        ecmaFeatures: { modules: true },
-        ecmaVersion: 'latest',
-        project: './tsconfig.json',
-      },
-    },
-    plugins: {
-      import: imprt,
-      '@typescript-eslint': ts,
-      ts,
-    },
-    rules: {
-      ...ts.configs['eslint-recommended'].rules,
-      ...ts.configs['recommended'].rules,
-      'ts/return-await': 2,
-    },
-  },
-  {
-    ignores: ['**/.next/','node_modules','__generated__'],
-  },
-]
+)

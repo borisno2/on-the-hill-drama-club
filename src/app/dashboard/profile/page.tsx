@@ -31,11 +31,12 @@ const GET_ACCOUNT = graphql(`
   }
 `)
 
-export default async function Profile({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined }
-}) {
+export default async function Profile(
+  props: {
+    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+  }
+) {
+  const searchParams = await props.searchParams;
   let redirectOnSave: boolean = false
   if (searchParams?.incomplete === 'true') {
     redirectOnSave = true

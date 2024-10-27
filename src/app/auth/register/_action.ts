@@ -60,7 +60,7 @@ export async function registerAccount(data: z.infer<typeof registerSchema>) {
   const form = new URLSearchParams()
   form.append('secret', SECRET_KEY)
   form.append('response', validationResult.turnstileRes)
-  const headersList = headers()
+  const headersList = await headers()
   form.append('remoteip', headersList.get('x-forwarded-for') as string)
 
   const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
