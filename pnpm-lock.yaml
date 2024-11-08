@@ -139,8 +139,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       inngest:
-        specifier: ^3.23.1
-        version: 3.23.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.8.2)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.0.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(typescript@5.6.3)
+        specifier: ^3.25.1
+        version: 3.25.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.8.2)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.0.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(typescript@5.6.3)
       lucide-react:
         specifier: ^0.454.0
         version: 0.454.0(react@19.0.0-rc-fb9a90fa48-20240614)
@@ -4403,8 +4403,8 @@ packages:
     resolution: {integrity: sha512-QQnnxNyfvmHFIsj7gkPcYymR8Jdw/o7mp5ZFihxn6h8Ci6fh3Dx4E1gPjpQEpIuPo9XVNY/ZUwh4BPMjGyL01g==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  inngest@3.23.1:
-    resolution: {integrity: sha512-sna5fVoMO7ykHfwtV7tj4Z+6IEwWL1gjvMHlThOT3XM76tZl5p/16ZhNeDPTGE3YL9ErJJMaY52JWmyltfkiRg==}
+  inngest@3.25.1:
+    resolution: {integrity: sha512-d/0Fa9A3MeqSDh+N0cH628vi4uE2dQbrsTT684ilKMtIYNhWhkSh5xswQtCfOE8Wr2zxmmuQTfB+sdk6sDy+OA==}
     engines: {node: '>=14'}
     peerDependencies:
       '@sveltejs/kit': '>=1.27.3'
@@ -9657,7 +9657,7 @@ snapshots:
       '@typescript-eslint/types': 6.14.0
       '@typescript-eslint/typescript-estree': 6.14.0(typescript@5.6.3)
       '@typescript-eslint/visitor-keys': 6.14.0
-      debug: 4.3.4
+      debug: 4.3.7
       eslint: 9.13.0(jiti@1.21.0)
     optionalDependencies:
       typescript: 5.6.3
@@ -11089,7 +11089,7 @@ snapshots:
 
   eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.14.0(eslint@9.13.0(jiti@1.21.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@9.13.0(jiti@1.21.0)):
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.7
       enhanced-resolve: 5.15.0
       eslint: 9.13.0(jiti@1.21.0)
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.14.0(eslint@9.13.0(jiti@1.21.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@9.13.0(jiti@1.21.0))
@@ -11849,13 +11849,13 @@ snapshots:
 
   ini@4.1.1: {}
 
-  inngest@3.23.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.8.2)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.0.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(typescript@5.6.3):
+  inngest@3.25.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.8.2)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.0)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.0.1(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(typescript@5.6.3):
     dependencies:
       '@types/debug': 4.1.12
       canonicalize: 1.0.8
       chalk: 4.1.2
       cross-fetch: 4.0.0
-      debug: 4.3.4
+      debug: 4.3.7
       hash.js: 1.1.7
       json-stringify-safe: 5.0.1
       ms: 2.1.3
