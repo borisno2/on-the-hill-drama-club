@@ -93,12 +93,32 @@ const Account: Lists.Account<Session> = list({
       access: {
         update: isAdmin,
       },
+      ui: {
+        displayMode: 'cards',
+        cardFields: ['name', 'school', 'yearLevel'],
+        inlineCreate: {
+          fields: [
+            'firstName',
+            'surname',
+            'dateOfBirth',
+            'school',
+            'yearLevel',
+          ],
+        },
+        inlineEdit: { fields: ['firstName', 'surname', 'school', 'yearLevel'] },
+      },
     }),
     bills: relationship({
       ref: 'Bill.account',
       many: true,
       access: {
         update: isAdmin,
+      },
+      ui: {
+        displayMode: 'cards',
+        cardFields: ['status', 'term', 'createdAt'],
+        inlineCreate: { fields: ['status', 'term'] },
+        inlineEdit: { fields: ['status', 'term'] },
       },
     }),
     streetAddress: text({

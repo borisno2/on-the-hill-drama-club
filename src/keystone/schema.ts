@@ -313,7 +313,16 @@ export const lists: Lists<Session> = {
       createdAt: timestamp({
         defaultValue: { kind: 'now' },
       }),
-      lessonTerms: relationship({ ref: 'LessonTerm.lesson', many: true }),
+      lessonTerms: relationship({
+        ref: 'LessonTerm.lesson',
+        many: true,
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name', 'status', 'numberOfLessons'],
+          inlineCreate: { fields: ['status', 'term', 'numberOfLessons'] },
+          inlineEdit: { fields: ['status', 'term', 'numberOfLessons'] },
+        },
+      }),
       teachers: relationship({ ref: 'Teacher.lessons', many: true }),
     },
   }),

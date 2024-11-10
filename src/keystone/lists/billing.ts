@@ -96,7 +96,16 @@ export const Bill: Lists.Bill<Session> = list({
       options: billStatusOptions,
     }),
     term: relationship({ ref: 'Term', many: false }),
-    items: relationship({ ref: 'BillItem.bill', many: true }),
+    items: relationship({
+      ref: 'BillItem.bill',
+      many: true,
+      ui: {
+        displayMode: 'cards',
+        cardFields: ['name', 'quantity', 'amount', 'total'],
+        inlineCreate: { fields: ['name', 'quantity', 'amount'] },
+        inlineEdit: { fields: ['name', 'quantity', 'amount'] },
+      },
+    }),
     xeroId: text({
       isIndexed: 'unique',
       db: { isNullable: true },
