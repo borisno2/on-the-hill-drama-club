@@ -88,8 +88,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.9.0)))(next@15.0.3(react-dom@19.0.0-rc-fb9a90fa48-20240614(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614))(react@19.0.0-rc-fb9a90fa48-20240614)(svelte@4.2.17)
       '@whatwg-node/fetch':
-        specifier: ^0.9.23
-        version: 0.9.23
+        specifier: ^0.10.1
+        version: 0.10.1
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.32)
@@ -13963,7 +13963,7 @@ snapshots:
   worker-timers@7.1.8:
     dependencies:
       '@babel/runtime': 7.25.6
-      tslib: 2.7.0
+      tslib: 2.8.1
       worker-timers-broker: 6.1.8
       worker-timers-worker: 7.0.71
 
