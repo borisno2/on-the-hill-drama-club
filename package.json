@@ -74,7 +74,7 @@
   "devDependencies": {
     "@0no-co/graphqlsp": "^1.12.16",
     "@eslint/compat": "^1.2.2",
-    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.14.0",
     "@next/eslint-plugin-next": "^15.0.3",
     "@types/eslint__js": "^8.42.3",
