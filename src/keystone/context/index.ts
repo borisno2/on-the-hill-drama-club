@@ -1,7 +1,7 @@
 import { getContext } from '@keystone-6/core/context'
 import config from '../../../keystone'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from 'app/api/auth/[...nextauth]/route'
+import { authOptions } from 'lib/authConfig'
 import * as PrismaModule from '@prisma/client'
 import { Pool, neonConfig } from '@neondatabase/serverless'
 import { PrismaNeon } from '@prisma/adapter-neon'
