@@ -35,7 +35,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@types/dotenv-flow": "^3.3.3",
     "@vercel/analytics": "^1.4.1",
-    "@vercel/blob": "^0.25.1",
+    "@vercel/blob": "^0.27.0",
     "@vercel/speed-insights": "^1.1.0",
     "@whatwg-node/fetch": "^0.9.23",
     "autoprefixer": "^10.4.20",
