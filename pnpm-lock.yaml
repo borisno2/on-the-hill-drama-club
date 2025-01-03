@@ -37,8 +37,8 @@ importers:
         specifier: ^6.3.1
         version: 6.3.1(@prisma/generator-helper@5.21.1)(@types/express@4.17.21)(aws-crt@1.23.0)(types-react@19.0.0-rc.1)
       '@marsidev/react-turnstile':
-        specifier: ^1.0.2
-        version: 1.0.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.1.0
+        version: 1.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@neondatabase/serverless':
         specifier: ^0.10.4
         version: 0.10.4
@@ -1750,8 +1750,8 @@ packages:
       react: 19.0.0
       react-dom: 19.0.0
 
-  '@marsidev/react-turnstile@1.0.2':
-    resolution: {integrity: sha512-YkCtJVaCzZ1kcmhPsiFTmTXVughoNzEMRsNHcmTG0K5OdbCQfAG67Q6d5Ze+A72vrHbvVZkvcLgUbldeGcbRjQ==}
+  '@marsidev/react-turnstile@1.1.0':
+    resolution: {integrity: sha512-X7bP9ZYutDd+E+klPYF+/BJHqEyyVkN4KKmZcNRr84zs3DcMoftlMAuoKqNSnqg0HE7NQ1844+TLFSJoztCdSA==}
     peerDependencies:
       react: 19.0.0
       react-dom: 19.0.0
@@ -8545,7 +8545,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@marsidev/react-turnstile@1.0.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@marsidev/react-turnstile@1.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
