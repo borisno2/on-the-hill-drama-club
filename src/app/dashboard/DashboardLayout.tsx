@@ -55,8 +55,7 @@ export default function DashboardLayout({
   session,
 }: NavigationProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const pathname = usePathname()
-  const PageName = getPageName(pathname)
+  const PageName = getPageName(usePathname())
   if (!session) {
     return (
       <div className="flex h-screen items-center justify-center">
