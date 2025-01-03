@@ -11,6 +11,5 @@
   "rangeStrategy": "bump",
   "timezone": "Australia/Sydney",
   "updateNotScheduled": false,
-  "baseBranches": ["dev"],
   "extends": ["config:base"]
 }

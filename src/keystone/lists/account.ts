@@ -94,13 +94,6 @@ const Account: Lists.Account<Session> = list({
         update: isAdmin,
       },
     }),
-    bills: relationship({
-      ref: 'Bill.account',
-      many: true,
-      access: {
-        update: isAdmin,
-      },
-    }),
     streetAddress: text({
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',

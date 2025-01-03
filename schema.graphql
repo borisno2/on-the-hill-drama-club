@@ -179,8 +179,6 @@ type Account {
   secondContactPhone: String
   students(where: StudentWhereInput! = {}, orderBy: [StudentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: StudentWhereUniqueInput): [Student!]
   studentsCount(where: StudentWhereInput! = {}): Int
-  bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillWhereUniqueInput): [Bill!]
-  billsCount(where: BillWhereInput! = {}): Int
   streetAddress: String
   suburb: String
   postcode: Int
@@ -205,7 +203,6 @@ input AccountWhereInput {
   secondContactName: StringFilter
   secondContactPhone: StringFilter
   students: StudentManyRelationFilter
-  bills: BillManyRelationFilter
   streetAddress: StringFilter
   suburb: StringFilter
   postcode: IntFilter
@@ -217,12 +214,6 @@ input StudentManyRelationFilter {
   every: StudentWhereInput
   some: StudentWhereInput
   none: StudentWhereInput
-}
-
-input BillManyRelationFilter {
-  every: BillWhereInput
-  some: BillWhereInput
-  none: BillWhereInput
 }
 
 input IntFilter {
@@ -273,7 +264,6 @@ input AccountUpdateInput {
   secondContactName: String
   secondContactPhone: String
   students: StudentRelateToManyForUpdateInput
-  bills: BillRelateToManyForUpdateInput
   streetAddress: String
   suburb: String
   postcode: Int
@@ -294,13 +284,6 @@ input StudentRelateToManyForUpdateInput {
   connect: [StudentWhereUniqueInput!]
 }
 
-input BillRelateToManyForUpdateInput {
-  disconnect: [BillWhereUniqueInput!]
-  set: [BillWhereUniqueInput!]
-  create: [BillCreateInput!]
-  connect: [BillWhereUniqueInput!]
-}
-
 input AccountUpdateArgs {
   where: AccountWhereUniqueInput!
   data: AccountUpdateInput!
@@ -314,7 +297,6 @@ input AccountCreateInput {
   secondContactName: String
   secondContactPhone: String
   students: StudentRelateToManyForCreateInput
-  bills: BillRelateToManyForCreateInput
   streetAddress: String
   suburb: String
   postcode: Int
@@ -332,11 +314,6 @@ input StudentRelateToManyForCreateInput {
   connect: [StudentWhereUniqueInput!]
 }
 
-input BillRelateToManyForCreateInput {
-  create: [BillCreateInput!]
-  connect: [BillWhereUniqueInput!]
-}
-
 type Student {
   id: ID!
   name: String
@@ -344,7 +321,7 @@ type Student {
   surname: String
   dateOfBirth: CalendarDay
   school: String
-  yearLevel: Int
+  age: Int!
   medical: String
   account: Account
   enrolments(where: EnrolmentWhereInput! = {}, orderBy: [EnrolmentOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EnrolmentWhereUniqueInput): [Enrolment!]
@@ -367,7 +344,6 @@ input StudentWhereInput {
   surname: StringFilter
   dateOfBirth: CalendarDayFilter
   school: StringFilter
-  yearLevel: IntFilter
   medical: StringNullableFilter
   account: AccountWhereInput
   enrolments: EnrolmentManyRelationFilter
@@ -397,7 +373,6 @@ input StudentOrderByInput {
   surname: OrderDirection
   dateOfBirth: OrderDirection
   school: OrderDirection
-  yearLevel: OrderDirection
   medical: OrderDirection
   createdAt: OrderDirection
 }
@@ -407,7 +382,6 @@ input StudentUpdateInput {
   surname: String
   dateOfBirth: CalendarDay
   school: String
-  yearLevel: Int
   medical: String
   account: AccountRelateToOneForUpdateInput
   enrolments: EnrolmentRelateToManyForUpdateInput
@@ -431,7 +405,6 @@ input StudentCreateInput {
   surname: String
   dateOfBirth: CalendarDay
   school: String
-  yearLevel: Int
   medical: String
   account: AccountRelateToOneForCreateInput
   enrolments: EnrolmentRelateToManyForCreateInput
@@ -1054,7 +1027,6 @@ type Enrolment {
   lessonTerm: LessonTerm
   student: Student
   status: String
-  billItem: BillItem
   createdAt: DateTime
 }
 
@@ -1070,7 +1042,6 @@ input EnrolmentWhereInput {
   lessonTerm: LessonTermWhereInput
   student: StudentWhereInput
   status: StringFilter
-  billItem: BillItemWhereInput
   createdAt: DateTimeNullableFilter
 }
 
@@ -1084,7 +1055,6 @@ input EnrolmentUpdateInput {
   lessonTerm: LessonTermRelateToOneForUpdateInput
   student: StudentRelateToOneForUpdateInput
   status: String
-  billItem: BillItemRelateToOneForUpdateInput
   createdAt: DateTime
 }
 
@@ -1100,12 +1070,6 @@ input StudentRelateToOneForUpdateInput {
   disconnect: Boolean
 }
 
-input BillItemRelateToOneForUpdateInput {
-  create: BillItemCreateInput
-  connect: BillItemWhereUniqueInput
-  disconnect: Boolean
-}
-
 input EnrolmentUpdateArgs {
   where: EnrolmentWhereUniqueInput!
   data: EnrolmentUpdateInput!
@@ -1115,7 +1079,6 @@ input EnrolmentCreateInput {
   lessonTerm: LessonTermRelateToOneForCreateInput
   student: StudentRelateToOneForCreateInput
   status: String
-  billItem: BillItemRelateToOneForCreateInput
   createdAt: DateTime
 }
 
@@ -1127,11 +1090,6 @@ input LessonTermRelateToOneForCreateInput {
 input StudentRelateToOneForCreateInput {
   create: StudentCreateInput
   connect: StudentWhereUniqueInput
-}
-
-input BillItemRelateToOneForCreateInput {
-  create: BillItemCreateInput
-  connect: BillItemWhereUniqueInput
 }
 
 type Message {
@@ -1192,199 +1150,6 @@ input MessageCreateInput {
   lessonTerms: LessonTermRelateToManyForCreateInput
   sentAt: DateTime
   createdAt: DateTime
-}
-
-type Bill {
-  id: ID!
-  name: String
-  account: Account
-  date: CalendarDay
-  dueDate: CalendarDay
-  total: Decimal
-  status: String
-  term: Term
-  items(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillItemWhereUniqueInput): [BillItem!]
-  itemsCount(where: BillItemWhereInput! = {}): Int
-  xeroId: String
-  createdAt: DateTime
-}
-
-scalar Decimal
-
-input BillWhereUniqueInput {
-  id: ID
-  xeroId: String
-}
-
-input BillWhereInput {
-  AND: [BillWhereInput!]
-  OR: [BillWhereInput!]
-  NOT: [BillWhereInput!]
-  id: IDFilter
-  name: StringFilter
-  account: AccountWhereInput
-  date: CalendarDayNullableFilter
-  dueDate: CalendarDayNullableFilter
-  status: StringFilter
-  term: TermWhereInput
-  items: BillItemManyRelationFilter
-  xeroId: StringNullableFilter
-  createdAt: DateTimeNullableFilter
-}
-
-input CalendarDayNullableFilter {
-  equals: CalendarDay
-  in: [CalendarDay!]
-  notIn: [CalendarDay!]
-  lt: CalendarDay
-  lte: CalendarDay
-  gt: CalendarDay
-  gte: CalendarDay
-  not: CalendarDayNullableFilter
-}
-
-input BillItemManyRelationFilter {
-  every: BillItemWhereInput
-  some: BillItemWhereInput
-  none: BillItemWhereInput
-}
-
-input BillOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  date: OrderDirection
-  dueDate: OrderDirection
-  status: OrderDirection
-  xeroId: OrderDirection
-  createdAt: OrderDirection
-}
-
-input BillUpdateInput {
-  name: String
-  account: AccountRelateToOneForUpdateInput
-  date: CalendarDay
-  dueDate: CalendarDay
-  status: String
-  term: TermRelateToOneForUpdateInput
-  items: BillItemRelateToManyForUpdateInput
-  xeroId: String
-  createdAt: DateTime
-}
-
-input BillItemRelateToManyForUpdateInput {
-  disconnect: [BillItemWhereUniqueInput!]
-  set: [BillItemWhereUniqueInput!]
-  create: [BillItemCreateInput!]
-  connect: [BillItemWhereUniqueInput!]
-}
-
-input BillUpdateArgs {
-  where: BillWhereUniqueInput!
-  data: BillUpdateInput!
-}
-
-input BillCreateInput {
-  name: String
-  account: AccountRelateToOneForCreateInput
-  date: CalendarDay
-  dueDate: CalendarDay
-  status: String
-  term: TermRelateToOneForCreateInput
-  items: BillItemRelateToManyForCreateInput
-  xeroId: String
-  createdAt: DateTime
-}
-
-input BillItemRelateToManyForCreateInput {
-  create: [BillItemCreateInput!]
-  connect: [BillItemWhereUniqueInput!]
-}
-
-type BillItem {
-  id: ID!
-  name: String
-  bill: Bill
-  quantity: Int
-  amount: Int
-  total: Decimal!
-  enrolment: Enrolment
-  xeroId: String
-  createdAt: DateTime
-}
-
-input BillItemWhereUniqueInput {
-  id: ID
-  xeroId: String
-}
-
-input BillItemWhereInput {
-  AND: [BillItemWhereInput!]
-  OR: [BillItemWhereInput!]
-  NOT: [BillItemWhereInput!]
-  id: IDFilter
-  name: StringFilter
-  bill: BillWhereInput
-  quantity: IntFilter
-  amount: IntFilter
-  enrolment: EnrolmentWhereInput
-  xeroId: StringNullableFilter
-  createdAt: DateTimeNullableFilter
-}
-
-input BillItemOrderByInput {
-  id: OrderDirection
-  name: OrderDirection
-  quantity: OrderDirection
-  amount: OrderDirection
-  xeroId: OrderDirection
-  createdAt: OrderDirection
-}
-
-input BillItemUpdateInput {
-  name: String
-  bill: BillRelateToOneForUpdateInput
-  quantity: Int
-  amount: Int
-  enrolment: EnrolmentRelateToOneForUpdateInput
-  xeroId: String
-  createdAt: DateTime
-}
-
-input BillRelateToOneForUpdateInput {
-  create: BillCreateInput
-  connect: BillWhereUniqueInput
-  disconnect: Boolean
-}
-
-input EnrolmentRelateToOneForUpdateInput {
-  create: EnrolmentCreateInput
-  connect: EnrolmentWhereUniqueInput
-  disconnect: Boolean
-}
-
-input BillItemUpdateArgs {
-  where: BillItemWhereUniqueInput!
-  data: BillItemUpdateInput!
-}
-
-input BillItemCreateInput {
-  name: String
-  bill: BillRelateToOneForCreateInput
-  quantity: Int
-  amount: Int
-  enrolment: EnrolmentRelateToOneForCreateInput
-  xeroId: String
-  createdAt: DateTime
-}
-
-input BillRelateToOneForCreateInput {
-  create: BillCreateInput
-  connect: BillWhereUniqueInput
-}
-
-input EnrolmentRelateToOneForCreateInput {
-  create: EnrolmentCreateInput
-  connect: EnrolmentWhereUniqueInput
 }
 
 """
@@ -1471,18 +1236,6 @@ type Mutation {
   updateMessages(data: [MessageUpdateArgs!]!): [Message]
   deleteMessage(where: MessageWhereUniqueInput!): Message
   deleteMessages(where: [MessageWhereUniqueInput!]!): [Message]
-  createBill(data: BillCreateInput!): Bill
-  createBills(data: [BillCreateInput!]!): [Bill]
-  updateBill(where: BillWhereUniqueInput!, data: BillUpdateInput!): Bill
-  updateBills(data: [BillUpdateArgs!]!): [Bill]
-  deleteBill(where: BillWhereUniqueInput!): Bill
-  deleteBills(where: [BillWhereUniqueInput!]!): [Bill]
-  createBillItem(data: BillItemCreateInput!): BillItem
-  createBillItems(data: [BillItemCreateInput!]!): [BillItem]
-  updateBillItem(where: BillItemWhereUniqueInput!, data: BillItemUpdateInput!): BillItem
-  updateBillItems(data: [BillItemUpdateArgs!]!): [BillItem]
-  deleteBillItem(where: BillItemWhereUniqueInput!): BillItem
-  deleteBillItems(where: [BillItemWhereUniqueInput!]!): [BillItem]
 }
 
 type Query {
@@ -1525,12 +1278,6 @@ type Query {
   message(where: MessageWhereUniqueInput!): Message
   messages(where: MessageWhereInput! = {}, orderBy: [MessageOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: MessageWhereUniqueInput): [Message!]
   messagesCount(where: MessageWhereInput! = {}): Int
-  bill(where: BillWhereUniqueInput!): Bill
-  bills(where: BillWhereInput! = {}, orderBy: [BillOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillWhereUniqueInput): [Bill!]
-  billsCount(where: BillWhereInput! = {}): Int
-  billItem(where: BillItemWhereUniqueInput!): BillItem
-  billItems(where: BillItemWhereInput! = {}, orderBy: [BillItemOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BillItemWhereUniqueInput): [BillItem!]
-  billItemsCount(where: BillItemWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 

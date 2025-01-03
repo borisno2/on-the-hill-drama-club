@@ -1,15 +1,7 @@
 import { serve } from 'inngest/next'
 import { inngest } from 'lib/inngest/client'
 import { sendMessageFunction } from 'inngestFunctions/message'
-import {
-  createBillItemFunction,
-  sendEnrolmentConfirmationFunction,
-} from 'inngestFunctions/enrolment'
-import {
-  createXeroCustomerFunction,
-  upsertXeroCustomerFunction,
-} from 'inngestFunctions/account'
-import { createXeroInvoiceFunction } from 'inngestFunctions/bill'
+import { sendEnrolmentConfirmationFunction } from 'inngestFunctions/enrolment'
 import {
   copyTermFunction,
   copyEnrolmentsFunction,
@@ -21,12 +13,8 @@ export const { GET, POST, PUT } = serve({
   functions: [
     sendMessageFunction,
     sendEnrolmentConfirmationFunction,
-    createXeroCustomerFunction,
-    createXeroInvoiceFunction,
-    createBillItemFunction,
     copyTermFunction,
     copyEnrolmentsFunction,
     completeTermFunction,
-    upsertXeroCustomerFunction,
   ],
 })

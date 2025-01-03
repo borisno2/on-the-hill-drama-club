@@ -7,18 +7,21 @@ import { enrolmentStatusOptions } from 'types/selectOptions'
 import { type ResultOf, graphql } from 'gql'
 
 const GET_STUDENTS_ENROLMENTS = graphql(`
-  query GET_STUDENTS_ENROLMENTS($minYear: Int!, $maxYear: Int!) {
+  query GET_STUDENTS_ENROLMENTS(
+    $gteYear: CalendarDay!
+    $lteYear: CalendarDay!
+  ) {
     students(
       where: {
         AND: [
-          { yearLevel: { gte: $minYear } }
-          { yearLevel: { lte: $maxYear } }
+          { dateOfBirth: { gte: $gteYear } }
+          { dateOfBirth: { lte: $lteYear } }
         ]
       }
     ) {
       id
       firstName
-      yearLevel
+      age
       surname
       enrolments {
         id
@@ -45,11 +48,19 @@ export default async function StudentList({
   ) {
     redirect('/dashboard/lessons')
   }
+  const minAge = lessonTerm.lesson.minYear
+  const maxAge = lessonTerm.lesson.maxYear
+  // construct the query to get students who are within the age range of the lesson
+  const date = new Date()
+  const year = date.getFullYear()
+  const gteYear = `${year - maxAge}-01-01`
+  const lteYear = `${year - minAge}-12-31`
+
   const { students } = await context.graphql.run({
     query: GET_STUDENTS_ENROLMENTS,
     variables: {
-      minYear: lessonTerm.lesson.minYear,
-      maxYear: lessonTerm.lesson.maxYear,
+      gteYear,
+      lteYear,
     },
   })
   return (
@@ -76,7 +87,7 @@ export default async function StudentList({
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    School Year Level
+                    Age
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span className="sr-only">Enrol</span>
@@ -97,7 +108,7 @@ export default async function StudentList({
                         {student.surname}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {student.yearLevel}
+                        {student.age}
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         {student.enrolments?.some(

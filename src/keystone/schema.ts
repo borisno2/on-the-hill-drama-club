@@ -21,7 +21,6 @@ import {
 import type { Lists, Context } from '.keystone/types'
 import { isAdmin, isLoggedIn, userFilter } from './helpers'
 import Account from './lists/account'
-import { Bill, BillItem } from './lists/billing'
 import Message from './lists/message'
 import Student from './lists/student'
 import { inngest } from '../lib/inngest/client'
@@ -370,6 +369,4 @@ export const lists: Lists<Session> = {
   }),
   Enrolment,
   Message,
-  Bill,
-  BillItem,
 }

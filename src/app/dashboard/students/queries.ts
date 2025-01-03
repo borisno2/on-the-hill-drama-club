@@ -7,7 +7,7 @@ export const GET_STUDENTS = graphql(`
       firstName
       surname
       dateOfBirth
-      yearLevel
+      age
       enrolmentsCount
     }
   }
@@ -21,7 +21,7 @@ export const GET_STUDENT_BY_ID_WITH_ENROLMENTS = graphql(`
       surname
       dateOfBirth
       school
-      yearLevel
+      age
       medical
       enrolments {
         id
@@ -61,7 +61,7 @@ export const GET_STUDENT_BY_ID = graphql(`
       surname
       dateOfBirth
       school
-      yearLevel
+      age
       medical
     }
   }

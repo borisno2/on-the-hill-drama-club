@@ -1,13 +1,14 @@
 'use client'
-import { graphql } from 'gql'
 import { useRouter } from 'next/navigation'
-import { useState, useTransition } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ErrorPop from 'components/ErrorPop'
 import SuccessPop from 'components/SuccessPop'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { runKeystoneGraphQL } from 'keystone/context/graphql'
+import { profileSchema, type Values } from './profileSchema'
+import { updateProfileAction } from './updateProfileAction'
+import { useActionState } from 'react'
+import { formOnSubmit } from 'lib/utils'
 
 type User = {
   id: string
@@ -22,73 +23,6 @@ type User = {
   secondContactPhone: string | null
 }
 
-type Values = {
-  firstName: string
-  surname: string
-  phone: string
-  suburb: string
-  postcode: number
-  streetAddress: string
-  secondContactName: string
-  secondContactPhone: string
-}
-
-const updateRegex = /^(?!PLEASE_UPDATE).*$/
-
-const profileSchema = z.object({
-  firstName: z
-    .string()
-    .min(1, { message: 'Please enter your first name' })
-    .regex(updateRegex, {
-      message: 'Please update your first name',
-    }),
-  surname: z
-    .string()
-    .min(1, { message: 'Please enter your surname' })
-    .regex(updateRegex, {
-      message: 'Please update your surname',
-    }),
-  phone: z
-    .string()
-    .length(10, { message: 'Please enter a valid 10 digit phone number' })
-    .regex(/^\d+$/, {
-      message: 'Please enter a valid 10 digit phone number',
-    }),
-  suburb: z
-    .string()
-    .min(1, { message: 'Please enter your Suburb' })
-    .regex(updateRegex, {
-      message: 'Please update your Suburb',
-    }),
-  postcode: z
-    .number()
-    .min(1000, { message: 'Please enter a valid postcode' })
-    .max(9999, { message: 'Please enter a valid postcode' }),
-  streetAddress: z
-    .string()
-    .min(5, { message: 'Please enter your Street Address' })
-    .regex(updateRegex, {
-      message: 'Please update your Street Address',
-    }),
-  secondContactName: z.string().regex(updateRegex, {
-    message: 'Please update your second contact name',
-  }),
-  secondContactPhone: z
-    .string()
-    .length(10, { message: 'Please enter a valid 10 digit phone number' })
-    .regex(/^\d+$/, {
-      message: 'Please enter a valid 10 digit phone number',
-    }),
-})
-const UPDATE_ACCOUNT = graphql(`
-  mutation UPDATE_ACCOUNT($id: ID!, $data: AccountUpdateInput!) {
-    updateAccount(where: { id: $id }, data: $data) {
-      id
-      phone
-    }
-  }
-`)
-
 export default function ProfileForm({
   user,
   redirectOnSave,
@@ -97,58 +31,50 @@ export default function ProfileForm({
   redirectOnSave: boolean
 }) {
   const router = useRouter()
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const [state, formAction, pending] = useActionState(updateProfileAction, {
+    message: '',
+  })
 
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
-  const [isPending, startTransition] = useTransition()
-  const [isSubmitting, setSubmitting] = useState(false)
 
   const defaultValues = {
     firstName: user.firstName || '',
     surname: user.surname || '',
     phone: user.phone || '',
     suburb: user.suburb || '',
-    postcode: user.postcode || 3550,
+    postcode: user.postcode?.toString() || '3550',
     streetAddress: user.streetAddress || '',
     secondContactName: user.secondContactName || '',
     secondContactPhone: user.secondContactPhone || '',
+    ...(state?.fields ?? {}),
   }
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<Values>({ defaultValues, resolver: zodResolver(profileSchema) })
 
-  const onSubmit = async (values: Values) => {
-    setSubmitting(true)
-    try {
-      await runKeystoneGraphQL({
-        query: UPDATE_ACCOUNT,
-        variables: {
-          id: user.id,
-          data: values,
-        },
-      })
+  useEffect(() => {
+    if (state?.message === 'Success') {
       setSuccess(true)
-      setSubmitting(false)
-      startTransition(() => {
-        if (redirectOnSave) {
-          router.push('/dashboard')
-        }
-        router.refresh()
-      })
-    } catch (error) {
+      if (redirectOnSave) {
+        router.push('/dashboard')
+      }
+    } else if (state?.message !== '') {
       setError(true)
-      setSubmitting(false)
-      throw error
     }
-  }
+  }, [state?.message, redirectOnSave, router])
 
   return (
     <>
       <form
+        action={formAction}
         className="space-y-8 divide-y divide-gray-200"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={formOnSubmit(handleSubmit, isValid)}
+        ref={formRef}
       >
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div className="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
@@ -351,7 +277,7 @@ export default function ProfileForm({
                 <div className="mt-1 sm:col-span-2 sm:mt-0">
                   <input
                     title="Post Code"
-                    {...register('postcode', { valueAsNumber: true })}
+                    {...register('postcode')}
                     type="number"
                     autoComplete="postal-code"
                     className="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
@@ -366,20 +292,26 @@ export default function ProfileForm({
             </div>
           </div>
         </div>
+
+        {state?.issues && (
+          <div className="text-red-500">
+            <ul>
+              {state.issues.map((issue) => (
+                <li key={issue.code} className="flex gap-1">
+                  {issue.message}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div className="pt-5">
           <div className="flex justify-end">
             <button
-              type="button"
-              className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              Cancel
-            </button>
-            <button
               type="submit"
-              disabled={isSubmitting || isPending}
+              disabled={pending}
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              {isSubmitting || isPending ? 'Loading...' : 'Save'}
+              {pending ? 'Loading...' : 'Save'}
             </button>
           </div>
         </div>

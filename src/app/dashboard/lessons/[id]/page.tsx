@@ -1,4 +1,3 @@
-import DashboardLayout from '../../DashboardLayout'
 import { getSessionContext } from 'keystone/context'
 
 import { redirect } from 'next/navigation'
@@ -16,12 +15,10 @@ export const metadata: Metadata = {
 }
 
 export const dynamic = 'force-dynamic'
-export default async function LessonPage(
-  props: {
-    params: Promise<{ id?: string }>
-  }
-) {
-  const params = await props.params;
+export default async function LessonPage(props: {
+  params: Promise<{ id?: string }>
+}) {
+  const params = await props.params
   if (!params.id || !isCuid(params.id)) {
     redirect('/dashboard/lessons')
   }
@@ -40,69 +37,63 @@ export default async function LessonPage(
   }
 
   return (
-    <DashboardLayout PageName="Lessons">
-      <div className="py-4">
-        <Suspense fallback={<div>Loading...</div>}>
-          <h1 className="text-2xl font-bold text-gray-900">
-            {lessonTerm.lesson?.name}
-          </h1>
+    <div className="py-4">
+      <Suspense fallback={<div>Loading...</div>}>
+        <h1 className="text-2xl font-bold text-gray-900">
+          {lessonTerm.lesson?.name}
+        </h1>
 
-          <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
-            <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">
-                  Day of the Week
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                  {lessonTerm.lesson?.day}
-                </dd>
-              </div>
+        <div className="mx-auto mt-6 max-w-5xl px-4 sm:px-6 lg:px-8">
+          <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+            <div className="sm:col-span-1">
+              <dt className="text-sm font-medium text-gray-500">
+                Day of the Week
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900">
+                {lessonTerm.lesson?.day}
+              </dd>
+            </div>
 
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">
-                  Time of the Day
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                  {lessonTerm.lesson?.time}
-                </dd>
-              </div>
+            <div className="sm:col-span-1">
+              <dt className="text-sm font-medium text-gray-500">
+                Time of the Day
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900">
+                {lessonTerm.lesson?.time}
+              </dd>
+            </div>
 
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">Taught By</dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                  {teacherNameHelper(lessonTerm.lesson?.teachers)}
-                </dd>
-              </div>
+            <div className="sm:col-span-1">
+              <dt className="text-sm font-medium text-gray-500">Taught By</dt>
+              <dd className="mt-1 text-sm text-gray-900">
+                {teacherNameHelper(lessonTerm.lesson?.teachers)}
+              </dd>
+            </div>
 
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">
-                  Year Level
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                  {lessonTerm.lesson?.minYear} - {lessonTerm.lesson?.maxYear}
-                </dd>
-              </div>
-              <div className="sm:col-span-1">
-                <dt className="text-sm font-medium text-gray-500">
-                  Cost Per Lesson
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900">
-                  {lessonTerm.lesson?.lessonCategory?.cost}
-                </dd>
-              </div>
+            <div className="sm:col-span-1">
+              <dt className="text-sm font-medium text-gray-500">Year Level</dt>
+              <dd className="mt-1 text-sm text-gray-900">
+                {lessonTerm.lesson?.minYear} - {lessonTerm.lesson?.maxYear}
+              </dd>
+            </div>
+            <div className="sm:col-span-1">
+              <dt className="text-sm font-medium text-gray-500">
+                Cost Per Lesson
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900">
+                {lessonTerm.lesson?.lessonCategory?.cost}
+              </dd>
+            </div>
 
-              <div className="sm:col-span-2">
-                <dt className="text-sm font-medium text-gray-500">
-                  Description
-                </dt>
-                <dd className="mt-1 max-w-prose space-y-5 text-sm text-gray-900" />
-                {lessonTerm.lesson?.description}
-              </div>
-            </dl>
-            <EnrolStudentList lessonTerm={lessonTerm} />
-          </div>
-        </Suspense>
-      </div>
-    </DashboardLayout>
+            <div className="sm:col-span-2">
+              <dt className="text-sm font-medium text-gray-500">Description</dt>
+              <dd className="mt-1 max-w-prose space-y-5 text-sm text-gray-900" />
+              {lessonTerm.lesson?.description}
+            </div>
+          </dl>
+          <EnrolStudentList lessonTerm={lessonTerm} />
+        </div>
+      </Suspense>
+    </div>
   )
 }

@@ -1,4 +1,3 @@
-import DashboardLayout from '../../DashboardLayout'
 import { getSessionContext } from 'keystone/context'
 import StudentForm from '../StudentForm'
 
@@ -15,12 +14,10 @@ export const metadata: Metadata = {
 }
 
 export const dynamic = 'force-dynamic'
-export default async function Students(
-  props: {
-    params: Promise<{ id?: string }>
-  }
-) {
-  const params = await props.params;
+export default async function Students(props: {
+  params: Promise<{ id?: string }>
+}) {
+  const params = await props.params
   if (!params.id || !isCuid(params.id)) {
     redirect('/dashboard/students')
   }
@@ -40,8 +37,8 @@ export default async function Students(
     AND: {
       status: { in: ['UPCOMING', 'ENROL'] },
       lesson: {
-        maxYear: { gte: student.yearLevel },
-        minYear: { lte: student.yearLevel },
+        maxYear: { gte: student.age },
+        minYear: { lte: student.age },
       },
       enrolments: {
         none: {
@@ -92,48 +89,41 @@ export default async function Students(
   }
 
   return (
-    <DashboardLayout PageName="Students">
-      <div className="py-4">
-        <StudentForm
-          student={{ ...student }}
-          accountId={session.data.accountId!}
+    <div className="py-4">
+      <StudentForm student={{ ...student }} />
+      <div className="space-y-8 divide-y divide-gray-200 py-5 sm:space-y-5">
+        <h2 className="text-2xl font-bold text-gray-900">Lessons Pending</h2>
+        <p className="text-sm text-gray-500">
+          Lessons pending confirmation from Emily
+        </p>
+        <LessonList
+          where={pendingWhere}
+          studentId={student.id}
+          enroled={true}
         />
-        <div className="space-y-8 divide-y divide-gray-200 py-5 sm:space-y-5">
-          <h2 className="text-2xl font-bold text-gray-900">Lessons Pending</h2>
-          <p className="text-sm text-gray-500">
-            Lessons pending confirmation from Emily
-          </p>
-          <LessonList
-            where={pendingWhere}
-            studentId={student.id}
-            enroled={true}
-          />
-        </div>
-        <div className="space-y-8 divide-y divide-gray-200 py-5 sm:space-y-5">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Confirmed Enroled Lessons
-          </h2>
-          <p className="text-sm text-gray-500">Lessons confirmed by Emily</p>
-          <LessonList
-            where={enroledWhere}
-            studentId={student.id}
-            enroled={true}
-          />
-        </div>
-        <div className="space-y-8 divide-y divide-gray-200 py-5 sm:space-y-5">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Available Lessons
-          </h2>
-          <p className="text-sm text-gray-500">
-            Lessons that match this students class year
-          </p>
-          <LessonList
-            where={availableWhere}
-            studentId={student.id}
-            enroled={false}
-          />
-        </div>
       </div>
-    </DashboardLayout>
+      <div className="space-y-8 divide-y divide-gray-200 py-5 sm:space-y-5">
+        <h2 className="text-2xl font-bold text-gray-900">
+          Confirmed Enroled Lessons
+        </h2>
+        <p className="text-sm text-gray-500">Lessons confirmed by Emily</p>
+        <LessonList
+          where={enroledWhere}
+          studentId={student.id}
+          enroled={true}
+        />
+      </div>
+      <div className="space-y-8 divide-y divide-gray-200 py-5 sm:space-y-5">
+        <h2 className="text-2xl font-bold text-gray-900">Available Lessons</h2>
+        <p className="text-sm text-gray-500">
+          Lessons that match this students class year
+        </p>
+        <LessonList
+          where={availableWhere}
+          studentId={student.id}
+          enroled={false}
+        />
+      </div>
+    </div>
   )
 }

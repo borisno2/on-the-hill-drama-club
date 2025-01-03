@@ -2,7 +2,6 @@ import { graphql } from 'gql'
 import { getSessionContext } from 'keystone/context'
 import ProfileForm from './ProfileForm'
 import { redirect } from 'next/navigation'
-import DashboardLayout from '../DashboardLayout'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
 
@@ -31,12 +30,10 @@ const GET_ACCOUNT = graphql(`
   }
 `)
 
-export default async function Profile(
-  props: {
-    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
-  }
-) {
-  const searchParams = await props.searchParams;
+export default async function Profile(props: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const searchParams = await props.searchParams
   let redirectOnSave: boolean = false
   if (searchParams?.incomplete === 'true') {
     redirectOnSave = true
@@ -61,10 +58,8 @@ export default async function Profile(
   }
 
   return (
-    <DashboardLayout PageName="Profile">
-      <div className="py-4">
-        <ProfileForm user={profile} redirectOnSave={redirectOnSave} />
-      </div>
-    </DashboardLayout>
+    <div className="py-4">
+      <ProfileForm user={profile} redirectOnSave={redirectOnSave} />
+    </div>
   )
 }
