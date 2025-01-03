@@ -4,12 +4,12 @@
     {
       "matchUpdateTypes": ["patch"],
       "groupSlug": "all-minor-patch",
-      "matchPackagePatterns": ["*"],
-      "groupName": "Patch Dependencies"
+      "groupName": "Patch Dependencies",
+      "matchPackageNames": ["*"]
     }
   ],
   "rangeStrategy": "bump",
   "timezone": "Australia/Sydney",
   "updateNotScheduled": false,
-  "extends": ["config:base"]
+  "extends": ["config:recommended"]
 }
