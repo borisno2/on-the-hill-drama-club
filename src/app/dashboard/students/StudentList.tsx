@@ -40,7 +40,7 @@ export default async function StudentList() {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      School Year Level
+                      Age
                     </th>
                     <th
                       scope="col"
@@ -72,7 +72,7 @@ export default async function StudentList() {
                         {student.surname}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {student.yearLevel}
+                        {student.age}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {student.enrolmentsCount}

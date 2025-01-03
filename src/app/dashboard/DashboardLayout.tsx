@@ -2,43 +2,49 @@
 
 import React, { Fragment, useState } from 'react'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
-import { Dialog, Transition } from '@headlessui/react'
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from '@headlessui/react'
 
 import {
   Bars3Icon,
-  // CalendarIcon,
-  // ChartBarIcon,
   FolderIcon,
   HomeIcon,
-  // InboxIcon,
   UsersIcon,
   XMarkIcon,
   IdentificationIcon,
-  // ScaleIcon,
+  InboxIcon,
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import ProfileDropdown from 'components/ProfileDropdown'
+import { Session } from 'next-auth'
+import { usePathname } from 'next/navigation'
 
 type NavigationProps = {
   children: React.ReactNode
-  PageName:
-    | 'Account'
-    | 'Dashboard'
-    | 'Students'
-    | 'Lessons'
-    | 'Calendar'
-    | 'Notifications'
-    | 'Profile'
+  session?: Session
 }
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
   { name: 'Students', href: '/dashboard/students', icon: UsersIcon },
   { name: 'Lessons', href: '/dashboard/lessons', icon: FolderIcon },
-  //{ name: 'Account', href: '/dashboard/account', icon: ScaleIcon },
-  //{ name: 'Calendar', href: '/dashboard/calendar', icon: CalendarIcon },
-  //{ name: 'Notifications', href: '/dashboard/notifications', icon: InboxIcon },
+  { name: 'Notifications', href: '/dashboard/notifications', icon: InboxIcon },
 ]
+function getPageName(pathname: string) {
+  if (pathname.startsWith('/dashboard/students')) {
+    return 'Students'
+  }
+  if (pathname.startsWith('/dashboard/lessons')) {
+    return 'Lessons'
+  }
+  if (pathname.startsWith('/dashboard/notifications')) {
+    return 'Notifications'
+  }
+  return 'Dashboard'
+}
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -46,10 +52,11 @@ function classNames(...classes: string[]) {
 
 export default function DashboardLayout({
   children,
-  PageName,
+  session,
 }: NavigationProps) {
-  const { data: session } = useSession()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const pathname = usePathname()
+  const PageName = getPageName(pathname)
   if (!session) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -57,16 +64,16 @@ export default function DashboardLayout({
       </div>
     )
   }
-  // TODO: Split this into a separate components using Server Side Components
+
   return (
     <div>
-      <Transition.Root show={sidebarOpen} as={Fragment}>
+      <Transition show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-40 md:hidden"
           onClose={setSidebarOpen}
         >
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
             enterFrom="opacity-0"
@@ -76,10 +83,10 @@ export default function DashboardLayout({
             leaveTo="opacity-0"
           >
             <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
-          </Transition.Child>
+          </TransitionChild>
 
           <div className="fixed inset-0 z-40 flex">
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="transition ease-in-out duration-300 transform"
               enterFrom="-translate-x-full"
@@ -88,8 +95,8 @@ export default function DashboardLayout({
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-white">
-                <Transition.Child
+              <DialogPanel className="relative flex w-full max-w-xs flex-1 flex-col bg-white">
+                <TransitionChild
                   as={Fragment}
                   enter="ease-in-out duration-300"
                   enterFrom="opacity-0"
@@ -111,14 +118,14 @@ export default function DashboardLayout({
                       />
                     </button>
                   </div>
-                </Transition.Child>
+                </TransitionChild>
                 <div className="h-0 flex-1 overflow-y-auto pb-4 pt-5">
                   <div className="flex flex-shrink-0 items-center px-4">
                     <Link href="/" aria-label="Home" title="Home">
                       <Image
                         className="mx-auto w-auto"
-                        src="/emily-logo.png"
-                        alt="Emily Calder - School of Performing Arts"
+                        src="/oth-logo.png"
+                        alt="On the Hill Drama Club"
                         width={40}
                         height={40}
                       />
@@ -176,14 +183,14 @@ export default function DashboardLayout({
                     </div>
                   </Link>
                 </div>
-              </Dialog.Panel>
-            </Transition.Child>
+              </DialogPanel>
+            </TransitionChild>
             <div className="w-14 flex-shrink-0">
               {/* Force sidebar to shrink to fit close icon */}
             </div>
           </div>
         </Dialog>
-      </Transition.Root>
+      </Transition>
 
       {/* Static sidebar for desktop */}
       <div className="z-10 hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
@@ -194,8 +201,8 @@ export default function DashboardLayout({
               <Link href="/" aria-label="Home" title="Home">
                 <Image
                   className="mx-auto w-auto"
-                  src="/emily-logo.png"
-                  alt="Emily Calder - School of Performing Arts"
+                  src="/oth-logo.png"
+                  alt="On the Hill Drama Club"
                   width={40}
                   height={40}
                 />

@@ -2,13 +2,6 @@ import { EventSchemas, Inngest, slugify } from 'inngest'
 import { Lists } from '.keystone/types'
 import { Session } from 'next-auth'
 
-export type BillApprovedEvent = {
-  data: {
-    item: Lists.Bill.TypeInfo['item']
-    session: Session
-  }
-}
-
 export type SendMessageEvent = {
   data: {
     item: Lists.Message.TypeInfo['item']
@@ -23,7 +16,7 @@ export type EnrolmentConfirmedEvent = {
   }
 }
 
-export type CreateXeroCustomerEvent = {
+export type AccountCreatedEvent = {
   data: {
     item: Lists.Account.TypeInfo['item']
     session: Session
@@ -56,13 +49,11 @@ export type Events = {
   'app/copyterm.confirmed': CopyTermConfirmedEvent
   'app/message.queued': SendMessageEvent
   'app/enrolment.enroled': EnrolmentConfirmedEvent
-  'app/account.created': CreateXeroCustomerEvent
-  'app/bill.approved': BillApprovedEvent
+  'app/account.created': AccountCreatedEvent
   'app/term.completed': TermCompletedEvent
-  'xero/customer.upsert': CreateXeroCustomerEvent
 }
 
 export const inngest = new Inngest({
-  id: slugify('Emily Calder ARTS'),
+  id: slugify('On the Hll Drama Club'),
   schemas: new EventSchemas().fromRecord<Events>(),
 })

@@ -3,7 +3,6 @@ import { graphql, list } from '@keystone-6/core'
 import { allOperations } from '@keystone-6/core/access'
 import {
   calendarDay,
-  integer,
   relationship,
   select,
   text,
@@ -42,7 +41,17 @@ const Student: Lists.Student<Session> = list({
       validation: { isRequired: true },
       options: schoolOptions,
     }),
-    yearLevel: integer({ validation: { isRequired: true } }),
+    age: virtual({
+      field: graphql.field({
+        type: graphql.nonNull(graphql.Int),
+        resolve: async (item) => {
+          const dob = new Date(item.dateOfBirth)
+          const diffMs = Date.now() - dob.getTime()
+          const ageDt = new Date(diffMs)
+          return Math.abs(ageDt.getUTCFullYear() - 1970)
+        },
+      }),
+    }),
     medical: text({
       ui: { displayMode: 'textarea' },
       db: {

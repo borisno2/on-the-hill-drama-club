@@ -108,14 +108,6 @@ const Enrollment: Lists.Enrolment<Session> = list({
         update: isAdmin,
       },
     }),
-    billItem: relationship({
-      ref: 'BillItem.enrolment',
-      many: false,
-      access: {
-        create: isAdmin,
-        update: isAdmin,
-      },
-    }),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),

@@ -1,6 +1,5 @@
 import { getSessionContext } from 'keystone/context'
 import StudentForm from '../StudentForm'
-import DashboardLayout from '../../DashboardLayout'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
 import { redirect } from 'next/navigation'
@@ -21,10 +20,8 @@ export default async function NewStudent() {
   }
 
   return (
-    <DashboardLayout PageName="Students">
-      <div className="py-4">
-        <StudentForm accountId={accountId} />
-      </div>
-    </DashboardLayout>
+    <div className="py-4">
+      <StudentForm />
+    </div>
   )
 }

@@ -1,12 +1,22 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "build": {
-      "outputs": [".next/**", ".keystone/admin/.next/**"],
-      "env": ["DATABASE_URL", "KEYSTONE_URL"]
-    },
-    "seed-data": {
+    "prep:keystone": {
+      "outputs": [".keystone/config.**"],
       "env": ["DATABASE_URL"]
+    },
+    "db:migrate": {
+      "dependsOn": ["prep:keystone"],
+      "env": ["DATABASE_URL"]
+    },
+    "db:seed": {
+      "dependsOn": ["db:migrate"],
+      "env": ["DATABASE_URL"]
+    },
+    "build": {
+      "dependsOn": ["db:seed"],
+      "outputs": [".next/**"],
+      "env": ["DATABASE_URL", "KEYSTONE_URL"]
     },
     "lint": {}
   }

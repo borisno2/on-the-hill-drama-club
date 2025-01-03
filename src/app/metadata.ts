@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const baseMetadata: Metadata = {
-  title: 'Emily Calder - School of Performing Arts',
+  title: 'On the Hill Drama Club',
   description:
-    'Emily Calder - School of Performing Arts - Teaching Theatre and Music in the Bendigo Region',
+    'On the Hill Drama Club - A demonstration site for Next.js and KeystoneJS',
 }
 
 export function getMetadata(page: string): Metadata {

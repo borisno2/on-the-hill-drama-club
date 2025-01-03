@@ -2,19 +2,15 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
-  AcademicCapIcon,
   Bars3Icon,
   BookmarkSquareIcon,
   CalendarIcon,
   CreditCardIcon,
   EyeIcon,
-  GlobeAsiaAustraliaIcon,
   KeyIcon,
-  MusicalNoteIcon,
   PaperAirplaneIcon,
   PencilSquareIcon,
   PhoneIcon,
-  Squares2X2Icon,
   StarIcon,
   XMarkIcon,
   ShoppingCartIcon,
@@ -26,34 +22,10 @@ import Link from 'next/link'
 
 const lessons = [
   {
-    name: 'Private Music Tuition',
-    description: '',
-    href: '/lessons/private-music-tuition',
-    icon: MusicalNoteIcon,
-  },
-  {
     name: 'On the Hill Drama Club',
     description: '',
     href: '/lessons/drama-club',
     icon: StarIcon,
-  },
-  {
-    name: 'Only Strings',
-    description: 'Orchestra',
-    href: '/lessons/only-strings-orchestra',
-    icon: GlobeAsiaAustraliaIcon,
-  },
-  {
-    name: 'Music Theory',
-    description: '',
-    href: '/lessons/music-theory',
-    icon: AcademicCapIcon,
-  },
-  {
-    name: 'Musical Munchkins',
-    description: 'Early Childhood Music',
-    href: '/lessons/musical-munchkins',
-    icon: Squares2X2Icon,
   },
   {
     name: 'Drama Teens',
@@ -135,13 +107,11 @@ export const Header = () => {
         <div className="flex items-center justify-between border-b-2 border-gray-100 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
-              <span className="sr-only">
-                Emily Calder - School of Performing Arts
-              </span>
+              <span className="sr-only">On the Hill Drama Club</span>
               <Image
                 className="mx-auto w-auto"
-                src="/emily-logo.png"
-                alt="Emily Calder - School of Performing Arts"
+                src="/oth-logo.png"
+                alt="On the Hill Drama Club"
                 width={100}
                 height={100}
               />
@@ -326,8 +296,8 @@ export const Header = () => {
                 <div>
                   <Image
                     className="mx-auto w-auto"
-                    src="/emily-logo.png"
-                    alt="Emily Calder - School of Performing Arts"
+                    src="/oth-logo.png"
+                    alt="On the Hill Drama Club"
                     width={40}
                     height={40}
                   />

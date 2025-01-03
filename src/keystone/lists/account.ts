@@ -94,13 +94,6 @@ const Account: Lists.Account<Session> = list({
         update: isAdmin,
       },
     }),
-    bills: relationship({
-      ref: 'Bill.account',
-      many: true,
-      access: {
-        update: isAdmin,
-      },
-    }),
     streetAddress: text({
       validation: { isRequired: true },
       defaultValue: 'PLEASE_UPDATE',
@@ -112,10 +105,6 @@ const Account: Lists.Account<Session> = list({
     postcode: integer({
       validation: { isRequired: true },
       defaultValue: 3550,
-    }),
-    xeroId: text({
-      isIndexed: 'unique',
-      db: { isNullable: true },
     }),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },

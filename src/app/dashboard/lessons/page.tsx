@@ -1,4 +1,3 @@
-import DashboardLayout from '../DashboardLayout'
 import ClassList from './LessonList'
 import { getSessionContext } from 'keystone/context'
 import { GET_STUDENTS } from '../students/queries'
@@ -24,9 +23,7 @@ export default async function lessons() {
     redirect('/dashboard/students')
   }
   // get a list of students year levels
-  const yearLevels = students
-    ? students.map((student) => student.yearLevel)
-    : []
+  const yearLevels = students ? students.map((student) => student.age) : []
   const studentIds = students ? students.map((student) => student.id) : []
   // remove duplicates
   const uniqueYearLevels = [...new Set(yearLevels)]
@@ -69,37 +66,33 @@ export default async function lessons() {
   }
 
   return (
-    <DashboardLayout PageName="Lessons">
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-          <h2 className="text-2xl font-bold text-gray-900">Enrolled Classes</h2>
-          <p className="text-sm text-gray-500">
-            This is a list of all lessons that you have one or more student
-            enrolled in
-          </p>
-          <ClassList where={enroledWhere} enroled={true} />
-        </div>
-        <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Available Lessons
-          </h2>
-          <p className="text-sm text-gray-500">
-            This is a list of all lessons that are suitable for one of more your
-            Students based on their class year level, except those listed above
-            where you already have a Student enrolled
-          </p>
-          <ClassList where={availableWhere} enroled={false} />
-        </div>
-
-        <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-          <h2 className="text-2xl font-bold text-gray-900">All Lessons</h2>
-          <p className="text-sm text-gray-500">
-            This is a list of all lessons, except those you have a student
-            enrolled in or a suitably aged student for.
-          </p>
-          <ClassList where={allWhere} enroled={false} />
-        </div>
+    <div className="px-4 sm:px-6 lg:px-8">
+      <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+        <h2 className="text-2xl font-bold text-gray-900">Enrolled Classes</h2>
+        <p className="text-sm text-gray-500">
+          This is a list of all lessons that you have one or more student
+          enrolled in
+        </p>
+        <ClassList where={enroledWhere} enroled={true} />
       </div>
-    </DashboardLayout>
+      <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+        <h2 className="text-2xl font-bold text-gray-900">Available Lessons</h2>
+        <p className="text-sm text-gray-500">
+          This is a list of all lessons that are suitable for one of more your
+          Students based on their class year level, except those listed above
+          where you already have a Student enrolled
+        </p>
+        <ClassList where={availableWhere} enroled={false} />
+      </div>
+
+      <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+        <h2 className="text-2xl font-bold text-gray-900">All Lessons</h2>
+        <p className="text-sm text-gray-500">
+          This is a list of all lessons, except those you have a student
+          enrolled in or a suitably aged student for.
+        </p>
+        <ClassList where={allWhere} enroled={false} />
+      </div>
+    </div>
   )
 }

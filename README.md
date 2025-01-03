@@ -1,12 +1,19 @@
-# Emily Calder - School of Performing Arts
+# On the Hill Drama Club - Demo Site
 
-Emily is a String and Theatre teacher in Bendigo, Victoria, Australia. Her Drama Club at [The Old Church on the Hill](https://www.theoldchurch.org.au) has grown to now have more students than her old faithful pen and paper can handle. Being both her husband and a developer on the [Keystone](https://www.keystonejs.com) project at [Thinkmill](https://www.thinkmill.com.au) I figured I could help make her life a little bit easier by streamlining the enrolment, communication, and billing, while at the same time exploring new tech and new ways of working with Keystone. So over Christmas 2022, I started putting together this Website which serves as both a marketing site and a student portal.
+Welcome to the On the Hill Drama Club demo site! This project demonstrates how to build a modern web application using Next.js App Directory alongside KeystoneJS, showcasing best practices for both technologies.
+
+The site is inspired by a real-world use case: Emily, a passionate string and theatre teacher based in Bendigo, Victoria, Australia. Emily’s drama club at The Old Church on the Hill grew beyond what pen and paper could handle. To support her growing club, this platform was developed to streamline enrolments, communication, and billing, while also exploring cutting-edge tools and workflows.
+
+Developed by Josh Calder at [OpenSaasAU](https://opensaas.au) this demo now serves as both a technical showcase and an example of how KeystoneJS can power dynamic, content-driven sites with custom admin interfaces, and is the basis of my [YouTube how-to series](https://youtube.com/playlist?list=PL6uX-qEY8TlcvaG33aMLVp-ICm2TL0qcn&si=SP8W6wmn0wuhUTnf)
+
+Features
+• Next.js App Directory: Leverage the latest routing and server components.
+• KeystoneJS: Simplified content management and custom workflows.
+• Real-World Application: Focus on usability for small organizations or clubs.
 
 ## What it does (function)
 
 The project allows students and their parents/guardians to view the timetable, check fees, see class availability and enroll through the Student Portal/Dashboard. Once enrolled they click enroll in their dashboard, the enrolment is set to `Pending`, then Emily can confirm their enrolment by setting its status to `Enroled`. Once the status is set to `Enroled` a confirmation email is sent to the account owner with the time and start date pulled from the `Lesson` and `Term`.
-
-We use Xero for bookkeeping, we can generate invoices for the Term which creates them in Xero ready to send.
 
 ## Tech Stack
 
@@ -37,6 +44,6 @@ I was using PlanetScale as their schema branching was something I really wanted 
 
 # Give it a Go.
 
-You can see the dev environment on Vercel at [emily-calder.vercel.app](https://emily-calder.vercel.app) - it does only have test data - feel free to register and give it a go. The production site is at [www.emilycalder.com.au](https://www.emilycalder.com.au) - feel free to check it out, but please don't enroll unless you are interested in having lessons in Bendigo (and get the bill for it).
+You can see the demo environment on hosted on Vercel at [onthehill.opensaas.au](https://onthehill.opensaas.au) - it does only have test data - feel free to register and give it a go.
 
 You can try it out on Dev by cloning the repo and running `pnpm install` and `pnpm dev` which will start two nextjs dev servers, one hosting the main site including the GraphQL API on port `3000` and one hosting the Keystone Admin UI on port `4000`, the Keystone UI is proxied through the frontend at `/admin`.

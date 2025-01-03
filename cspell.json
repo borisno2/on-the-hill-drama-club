@@ -22,6 +22,7 @@
     "__generated__",
     "dist",
     "gql.ts",
+    "*.sql",
     "graphql-env.d.ts"
   ]
 }

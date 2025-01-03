@@ -16,12 +16,10 @@ import {
   integer,
   virtual,
   checkbox,
-  json,
 } from '@keystone-6/core/fields'
 import type { Lists, Context } from '.keystone/types'
 import { isAdmin, isLoggedIn, userFilter } from './helpers'
 import Account from './lists/account'
-import { Bill, BillItem } from './lists/billing'
 import Message from './lists/message'
 import Student from './lists/student'
 import { inngest } from '../lib/inngest/client'
@@ -114,7 +112,6 @@ export const lists: Lists<Session> = {
           isNullable: true,
         },
       }),
-      xeroAccountCode: text({ isIndexed: 'unique', db: { isNullable: true } }),
       lessons: relationship({ ref: 'Lesson.lessonCategory', many: true }),
     },
   }),
@@ -332,18 +329,6 @@ export const lists: Lists<Session> = {
     },
   }),
 
-  XeroSettings: list({
-    access: isAdmin,
-    isSingleton: true,
-    graphql: {
-      plural: 'ManyXeroSettings',
-    },
-    fields: {
-      tokenSet: json(),
-      tenantId: text(),
-    },
-  }),
-
   Teacher: list({
     access: {
       operation: {
@@ -370,6 +355,4 @@ export const lists: Lists<Session> = {
   }),
   Enrolment,
   Message,
-  Bill,
-  BillItem,
 }

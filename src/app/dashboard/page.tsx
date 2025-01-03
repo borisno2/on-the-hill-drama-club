@@ -6,7 +6,6 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/outline'
 import { getSessionContext } from 'keystone/context'
-import DashboardLayout from './DashboardLayout'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
@@ -57,7 +56,7 @@ export default async function Portal() {
     // More items...
   ]
   return (
-    <DashboardLayout PageName="Dashboard">
+    <>
       <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
           Student Portal
@@ -167,6 +166,6 @@ export default async function Portal() {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </>
   )
 }
