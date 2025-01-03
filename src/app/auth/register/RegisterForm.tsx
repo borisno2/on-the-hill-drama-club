@@ -1,112 +1,58 @@
 'use client'
-import { signIn } from 'next-auth/react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ErrorPop from 'components/ErrorPop'
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { Turnstile } from '@marsidev/react-turnstile'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { registerAccount } from './_action'
-
-interface Values {
-  firstName: string
-  surname: string
-  password: string
-  passwordConfirmation: string
-  email: string
-  phone: string
-  secondContactName: string
-  secondContactPhone: string
-  suburb: string
-  postcode: number
-  streetAddress: string
-  turnstileRes: string
-}
-
-const registerSchema = z
-  .object({
-    turnstileRes: z.string(),
-    firstName: z.string().min(1, { message: 'Please enter your first name' }),
-    secondContactName: z
-      .string()
-      .min(1, { message: 'Please enter the name of a secondary contact' }),
-    secondContactPhone: z
-      .string()
-      .length(10, { message: 'Please enter a valid 10 digit phone number' })
-      .regex(/^\d+$/, {
-        message: 'Please enter a valid 10 digit phone number',
-      }),
-    surname: z.string().min(1, { message: 'Please enter your surname' }),
-    phone: z
-      .string()
-      .length(10, { message: 'Please enter a valid 10 digit phone number' })
-      .regex(/^\d+$/, {
-        message: 'Please enter a valid 10 digit phone number',
-      }),
-    suburb: z.string().min(1, { message: 'Please enter your Suburb' }),
-    postcode: z
-      .number()
-      .min(1000, { message: 'Please enter a valid postcode' })
-      .max(9999, { message: 'Please enter a valid postcode' }),
-    streetAddress: z
-      .string()
-      .min(5, { message: 'Please enter your Street Address' }),
-    email: z.string().email({ message: 'Please enter a valid email address' }),
-    password: z
-      .string()
-      .min(8, { message: 'Password must be at least 8 characters' }),
-    passwordConfirmation: z.string(),
-  })
-  .superRefine(({ passwordConfirmation, password }, ctx) => {
-    if (passwordConfirmation !== password) {
-      ctx.addIssue({
-        path: ['passwordConfirmation'],
-        code: 'custom',
-        message: 'The passwords did not match',
-      })
-    }
-  })
+import { registerAccount } from './registerAction'
+import { registerSchema, type Values } from './registerFormSchema'
+import { useActionState } from 'react'
+import { formOnSubmit } from 'lib/utils'
 
 export default function RegisterForm() {
-  const ref = useRef<TurnstileInstance | undefined>(null)
-  const [isSubmitting, setSubmitting] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const [state, formAction, isSubmitting] = useActionState(registerAccount, {
+    message: '',
+  })
+  const defaultValues: Values = {
+    email: '',
+    turnstileRes: '',
+    firstName: '',
+    secondContactName: '',
+    secondContactPhone: '',
+    surname: '',
+    phone: '',
+    suburb: '',
+    postcode: '',
+    streetAddress: '',
+    password: '',
+    passwordConfirmation: '',
+    ...(state?.fields ?? {}),
+  }
 
   const [error, setError] = useState(false)
+  useEffect(() => {
+    if (state?.message !== '') {
+      setError(true)
+    }
+  }, [state?.message])
 
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
-  } = useForm<Values>({ resolver: zodResolver(registerSchema) })
-
-  const onSubmit: SubmitHandler<Values> = async (values: Values) => {
-    setSubmitting(true)
-    const data = values
-    ref.current?.reset()
-    try {
-      const result = await registerAccount(data)
-      if (!result.success) {
-        setError(true)
-        throw new Error(result.error)
-      }
-      const newToken = ref.current?.getResponse()
-      await signIn('credentials', {
-        email: data.email,
-        password: data.password,
-        callbackUrl: '/dashboard/students/add',
-        turnstileRes: newToken,
-      })
-    } catch (error) {
-      setError(true)
-      setSubmitting(false)
-      throw error
-    }
-  }
+    formState: { errors, isValid },
+  } = useForm<Values>({ defaultValues, resolver: zodResolver(registerSchema) })
 
   return (
     <>
-      <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        action={formAction}
+        className="space-y-6"
+        onSubmit={formOnSubmit(handleSubmit, isValid)}
+        ref={formRef}
+      >
         <div className="shadow sm:overflow-hidden sm:rounded-md">
           <div className="space-y-6 bg-white px-4 py-6 sm:p-6">
             <div>
@@ -301,9 +247,7 @@ export default function RegisterForm() {
                 </label>
                 <input
                   title="Please enter a valid postcode."
-                  {...register('postcode', {
-                    valueAsNumber: true,
-                  })}
+                  {...register('postcode')}
                   type="number"
                   autoComplete="postal-code"
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -365,7 +309,6 @@ export default function RegisterForm() {
           </div>
           <Turnstile
             className="flex justify-center"
-            ref={ref}
             options={{ theme: 'light', responseFieldName: 'turnstileRes' }}
             siteKey={
               process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY ||
@@ -374,6 +317,17 @@ export default function RegisterForm() {
             onSuccess={(token: string) => setValue('turnstileRes', token)}
           />
 
+          {state?.issues && (
+            <div className="text-red-500">
+              <ul>
+                {state.issues.map((issue) => (
+                  <li key={issue.code} className="flex gap-1">
+                    {issue.message}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
             <button
               disabled={isSubmitting}

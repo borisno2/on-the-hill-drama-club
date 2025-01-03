@@ -17,7 +17,6 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
-import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 const lessons = [
@@ -100,7 +99,6 @@ function classNames(...classes: string[]) {
 }
 
 export const Header = () => {
-  const { data: session } = useSession()
   return (
     <Popover className="relative z-10 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -357,48 +355,6 @@ export const Header = () => {
                     {item.name}
                   </Popover.Button>
                 ))}
-              </div>
-              <div>
-                {session ? (
-                  <>
-                    <a
-                      onClick={() => signOut()}
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-gray-900 shadow-sm hover:bg-gray-100"
-                    >
-                      Sign Out
-                    </a>
-                    <p className="mt-6 text-center text-base font-medium text-gray-500">
-                      Existing customer?{' '}
-                      <Popover.Button
-                        as={Link}
-                        href="/dashboard"
-                        className="text-indigo-600 hover:text-indigo-500"
-                      >
-                        Student Portal
-                      </Popover.Button>
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <Popover.Button
-                      as={Link}
-                      href="/auth/register"
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                    >
-                      Sign up
-                    </Popover.Button>
-                    <p className="mt-6 text-center text-base font-medium text-gray-500">
-                      Existing account?{' '}
-                      <Popover.Button
-                        as={Link}
-                        href="/auth/signin"
-                        className="text-indigo-600 hover:text-indigo-500"
-                      >
-                        Sign in
-                      </Popover.Button>
-                    </p>
-                  </>
-                )}
               </div>
             </div>
           </div>

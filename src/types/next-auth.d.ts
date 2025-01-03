@@ -13,9 +13,10 @@ declare module 'next-auth' {
     role?: string | null
     name?: string | null
     failMessage?: string | null
+    subjectId?: string
   }
   interface Session {
-    adminUIAccess: boolean
+    allowAdminUI: boolean
     userId: string
     data: {
       firstName?: string | null
@@ -34,7 +35,8 @@ declare module 'next-auth/jwt' {
     id: string
     email: string | null
     role: string | null
-    allowAdminUI: boolean | null
+    allowAdminUI: boolean
+    emailVerified: boolean
     account: {
       id: string
       firstName: string | null

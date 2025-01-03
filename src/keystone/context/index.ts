@@ -1,13 +1,11 @@
 import { getContext } from '@keystone-6/core/context'
 import config from '../../../keystone'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from 'app/api/auth/[...nextauth]/route'
 import * as PrismaModule from '@prisma/client'
 import { Pool, neonConfig } from '@neondatabase/serverless'
 import { PrismaNeon } from '@prisma/adapter-neon'
 import ws from 'ws'
+import { auth } from 'lib/auth'
 
-import type { NextApiRequest, NextApiResponse } from 'next/types'
 import type { Session } from 'next-auth'
 import type { Context } from '.keystone/types'
 
@@ -33,16 +31,7 @@ if (process.env.NODE_ENV !== 'production')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).keystoneContext = keystoneContext
 
-export async function getSessionContext(props?: {
-  req: NextApiRequest
-  res: NextApiResponse
-}): Promise<Context<Session>> {
-  let session = null
-  if (props) {
-    const { req, res } = props
-    session = await getServerSession(req, res, authOptions)
-  }
-  // running in the app directory, so we don't need to pass req and res
-  else session = await getServerSession(authOptions)
+export async function getSessionContext(): Promise<Context<Session>> {
+  const session = await auth()
   return keystoneContext.withSession(session)
 }
