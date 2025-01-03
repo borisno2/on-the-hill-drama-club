@@ -65,22 +65,22 @@ importers:
         version: 8.1.4
       '@tailwindcss/forms':
         specifier: ^0.5.9
-        version: 0.5.9(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2)))
+        version: 0.5.9(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2)))
       '@tailwindcss/typography':
         specifier: ^0.5.15
-        version: 0.5.15(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2)))
+        version: 0.5.15(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2)))
       '@types/dotenv-flow':
         specifier: ^3.3.3
         version: 3.3.3
       '@vercel/analytics':
         specifier: ^1.4.1
-        version: 1.4.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)
+        version: 1.4.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)
       '@vercel/blob':
         specifier: ^0.27.0
         version: 0.27.0
       '@vercel/speed-insights':
         specifier: ^1.1.0
-        version: 1.1.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)
+        version: 1.1.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)
       '@whatwg-node/fetch':
         specifier: ^0.10.1
         version: 0.10.1
@@ -134,7 +134,7 @@ importers:
         version: 1.2.0
       inngest:
         specifier: ^3.28.0
-        version: 3.28.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.2)
+        version: 3.28.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.2)
       lucide-react:
         specifier: ^0.469.0
         version: 0.469.0(react@19.0.0)
@@ -167,10 +167,10 @@ importers:
         version: 2.6.0
       tailwindcss:
         specifier: ^3.4.17
-        version: 3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2))
+        version: 3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2))
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2)))
+        version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2)))
       ws:
         specifier: ^8.18.0
         version: 8.18.0
@@ -200,8 +200,8 @@ importers:
         specifier: ^4.17.13
         version: 4.17.13
       '@types/node':
-        specifier: ^22.10.4
-        version: 22.10.4
+        specifier: ^22.10.5
+        version: 22.10.5
       '@types/react':
         specifier: npm:types-react@19.0.0-rc.1
         version: types-react@19.0.0-rc.1
@@ -2569,8 +2569,8 @@ packages:
   '@types/node@14.18.33':
     resolution: {integrity: sha512-qelS/Ra6sacc4loe/3MSjXNL1dNQ/GjxNHVzuChwMfmk7HuycRLVQN2qNY3XahK+fZc5E2szqQSKUyAF0E+2bg==}
 
-  '@types/node@22.10.4':
-    resolution: {integrity: sha512-99l6wv4HEzBQhvaU/UGoeBoCK61SCROQaCCGyQSgX2tEQ3rKkNZ2S7CEWnS/4s1LV+8ODdK21UeyR1fHP2mXug==}
+  '@types/node@22.10.5':
+    resolution: {integrity: sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -9065,9 +9065,9 @@ snapshots:
       '@smithy/types': 3.7.2
       tslib: 2.8.1
 
-  '@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))':
+  '@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))
+      '@sveltejs/vite-plugin-svelte': 2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))
       '@types/cookie': 0.5.4
       cookie: 0.5.0
       devalue: 4.3.3
@@ -9081,32 +9081,32 @@ snapshots:
       svelte: 4.2.17
       tiny-glob: 0.2.9
       undici: 5.28.4
-      vite: 4.5.3(@types/node@22.10.4)
+      vite: 4.5.3(@types/node@22.10.5)
     transitivePeerDependencies:
       - supports-color
     optional: true
 
-  '@sveltejs/vite-plugin-svelte-inspector@1.0.4(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))':
+  '@sveltejs/vite-plugin-svelte-inspector@1.0.4(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))
+      '@sveltejs/vite-plugin-svelte': 2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))
       debug: 4.4.0
       svelte: 4.2.17
-      vite: 4.5.3(@types/node@22.10.4)
+      vite: 4.5.3(@types/node@22.10.5)
     transitivePeerDependencies:
       - supports-color
     optional: true
 
-  '@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))':
+  '@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 1.0.4(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))
+      '@sveltejs/vite-plugin-svelte-inspector': 1.0.4(@sveltejs/vite-plugin-svelte@2.5.3(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
       svelte: 4.2.17
       svelte-hmr: 0.15.3(svelte@4.2.17)
-      vite: 4.5.3(@types/node@22.10.4)
-      vitefu: 0.2.5(vite@4.5.3(@types/node@22.10.4))
+      vite: 4.5.3(@types/node@22.10.5)
+      vitefu: 0.2.5(vite@4.5.3(@types/node@22.10.5))
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -9117,18 +9117,18 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@tailwindcss/forms@0.5.9(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2)))':
+  '@tailwindcss/forms@0.5.9(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2)))':
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2))
+      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2))
 
-  '@tailwindcss/typography@0.5.15(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2)))':
+  '@tailwindcss/typography@0.5.15(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2)))':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2))
+      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2))
 
   '@tanstack/react-virtual@3.11.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -9163,15 +9163,15 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
 
   '@types/busboy@1.5.4':
     dependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
 
   '@types/cookie@0.5.4':
     optional: true
@@ -9195,7 +9195,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.6':
     dependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       '@types/qs': 6.9.17
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -9227,19 +9227,19 @@ snapshots:
 
   '@types/node-fetch@2.6.12':
     dependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       form-data: 4.0.1
 
   '@types/node-fetch@2.6.3':
     dependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       form-data: 3.0.2
     optional: true
 
   '@types/node@14.18.33':
     optional: true
 
-  '@types/node@22.10.4':
+  '@types/node@22.10.5':
     dependencies:
       undici-types: 6.20.0
 
@@ -9251,7 +9251,7 @@ snapshots:
 
   '@types/pg@8.11.6':
     dependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       pg-protocol: 1.7.0
       pg-types: 4.0.2
 
@@ -9266,17 +9266,17 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       '@types/send': 0.17.4
 
   '@types/ws@8.5.13':
     dependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
 
   '@typescript-eslint/eslint-plugin@8.19.0(@typescript-eslint/parser@8.19.0(eslint@9.17.0(jiti@1.21.7))(typescript@5.7.2))(eslint@9.17.0(jiti@1.21.7))(typescript@5.7.2)':
     dependencies:
@@ -9355,9 +9355,9 @@ snapshots:
       '@typescript-eslint/types': 8.19.0
       eslint-visitor-keys: 4.2.0
 
-  '@vercel/analytics@1.4.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)':
+  '@vercel/analytics@1.4.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)':
     optionalDependencies:
-      '@sveltejs/kit': 1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))
+      '@sveltejs/kit': 1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))
       next: 15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
       svelte: 4.2.17
@@ -9403,9 +9403,9 @@ snapshots:
       - encoding
     optional: true
 
-  '@vercel/speed-insights@1.1.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)':
+  '@vercel/speed-insights@1.1.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)':
     optionalDependencies:
-      '@sveltejs/kit': 1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))
+      '@sveltejs/kit': 1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))
       next: 15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
       svelte: 4.2.17
@@ -11188,7 +11188,7 @@ snapshots:
   graphql-upload@15.0.2(@types/express@4.17.21)(graphql@16.10.0):
     dependencies:
       '@types/busboy': 1.5.4
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       '@types/object-path': 0.11.4
       busboy: 1.6.0
       fs-capacitor: 6.2.0
@@ -11336,7 +11336,7 @@ snapshots:
 
   ini@4.1.1: {}
 
-  inngest@3.28.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.2):
+  inngest@3.28.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.2):
     dependencies:
       '@types/debug': 4.1.12
       canonicalize: 1.0.8
@@ -11350,7 +11350,7 @@ snapshots:
       strip-ansi: 5.2.0
       zod: 3.22.5
     optionalDependencies:
-      '@sveltejs/kit': 1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.4))
+      '@sveltejs/kit': 1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.10.5))
       '@vercel/node': 2.15.10
       aws-lambda: 1.0.7
       express: 4.21.2
@@ -12217,13 +12217,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.4.49
 
-  postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2)):
+  postcss-load-config@4.0.2(postcss@8.4.49)(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2)):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.7.0
     optionalDependencies:
       postcss: 8.4.49
-      ts-node: 10.9.1(@types/node@22.10.4)(typescript@5.7.2)
+      ts-node: 10.9.1(@types/node@22.10.5)(typescript@5.7.2)
 
   postcss-nested@6.2.0(postcss@8.4.49):
     dependencies:
@@ -12979,11 +12979,11 @@ snapshots:
 
   tailwind-merge@2.6.0: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2))):
     dependencies:
-      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2))
+      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2))
 
-  tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2)):
+  tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -13002,7 +13002,7 @@ snapshots:
       postcss: 8.4.49
       postcss-import: 15.1.0(postcss@8.4.49)
       postcss-js: 4.0.1(postcss@8.4.49)
-      postcss-load-config: 4.0.2(postcss@8.4.49)(ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2))
+      postcss-load-config: 4.0.2(postcss@8.4.49)(ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2))
       postcss-nested: 6.2.0(postcss@8.4.49)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.10
@@ -13099,14 +13099,14 @@ snapshots:
       yn: 3.1.1
     optional: true
 
-  ts-node@10.9.1(@types/node@22.10.4)(typescript@5.7.2):
+  ts-node@10.9.1(@types/node@22.10.5)(typescript@5.7.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -13350,19 +13350,19 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@4.5.3(@types/node@22.10.4):
+  vite@4.5.3(@types/node@22.10.5):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.4.49
       rollup: 3.29.5
     optionalDependencies:
-      '@types/node': 22.10.4
+      '@types/node': 22.10.5
       fsevents: 2.3.3
     optional: true
 
-  vitefu@0.2.5(vite@4.5.3(@types/node@22.10.4)):
+  vitefu@0.2.5(vite@4.5.3(@types/node@22.10.5)):
     optionalDependencies:
-      vite: 4.5.3(@types/node@22.10.4)
+      vite: 4.5.3(@types/node@22.10.5)
     optional: true
 
   vscode-languageserver-textdocument@1.0.12: {}
