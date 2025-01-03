@@ -124,8 +124,8 @@ export default function DashboardLayout({
                     <Link href="/" aria-label="Home" title="Home">
                       <Image
                         className="mx-auto w-auto"
-                        src="/emily-logo.png"
-                        alt="Emily Calder - School of Performing Arts"
+                        src="/oth-logo.png"
+                        alt="On the Hill Drama Club"
                         width={40}
                         height={40}
                       />
@@ -201,8 +201,8 @@ export default function DashboardLayout({
               <Link href="/" aria-label="Home" title="Home">
                 <Image
                   className="mx-auto w-auto"
-                  src="/emily-logo.png"
-                  alt="Emily Calder - School of Performing Arts"
+                  src="/oth-logo.png"
+                  alt="On the Hill Drama Club"
                   width={40}
                   height={40}
                 />

@@ -19,7 +19,7 @@ export default async function sendEmail(data: emailData) {
     email.to = process.env.TEST_EMAIL || 'no-reply@openaas.com.au'
   }
   if (!email.from.name) {
-    email.from.name = 'Emily Calder'
+    email.from.name = 'On the Hill Drama Club'
   }
 
   const msg = { ...email }

@@ -11,12 +11,10 @@ export const metadata: Metadata = {
   ...getMetadata('Register'),
 }
 
-export default async function RegisterPage(
-  props: {
-    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
-  }
-) {
-  const searchParams = await props.searchParams;
+export default async function RegisterPage(props: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const searchParams = await props.searchParams
   const context = await getSessionContext()
   if (context.session) {
     redirect('/dashboard')
@@ -31,8 +29,8 @@ export default async function RegisterPage(
         <Link href="/" title="Home">
           <Image
             className="mx-auto w-auto"
-            src="/emily-logo.png"
-            alt="Emily Calder - School of Performing Arts"
+            src="/oth-logo.png"
+            alt="On the Hill Drama Club"
             width={100}
             height={100}
           />
@@ -48,7 +46,8 @@ export default async function RegisterPage(
           </Link>
         </p>
         <p className="text-sm text-gray-500">
-          To setup a new account, fill in your details below and click submit
+          To setup a new account, fill in your details below and click submit -
+          Note: this is a demonstration site only
         </p>
         <SocialLogins callbackUrl={callbackUrl} />
         <RegisterForm />

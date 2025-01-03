@@ -1,4 +1,4 @@
-# Emily Calder - School of Performing Arts
+# On the Hill Drama Club
 
 Emily is a String and Theatre teacher in Bendigo, Victoria, Australia. Her Drama Club at [The Old Church on the Hill](https://www.theoldchurch.org.au) has grown to now have more students than her old faithful pen and paper can handle. Being both her husband and a developer on the [Keystone](https://www.keystonejs.com) project at [Thinkmill](https://www.thinkmill.com.au) I figured I could help make her life a little bit easier by streamlining the enrolment, communication, and billing, while at the same time exploring new tech and new ways of working with Keystone. So over Christmas 2022, I started putting together this Website which serves as both a marketing site and a student portal.
 

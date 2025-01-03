@@ -11,15 +11,9 @@ export function Footer() {
           <Container.Inner>
             <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Josh and Emily Calder. All
-                rights reserved.
+                &copy; {new Date().getFullYear()} Josh Calder. All rights
+                reserved. Site is for demonstration purposes only.
               </p>
-              <Link
-                className="text-sm text-zinc-400 dark:text-zinc-500"
-                href="/contact"
-              >
-                Contact and Location
-              </Link>
 
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
                 Website by <Link href="https://www.opensaas.au">OpenSaas</Link>

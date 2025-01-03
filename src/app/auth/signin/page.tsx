@@ -9,12 +9,10 @@ export const metadata: Metadata = {
   ...getMetadata('Sign In'),
 }
 
-export default async function SignInPage(
-  props: {
-    searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
-  }
-) {
-  const searchParams = await props.searchParams;
+export default async function SignInPage(props: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const searchParams = await props.searchParams
   const callbackUrl =
     typeof searchParams?.callbackUrl === 'string'
       ? searchParams?.callbackUrl
@@ -26,14 +24,14 @@ export default async function SignInPage(
           <Link href="/" title="Home">
             <Image
               className="mx-auto w-auto"
-              src="/emily-logo.png"
-              alt="Emily Calder - School of Performing Arts"
+              src="/oth-logo.png"
+              alt="On the Hill Drama Club"
               width={100}
               height={100}
             />
           </Link>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to your account
+            Sign in - This is a demonstration site
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{' '}

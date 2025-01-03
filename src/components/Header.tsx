@@ -114,13 +114,11 @@ export const Header = () => {
         <div className="flex items-center justify-between border-b-2 border-gray-100 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
-              <span className="sr-only">
-                Emily Calder - School of Performing Arts
-              </span>
+              <span className="sr-only">On the Hill Drama Club</span>
               <Image
                 className="mx-auto w-auto"
-                src="/emily-logo.png"
-                alt="Emily Calder - School of Performing Arts"
+                src="/oth-logo.png"
+                alt="On the Hill Drama Club"
                 width={100}
                 height={100}
               />
@@ -305,8 +303,8 @@ export const Header = () => {
                 <div>
                   <Image
                     className="mx-auto w-auto"
-                    src="/emily-logo.png"
-                    alt="Emily Calder - School of Performing Arts"
+                    src="/oth-logo.png"
+                    alt="On the Hill Drama Club"
                     width={40}
                     height={40}
                   />
