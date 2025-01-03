@@ -19,7 +19,7 @@
   "dependencies": {
     "@aws-sdk/signature-v4-crt": "^3.679.0",
     "@headlessui/react": "^2.2.0",
-    "@heroicons/react": "^2.1.5",
+    "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.1",
     "@keystone-6/core": "^6.3.1",
     "@marsidev/react-turnstile": "^1.0.2",
