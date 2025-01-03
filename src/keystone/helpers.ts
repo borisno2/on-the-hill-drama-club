@@ -1,15 +1,5 @@
-import { graphql } from '../gql'
 import { Session } from 'next-auth'
 import type { StudentWhereInput, MessageWhereInput } from '.keystone/types'
-
-export const GET_BILL_ITEMS_TOTAL = graphql(`
-  query GET_BILL_ITEMS_TOTAL($id: ID!) {
-    billItems(where: { bill: { id: { equals: $id } } }) {
-      id
-      total
-    }
-  }
-`)
 
 export function isAdmin({ session }: { session?: Session }) {
   return session?.data.role === 'ADMIN'

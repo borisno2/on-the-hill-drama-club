@@ -2,7 +2,6 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import {
-  AcademicCapIcon,
   Bars3Icon,
   BookmarkSquareIcon,
   CalendarIcon,
@@ -10,11 +9,9 @@ import {
   EyeIcon,
   GlobeAsiaAustraliaIcon,
   KeyIcon,
-  MusicalNoteIcon,
   PaperAirplaneIcon,
   PencilSquareIcon,
   PhoneIcon,
-  Squares2X2Icon,
   StarIcon,
   XMarkIcon,
   ShoppingCartIcon,
@@ -26,12 +23,6 @@ import Link from 'next/link'
 
 const lessons = [
   {
-    name: 'Private Music Tuition',
-    description: '',
-    href: '/lessons/private-music-tuition',
-    icon: MusicalNoteIcon,
-  },
-  {
     name: 'On the Hill Drama Club',
     description: '',
     href: '/lessons/drama-club',
@@ -42,18 +33,6 @@ const lessons = [
     description: 'Orchestra',
     href: '/lessons/only-strings-orchestra',
     icon: GlobeAsiaAustraliaIcon,
-  },
-  {
-    name: 'Music Theory',
-    description: '',
-    href: '/lessons/music-theory',
-    icon: AcademicCapIcon,
-  },
-  {
-    name: 'Musical Munchkins',
-    description: 'Early Childhood Music',
-    href: '/lessons/musical-munchkins',
-    icon: Squares2X2Icon,
   },
   {
     name: 'Drama Teens',

@@ -1,12 +1,11 @@
-import { keystoneContext } from 'keystone/context'
-import { getServerActionContext } from 'keystone/context/nextAuthFix'
+import { getSessionContext, keystoneContext } from 'keystone/context'
 
 import { createYoga } from 'graphql-yoga'
 import { createFetch } from '@whatwg-node/fetch'
 
 const { handleRequest } = createYoga({
   schema: keystoneContext.graphql.schema,
-  context: async () => getServerActionContext(),
+  context: async () => getSessionContext(),
 
   graphqlEndpoint: '/api/graphql',
 
