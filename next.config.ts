@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return {
       beforeFiles: [],
-      afterFiles: [
+      fallback: [
         {
           source: '/admin',
           destination: `${KEYSTONE_URL}/admin`,
@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
           destination: `${KEYSTONE_URL}/admin/:admin*`,
         },
       ],
-      fallback: [],
+      afterFiles: [],
     }
   },
 }
