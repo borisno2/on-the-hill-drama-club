@@ -182,13 +182,11 @@ type Account {
   streetAddress: String
   suburb: String
   postcode: Int
-  xeroId: String
   createdAt: DateTime
 }
 
 input AccountWhereUniqueInput {
   id: ID
-  xeroId: String
 }
 
 input AccountWhereInput {
@@ -206,7 +204,6 @@ input AccountWhereInput {
   streetAddress: StringFilter
   suburb: StringFilter
   postcode: IntFilter
-  xeroId: StringNullableFilter
   createdAt: DateTimeNullableFilter
 }
 
@@ -227,21 +224,6 @@ input IntFilter {
   not: IntFilter
 }
 
-input StringNullableFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  mode: QueryMode
-  not: StringNullableFilter
-}
-
 input AccountOrderByInput {
   id: OrderDirection
   firstName: OrderDirection
@@ -252,7 +234,6 @@ input AccountOrderByInput {
   streetAddress: OrderDirection
   suburb: OrderDirection
   postcode: OrderDirection
-  xeroId: OrderDirection
   createdAt: OrderDirection
 }
 
@@ -267,7 +248,6 @@ input AccountUpdateInput {
   streetAddress: String
   suburb: String
   postcode: Int
-  xeroId: String
   createdAt: DateTime
 }
 
@@ -300,7 +280,6 @@ input AccountCreateInput {
   streetAddress: String
   suburb: String
   postcode: Int
-  xeroId: String
   createdAt: DateTime
 }
 
@@ -359,6 +338,21 @@ input CalendarDayFilter {
   gt: CalendarDay
   gte: CalendarDay
   not: CalendarDayFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: StringNullableFilter
 }
 
 input EnrolmentManyRelationFilter {
@@ -424,7 +418,6 @@ type LessonCategory {
   type: String
   length: String
   description: String
-  xeroAccountCode: String
   lessons(where: LessonWhereInput! = {}, orderBy: [LessonOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LessonWhereUniqueInput): [Lesson!]
   lessonsCount(where: LessonWhereInput! = {}): Int
 }
@@ -432,7 +425,6 @@ type LessonCategory {
 input LessonCategoryWhereUniqueInput {
   id: ID
   slug: String
-  xeroAccountCode: String
 }
 
 input LessonCategoryWhereInput {
@@ -446,7 +438,6 @@ input LessonCategoryWhereInput {
   type: StringFilter
   length: StringFilter
   description: StringNullableFilter
-  xeroAccountCode: StringNullableFilter
   lessons: LessonManyRelationFilter
 }
 
@@ -464,7 +455,6 @@ input LessonCategoryOrderByInput {
   type: OrderDirection
   length: OrderDirection
   description: OrderDirection
-  xeroAccountCode: OrderDirection
 }
 
 input LessonCategoryUpdateInput {
@@ -474,7 +464,6 @@ input LessonCategoryUpdateInput {
   type: String
   length: String
   description: String
-  xeroAccountCode: String
   lessons: LessonRelateToManyForUpdateInput
 }
 
@@ -497,7 +486,6 @@ input LessonCategoryCreateInput {
   type: String
   length: String
   description: String
-  xeroAccountCode: String
   lessons: LessonRelateToManyForCreateInput
 }
 
@@ -915,44 +903,6 @@ input EmailSettingsCreateInput {
   lessonTermMessageTemplate: String
 }
 
-type XeroSettings {
-  id: ID!
-  tokenSet: JSON
-  tenantId: String
-}
-
-input XeroSettingsWhereUniqueInput {
-  id: ID
-}
-
-input XeroSettingsWhereInput {
-  AND: [XeroSettingsWhereInput!]
-  OR: [XeroSettingsWhereInput!]
-  NOT: [XeroSettingsWhereInput!]
-  id: IDFilter
-  tenantId: StringFilter
-}
-
-input XeroSettingsOrderByInput {
-  id: OrderDirection
-  tenantId: OrderDirection
-}
-
-input XeroSettingsUpdateInput {
-  tokenSet: JSON
-  tenantId: String
-}
-
-input XeroSettingsUpdateArgs {
-  where: XeroSettingsWhereUniqueInput! = {id: 1}
-  data: XeroSettingsUpdateInput!
-}
-
-input XeroSettingsCreateInput {
-  tokenSet: JSON
-  tenantId: String
-}
-
 type Teacher {
   id: ID!
   name: String
@@ -1212,12 +1162,6 @@ type Mutation {
   updateManyEmailSettings(data: [EmailSettingsUpdateArgs!]!): [EmailSettings]
   deleteEmailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}): EmailSettings
   deleteManyEmailSettings(where: [EmailSettingsWhereUniqueInput!]!): [EmailSettings]
-  createXeroSettings(data: XeroSettingsCreateInput!): XeroSettings
-  createManyXeroSettings(data: [XeroSettingsCreateInput!]!): [XeroSettings]
-  updateXeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}, data: XeroSettingsUpdateInput!): XeroSettings
-  updateManyXeroSettings(data: [XeroSettingsUpdateArgs!]!): [XeroSettings]
-  deleteXeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}): XeroSettings
-  deleteManyXeroSettings(where: [XeroSettingsWhereUniqueInput!]!): [XeroSettings]
   createTeacher(data: TeacherCreateInput!): Teacher
   createTeachers(data: [TeacherCreateInput!]!): [Teacher]
   updateTeacher(where: TeacherWhereUniqueInput!, data: TeacherUpdateInput!): Teacher
@@ -1266,9 +1210,6 @@ type Query {
   emailSettings(where: EmailSettingsWhereUniqueInput! = {id: 1}): EmailSettings
   manyEmailSettings(where: EmailSettingsWhereInput! = {id: {equals: 1}}, orderBy: [EmailSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: EmailSettingsWhereUniqueInput): [EmailSettings!]
   manyEmailSettingsCount(where: EmailSettingsWhereInput! = {id: {equals: 1}}): Int
-  xeroSettings(where: XeroSettingsWhereUniqueInput! = {id: 1}): XeroSettings
-  manyXeroSettings(where: XeroSettingsWhereInput! = {id: {equals: 1}}, orderBy: [XeroSettingsOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: XeroSettingsWhereUniqueInput): [XeroSettings!]
-  manyXeroSettingsCount(where: XeroSettingsWhereInput! = {id: {equals: 1}}): Int
   teacher(where: TeacherWhereUniqueInput!): Teacher
   teachers(where: TeacherWhereInput! = {}, orderBy: [TeacherOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TeacherWhereUniqueInput): [Teacher!]
   teachersCount(where: TeacherWhereInput! = {}): Int

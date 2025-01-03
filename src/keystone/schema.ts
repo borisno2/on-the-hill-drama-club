@@ -16,7 +16,6 @@ import {
   integer,
   virtual,
   checkbox,
-  json,
 } from '@keystone-6/core/fields'
 import type { Lists, Context } from '.keystone/types'
 import { isAdmin, isLoggedIn, userFilter } from './helpers'
@@ -113,7 +112,6 @@ export const lists: Lists<Session> = {
           isNullable: true,
         },
       }),
-      xeroAccountCode: text({ isIndexed: 'unique', db: { isNullable: true } }),
       lessons: relationship({ ref: 'Lesson.lessonCategory', many: true }),
     },
   }),
@@ -328,18 +326,6 @@ export const lists: Lists<Session> = {
         validation: { isRequired: true },
       }),
       lessonTermMessageTemplate: text(),
-    },
-  }),
-
-  XeroSettings: list({
-    access: isAdmin,
-    isSingleton: true,
-    graphql: {
-      plural: 'ManyXeroSettings',
-    },
-    fields: {
-      tokenSet: json(),
-      tenantId: text(),
     },
   }),
 

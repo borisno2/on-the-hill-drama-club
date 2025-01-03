@@ -106,10 +106,6 @@ const Account: Lists.Account<Session> = list({
       validation: { isRequired: true },
       defaultValue: 3550,
     }),
-    xeroId: text({
-      isIndexed: 'unique',
-      db: { isNullable: true },
-    }),
     createdAt: timestamp({
       defaultValue: { kind: 'now' },
     }),

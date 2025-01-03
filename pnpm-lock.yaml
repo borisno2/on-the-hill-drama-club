@@ -180,9 +180,6 @@ importers:
       ws:
         specifier: ^8.18.0
         version: 8.18.0
-      xero-node:
-        specifier: ^9.3.0
-        version: 9.3.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -6546,9 +6543,6 @@ packages:
   xdg-basedir@5.1.0:
     resolution: {integrity: sha512-GCPAHLvrIH13+c0SuacwvRYj2SxJXQ4kaVTT5xgL3kPrz56XxkF21IGhjSE1+W0aw7gpBWRGXLCPnPby6lSpmQ==}
     engines: {node: '>=12'}
-
-  xero-node@9.3.0:
-    resolution: {integrity: sha512-0uXEjzNE+Eek02uBZNa3lXEnQjemCVegQLdFqQPCq4QmAF5U421haVl44P+uAWBFTbf4quGN4AtGy6CfL9ONrQ==}
 
   xml2js@0.6.2:
     resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
@@ -14066,13 +14060,6 @@ snapshots:
   ws@8.18.0: {}
 
   xdg-basedir@5.1.0: {}
-
-  xero-node@9.3.0:
-    dependencies:
-      axios: 1.7.7
-      openid-client: 5.6.5
-    transitivePeerDependencies:
-      - debug
 
   xml2js@0.6.2:
     dependencies:

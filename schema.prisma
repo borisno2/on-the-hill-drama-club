@@ -39,7 +39,6 @@ model Account {
   streetAddress      String    @default("PLEASE_UPDATE")
   suburb             String    @default("PLEASE_UPDATE")
   postcode           Int       @default(3550)
-  xeroId             String?   @unique
   createdAt          DateTime? @default(now())
 }
 
@@ -59,15 +58,14 @@ model Student {
 }
 
 model LessonCategory {
-  id              String   @id @default(cuid())
-  name            String   @default("")
-  slug            String   @unique @default("")
-  cost            String   @default("")
-  type            String
-  length          String   @default("")
-  description     String?  @postgresql.Text
-  xeroAccountCode String?  @unique
-  lessons         Lesson[] @relation("Lesson_lessonCategory")
+  id          String   @id @default(cuid())
+  name        String   @default("")
+  slug        String   @unique @default("")
+  cost        String   @default("")
+  type        String
+  length      String   @default("")
+  description String?  @postgresql.Text
+  lessons     Lesson[] @relation("Lesson_lessonCategory")
 }
 
 model ImportantDate {
@@ -135,12 +133,6 @@ model EmailSettings {
   fromEmail                     String @default("")
   enrolmentConfirmationTemplate String @default("")
   lessonTermMessageTemplate     String @default("")
-}
-
-model XeroSettings {
-  id       Int    @id
-  tokenSet Json?
-  tenantId String @default("")
 }
 
 model Teacher {

@@ -1,13 +1,10 @@
 # New Words
 neondatabase
-Accountbills
 Accountstudents
 ACCREC
 AMEB
 authorise
 AUTHORISED
-Billitems
-Breanna
 Categorylessons
 characterisation
 Colours
@@ -32,11 +29,10 @@ Mutationdelete
 Mutationupdate
 onthehilldrama
 opensaasau
+opensaas
 planetscale
 Queryaccount
 Queryaccounts
-Querybill
-Querybills
 Queryemail
 Queryenrolment
 Queryenrolments
@@ -89,7 +85,6 @@ apos
 Listbox
 datetime
 Bodoni
-Thinkmill
 Retriable
 pkce
 vars
@@ -101,3 +96,5 @@ Merch
 tseslint
 Kirsty
 Ulumbarra
+onthehill
+opensaas
