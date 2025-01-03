@@ -15,7 +15,7 @@ overrides:
   '@types/react': npm:types-react@19.0.0-rc.1
   '@types/react-dom': npm:types-react-dom@19.0.0
   '@apollo/client': ^3.12.4
-  react-day-picker: ^9.2.0
+  react-day-picker: ^9.5.0
 
 importers:
 
@@ -151,7 +151,7 @@ importers:
         specifier: 19.0.0
         version: 19.0.0
       react-day-picker:
-        specifier: ^9.2.0
+        specifier: ^9.5.0
         version: 9.5.0(react@19.0.0)
       react-dom:
         specifier: 19.0.0
