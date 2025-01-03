@@ -4,6 +4,8 @@
   "scripts": {
     "build": "next build",
     "build:keystone": "keystone build",
+    "db:migrate": "keystone prisma migrate deploy",
+    "db:seed": "tsx seed-data.ts",
     "dev": "turbo dev:watch dev:keystone dev:next",
     "dev:keystone": "next start .keystone/admin --port 4000",
     "dev:next": "next dev --port 3000 --turbopack",
@@ -12,7 +14,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone build --no-ui --frozen",
     "lint": "next lint && eslint . && cspell '**' && tsc --noEmit",
-    "seed-data": "tsx seed-data.ts"
+    "prep:keystone": "keystone build --no-ui"
   },
   "dependencies": {
     "@aws-sdk/signature-v4-crt": "^3.679.0",
