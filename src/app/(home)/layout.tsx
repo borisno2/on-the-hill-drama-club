@@ -1,6 +1,6 @@
 import AuthContext from 'app/AuthContext'
 
-import { Libre_Bodoni } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import 'styles/tailwind.css'
 import 'styles/globals.css'
 import 'focus-visible'
@@ -14,7 +14,7 @@ type AppProps = {
   children: React.ReactNode
 }
 
-const font = Libre_Bodoni({ subsets: ['latin'] })
+const font = Montserrat({ subsets: ['latin'] })
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
 

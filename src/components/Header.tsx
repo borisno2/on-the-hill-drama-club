@@ -7,7 +7,6 @@ import {
   CalendarIcon,
   CreditCardIcon,
   EyeIcon,
-  GlobeAsiaAustraliaIcon,
   KeyIcon,
   PaperAirplaneIcon,
   PencilSquareIcon,
@@ -27,12 +26,6 @@ const lessons = [
     description: '',
     href: '/lessons/drama-club',
     icon: StarIcon,
-  },
-  {
-    name: 'Only Strings',
-    description: 'Orchestra',
-    href: '/lessons/only-strings-orchestra',
-    icon: GlobeAsiaAustraliaIcon,
   },
   {
     name: 'Drama Teens',
