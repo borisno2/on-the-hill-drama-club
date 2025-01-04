@@ -1,7 +1,10 @@
-import { getSessionContext, keystoneContext } from 'keystone/context'
+import { keystoneContext } from 'keystone/context'
+import { getSessionContext } from 'keystone/context'
 
 import { createYoga } from 'graphql-yoga'
 import { createFetch } from '@whatwg-node/fetch'
+import { NextRequest, NextResponse } from 'next/server'
+import { auth } from 'lib/auth'
 
 const { handleRequest } = createYoga({
   schema: keystoneContext.graphql.schema,
@@ -25,15 +28,26 @@ const { handleRequest } = createYoga({
     Response,
   },
 })
-export async function GET(request: Request) {
+export const GET = auth(function GET(req) {
+  if (!req.auth?.allowAdminUI)
+    return NextResponse.json({ message: 'Not authenticated' }, { status: 401 })
+
   const ctx = { waitUntil: () => new Promise(() => {}) }
-  return handleRequest(request, ctx)
-}
-export async function POST(request: Request) {
+  return handleRequest(req, ctx)
+}) as (req: NextRequest) => Promise<NextResponse>
+
+export const POST = auth(function POST(req) {
+  if (!req.auth?.allowAdminUI)
+    return NextResponse.json({ message: 'Not authenticated' }, { status: 401 })
+
   const ctx = { waitUntil: () => new Promise(() => {}) }
-  return handleRequest(request, ctx)
-}
-export async function OPTIONS(request: Request) {
+  return handleRequest(req, ctx)
+}) as (req: NextRequest) => Promise<NextResponse>
+
+export const OPTIONS = auth(function OPTIONS(req) {
+  if (!req.auth?.allowAdminUI)
+    return NextResponse.json({ message: 'Not authenticated' }, { status: 401 })
+
   const ctx = { waitUntil: () => new Promise(() => {}) }
-  return handleRequest(request, ctx)
-}
+  return handleRequest(req, ctx)
+}) as (req: NextRequest) => Promise<NextResponse>

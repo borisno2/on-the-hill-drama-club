@@ -1,5 +1,3 @@
-import AuthContext from 'app/AuthContext'
-
 import { Montserrat } from 'next/font/google'
 import 'styles/tailwind.css'
 import 'styles/globals.css'
@@ -28,13 +26,11 @@ export default function RootLayout({ children }: AppProps) {
           </div>
         </div>
 
-        <AuthContext>
-          <div className="relative">
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </div>
-        </AuthContext>
+        <div className="relative">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </div>
         <AnalyticsWrapper />
         <SpeedInsights />
       </body>

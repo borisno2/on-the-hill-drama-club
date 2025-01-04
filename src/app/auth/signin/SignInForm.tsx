@@ -1,35 +1,45 @@
 'use client'
-import { FormEvent, useState } from 'react'
-import { signIn } from 'next-auth/react'
+import { useEffect, useRef, useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
+import { signInAction } from './signInAction'
+import { signInSchema, Values } from './signInSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useActionState } from 'react'
+import { formOnSubmit } from 'lib/utils'
 
 export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const formRef = useRef<HTMLFormElement>(null)
+
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [token, setToken] = useState('')
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-
-    try {
-      await signIn('credentials', {
-        email,
-        password,
-        callbackUrl,
-        turnstileRes: token,
-      })
-    } catch {
-      setError('Failed to log in')
-    }
+  const [state, formAction, isSubmitting] = useActionState(signInAction, {
+    message: '',
+  })
+  const defaultValues = {
+    email: '',
+    password: '',
+    turnstileRes: '',
   }
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm<Values>({ defaultValues, resolver: zodResolver(signInSchema) })
 
+  useEffect(() => {
+    if (typeof state?.message === 'string' && state?.message !== '') {
+      setError(state.message)
+    }
+  }, [state?.message])
   return (
-    <form className="space-y-6" onSubmit={handleSubmit}>
-      <input name="callbackUrl" type="hidden" defaultValue={callbackUrl} />
+    <form
+      action={formAction}
+      className="space-y-6"
+      onSubmit={formOnSubmit(handleSubmit, isValid)}
+      ref={formRef}
+    >
+      <input name="redirectTo" type="hidden" defaultValue={callbackUrl} />
       <div>
         <label
           htmlFor="email"
@@ -39,15 +49,16 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
         </label>
         <div className="mt-1">
           <input
-            id="email"
-            name="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            title="Please enter a valid email address."
+            {...register('email')}
             autoComplete="email"
-            required
             className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           />
+          {errors.email && (
+            <div className="block text-sm font-medium text-red-700">
+              {errors.email.message}
+            </div>
+          )}
         </div>
       </div>
 
@@ -60,15 +71,17 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
         </label>
         <div className="mt-1">
           <input
-            id="password"
-            name="password"
+            {...register('password')}
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
-            required
             className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           />
+
+          {errors.password && (
+            <div className="block text-sm font-medium text-red-700">
+              {errors.password.message}
+            </div>
+          )}
         </div>
       </div>
 
@@ -90,17 +103,32 @@ export default function SignInForm({ callbackUrl }: { callbackUrl: string }) {
           process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY ||
           '1x00000000000000000000AA'
         }
-        onSuccess={(token) => {
-          setToken(token)
-        }}
+        onSuccess={(token: string) => setValue('turnstileRes', token)}
       />
+
+      {errors.turnstileRes && (
+        <div className="block text-sm font-medium text-red-700">
+          {errors.turnstileRes.message}
+        </div>
+      )}
+      {state?.issues && (
+        <div className="text-red-500">
+          <ul>
+            {state.issues.map((issue) => (
+              <li key={issue.code} className="flex gap-1">
+                {issue.message}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div>
         <button
           type="submit"
-          disabled={loading}
+          disabled={isSubmitting}
           className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          {loading ? 'Loading...' : 'Sign in'}
+          {isSubmitting ? 'Loading...' : 'Sign in'}
         </button>
         {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
       </div>
