@@ -1,5 +1,5 @@
 'use client'
-import { signIn } from 'next-auth/react'
+import { socialSignIn } from 'lib/authActions'
 
 export function SocialLogins({ callbackUrl }: { callbackUrl: string }) {
   return (
@@ -15,7 +15,9 @@ export function SocialLogins({ callbackUrl }: { callbackUrl: string }) {
       {/* <div className="mt-6 grid grid-cols-2 gap-5"> */}
       <div>
         <button
-          onClick={() => signIn('google', { callbackUrl })}
+          onClick={async () => {
+            await socialSignIn('google', { callbackUrl })
+          }}
           className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
         >
           <span className="sr-only">Sign in with Google</span>

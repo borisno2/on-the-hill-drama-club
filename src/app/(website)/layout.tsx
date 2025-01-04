@@ -7,6 +7,7 @@ import { Footer } from 'components/Footer'
 import { AnalyticsWrapper } from 'components/Analytics'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Viewport } from 'next'
+import { auth } from 'lib/auth'
 
 type AppProps = {
   children: React.ReactNode
@@ -16,7 +17,8 @@ const font = Montserrat({ subsets: ['latin'] })
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 }
 
-export default function RootLayout({ children }: AppProps) {
+export default async function RootLayout({ children }: AppProps) {
+  const session = await auth()
   return (
     <html lang="en">
       <body className={font.className}>
@@ -27,7 +29,7 @@ export default function RootLayout({ children }: AppProps) {
         </div>
 
         <div className="relative">
-          <Header />
+          <Header session={session} />
           <main>{children}</main>
           <Footer />
         </div>
