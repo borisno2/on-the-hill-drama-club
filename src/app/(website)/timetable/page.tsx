@@ -9,18 +9,18 @@ export const metadata: Metadata = {
   ...getMetadata('Timetable'),
 }
 
-export default async function TimetablePage(
-  props: {
-    searchParams: Promise<{ daySelected: string }>
-  }
-) {
-  const searchParams = await props.searchParams;
+export default async function TimetablePage(props: {
+  searchParams: Promise<{ daySelected: string }>
+}) {
+  const searchParams = await props.searchParams
 
   const context = await getSessionContext()
-  const { lessons } = await context.graphql.run({ query: GET_LESSON_TIMETABLE }).catch((error) => {
-    console.error(error)
-    return { lessons: [] }
-  })
+  const { lessons } = await context.graphql
+    .run({ query: GET_LESSON_TIMETABLE })
+    .catch((error) => {
+      console.error(error)
+      return { lessons: [] }
+    })
   let daySelected: DayOfTheWeek = 'MONDAY'
   if (searchParams.daySelected && searchParams.daySelected !== '') {
     if (
@@ -45,7 +45,7 @@ export default async function TimetablePage(
         <section>
           <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
-              2024 Timetable
+              2025 Timetable
             </h3>
           </div>
           <Timetable daySelected={daySelected} lessons={lessons} />
