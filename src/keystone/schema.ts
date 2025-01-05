@@ -183,11 +183,9 @@ export const lists: Lists<Session> = {
       quantity: integer({ validation: { isRequired: true } }),
       year: integer({ validation: { isRequired: true } }),
       startDate: calendarDay({
-        ui: { views: './src/components/keystone/calendarDay/view' },
         validation: { isRequired: true },
       }),
       endDate: calendarDay({
-        ui: { views: './src/components/keystone/calendarDay/view' },
         validation: { isRequired: true },
       }),
       lessonTerms: relationship({ ref: 'LessonTerm.term', many: true }),
