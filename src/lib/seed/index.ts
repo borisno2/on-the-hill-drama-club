@@ -38,24 +38,11 @@ export async function seedDatabase() {
       const seedTerms = await context.db.Term.createMany({
         data: [
           {
-            name: 'Term 1',
-            startDate: new Date('2025-01-01'),
-            endDate: new Date('2025-03-31'),
-          },
-          {
-            name: 'Term 2',
-            startDate: new Date('2025-04-01'),
-            endDate: new Date('2021-06-30'),
-          },
-          {
-            name: 'Term 3',
-            startDate: new Date('2025-07-01'),
-            endDate: new Date('2025-09-30'),
-          },
-          {
-            name: 'Term 4',
-            startDate: new Date('2025-10-01'),
-            endDate: new Date('2025-12-31'),
+            name: 'Term 1 2025',
+            year: 2025,
+            quantity: 10,
+            startDate: '2025-01-01',
+            endDate: '2025-03-31',
           },
         ],
       })
