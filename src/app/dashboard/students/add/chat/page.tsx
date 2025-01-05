@@ -1,6 +1,7 @@
 'use client'
 
 import { useChat } from 'ai/react'
+import { useEffect } from 'react'
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
@@ -8,6 +9,12 @@ export default function Chat() {
     initialInput: 'Please help create a student',
     api: '/dashboard/students/add/chat/api',
   })
+
+  useEffect(() => {
+    if (messages.length === 0) {
+      handleSubmit()
+    }
+  }, [])
   return (
     <div className="py-4">
       <p className="text-lg font-semibold">Chat</p>
