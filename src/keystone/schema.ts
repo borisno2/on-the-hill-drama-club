@@ -182,8 +182,12 @@ export const lists: Lists<Session> = {
       name: text({ validation: { isRequired: true } }),
       quantity: integer({ validation: { isRequired: true } }),
       year: integer({ validation: { isRequired: true } }),
-      startDate: calendarDay({ validation: { isRequired: true } }),
-      endDate: calendarDay({ validation: { isRequired: true } }),
+      startDate: calendarDay({
+        validation: { isRequired: true },
+      }),
+      endDate: calendarDay({
+        validation: { isRequired: true },
+      }),
       lessonTerms: relationship({ ref: 'LessonTerm.term', many: true }),
       termStatus: select({
         options: lessonStatusOptions,

@@ -74,7 +74,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         if (account?.provider === 'google') {
           const googleProfile = profile as GoogleProfile
           newUserData = {
-            subjectId: user.id,
+            subjectId: googleProfile.sub,
             provider: account?.provider,
             email: googleProfile?.email,
             emailVerified: googleProfile?.email_verified,
