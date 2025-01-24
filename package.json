@@ -49,7 +49,7 @@
     "cuid": "^3.0.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
-    "decimal.js": "^10.4.3",
+    "decimal.js": "^10.5.0",
     "dotenv": "^16.4.7",
     "file-type": "^20.0.0",
     "focus-visible": "^5.2.1",
