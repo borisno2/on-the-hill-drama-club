@@ -34,20 +34,26 @@ export default async function Students(props: {
     redirect('/dashboard/students')
   }
   const availableWhere = {
-    AND: {
-      status: { in: ['UPCOMING', 'ENROL'] },
-      lesson: {
-        maxYear: { gte: student.age },
-        minYear: { lte: student.age },
+    AND: [
+      {
+        status: { in: ['UPCOMING', 'ENROL'] },
       },
-      enrolments: {
-        none: {
-          student: {
-            id: { equals: student.id },
+      {
+        lesson: {
+          maxYear: { gte: student.age },
+          minYear: { lte: student.age },
+        },
+      },
+      {
+        enrolments: {
+          none: {
+            student: {
+              id: { equals: student.id },
+            },
           },
         },
       },
-    },
+    ],
   }
   const enroledWhere = {
     enrolments: {

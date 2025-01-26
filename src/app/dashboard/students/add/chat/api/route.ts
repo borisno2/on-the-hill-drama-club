@@ -6,9 +6,8 @@ import {
   GET_STUDENT_BY_ID,
 } from 'app/dashboard/students/queries'
 
-import { LessonTermWhereInput } from '.keystone/types'
 import { studentSchema } from 'app/dashboard/students/studentFromSchema'
-import { graphql, VariablesOf } from 'gql'
+import { graphql } from 'gql'
 import { getSessionContext } from 'keystone/context'
 import { z } from 'zod'
 
@@ -77,27 +76,31 @@ export async function POST(req: Request) {
             throw new Error('Student not found')
           }
           const availableWhere = {
-            AND: {
-              status: { in: ['UPCOMING' as const, 'ENROL' as const] },
-              lesson: {
-                maxYear: { gte: student.age },
-                minYear: { lte: student.age },
+            AND: [
+              {
+                status: { in: ['UPCOMING', 'ENROL'] },
               },
-              enrolments: {
-                none: {
-                  student: {
-                    id: { equals: student.id },
+              {
+                lesson: {
+                  maxYear: { gte: student.age },
+                  minYear: { lte: student.age },
+                },
+              },
+              {
+                enrolments: {
+                  none: {
+                    student: {
+                      id: { equals: student.id },
+                    },
                   },
                 },
               },
-            },
-          } satisfies LessonTermWhereInput
+            ],
+          }
           const { lessonTerms } = await context.graphql.run({
             query: GET_LESSONS,
             variables: {
-              where: availableWhere as unknown as VariablesOf<
-                typeof GET_LESSONS
-              >['where'],
+              where: availableWhere,
             },
           })
           return lessonTerms?.map((lessonTerm) => ({
