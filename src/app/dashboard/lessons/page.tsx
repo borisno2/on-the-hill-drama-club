@@ -4,9 +4,8 @@ import { GET_STUDENTS } from '../students/queries'
 import { redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getMetadata } from 'app/metadata'
-import { LessonTermWhereInput } from '.keystone/types'
-
-//type LessonTermWhereInput = Parameters<typeof ClassList>[0]['where']
+import { VariablesOf } from 'gql'
+import { GET_LESSONS } from './queries'
 
 export const metadata: Metadata = {
   ...getMetadata('Lessons - Student Portal'),
@@ -28,8 +27,8 @@ export default async function lessons() {
   // remove duplicates
   const uniqueYearLevels = [...new Set(yearLevels)]
   // create a class where clause to filter lessons by year level
-  let availableWhere: LessonTermWhereInput = {}
-  let enroledWhere: LessonTermWhereInput = {}
+  let availableWhere: VariablesOf<typeof GET_LESSONS>['where'] = {}
+  let enroledWhere: VariablesOf<typeof GET_LESSONS>['where'] = {}
   if (uniqueYearLevels.length > 0) {
     if (studentIds.length > 0) {
       enroledWhere = {
@@ -40,26 +39,34 @@ export default async function lessons() {
       }
     }
     availableWhere = {
-      AND: {
-        NOT: enroledWhere,
-        status: { in: ['UPCOMING', 'ENROL'] },
-        lesson: {
-          OR: uniqueYearLevels.map((yearLevel) => ({
-            AND: [
-              { maxYear: { gte: yearLevel } },
-              { minYear: { lte: yearLevel } },
-            ],
-          })),
+      AND: [
+        {
+          NOT: [enroledWhere],
         },
-      },
+        {
+          status: { in: ['UPCOMING', 'ENROL'] },
+        },
+        {
+          lesson: {
+            OR: uniqueYearLevels.map((yearLevel) => ({
+              AND: [
+                { maxYear: { gte: yearLevel } },
+                { minYear: { lte: yearLevel } },
+              ],
+            })),
+          },
+        },
+      ],
     }
   }
-  const allWhere: LessonTermWhereInput = {
+  const allWhere: VariablesOf<typeof GET_LESSONS>['where'] = {
     AND: [
       {
-        NOT: {
-          OR: [availableWhere, enroledWhere],
-        },
+        NOT: [
+          {
+            OR: [availableWhere, enroledWhere],
+          },
+        ],
       },
       { status: { in: ['UPCOMING', 'ENROL'] } },
     ],
