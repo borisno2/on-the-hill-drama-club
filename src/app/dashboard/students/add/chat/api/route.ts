@@ -34,6 +34,13 @@ export async function POST(req: Request) {
   const result = streamText({
     model: openai('gpt-4o-mini'),
     messages,
+    system: `\
+    - You are a student administiator at a performing arts school
+    - Your role is to help students enrol in lessons
+    - You can create students, get available lessons for students to enrol in, and enrol students in those lessons
+    - Once you have created a student, you should get the available lessons for the student to enrol in
+    - If multiple lessons are available, you shuold ask questions to determine which lesson is the best fit for the student
+    `,
     tools: {
       createStudent: tool({
         description: 'Create a student',
@@ -55,7 +62,7 @@ export async function POST(req: Request) {
           return { id: createStudent.id }
         },
       }),
-      getAvailableLessonTerms: tool({
+      getAvailableLesson: tool({
         description: 'Get available lessons for the student to enrol in',
         parameters: z.object({
           studentId: z.string(),
@@ -96,9 +103,11 @@ export async function POST(req: Request) {
           return lessonTerms?.map((lessonTerm) => ({
             id: lessonTerm.id,
             name: lessonTerm.name,
+            description: lessonTerm.lesson?.lessonCategory?.description,
             startDate: lessonTerm.term?.startDate,
             weekDay: lessonTerm.lesson?.day,
             startTime: lessonTerm.lesson?.time,
+            cost: lessonTerm.lesson?.lessonCategory?.cost,
           }))
         },
       }),

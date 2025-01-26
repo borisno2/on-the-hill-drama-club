@@ -27,6 +27,7 @@ export const GET_LESSONS = graphql(`
           id
           cost
           type
+          description
         }
       }
       status
