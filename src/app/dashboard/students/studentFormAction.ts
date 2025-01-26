@@ -10,6 +10,7 @@ type FormState = {
   message: string
   studentId: string | null
   success: boolean
+  age?: number | null
   fields?: Values
   issues?: ZodError<Values>['issues']
 }
@@ -27,6 +28,7 @@ const CREATE_STUDENT = graphql(`
     createStudent(data: $data) {
       id
       name
+      age
     }
   }
 `)
@@ -92,7 +94,13 @@ export async function studentFormAction(
       },
     })
     if (createStudent) {
-      redirect(`/dashboard/students/${createStudent.id}`)
+      return {
+        message: '',
+        success: true,
+        studentId: createStudent.id,
+        age: createStudent.age,
+        fields,
+      }
     } else {
       return {
         message: 'Error creating student',

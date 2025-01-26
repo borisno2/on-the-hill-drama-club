@@ -33,8 +33,10 @@ const parseDateForInput = (date: string) => {
 
 export default function Student({
   student,
+  setStudent,
 }: {
   student?: ResultOf<typeof GET_STUDENT_BY_ID>['student']
+  setStudent?: (student: ResultOf<typeof GET_STUDENT_BY_ID>['student']) => void
 }) {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement>(null)
@@ -72,6 +74,19 @@ export default function Student({
     if (state?.success) {
       setSuccess(true)
       reset(defaultValues)
+      if (setStudent && state.studentId) {
+        setStudent({
+          id: state.studentId,
+          firstName: state.fields?.firstName || '',
+          surname: state.fields?.surname || '',
+          dateOfBirth: state.fields?.dateOfBirth || '',
+          school: state.fields?.school || 'SCHOOL',
+          medical: state.fields?.medical || '',
+          age: student?.age || 0,
+        })
+      } else if (!student) {
+        router.push(`/dashboard/students/${state.studentId}`)
+      }
     } else if (state?.message !== '') {
       setError(true)
       reset(defaultValues)

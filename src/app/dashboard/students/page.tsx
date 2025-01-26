@@ -30,10 +30,10 @@ export default async function Students() {
           <div className="px-2 sm:ml-3 sm:block">
             <Link
               type="button"
-              href="/dashboard/students/add/chat"
+              href="/dashboard/students/chat"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
-              Add New Student using Chat
+              Enrol using Chat
             </Link>
           </div>
         </div>

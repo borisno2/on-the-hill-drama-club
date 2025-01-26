@@ -4,24 +4,13 @@ import { GET_LESSONS } from 'app/dashboard/lessons/queries'
 import {
   ENROL_STUDENT_IN_LESSON,
   GET_STUDENT_BY_ID,
+  GET_STUDENTS,
 } from 'app/dashboard/students/queries'
-
-import { studentSchema } from 'app/dashboard/students/studentFromSchema'
-import { graphql } from 'gql'
 import { getSessionContext } from 'keystone/context'
 import { z } from 'zod'
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30
-
-const CREATE_STUDENT = graphql(`
-  mutation CREATE_STUDENT($data: StudentCreateInput!) {
-    createStudent(data: $data) {
-      id
-      name
-    }
-  }
-`)
 
 export async function POST(req: Request) {
   const context = await getSessionContext()
@@ -31,34 +20,44 @@ export async function POST(req: Request) {
   const { messages } = await req.json()
 
   const result = streamText({
-    model: openai('gpt-4o-mini'),
+    model: openai('gpt-4o'),
     messages,
     system: `\
     - You are a student administiator at a performing arts school
     - Your role is to help students enrol in lessons
-    - You can create students, get available lessons for students to enrol in, and enrol students in those lessons
-    - Once you have created a student, you should get the available lessons for the student to enrol in
-    - If multiple lessons are available, you should ask questions to determine which lesson is the best fit for the student
+    - You need to first check to see if the user has students in their account
+    - If the user has no students, you provide the form to create a student
+    - If the user has students, give them the option to select a student or create a new student
+    - If the user has multiple students, ask questions to determine which student they are referring to
+    - You can get available lessons for students to enrol in
+    - If multiple lessons are available, give them the avaiable days and what might be different about each day
+    and then ask questions to determine which lesson is the best fit for the student
+    - consider the student's age, most suitable time and day the particular features of the lession avaible in the description
+    - Once the student has selected a lesson, enrol them in the lesson
+    - If the user has other students, ask if they would like to enrol another student
     `,
     tools: {
       createStudent: tool({
-        description: 'Create a student',
-        parameters: studentSchema,
-        execute: async (params) => {
-          console.log('Creating student', params)
-          const { createStudent } = await context.graphql.run({
-            query: CREATE_STUDENT,
-            variables: {
-              data: {
-                ...params,
-                account: { connect: { id: context.session!.data.accountId } },
-              },
-            },
+        description: 'Let the user create a student using the form provided',
+        parameters: z.object({
+          message: z
+            .string()
+            .describe('A message asking the user to create a student'),
+        }),
+      }),
+      getStudents: tool({
+        description: 'Get students that the user has in their account',
+        parameters: z.object({}),
+        execute: async () => {
+          console.log('Getting students')
+          const { students } = await context.graphql.run({
+            query: GET_STUDENTS,
           })
-          if (!createStudent) {
-            throw new Error('Failed to create student')
-          }
-          return { id: createStudent.id }
+          return students?.map((student) => ({
+            studentId: student.id,
+            firstName: student.firstName,
+            age: student.age,
+          }))
         },
       }),
       getAvailableLesson: tool({
