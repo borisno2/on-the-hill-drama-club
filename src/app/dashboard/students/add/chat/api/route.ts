@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     - Your role is to help students enrol in lessons
     - You can create students, get available lessons for students to enrol in, and enrol students in those lessons
     - Once you have created a student, you should get the available lessons for the student to enrol in
-    - If multiple lessons are available, you shuold ask questions to determine which lesson is the best fit for the student
+    - If multiple lessons are available, you should ask questions to determine which lesson is the best fit for the student
     `,
     tools: {
       createStudent: tool({
