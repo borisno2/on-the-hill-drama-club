@@ -55,7 +55,7 @@
     "focus-visible": "^5.2.1",
     "gql.tada": "^1.8.10",
     "graphql": "^16.10.0",
-    "graphql-yoga": "^5.10.8",
+    "graphql-yoga": "^5.11.0",
     "image-size": "^1.2.0",
     "inngest": "^3.31.4",
     "lucide-react": "^0.474.0",
