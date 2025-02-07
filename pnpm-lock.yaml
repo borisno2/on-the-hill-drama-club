@@ -92,8 +92,8 @@ importers:
         specifier: ^0.10.3
         version: 0.10.3
       ai:
-        specifier: ^4.1.24
-        version: 4.1.24(react@19.0.0)(zod@3.24.1)
+        specifier: ^4.1.25
+        version: 4.1.25(react@19.0.0)(zod@3.24.1)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -2998,8 +2998,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  ai@4.1.24:
-    resolution: {integrity: sha512-QJLU9lIrwxZqNz6C3m+MLbtklPyBVUNWDHmk38M8ZstHhHezHGEo0FLjDlKYo3cysshdSz8TFXBvXh+429Yopw==}
+  ai@4.1.25:
+    resolution: {integrity: sha512-gBdx5QqM3EK97F9/opVicP3WMHfiR0/cc96xdNnsFLpcuPBXPtm6lcK56G6ok19+NZggnVcS+KIHzFtp0aHC+g==}
     engines: {node: '>=18'}
     peerDependencies:
       react: 19.0.0
@@ -10012,7 +10012,7 @@ snapshots:
 
   acorn@8.14.0: {}
 
-  ai@4.1.24(react@19.0.0)(zod@3.24.1):
+  ai@4.1.25(react@19.0.0)(zod@3.24.1):
     dependencies:
       '@ai-sdk/provider': 1.0.7
       '@ai-sdk/provider-utils': 2.1.6(zod@3.24.1)
