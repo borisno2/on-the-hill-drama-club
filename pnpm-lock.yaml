@@ -92,8 +92,8 @@ importers:
         specifier: ^0.10.3
         version: 0.10.3
       ai:
-        specifier: ^4.1.25
-        version: 4.1.25(react@19.0.0)(zod@3.24.1)
+        specifier: ^4.1.26
+        version: 4.1.26(react@19.0.0)(zod@3.24.1)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -143,8 +143,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       inngest:
-        specifier: ^3.31.5
-        version: 3.31.5(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.13.1)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.6(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.3)
+        specifier: ^3.31.6
+        version: 3.31.6(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.13.1)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.6(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.3)
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.0.0)
@@ -3002,8 +3002,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  ai@4.1.25:
-    resolution: {integrity: sha512-gBdx5QqM3EK97F9/opVicP3WMHfiR0/cc96xdNnsFLpcuPBXPtm6lcK56G6ok19+NZggnVcS+KIHzFtp0aHC+g==}
+  ai@4.1.26:
+    resolution: {integrity: sha512-Mww6mJbGwmMK0qAKR67WfVK1WyaUjfFlPZ2rhUUmDns3WhI+DVgMM7gLmuo0rA+I5qq69g7YE1OCgUwMRKKjMw==}
     engines: {node: '>=18'}
     peerDependencies:
       react: 19.0.0
@@ -4520,8 +4520,8 @@ packages:
     resolution: {integrity: sha512-QQnnxNyfvmHFIsj7gkPcYymR8Jdw/o7mp5ZFihxn6h8Ci6fh3Dx4E1gPjpQEpIuPo9XVNY/ZUwh4BPMjGyL01g==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  inngest@3.31.5:
-    resolution: {integrity: sha512-RCguS3RuKhwrZhWUuaAK2g3X5WbIkDk6sXlqyZORkyibI//kdHtrTuEpbvqTbIHTN0a+/AW/EVb+qLrvoeYZZQ==}
+  inngest@3.31.6:
+    resolution: {integrity: sha512-XN0dvUzP+DX7o9xxOCwAitwVTxpKHAD8j6FqfezPKq0XHaA6EcdK4So6hiszX1og4CyA6kvrV2XKKOIkAwtDAA==}
     engines: {node: '>=14'}
     peerDependencies:
       '@sveltejs/kit': '>=1.27.3'
@@ -10020,7 +10020,7 @@ snapshots:
 
   acorn@8.14.0: {}
 
-  ai@4.1.25(react@19.0.0)(zod@3.24.1):
+  ai@4.1.26(react@19.0.0)(zod@3.24.1):
     dependencies:
       '@ai-sdk/provider': 1.0.7
       '@ai-sdk/provider-utils': 2.1.6(zod@3.24.1)
@@ -11909,7 +11909,7 @@ snapshots:
 
   ini@4.1.1: {}
 
-  inngest@3.31.5(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.13.1)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.6(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.3):
+  inngest@3.31.6(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.13.1)))(@vercel/node@2.15.10)(aws-lambda@1.0.7)(express@4.21.2)(fastify@4.27.0)(h3@1.9.0)(hono@4.4.0)(koa@2.15.3)(next@15.1.6(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.7.3):
     dependencies:
       '@bufbuild/protobuf': 2.2.3
       '@inngest/ai': 0.0.0
