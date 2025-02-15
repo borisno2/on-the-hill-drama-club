@@ -92,8 +92,8 @@ importers:
         specifier: ^0.10.3
         version: 0.10.3
       ai:
-        specifier: ^4.1.40
-        version: 4.1.40(react@19.0.0)(zod@3.24.2)
+        specifier: ^4.1.41
+        version: 4.1.41(react@19.0.0)(zod@3.24.2)
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -290,8 +290,8 @@ packages:
     resolution: {integrity: sha512-q1PJEZ0qD9rVR+8JFEd01/QM++csMT5UVwYXSN2u54BrVw/D8TZLTeg2FEfKK00DgAx0UtWd8XOhhwITP9BT5g==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/react@1.1.15':
-    resolution: {integrity: sha512-3NL25hAiPxqsk9lSVe7SGhU4ZRsnMitVB0IKN/GlcXiuFHyfoxf2zQgmaFAVAtSnfdrC+Jo2tfwu/fvSFoXlBg==}
+  '@ai-sdk/react@1.1.16':
+    resolution: {integrity: sha512-4Jx1piCte2+YoDd6ZdwM0Mw29046edw7MMNICImCPv2s7sfwFwe4c1t8waA4PYRefuETmzheqjh80kafQYJf8g==}
     engines: {node: '>=18'}
     peerDependencies:
       react: 19.0.0
@@ -3027,8 +3027,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  ai@4.1.40:
-    resolution: {integrity: sha512-SITNoSeG+5tZfMAMbyo5G+P5K6jXfQXx3vaTZyJflAvm/fEvaGq+DfJGzKp2zvfq6qfFE1dmWQbOuoPq5Uq3qA==}
+  ai@4.1.41:
+    resolution: {integrity: sha512-qQ5eVm5ivTij0/auLaoggfW3Y+IgWL0uNCCH79P8eUODeJTTqCRvB0B3iz9xl9b4uqOPcgZCVELgLfVODnCJ9g==}
     engines: {node: '>=18'}
     peerDependencies:
       react: 19.0.0
@@ -6716,7 +6716,7 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.1.15(react@19.0.0)(zod@3.24.2)':
+  '@ai-sdk/react@1.1.16(react@19.0.0)(zod@3.24.2)':
     dependencies:
       '@ai-sdk/provider-utils': 2.1.8(zod@3.24.2)
       '@ai-sdk/ui-utils': 1.1.14(zod@3.24.2)
@@ -10101,11 +10101,11 @@ snapshots:
 
   acorn@8.14.0: {}
 
-  ai@4.1.40(react@19.0.0)(zod@3.24.2):
+  ai@4.1.41(react@19.0.0)(zod@3.24.2):
     dependencies:
       '@ai-sdk/provider': 1.0.7
       '@ai-sdk/provider-utils': 2.1.8(zod@3.24.2)
-      '@ai-sdk/react': 1.1.15(react@19.0.0)(zod@3.24.2)
+      '@ai-sdk/react': 1.1.16(react@19.0.0)(zod@3.24.2)
       '@ai-sdk/ui-utils': 1.1.14(zod@3.24.2)
       '@opentelemetry/api': 1.9.0
       jsondiffpatch: 0.6.0
