@@ -125,8 +125,8 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       file-type:
-        specifier: ^20.2.0
-        version: 20.2.0
+        specifier: ^20.3.0
+        version: 20.3.0
       focus-visible:
         specifier: ^5.2.1
         version: 5.2.1
@@ -4196,8 +4196,8 @@ packages:
     resolution: {integrity: sha512-VZR5I7k5wkD0HgFnMsq5hOsSc710MJMu5Nc5QYsbe38NN5iPV/XTObYLc/cpttRTf6lX538+5uO1ZQRhYibiZQ==}
     engines: {node: '>=18'}
 
-  file-type@20.2.0:
-    resolution: {integrity: sha512-dpL887ofyFe5oaJEjrNvMmKpw39fQlRkbVPoyHSFw+ikEApK9f5SZTGWn0l29Q/hP08dSSWQjXrnNZB0b1yFcA==}
+  file-type@20.3.0:
+    resolution: {integrity: sha512-7eYG8OCoBNNf7179DmAUA6HyXYfJO8CQnZkgusRIDKCHQBbYU5rqJC0k2yr0c+C22v4bFfKL+DKuOPSU78uuTA==}
     engines: {node: '>=18'}
 
   fill-range@7.1.1:
@@ -11612,7 +11612,7 @@ snapshots:
       token-types: 6.0.0
       uint8array-extras: 1.4.0
 
-  file-type@20.2.0:
+  file-type@20.3.0:
     dependencies:
       '@tokenizer/inflate': 0.2.6
       strtok3: 10.2.1
