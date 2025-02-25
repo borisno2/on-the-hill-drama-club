@@ -38,8 +38,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(react@19.0.0)
       '@hookform/resolvers':
-        specifier: ^4.0.0
-        version: 4.0.0(react-hook-form@7.54.2(react@19.0.0))
+        specifier: ^4.1.2
+        version: 4.1.2(react-hook-form@7.54.2(react@19.0.0))
       '@keystone-6/core':
         specifier: ^6.4.0
         version: 6.4.0(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.25.3)(typescript@5.7.3)
@@ -1610,8 +1610,8 @@ packages:
     peerDependencies:
       react: 19.0.0
 
-  '@hookform/resolvers@4.0.0':
-    resolution: {integrity: sha512-93ZueVlTaeMF0pRbrLbcnzrxeb2mGA/xyO3RgfrsKs5OCtcfjoWcdjBJm+N7096Jfg/JYlGPjuyQCgqVEodSTg==}
+  '@hookform/resolvers@4.1.2':
+    resolution: {integrity: sha512-wl6H9c9wLOZMJAqGLEVKzbCkxJuV+BYuLFZFCQtCwMe0b3qQk4kUBd/ZAj13SwcSqcx86rCgSCyngQfmA6DOWg==}
     peerDependencies:
       react-hook-form: ^7.0.0
 
@@ -2649,6 +2649,9 @@ packages:
   '@smithy/util-waiter@4.0.2':
     resolution: {integrity: sha512-piUTHyp2Axx3p/kc2CIJkYSv0BAaheBQmbACZgQSSfWUumWNW+R1lL+H9PDBxKJkvOeEX+hKYEFiwO8xagL8AQ==}
     engines: {node: '>=18.0.0'}
+
+  '@standard-schema/utils@0.3.0':
+    resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
   '@sveltejs/kit@1.30.4':
     resolution: {integrity: sha512-JSQIQT6XvdchCRQEm7BABxPC56WP5RYVONAi+09S8tmzeP43fBsRlr95bFmsTQM2RHBldfgQk+jgdnsKI75daA==}
@@ -8278,8 +8281,9 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@hookform/resolvers@4.0.0(react-hook-form@7.54.2(react@19.0.0))':
+  '@hookform/resolvers@4.1.2(react-hook-form@7.54.2(react@19.0.0))':
     dependencies:
+      '@standard-schema/utils': 0.3.0
       react-hook-form: 7.54.2(react@19.0.0)
 
   '@httptoolkit/websocket-stream@6.0.1':
@@ -9629,6 +9633,8 @@ snapshots:
       '@smithy/abort-controller': 4.0.1
       '@smithy/types': 4.1.0
       tslib: 2.8.1
+
+  '@standard-schema/utils@0.3.0': {}
 
   '@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.13.5))':
     dependencies:
