@@ -23,8 +23,8 @@ importers:
   .:
     dependencies:
       '@ai-sdk/openai':
-        specifier: ^1.1.15
-        version: 1.1.15(zod@3.24.2)
+        specifier: ^1.2.0
+        version: 1.2.0(zod@3.24.2)
       '@aws-sdk/client-s3':
         specifier: ^3.758.0
         version: 3.758.0(aws-crt@1.25.3)
@@ -271,8 +271,8 @@ packages:
       graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
       typescript: ^5.0.0
 
-  '@ai-sdk/openai@1.1.15':
-    resolution: {integrity: sha512-irGQx5lMrYI9gub7Sy2ZHu49D3Icf7OtfOu3X8fVKMONOyi54RTKRNjVZTewkfRNE44psTbZDO8j8qmPirOTNQ==}
+  '@ai-sdk/openai@1.2.0':
+    resolution: {integrity: sha512-tzxH6OxKL5ffts4zJPdziQSJGGpSrQcJmuSrE92jCt7pJ4PAU5Dx4tjNNFIU8lSfwarLnywejZEt3Fz0uQZZOQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.0.0
@@ -6691,7 +6691,7 @@ snapshots:
       graphql: 16.10.0
       typescript: 5.7.3
 
-  '@ai-sdk/openai@1.1.15(zod@3.24.2)':
+  '@ai-sdk/openai@1.2.0(zod@3.24.2)':
     dependencies:
       '@ai-sdk/provider': 1.0.9
       '@ai-sdk/provider-utils': 2.1.10(zod@3.24.2)
