@@ -3,18 +3,17 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "build:keystone": "keystone build",
-    "db:migrate": "keystone prisma migrate deploy",
-    "db:seed": "tsx seed-data.ts",
-    "dev": "turbo dev:watch dev:keystone dev:next",
+    "build:keystone": "keystone build --no-prisma",
+    "dev": "turbo dev:keystone dev:next",
     "dev:keystone": "next dev .keystone/admin --port 4000",
     "dev:next": "next dev --port 3000 --turbopack",
     "dev:next-ssl": "node server.js",
-    "dev:watch": "keystone dev --no-server",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "postinstall": "keystone build --no-ui --frozen",
     "lint": "next lint && eslint . && cspell '**' && tsc --noEmit",
-    "prep:keystone": "keystone build --no-ui"
+    "migrate:deploy": "keystone prisma migrate deploy",
+    "prep:keystone": "keystone build --no-ui",
+    "seed-data": "tsx seed-data.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.2.1",

@@ -1,22 +1,35 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "prep:keystone": {
+    "postinstall": {
       "outputs": [".keystone/config.**"],
-      "env": ["DATABASE_URL"]
-    },
-    "db:migrate": {
-      "dependsOn": ["prep:keystone"],
-      "env": ["DATABASE_URL"]
-    },
-    "db:seed": {
-      "dependsOn": ["db:migrate"],
-      "env": ["DATABASE_URL"]
+      "env": ["DATABASE_URL", "KEYSTONE_URL"]
     },
     "build": {
-      "dependsOn": ["db:seed"],
+      "dependsOn": ["postinstall"],
       "outputs": [".next/**"],
       "env": ["DATABASE_URL", "KEYSTONE_URL"]
+    },
+    "build:keystone": {
+      "dependsOn": ["postinstall"],
+      "outputs": [".keystone/admin/**"],
+      "env": ["DATABASE_URL", "KEYSTONE_URL"]
+    },
+    "dev:keystone": {
+      "dependsOn": ["build:keystone"],
+      "env": ["DATABASE_URL", "KEYSTONE_URL"]
+    },
+    "dev": {
+      "dependsOn": ["build:keystone"],
+      "env": ["DATABASE_URL", "KEYSTONE_URL"]
+    },
+    "migrate:deploy": {
+      "env": ["DATABASE_URL"],
+      "dependsOn": ["build"]
+    },
+    "seed-data": {
+      "env": ["DATABASE_URL"],
+      "dependsOn": ["migrate:deploy"]
     },
     "lint": {}
   }
