@@ -27,7 +27,7 @@ importers:
         version: 1.2.1(zod@3.24.2)
       '@aws-sdk/client-s3':
         specifier: ^3.758.0
-        version: 3.758.0(aws-crt@1.25.3)
+        version: 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/signature-v4-crt':
         specifier: ^3.758.0
         version: 3.758.0
@@ -42,7 +42,7 @@ importers:
         version: 4.0.0(react-hook-form@7.54.2(react@19.0.0))
       '@keystone-6/core':
         specifier: ^6.4.0
-        version: 6.4.0(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.25.3)(typescript@5.7.3)
+        version: 6.4.0(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.26.2)(typescript@5.7.3)
       '@marsidev/react-turnstile':
         specifier: ^1.1.0
         version: 1.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -98,8 +98,8 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       aws-crt:
-        specifier: ^1.25.3
-        version: 1.25.3
+        specifier: ^1.26.2
+        version: 1.26.2
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -3213,8 +3213,8 @@ packages:
   avvio@8.4.0:
     resolution: {integrity: sha512-CDSwaxINFy59iNwhYnkvALBwZiTydGkOecZyPkqBpABYR1KqGEsET0VOOYDwtleZSUIdeY36DC2bSZ24CO1igA==}
 
-  aws-crt@1.25.3:
-    resolution: {integrity: sha512-MWV2Yy08xxAZqMJiFE1ZwSrVNq2Hy54SK4ooUx2Ts6DlDzdAizSfgoEKkh7ifyo7j5RVXu3924zAPjC8FBLiSg==}
+  aws-crt@1.26.2:
+    resolution: {integrity: sha512-XyzCoWMQ693g6iLFqgeVl6DTMKZIIc0zlzwLvP47az7nRgob8JLiqJDbx1ljKqBxKesRqq9igjTMzOKh3JkvUA==}
 
   aws-lambda@1.0.7:
     resolution: {integrity: sha512-9GNFMRrEMG5y3Jvv+V4azWvc+qNWdWLTjDdhf/zgMlz8haaaLWv0xeAIWxz9PuWUBawsVxy0zZotjCdR3Xq+2w==}
@@ -6955,13 +6955,13 @@ snapshots:
       '@smithy/util-utf8': 2.3.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-s3@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/client-s3@3.758.0(aws-crt@1.26.2)':
     dependencies:
       '@aws-crypto/sha1-browser': 5.2.0
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
       '@aws-sdk/core': 3.758.0
-      '@aws-sdk/credential-provider-node': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/credential-provider-node': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/middleware-bucket-endpoint': 3.734.0
       '@aws-sdk/middleware-expect-continue': 3.734.0
       '@aws-sdk/middleware-flexible-checksums': 3.758.0
@@ -6977,7 +6977,7 @@ snapshots:
       '@aws-sdk/types': 3.734.0
       '@aws-sdk/util-endpoints': 3.743.0
       '@aws-sdk/util-user-agent-browser': 3.734.0
-      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/xml-builder': 3.734.0
       '@smithy/config-resolver': 4.0.1
       '@smithy/core': 3.1.5
@@ -7016,7 +7016,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sso@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/client-sso@3.758.0(aws-crt@1.26.2)':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -7029,7 +7029,7 @@ snapshots:
       '@aws-sdk/types': 3.734.0
       '@aws-sdk/util-endpoints': 3.743.0
       '@aws-sdk/util-user-agent-browser': 3.734.0
-      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.26.2)
       '@smithy/config-resolver': 4.0.1
       '@smithy/core': 3.1.5
       '@smithy/fetch-http-handler': 5.0.1
@@ -7108,15 +7108,15 @@ snapshots:
       '@smithy/util-stream': 4.1.2
       tslib: 2.8.1
 
-  '@aws-sdk/credential-provider-ini@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/credential-provider-ini@3.758.0(aws-crt@1.26.2)':
     dependencies:
       '@aws-sdk/core': 3.758.0
       '@aws-sdk/credential-provider-env': 3.758.0
       '@aws-sdk/credential-provider-http': 3.758.0
       '@aws-sdk/credential-provider-process': 3.758.0
-      '@aws-sdk/credential-provider-sso': 3.758.0(aws-crt@1.25.3)
-      '@aws-sdk/credential-provider-web-identity': 3.758.0(aws-crt@1.25.3)
-      '@aws-sdk/nested-clients': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/credential-provider-sso': 3.758.0(aws-crt@1.26.2)
+      '@aws-sdk/credential-provider-web-identity': 3.758.0(aws-crt@1.26.2)
+      '@aws-sdk/nested-clients': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/types': 3.734.0
       '@smithy/credential-provider-imds': 4.0.1
       '@smithy/property-provider': 4.0.1
@@ -7126,14 +7126,14 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/credential-provider-node@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/credential-provider-node@3.758.0(aws-crt@1.26.2)':
     dependencies:
       '@aws-sdk/credential-provider-env': 3.758.0
       '@aws-sdk/credential-provider-http': 3.758.0
-      '@aws-sdk/credential-provider-ini': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/credential-provider-ini': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/credential-provider-process': 3.758.0
-      '@aws-sdk/credential-provider-sso': 3.758.0(aws-crt@1.25.3)
-      '@aws-sdk/credential-provider-web-identity': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/credential-provider-sso': 3.758.0(aws-crt@1.26.2)
+      '@aws-sdk/credential-provider-web-identity': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/types': 3.734.0
       '@smithy/credential-provider-imds': 4.0.1
       '@smithy/property-provider': 4.0.1
@@ -7152,11 +7152,11 @@ snapshots:
       '@smithy/types': 4.1.0
       tslib: 2.8.1
 
-  '@aws-sdk/credential-provider-sso@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/credential-provider-sso@3.758.0(aws-crt@1.26.2)':
     dependencies:
-      '@aws-sdk/client-sso': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/client-sso': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/core': 3.758.0
-      '@aws-sdk/token-providers': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/token-providers': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/types': 3.734.0
       '@smithy/property-provider': 4.0.1
       '@smithy/shared-ini-file-loader': 4.0.1
@@ -7165,10 +7165,10 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/credential-provider-web-identity@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/credential-provider-web-identity@3.758.0(aws-crt@1.26.2)':
     dependencies:
       '@aws-sdk/core': 3.758.0
-      '@aws-sdk/nested-clients': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/nested-clients': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/types': 3.734.0
       '@smithy/property-provider': 4.0.1
       '@smithy/types': 4.1.0
@@ -7178,8 +7178,8 @@ snapshots:
 
   '@aws-sdk/crt-loader@3.758.0':
     dependencies:
-      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.25.3)
-      aws-crt: 1.25.3
+      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.26.2)
+      aws-crt: 1.26.2
       tslib: 2.8.1
     transitivePeerDependencies:
       - bufferutil
@@ -7187,9 +7187,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@aws-sdk/lib-storage@3.721.0(@aws-sdk/client-s3@3.758.0(aws-crt@1.25.3))':
+  '@aws-sdk/lib-storage@3.721.0(@aws-sdk/client-s3@3.758.0(aws-crt@1.26.2))':
     dependencies:
-      '@aws-sdk/client-s3': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/client-s3': 3.758.0(aws-crt@1.26.2)
       '@smithy/abort-controller': 3.1.9
       '@smithy/middleware-endpoint': 3.2.8
       '@smithy/smithy-client': 3.7.0
@@ -7307,7 +7307,7 @@ snapshots:
       '@smithy/types': 4.1.0
       tslib: 2.8.1
 
-  '@aws-sdk/nested-clients@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/nested-clients@3.758.0(aws-crt@1.26.2)':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -7320,7 +7320,7 @@ snapshots:
       '@aws-sdk/types': 3.734.0
       '@aws-sdk/util-endpoints': 3.743.0
       '@aws-sdk/util-user-agent-browser': 3.734.0
-      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/util-user-agent-node': 3.758.0(aws-crt@1.26.2)
       '@smithy/config-resolver': 4.0.1
       '@smithy/core': 3.1.5
       '@smithy/fetch-http-handler': 5.0.1
@@ -7404,9 +7404,9 @@ snapshots:
       '@smithy/types': 4.1.0
       tslib: 2.8.1
 
-  '@aws-sdk/token-providers@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/token-providers@3.758.0(aws-crt@1.26.2)':
     dependencies:
-      '@aws-sdk/nested-clients': 3.758.0(aws-crt@1.25.3)
+      '@aws-sdk/nested-clients': 3.758.0(aws-crt@1.26.2)
       '@aws-sdk/types': 3.734.0
       '@smithy/property-provider': 4.0.1
       '@smithy/shared-ini-file-loader': 4.0.1
@@ -7458,7 +7458,7 @@ snapshots:
       bowser: 2.11.0
       tslib: 2.8.1
 
-  '@aws-sdk/util-user-agent-node@3.758.0(aws-crt@1.25.3)':
+  '@aws-sdk/util-user-agent-node@3.758.0(aws-crt@1.26.2)':
     dependencies:
       '@aws-sdk/middleware-user-agent': 3.758.0
       '@aws-sdk/types': 3.734.0
@@ -7466,7 +7466,7 @@ snapshots:
       '@smithy/types': 4.1.0
       tslib: 2.8.1
     optionalDependencies:
-      aws-crt: 1.25.3
+      aws-crt: 1.26.2
 
   '@aws-sdk/util-utf8-browser@3.259.0':
     dependencies:
@@ -8451,13 +8451,13 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
     optional: true
 
-  '@keystone-6/core@6.4.0(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.25.3)(typescript@5.7.3)':
+  '@keystone-6/core@6.4.0(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.26.2)(typescript@5.7.3)':
     dependencies:
       '@apollo/cache-control-types': 1.0.3(graphql@16.10.0)
       '@apollo/client': 3.13.3(@types/react@19.0.10)(graphql@16.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@apollo/server': 4.11.3(graphql@16.10.0)
-      '@aws-sdk/client-s3': 3.758.0(aws-crt@1.25.3)
-      '@aws-sdk/lib-storage': 3.721.0(@aws-sdk/client-s3@3.758.0(aws-crt@1.25.3))
+      '@aws-sdk/client-s3': 3.758.0(aws-crt@1.26.2)
+      '@aws-sdk/lib-storage': 3.721.0(@aws-sdk/client-s3@3.758.0(aws-crt@1.26.2))
       '@aws-sdk/s3-request-presigner': 3.721.0
       '@babel/runtime': 7.26.0
       '@emotion/hash': 0.9.2
@@ -10344,7 +10344,7 @@ snapshots:
       fastq: 1.18.0
     optional: true
 
-  aws-crt@1.25.3:
+  aws-crt@1.26.2:
     dependencies:
       '@aws-sdk/util-utf8-browser': 3.259.0
       '@httptoolkit/websocket-stream': 6.0.1
