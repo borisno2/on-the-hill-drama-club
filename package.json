@@ -62,7 +62,7 @@
     "next-auth": "5.0.0-beta.25",
     "postcss-focus-visible": "^10.0.1",
     "react": "19.0.0",
-    "react-day-picker": "^9.5.1",
+    "react-day-picker": "^9.6.2",
     "react-dom": "19.0.0",
     "react-hook-form": "^7.54.2",
     "sharp": "^0.33.5",
@@ -109,7 +109,7 @@
       "@types/react": "^19.0.10",
       "@types/react-dom": "^19.0.4",
       "@apollo/client": "^3.13.3",
-      "react-day-picker": "^9.5.1",
+      "react-day-picker": "^9.6.2",
       "@0no-co/graphql.web": "1.1.2"
     }
   }
