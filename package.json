@@ -84,7 +84,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/ws": "^8.18.1",
-    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
     "cspell": "^8.17.5",
     "eslint": "9.22.0",
     "eslint-config-next": "15.2.4",
@@ -94,7 +94,7 @@
     "tsx": "^4.19.3",
     "turbo": "^2.4.4",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.26.0"
+    "typescript-eslint": "^8.29.0"
   },
   "packageManager": "pnpm@10.6.1",
   "pnpm": {
