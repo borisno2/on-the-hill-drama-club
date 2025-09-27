@@ -110,7 +110,7 @@
       "@types/react-dom": "^19.0.4",
       "@apollo/client": "^3.13.5",
       "react-day-picker": "^9.6.4",
-      "@0no-co/graphql.web": "1.1.2"
+      "@0no-co/graphql.web": "1.2.0"
     }
   }
 }
