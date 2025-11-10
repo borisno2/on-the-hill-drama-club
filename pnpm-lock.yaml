@@ -41,8 +41,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(react-hook-form@7.63.0(react@19.0.0))
       '@keystone-6/core':
-        specifier: ^6.4.0
-        version: 6.4.0(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.26.2)(typescript@5.7.3)
+        specifier: ^6.5.1
+        version: 6.5.1(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.26.2)(typescript@5.7.3)
       '@marsidev/react-turnstile':
         specifier: ^1.1.0
         version: 1.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1793,8 +1793,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@keystone-6/core@6.4.0':
-    resolution: {integrity: sha512-Mpb9f1LxoDqa88iXqNkwxi6Om0RLyFr1nzQhOsHtO6uuGK9WBQ76oxCGZgnHZmAwQzsWNRa7tUUoqwbF3zE4Nw==}
+  '@keystone-6/core@6.5.1':
+    resolution: {integrity: sha512-Fa95sMV48sLg04q8Zysl9FAUKmZpOqAEp0ulOgLaSQryB5wm9mlseJ3jYIq2Fj4BYrE41TAoZ17udDlbNltq8g==}
     hasBin: true
 
   '@keystone-ui/button@7.0.2':
@@ -4646,6 +4646,7 @@ packages:
 
   intersection-observer@0.12.2:
     resolution: {integrity: sha512-7m1vEcPCxXYI8HqnL8CKI6siDyD+eIWSwgB3DZA+ZTogxk9I4CDnj4wilt9x/+/QbHI4YG5YZNmC6458/e9Ktg==}
+    deprecated: The Intersection Observer polyfill is no longer needed and can safely be removed. Intersection Observer has been Baseline since 2019.
 
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
@@ -4893,6 +4894,7 @@ packages:
   keygrip@1.1.0:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
     engines: {node: '>= 0.6'}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -8510,7 +8512,7 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
     optional: true
 
-  '@keystone-6/core@6.4.0(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.26.2)(typescript@5.7.3)':
+  '@keystone-6/core@6.5.1(@opentelemetry/api@1.9.0)(@prisma/generator-helper@6.4.1)(@types/express@4.17.21)(@types/react@19.0.10)(aws-crt@1.26.2)(typescript@5.7.3)':
     dependencies:
       '@apollo/cache-control-types': 1.0.3(graphql@16.10.0)
       '@apollo/client': 3.13.5(@types/react@19.0.10)(graphql@16.10.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
