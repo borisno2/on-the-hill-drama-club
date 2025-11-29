@@ -25,6 +25,7 @@ type PasswordState {
 input UserWhereUniqueInput {
   id: ID
   subjectId: String
+  account: AccountWhereUniqueInput
 }
 
 input UserWhereInput {
@@ -187,6 +188,7 @@ type Account {
 
 input AccountWhereUniqueInput {
   id: ID
+  user: UserWhereUniqueInput
 }
 
 input AccountWhereInput {
