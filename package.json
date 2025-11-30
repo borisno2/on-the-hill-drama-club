@@ -52,7 +52,7 @@
     "dotenv": "^16.4.7",
     "file-type": "^20.4.1",
     "focus-visible": "^5.2.1",
-    "gql.tada": "^1.8.10",
+    "gql.tada": "^1.9.0",
     "graphql": "^16.10.0",
     "graphql-yoga": "^5.13.2",
     "image-size": "^2.0.2",
