@@ -41,7 +41,7 @@
     "@whatwg-node/fetch": "^0.10.13",
     "ai": "^4.3.19",
     "autoprefixer": "^10.4.22",
-    "aws-crt": "^1.26.2",
+    "aws-crt": "^1.27.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "csrf": "^3.1.0",
