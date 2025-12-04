@@ -80,8 +80,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       '@vercel/analytics':
-        specifier: ^1.5.0
-        version: 1.5.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.19.1)))(next@15.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)
+        specifier: ^1.6.1
+        version: 1.6.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.19.1)))(next@15.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)
       '@vercel/blob':
         specifier: ^0.27.3
         version: 0.27.3
@@ -2984,8 +2984,8 @@ packages:
     resolution: {integrity: sha512-Sne/pVz8ryR03NFK21VpN88dZ2FdQXOlq3VIklbrTYEt8yXtRFr9tvUhqvCeKjqYk5FSim37sHbooT6vzBTZcg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@vercel/analytics@1.5.0':
-    resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
+  '@vercel/analytics@1.6.1':
+    resolution: {integrity: sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==}
     peerDependencies:
       '@remix-run/react': ^2
       '@sveltejs/kit': ^1 || ^2
@@ -5219,6 +5219,7 @@ packages:
   next@15.2.4:
     resolution: {integrity: sha512-VwL+LAaPSxEkd3lU2xWbgEOtrM8oedmyhBqaVNmgKB+GvZlCy9rgaEc+y2on0wv+l0oSFqLtYD6dcC1eAedUaQ==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
+    deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -10178,7 +10179,7 @@ snapshots:
       '@typescript-eslint/types': 8.29.0
       eslint-visitor-keys: 4.2.0
 
-  '@vercel/analytics@1.5.0(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.19.1)))(next@15.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)':
+  '@vercel/analytics@1.6.1(@sveltejs/kit@1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.19.1)))(next@15.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)(svelte@4.2.17)':
     optionalDependencies:
       '@sveltejs/kit': 1.30.4(svelte@4.2.17)(vite@4.5.3(@types/node@22.19.1))
       next: 15.2.4(@opentelemetry/api@1.9.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
