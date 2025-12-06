@@ -23,6 +23,7 @@
     "dist",
     "gql.ts",
     "*.sql",
-    "graphql-env.d.ts"
+    "graphql-env.d.ts",
+    "CLAUDE.md"
   ]
 }
