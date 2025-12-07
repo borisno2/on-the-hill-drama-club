@@ -234,11 +234,11 @@ importers:
         specifier: 15.2.4
         version: 15.2.4(eslint@9.22.0(jiti@1.21.7))(typescript@5.7.3)
       prettier:
-        specifier: ^3.5.3
-        version: 3.5.3
+        specifier: ^3.7.4
+        version: 3.7.4
       prettier-plugin-tailwindcss:
         specifier: ^0.6.11
-        version: 0.6.11(prettier@3.5.3)
+        version: 0.6.11(prettier@3.7.4)
       prisma:
         specifier: 6.4.1
         version: 6.4.1(typescript@5.7.3)
@@ -5782,8 +5782,8 @@ packages:
       prettier-plugin-svelte:
         optional: true
 
-  prettier@3.5.3:
-    resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
+  prettier@3.7.4:
+    resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -13387,11 +13387,11 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.6.11(prettier@3.5.3):
+  prettier-plugin-tailwindcss@0.6.11(prettier@3.7.4):
     dependencies:
-      prettier: 3.5.3
+      prettier: 3.7.4
 
-  prettier@3.5.3: {}
+  prettier@3.7.4: {}
 
   pretty-bytes@5.6.0:
     optional: true
