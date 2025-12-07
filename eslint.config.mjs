@@ -28,6 +28,7 @@ export default tseslint.config(
       '__generated__',
       '**/.keystone',
       '*.js',
+      'next-env.d.ts',
     ],
   },
 )
