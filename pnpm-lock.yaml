@@ -15,7 +15,7 @@ overrides:
   '@types/react': ^19.0.10
   '@types/react-dom': ^19.0.4
   '@apollo/client': ^3.14.0
-  react-day-picker: ^9.6.4
+  react-day-picker: ^9.12.0
   '@0no-co/graphql.web': 1.2.0
 
 importers:
@@ -161,8 +161,8 @@ importers:
         specifier: 19.0.0
         version: 19.0.0
       react-day-picker:
-        specifier: ^9.6.4
-        version: 9.6.4(react@19.0.0)
+        specifier: ^9.12.0
+        version: 9.12.0(react@19.0.0)
       react-dom:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
@@ -899,8 +899,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@date-fns/tz@1.2.0':
-    resolution: {integrity: sha512-LBrd7MiJZ9McsOgxqWX7AaxrDjcFVjWH/tIKJd7pnR7McaslGYOP1QmmiBXdJH/H/yLCT+rcQ7FaPBUxRGUtrg==}
+  '@date-fns/tz@1.4.1':
+    resolution: {integrity: sha512-P5LUNhtbj6YfI3iJjw5EL9eUAG6OitD0W3fWQcpQjDRc/QIsL0tRNuO1PcDvPccWL1fSTXXdE1ds+l95DV/OFA==}
 
   '@edge-runtime/format@2.1.0':
     resolution: {integrity: sha512-gc2qbYEIIJRczBApBPznVI1c5vZgzrZQOsFZnAxxFiYah9qldHiu1YEitzSvXI8X8ZgvAguuIiyIbpWz17nlXA==}
@@ -5884,8 +5884,8 @@ packages:
     peerDependencies:
       react: 19.0.0
 
-  react-day-picker@9.6.4:
-    resolution: {integrity: sha512-OekyAWfaypSFN5zms4CD6Bcas5R0KbWdARkWTyQ2phJHQOolDfpLwrN6Q+U3ifPGNmKLf9ngXuSz25NKHMkR6w==}
+  react-day-picker@9.12.0:
+    resolution: {integrity: sha512-t8OvG/Zrciso5CQJu5b1A7yzEmebvST+S3pOVQJWxwjjVngyG/CA2htN/D15dLI4uTEuLLkbZyS4YYt480FAtA==}
     engines: {node: '>=18'}
     peerDependencies:
       react: 19.0.0
@@ -7987,7 +7987,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.9
     optional: true
 
-  '@date-fns/tz@1.2.0': {}
+  '@date-fns/tz@1.4.1': {}
 
   '@edge-runtime/format@2.1.0':
     optional: true
@@ -8916,7 +8916,7 @@ snapshots:
       '@keystone-ui/popover': 6.0.2(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       date-fns: 2.30.0
       react: 19.0.0
-      react-day-picker: 9.6.4(react@19.0.0)
+      react-day-picker: 9.12.0(react@19.0.0)
       react-dom: 19.0.0(react@19.0.0)
       react-focus-lock: 2.13.5(@types/react@19.0.10)(react@19.0.0)
       react-select: 5.9.0(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -13487,9 +13487,9 @@ snapshots:
       '@babel/runtime': 7.26.0
       react: 19.0.0
 
-  react-day-picker@9.6.4(react@19.0.0):
+  react-day-picker@9.12.0(react@19.0.0):
     dependencies:
-      '@date-fns/tz': 1.2.0
+      '@date-fns/tz': 1.4.1
       date-fns: 4.1.0
       date-fns-jalali: 4.1.0-0
       react: 19.0.0
