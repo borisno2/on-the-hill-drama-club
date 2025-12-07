@@ -88,7 +88,7 @@
     "cspell": "^8.19.4",
     "eslint": "9.22.0",
     "eslint-config-next": "15.2.4",
-    "prettier": "^3.5.3",
+    "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "6.4.1",
     "tsx": "^4.19.3",
