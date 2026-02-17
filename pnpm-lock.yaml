@@ -15,7 +15,7 @@ overrides:
   '@types/react': ^19.2.7
   '@types/react-dom': ^19.2.3
   '@apollo/client': ^3.14.0
-  react-day-picker: ^9.12.0
+  react-day-picker: ^9.13.2
   '@0no-co/graphql.web': 1.2.0
 
 importers:
@@ -161,8 +161,8 @@ importers:
         specifier: 19.2.3
         version: 19.2.3
       react-day-picker:
-        specifier: ^9.12.0
-        version: 9.12.0(react@19.2.3)
+        specifier: ^9.13.2
+        version: 9.13.2(react@19.2.3)
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
@@ -5897,8 +5897,8 @@ packages:
     peerDependencies:
       react: 19.2.3
 
-  react-day-picker@9.12.0:
-    resolution: {integrity: sha512-t8OvG/Zrciso5CQJu5b1A7yzEmebvST+S3pOVQJWxwjjVngyG/CA2htN/D15dLI4uTEuLLkbZyS4YYt480FAtA==}
+  react-day-picker@9.13.2:
+    resolution: {integrity: sha512-IMPiXfXVIAuR5Yk58DDPBC8QKClrhdXV+Tr/alBrwrHUw0qDDYB1m5zPNuTnnPIr/gmJ4ChMxmtqPdxm8+R4Eg==}
     engines: {node: '>=18'}
     peerDependencies:
       react: 19.2.3
@@ -8909,7 +8909,7 @@ snapshots:
       '@keystone-ui/popover': 6.0.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       date-fns: 2.30.0
       react: 19.2.3
-      react-day-picker: 9.12.0(react@19.2.3)
+      react-day-picker: 9.13.2(react@19.2.3)
       react-dom: 19.2.3(react@19.2.3)
       react-focus-lock: 2.13.5(@types/react@19.2.7)(react@19.2.3)
       react-select: 5.9.0(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -13435,7 +13435,7 @@ snapshots:
       '@babel/runtime': 7.26.0
       react: 19.2.3
 
-  react-day-picker@9.12.0(react@19.2.3):
+  react-day-picker@9.13.2(react@19.2.3):
     dependencies:
       '@date-fns/tz': 1.4.1
       date-fns: 4.1.0
