@@ -56,7 +56,7 @@
     "graphql": "^16.12.0",
     "graphql-yoga": "^5.17.1",
     "image-size": "^2.0.2",
-    "inngest": "^3.32.2",
+    "inngest": "^3.52.3",
     "lucide-react": "^0.556.0",
     "next": "^15.5.7",
     "next-auth": "5.0.0-beta.30",
