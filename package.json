@@ -25,8 +25,8 @@
     "@keystone-6/core": "^6.5.1",
     "@marsidev/react-turnstile": "^1.4.2",
     "@neondatabase/serverless": "^0.10.4",
-    "@prisma/adapter-neon": "^6.4.1",
-    "@prisma/client": "6.4.1",
+    "@prisma/adapter-neon": "^6.19.3",
+    "@prisma/client": "6.19.3",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-hover-card": "^1.1.15",
     "@radix-ui/react-popover": "^1.1.15",
@@ -100,9 +100,9 @@
   "pnpm": {
     "overrides": {
       "prisma": "6.4.1",
-      "@prisma/client": "6.4.1",
-      "@prisma/internals": "6.4.1",
-      "@prisma/migrate": "6.4.1",
+      "@prisma/client": "6.19.3",
+      "@prisma/internals": "6.19.3",
+      "@prisma/migrate": "6.19.3",
       "next": "^15.5.12",
       "react": "19.2.4",
       "react-dom": "19.2.4",
